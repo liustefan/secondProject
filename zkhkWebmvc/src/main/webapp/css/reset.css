@@ -1,0 +1,361 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    font-size: 12px;
+	line-height: 1.5;
+	font-family: "Microsoft YaHei", "SimSun";/*默认字体微软雅黑，宋体*/
+	color: #333;
+}
+
+input { 
+	font-family: "Microsoft YaHei";
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre,fieldset, lengend, button, input, textarea,th, td {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+	text-decoration: none;
+	outline: none; 
+	color: #333;
+}
+
+img {
+	border: 0;
+	vertical-align: middle;
+}
+
+ol,ul,li { 
+	list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 { 
+	font-weight: normal; 
+	font-size: 100%;
+}
+
+/*合并表格边框，设置边框距为零*/
+table { 
+	border-collapse: collapse; 
+	border-spacing: 0;
+}
+
+/*清除浮动*/
+.clear { 
+	clear: both;
+}
+
+.clear-fix:after { 
+	content: ".";
+	display: block;
+	height: 0;
+	font-size: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clear-fix { 
+	+height: 1%;
+}
+
+.clearfix {
+	overflow: auto; 
+	_height: 1%;
+}
+
+/*浮动*/
+.fl { 
+	float: left;
+}
+
+.fr { 
+	float: right;
+}
+
+/*强制换行*/
+.break_word { 
+	word-wrap: break-word; 
+	word-break: break-all;
+}
+
+/*禁止换行*/
+.keep_all { 
+	word-break: keep-all; 
+	white-space: nowrap;
+}
+
+/*超出省略号，仅限单行，并且需要设定一个宽度*/
+.ellipsis { 
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	display: block; 
+	white-space: nowrap;
+}
+	
+/*段落两端对齐*/
+.txt_justify { 
+	text-align: justify; 
+	text-justify: inter-ideograph;
+}
+
+/*禁止FF等浏览器给textarea增加可拖拽大小的设置*/
+textarea { 
+	resize: none; 
+	font-family: "Microsoft YaHei", "SimSun";/*默认字体微软雅黑，宋体*/ 
+}
+
+/*隐藏*/
+.hide { 
+	display: none;
+}
+
+/*超链接*/
+a { 
+	color: #002fd9;
+}
+
+a:hover { 
+	color: #0000cc; 
+	text-decoration: underline; 
+	cursor: pointer;
+}
+
+.muted { 
+	color: #999;
+}
+
+/*分页*/
+.page-btn {
+	-moz-user-select: none;
+    background-image: none;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 0 9px;
+	height: 24px;
+	line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+	background-image: -moz-linear-gradient(center top, rgba(246, 246, 246, 1.0) , rgba(246, 246, 246, 1.0)) repeat scroll 0 0 rgba(229, 229, 230,1.0);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(246, 246, 246, 1.0)), color-stop(1, rgba(229, 229, 230, 1.0)));
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#f6f6f6', EndColorStr='#e5e5e6');
+    color: #333;
+	border: 1px solid #d1d1d1;
+}
+	
+.page {
+	margin-top: 5px;
+	font-size: 12px;
+	text-align: right;
+	font-family: "Microsoft YaHei";/*默认字体微软雅黑*/
+}	
+
+.page a,.page span { 
+	display: inline-block; 
+	color: #333;
+}
+
+.page a:hover { 
+	color: #333; 
+	text-decoration: none;
+}
+
+.page a { 
+	position: relative;
+}
+
+.page i { 
+	font-style: normal;
+}
+
+select#pageSize,
+select#lines {
+	width: 45px;
+	height: 23px;
+	position: relative;
+	top: 1px;
+	border: 1px solid #519071;
+	box-sizing: content-box;
+	background: #6dbb95;
+	border-radius: 3px;
+	text-align: center;
+	color: #fff;
+	margin: 0 5px;
+}
+
+.page-go {
+	width: 35px;
+	height: 24px;
+	color: #333;
+	border-radius: 3px;
+	border: 1px solid #d1d1d1;
+	box-sizing: content-box;
+	margin: 0 2px 0 5px;
+	text-align: center;
+}
+
+#pre,
+#nex { 
+	margin: 0 10px; 
+	width: 5px;
+}
+
+#pre span { 
+	position: relative;
+	width: 5px;
+	height: 24px;
+	display: inline-block;
+	background: url(../img/arrow-l-gray.png) center no-repeat;
+}
+
+#nex span { 
+	position: relative;
+	width: 5px;
+	height: 24px;
+	display: inline-block;
+	background: url(../img/arrow-r.png) center no-repeat;
+}
+
+.page-go,
+select#lines {
+	position: relative;
+	top: 2px;
+	font-size: 12px;
+}
+
+.page-total { 
+	margin-left: 10px;
+}
+
+#page-last { 
+	margin-left: 10px;
+}
+
+#page-first { 
+	color: #ccc;
+}
+
+/*按钮*/
+a.btn-normal { 
+	display: inline-block;
+}
+
+a.btn-normal,
+.btn-normal {
+	height: 26px;
+	line-height: 26px;
+	border: 0;
+	border-radius: 3px;
+    -moz-border-radius: 3px;    /* Gecko browsers */
+   	-webkit-border-radius: 3px; /* Webkit browsers */
+	color: #FFF;
+	cursor: pointer;
+	font-family: "Microsoft YaHei", "SimSun";
+	padding: 0 10px;
+	font-size: 12px;
+	display: inline-block;
+	background: #75D07D;
+	background: -moz-linear-gradient(top, #48d660 0%, #61b95f 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#48d660), color-stop(100%,#61b95f));
+    background: -webkit-linear-gradient(top, #48d660 0%,#61b95f 100%);
+    background: -o-linear-gradient(top, #48d660 0%,#61b95f 100%);
+    background: -ms-linear-gradient(top, #48d660 0%,#61b95f 100%);
+    background: linear-gradient(to bottom, #48d660 0%,#61b95f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#48d660', endColorstr='#61b95f',GradientType=0 );
+}
+
+.btn-normal:hover { 
+	color: #fff; 
+	text-decoration: none;
+}
+
+.m-t-20 { 
+	margin-top: 20px;
+}
+	
+.m-t-15 { 
+	margin-top: 15px;
+}
+
+.btn-grey {
+	border-radius: 3px;
+	color: #333;
+	border: 1px solid #c7c7c7;
+	padding: 5px 20px;
+	cursor: pointer;
+	font-size: 14px;
+	display: inline-block;
+	background: #e9e9e9;
+ }
+  
+a.btn-sure,
+.btn-sure {
+	text-decoration: none;
+	border-radius: 3px;
+	color: #FFF;
+	padding: 5px 20px;
+	cursor: pointer;
+	font-size: 14px;
+	display: inline-block;
+	font-family: "Microsoft YaHei";
+	background: #01ba54;
+	border: 1px solid #00863c;
+ }
+ 
+/*个人信息*/
+.w1280 { 
+	width: 1280px; 
+	margin: 0 auto;
+}
+
+.single_report_head { 
+	background: #094;
+	padding: 15px 0;
+	height: 70px;
+	position: relative;
+}
+
+.single_report_head h3 { 
+	text-align: center;
+	font-size: 24px; 
+	color: #fff;
+	line-height: 70px;
+}
+
+.person-info { 
+	position: absolute;
+	left: 15px;
+}
+
+.person-info .fr p {
+	color: #fff;
+	font-size: 14px;
+	line-height: 24px;
+}
+.person-img,
+.person-img div {
+	width: 64px;
+	height: 64px;
+	border-radius: 5%;
+}
+  
+ .person-img {
+  margin: 5px 10px 5px 10px;
+}
+  
+.w96 { 
+	width: 96%; 
+	margin: 0 auto;
+}
+
+ #w1280 { 
+	width: 1280px; 
+	margin: 0 auto;
+}

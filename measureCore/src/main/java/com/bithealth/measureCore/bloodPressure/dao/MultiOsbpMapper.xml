@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bithealth.measureCore.bloodPressure.dao.MultiOsbpMapper">
+	<sql id="where_condition_0">
+		FROM 
+			omrr o 
+			JOIN osbp os 
+			ON os.Memberid = o.Memberid   
+			AND os.TestTime &gt;= o.MeasTime 
+	        AND os.TestTime &lt;= o.MeasTermTime 
+	        WHERE o.Memberid = #{memberId}
+	        AND o.id = #{reportNo}
+	</sql>
+	
+	<select id="selectOsbpListAndPage" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodPressure.model.OsbpOmemVO">
+		SELECT f.LogName, f.birthDate, f.MemName, f.memberid, f.gender, f.Tel, t.Docentry, t.EventId, t.DeviceCode, t.SBP, t.DBP, t.TestTime 
+			FROM osbp t, ompb a, odmt b, dgp1 c, odgp d, omgs e, omem f WHERE t.deltag = 0 AND a.Memberid = t.Memberid AND b.MemGrpid = a.MemGrpid AND c.OdgpId = b.OdgpId 
+  		<if test="docId != null">
+  			AND c.Docid = #{docId}
+  		</if>
+  			AND d.OdgpId = c.OdgpId AND e.MemGrpid = b.MemGrpid AND f.Memberid = t.Memberid AND f.UseTag = 'T' 
+ 		<if test="criteria != null and criteria != ''">
+  			AND (f.LogName LIKE #{criteria} OR f.MemName LIKE #{criteria} OR f.Tel LIKE #{criteria} OR t.DeviceCode LIKE #{criteria}) 
+    	</if>
+    	<if test="wheAbnTag == 1">
+    		AND t.Abnormal &lt;&gt; 0
+    	</if>
+    		GROUP BY t.TestTime DESC, t.Docentry DESC
+	</select>
+	
+	<select id="selectOsbpPieChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodPressure.model.OsbpChart">
+		SELECT os.Abnormal,COUNT(os.Abnormal) AS num 
+			<include refid="where_condition_0" /> 
+			GROUP BY os.Abnormal;
+	</select>
+	
+	<select id="selectOsbpPieChart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.bloodPressure.model.OsbpChart">
+		SELECT Abnormal,COUNT(Abnormal) AS num FROM osbp 
+		<where>
+			docentry in
+			<foreach item="docentry" collection="list"
+				open="(" separator="," close=")">
+				#{docentry}
+			</foreach>
+		</where>
+		 GROUP BY Abnormal;
+	</select>
+	
+	<select id="selectOsbpSubPieChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodPressure.model.OsbpChart">
+		  SELECT (CASE WHEN ((DATE_FORMAT(os.TestTime, '%H') + 0) &gt; 0 AND (DATE_FORMAT(os.TestTime, '%H') + 0) &lt;= 8) THEN '0' 
+          	WHEN ((DATE_FORMAT(os.TestTime, '%H') + 0) &gt; 8 AND (DATE_FORMAT(os.TestTime, '%H') + 0) &lt;= 12) THEN '1' 
+          	WHEN ((DATE_FORMAT(os.TestTime, '%H') + 0) &gt; 12 AND (DATE_FORMAT(os.TestTime, '%H') + 0) &lt;= 18) THEN '2' ELSE '3' END) TimeQ,
+    		(CASE WHEN (os.SBP &lt; 90 OR os.DBP &lt; 60) THEN '0' WHEN (os.SBP >= 90 AND os.SBP &lt; 140 AND os.DBP &gt;= 60 AND os.DBP &lt; 90) THEN '1' ELSE '2' 
+      		END) XY, COUNT(*) num 
+      		<include refid="where_condition_0" /> 
+      		GROUP BY TimeQ, XY; 
+	</select>
+	
+	<select id="selectOsbpSubPieChart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.bloodPressure.model.OsbpChart">
+		  SELECT (CASE WHEN ((DATE_FORMAT(os.TestTime, '%H') + 0) &gt; 0 AND (DATE_FORMAT(os.TestTime, '%H') + 0) &lt;= 8) THEN '0' 
+          	WHEN ((DATE_FORMAT(os.TestTime, '%H') + 0) &gt; 8 AND (DATE_FORMAT(os.TestTime, '%H') + 0) &lt;= 12) THEN '1' 
+          	WHEN ((DATE_FORMAT(os.TestTime, '%H') + 0) &gt; 12 AND (DATE_FORMAT(os.TestTime, '%H') + 0) &lt;= 18) THEN '2' ELSE '3' END) TimeQ,
+    		(CASE WHEN (os.SBP &lt; 90 OR os.DBP &lt; 60) THEN '0' WHEN (os.SBP >= 90 AND os.SBP &lt; 140 AND os.DBP &gt;= 60 AND os.DBP &lt; 90) THEN '1' ELSE '2' 
+      		END) XY, COUNT(*) num FROM osbp os 
+      		<where>
+				os.docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+		</where>
+      		GROUP BY TimeQ, XY; 
+	</select>
+	
+	<select id="selectOsbpScachart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodPressure.model.OsbpChart">
+		SELECT DATE_FORMAT(os.TestTime, '%H:%i') TestTimes, os.SBP, os.DBP
+			<include refid="where_condition_0" />
+			; 
+	</select>
+	
+	<select id="selectOsbpScachart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.bloodPressure.model.OsbpChart">
+		SELECT DATE_FORMAT(os.TestTime, '%H:%i') TestTimes, os.SBP, os.DBP FROM osbp os
+			<where>
+				os.docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+		</where>
+			; 
+	</select>
+	
+	<select id="selectOsbpTrendChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodPressure.model.OsbpChart">
+		SELECT DATE_FORMAT(os.TestTime, '%m-%d') TestTimes, os.SBP, os.DBP 
+			<include refid="where_condition_0" /> 
+       		<if test="timePeriod != null and timePeriod != ''">
+       			AND os.timePeriod = #{timePeriod}
+       		</if>
+        	ORDER BY os.TestTime; 
+	</select>
+	
+	<select id="selectOsbpTrendChart1" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodPressure.model.OsbpChart">
+		SELECT DATE_FORMAT(os.TestTime, '%m-%d') TestTimes, os.SBP, os.DBP,os.PulseRate FROM osbp os
+			<where>
+				os.docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+				
+				<if test="timePeriod != null and timePeriod != ''">
+      				AND os.timePeriod = #{timePeriod}
+       			</if>
+			</where>
+       		
+        	ORDER BY os.TestTime; 
+	</select>
+	
+	<select id="selectOmdsByOsbp" parameterType="java.util.Map" resultType="com.bithealth.measureCore.common.model.Omds">
+		select a.* from omds a JOIN osbp b ON a.eventid=b.EventId AND a.EventType=1 AND b.DelTag = 0
+    		<if test="memberId != null">
+    			AND b.memberid=#{memberId}
+    		</if>
+    	  	 ORDER BY b.TestTime DESC
+    </select>
+    
+    <!-- <insert id="insertOsbp_docentry">
+    	INSERT INTO osbp_docentry VALUES();
+    </insert>
+    
+    <select id="selectMaxDocentry" resultType="java.lang.Long">
+    	SELECT MAX(Docentry) FROM osbp_docentry;
+    </select> -->
+    
+    <insert id="insertOsbp" parameterType="com.bithealth.measureCore.bloodPressure.model.Osbp">
+    	INSERT INTO osbp (EventId,Memberid,UploadTime,TestTime,DelTag,Abnormal,timePeriod,SBP,DBP,PulseRate,BluetoothMacAddr,DeviceCode) 
+    		VALUES(#{eventid},#{memberid},#{uploadtime},#{testtime},#{deltag},#{abnormal},#{timeperiod},#{sbp},#{dbp},#{pulserate},#{bluetoothmacaddr},#{devicecode});
+    </insert>
+</mapper>

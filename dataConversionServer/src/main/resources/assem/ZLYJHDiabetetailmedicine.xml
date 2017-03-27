@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.inspectCore.inspect.model.PhDiabetesdetailmedicine">
+<Assem name="drugname" assembly="YYwmc"/>   <!-- 药物名称-->
+<Assem name="drugusage" assembly="YYwyf"/>   <!-- 药物用法 -->
+
+</Assemes>

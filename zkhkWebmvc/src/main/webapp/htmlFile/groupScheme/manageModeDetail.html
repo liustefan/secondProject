@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>查看生成明细</title>
+	<link rel="stylesheet" href="../../css/general.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<style>
+		.detail-box {
+			margin: 20px 0;
+		    padding-left: 8px;
+		    border: 1px solid #ccc;
+		    font-size: 14px;
+		    line-height: 28px;
+		    background-color: #eff1f0;
+		}
+		
+		.mg-right {
+			margin-right: 50px;
+		}
+	</style>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">
+   		<span>轻度高血压</span>管理方案
+	</div>
+	<div class="detail-box">
+		<p>会员疾病史：<span class="mg-right">高血压</span> 会员分组：<span>会慢病医院-》 寸草心-》 成都慢性病医院-》 单项测量-》 血压单项</span></p>
+		<p>会员标签：<span>高血压；轻度高血压；</span></p>
+	</div>
+    <form action="" method="POST" id="">
+		<div class="search-box-wrapper">
+			<ul class="search-wrapper">
+				<li>
+					<label>会员姓名：</label>
+	                <input type="text">
+				</li>
+				<li>
+					<label>手机号码：</label>
+	                <input type="text">
+				</li>
+				<li>
+					<label>状态：</label>
+	                <select name="">
+						<option value="0">全部</option>
+						<option value="1">未触发</option>
+						<option value="2">生成中</option>
+						<option value="3">生成成功</option>
+					</select>
+				</li>
+				<li>
+					<button type="button" class="btn-inquiry ico-search" onclick="">查询</button>
+				</li>
+			</ul>
+		</div>
+		<div class="table-box">
+			<table class="table-content">
+				<thead class="table-title">
+					<tr>
+						<th>会员姓名</th>
+						<th>性别</th>
+						<th>手机号码</th>
+						<th>触发时间</th>
+						<th>状态</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="page-box">
+			<jsp:include page="/public/pageFoot.jsp"></jsp:include>
+		</div>
+	</form>
+</div>
+</body>
+</html>

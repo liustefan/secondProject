@@ -1,0 +1,204 @@
+.contentHide{
+	display: none;
+}
+
+.contentShow{
+	
+}
+
+#table_content_title_showtd a:link,#table_content_title_showtd td a:active,#table_content_title_showtd td a:visited{
+	color: blue;
+	word-break:keep-all;white-space:nowrap;
+}	
+	
+	
+#ques_type_11{
+    background-color:#fff; 
+    border:2px solid #09c; 
+    left:43%; 
+    margin:-200px 0 0 -200px; 
+    position:fixed !important;
+    position:absolute; 
+    top:43%; 
+    width:600px; 
+    z-index:5; 
+    border-radius:5px; 
+    display:none; 
+}  
+#ques_type_22{
+    background-color:#fff; 
+    border:2px solid #09c; 
+    left:43%; 
+    margin:-200px 0 0 -200px; 
+    position:fixed !important;  
+    position:absolute; 
+    top:43%; 
+    width:600px; 
+    z-index:5; 
+    border-radius:5px; 
+    display:none; 
+}
+#ques_type_33{
+    background-color:#fff; 
+    border:2px solid #09c;  
+    left:43%; 
+    margin:-200px 0 0 -200px; 
+    position:fixed !important; 
+    position:absolute; 
+    top:43%; 
+    width:600px; 
+    z-index:5; 
+    border-radius:5px; 
+    display:none; 
+}
+#ques_type_44{
+    background-color:#fff; 
+    border:2px solid #09c; 
+    left:43%; 
+    margin:-200px 0 0 -200px; 
+    padding:1px; 
+    position:fixed !important; 
+    position:absolute; 
+    top:43%; 
+    width:600px; 
+    z-index:5; 
+    border-radius:5px; 
+    display:none; 
+}
+#ques_type_55{
+    background-color:#fff; 
+    border:2px solid #09c; 
+    left:43%; 
+    margin:-200px 0 0 -200px; 
+    position:fixed !important;
+    position:absolute; 
+    top:43%; 
+    width:600px; 
+    z-index:5; 
+    border-radius:5px; 
+    display:none; 
+}
+#ques_type_11 img,#ques_type_22 img,#ques_type_33 img,,#ques_type_44 img,#ques_type_55 img,{
+		height: 16px;
+		width: 16px;
+		cursor:pointer;
+}
+#ques_type_11 td,#ques_type_22 td,#ques_type_33 td,#ques_type_44 td,#ques_type_55 td{
+		padding:10px 0px 0px 0px;
+		font-size:12px;
+}
+#ques_type_11 label{
+		text-decoration:none;
+		color:#8196FE;
+		padding-left: 5px;
+		font-size: 14px;
+		font-weight: bold;
+	}
+	#ques_type_22 label{
+		text-decoration:none;
+		color:#8196FE;
+		padding-left: 5px;
+		font-size: 14px;
+		font-weight: bold;
+	}
+	#tk_label{
+		width: 40px;
+		font-size: 12px;
+		color: #000;
+	}
+	#ques_type_33 .label_add{
+		text-decoration:none;
+		color:#8196FE;
+		padding-left: 5px;
+		font-size: 14px;
+		font-weight: bold;
+		width: 180px;
+	}
+	
+	#ques_type_44 .label_add{
+		text-decoration:none;
+		color:#8196FE;
+		padding-left: 5px;
+		font-size: 14px;
+		font-weight: bold;
+		width: 180px;
+	}
+	#ques_type_55 .label_add{
+		text-decoration:none;
+		color:#8196FE;
+		padding-left: 5px;
+		font-size: 14px;
+		font-weight: bold;
+		width: 180px;
+	}
+#ques_type_11 p { 
+    margin:0 0 12px; 
+    height:28px; 
+    line-height:28px; 
+    background:#09c; 
+    } 
+    #ques_type_11 p.close { 
+    text-align:right; 
+    padding-right:10px; 
+    } 
+    #ques_type_11 p.close a { 
+	color:#fff; 
+	text-decoration:none; 
+	} 
+	#ques_type_22 p { 
+    margin:0 0 12px; 
+    height:28px; 
+    line-height:24px; 
+    background:#09c; 
+    } 
+    #ques_type_22 p.close { 
+    text-align:right; 
+    padding-right:10px; 
+    } 
+    #ques_type_22 p.close a { 
+	color:#fff; 
+	text-decoration:none; 
+	} 
+	#ques_type_33 p { 
+    margin:0 0 12px; 
+    height:28px; 
+    line-height:28px; 
+    background:#09c; 
+    } 
+    #ques_type_33 p.close { 
+    text-align:right; 
+    padding-right:10px; 
+    } 
+    #ques_type_33 p.close a { 
+	color:#fff; 
+	text-decoration:none; 
+	} 
+	#ques_type_44 p { 
+    margin:0 0 12px; 
+    height:28px; 
+    line-height:28px; 
+    background:#09c; 
+    } 
+    #ques_type_44 p.close { 
+    text-align:right; 
+    padding-right:10px; 
+    } 
+    #ques_type_44 p.close a { 
+	color:#fff; 
+	text-decoration:none; 
+	} 
+	#ques_type_55 p { 
+    margin:0 0 12px; 
+    height:28px; 
+    line-height:28px; 
+    background:#09c; 
+    } 
+    #ques_type_55 p.close { 
+    text-align:right; 
+    padding-right:10px; 
+    } 
+    #ques_type_55 p.close a { 
+	color:#fff; 
+	text-decoration:none; 
+	} 
+	

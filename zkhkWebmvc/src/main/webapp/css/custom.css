@@ -1,0 +1,246 @@
+body, html, div, p, span, a, h1, h2, h3, h4, h5{
+	margin 				: 0;
+	padding 			: 0;
+}
+
+body, html{	
+	width 				: 100%;
+}
+ul,li{list-style:none;}
+body{
+	margin: 0;
+	padding: 0;
+	font-family:"Microsoft YaHei", "SimSun";
+}
+
+	body p{
+		font-size 		: 14px;
+	}
+	
+		body p a{
+			font-size	: 16px;
+		}
+
+h1 {
+	color 				: #E05E00;	
+	/*font-style 			: italic;*/
+	font-style:normal;
+}
+
+
+
+/* general */
+.clear {
+	clear: both;
+}
+
+/* Header */
+.brand{
+	color 				: #E05E00 !important;	
+	font-family 		: georgia;
+	/*font-style 			: italic;*/
+}
+
+/* list stuff */
+#org{
+	background-color 	: white;
+	margin 				: 10px;
+	padding 			: 10px;
+}
+
+#show-list{
+	cursor 				: pointer;
+}
+
+/* bootstrap overrides */
+.alert-message{
+	margin: 2px 0;
+}
+
+.topbar{
+	position 			: absolute;
+}
+
+/* Custom chart styling */
+.jOrgChart {
+  margin                : 10px;
+  padding               : 20px;
+}
+
+/* Custom node styling */
+.jOrgChart .node {
+	font-size 			: 13px;
+	background-color 	: #35363B;
+	border-radius 		: 8px;
+	border 				: 2px solid #7DC05C;
+	color 				: #F38630;
+	-moz-border-radius 	: 8px;
+}
+.jOrgChart .node span{width:94px;overflow: hidden; text-overflow: ellipsis; display: block; white-space: nowrap;}
+	.node p{
+		font-family 	: tahoma;
+		font-size 		: 10px;
+		line-height 	: 11px;
+		padding 		: 2px;
+	}
+#menu_new{
+	margin-top: 20px;
+	margin-left: 20px;margin-right: 20px;
+	background: #46b258;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 4px;
+}
+#menu_new label{
+	padding: 5px 20px 5px 8px;
+	border-radius: 2px;
+	margin-left: 20px;
+	color: #FFF;
+	font-size: 16px; 
+	font-weight: bold;
+	line-height: 18px; 
+	float: none; 
+	width: 80px; 
+	text-align: center;
+}
+.ul_menu{
+	display: none;
+	margin: 0;
+	padding: 1px;
+	position: absolute;
+	background: #73c86a;
+	border: 1px solid #73c86a;
+	-moz-box-shadow: 5px 5px 4px -4px #666;
+	-webkit-box-shadow: 2px 2px 2px #999;
+	box-shadow: 2px 2px 2px #999;
+}
+.ul_menu li,.ul_menu li a{
+	display:block;
+	font-size: 14px;
+	line-height: 30px;
+	color:#fff;
+	text-align: center;
+	height: 30px;
+	width: 120px;
+	border-bottom: 1px solid #5ea256;
+}
+.ul_menu li a:hover{
+    cursor:pointer;
+	background:#5ea256;
+	text-decoration:none;
+}
+#jg_id,#orgCode,#endTag,#level,#endTagcancel{
+	color:#D6D9DB;
+	word-break:keep-all;/* 不换行 */
+	white-space:nowrap;/* 不换行 */
+	overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...);需与overflow:hidden;一起使用。*/
+}
+#endTag,#endTagcancel{
+	display: none;
+}
+#endTagcancel{
+	color: #808080;
+}
+ #ques_type,#ques_type_1, #del_gp{
+    background-color:#fff; 
+    border:2px solid #09c; 
+    left:43%; 
+    margin:-200px 0 0 -200px; 
+    /*padding:1px; */
+    position:fixed !important; /* 娴姩瀵硅瘽妗�*/ 
+    position:absolute; 
+    top:43%; 
+    width:500px; 
+    z-index:5; 
+    border-radius:5px 5px 0px 0px;
+    padding-bottom:15px; 
+    }  
+ #ques_type p,#ques_type_1 p, #del_gp p{ 
+    margin:0 0 12px; 
+    height:30px; 
+    line-height:30px; 
+    background:#09c; 
+    } 
+    #ques_type p.closes ,#ques_type_1 p.closes, #del_gp p.closes{ 
+    text-align:right; 
+    padding-right:10px; 
+    } 
+    #ques_type p.closes a,#ques_type_1 p.closes a, #del_gp p.closes a { 
+	color:#fff; 
+	font-size:14px;
+	text-decoration:none; 
+	} 
+#fullbg { 
+    background-color:#000; 
+    left:0; 
+    opacity:0.5; 
+    position:absolute; 
+    top:0; 
+    z-index:3; 
+    filter:alpha(opacity=50); 
+    -moz-opacity:0.5; 
+    -khtml-opacity:0.5; 
+    } 
+.ques_cap,.ques_cap_1,.del_cap{
+		height: 28px;
+		color: #333;
+		text-align: center;
+		font-weight: bold;
+		font-size:14px;
+		font-family:"Microsoft YaHei", "SimSun";
+	}
+.quer_td_title{
+		width:120px;
+		color: #000;
+		text-align:right;
+		font-family:"Microsoft YaHei", "SimSun";
+	}
+#quer_type_que table,#quer_type_que_1 table, #del_gp_1 table{
+	margin: 0 auto;
+	padding: 0 20px;
+}
+#quer_type_que table td,#quer_type_que_1 table td, #del_gp_1 table td{
+	padding-bottom: 6px;
+	color: #333;
+	font-family:"Microsoft YaHei", "SimSun";
+	
+}
+#orgcodes,#orgnames,#orgExplanation,#odgpName,#odpgremark{
+	width: 240px;
+	height: 18px;
+}
+.label_but{
+	padding: 3px 15px;
+	margin-right: 15px;
+	font-size: 13px;
+	line-height: 18px;
+	float: none;
+	color: #404040;
+	border: 1px solid #9a9a9a;
+	border-radius: 3px;
+	font-family:"Microsoft YaHei", "SimSun";
+	cursor:pointer;
+}
+#td_but{
+	padding: 8px 0;
+	/*text-align: center;*/
+}
+#Prompt{
+	margin-top: 5px;
+	color: #9a9a9a;
+	font-size: 12px;
+	margin-left: 20px;
+}
+#popup_ok,#popup_cancel{
+  padding: 3px 15px;
+  margin-right: 30px;
+  font-size: 13px;
+  line-height: 18px;
+  float: none;
+  color: #404040;
+  border: 1px solid #9a9a9a;
+  border-radius: 3px;
+  background-color: #fff;
+  font-family:"Microsoft YaHei", "SimSun";
+}

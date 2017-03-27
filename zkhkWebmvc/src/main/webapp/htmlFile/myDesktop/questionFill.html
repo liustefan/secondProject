@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>问卷填写</title>
+	<link rel="stylesheet" href="../../css/general.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<style>
+	    .task-title {
+	    	height: 30px;
+	    	line-height: 30px;
+	    	color: #007735;
+	    	background: #f2f1f1;
+	    	font-weight: bold;
+	    	padding-left: 8px;
+	    }
+	    
+	    .question-name {
+	    	height: 40px;
+	    	line-height: 40px;
+	    	font-size: 14px;
+	    }
+	    
+	    .main-box {
+			border: 1px solid #98cc6b;
+		}
+		
+		.main-box ul li {
+			margin: 15px 8px;
+		}
+		
+		.question-warpper {
+			padding-left: 30px;
+		}
+		
+		/* 单选框和复选框居中显示 */
+		.input-center {
+		    float: left;
+		    margin: 3px 4px 0 0;
+		    margin-top: 2px\0 !important;
+		}
+		
+		.span-center {
+		    display: inline-block;
+		    float: left;
+		    margin-right: 12px;
+		}
+		
+		.question-tip {
+			font-size: 14px;
+			
+		}
+		
+		.question-warpper label {
+			margin: 20px 0 ;
+		}
+	</style>
+</head>
+<body>
+<div class="content">
+    <form action="" method="POST" id="">
+		<div class="main-box">
+			<div class="task-title">问卷填写</div>
+			<div class="align-center question-name">问卷名称</div>
+			<div id="" class="question-warpper">
+				<p class="question-tip">1.您睡眠好吗[单选]</p>
+				<label>
+					<input type="radio" class="input-center" value="" name="xx">
+					<span class="span-center">A.好</span>
+				</label>
+				<label>
+					<input type="radio" class="input-center" value="" name="xx">
+					<span class="span-center">B.不好</span>
+				</label>
+				<p class="question-tip">2.您睡眠为什么不好[多选]</p>
+				<label>
+					<input type="checkbox" class="input-center" value="">
+					<span class="span-center">A.心情不好</span>
+				</label>
+				<label>
+					<input type="checkbox" class="input-center" value="">
+					<span class="span-center">B.晚上吃多了</span>
+				</label>
+				<label>
+					<input type="checkbox" class="input-center" value="">
+					<span class="span-center">C.晚上睡晚了</span>
+				</label>
+				<label>
+					<input type="checkbox" class="input-center" value="">
+					<span class="span-center">D.喝了咖啡</span>
+				</label>
+			</div>
+		</div>
+		<div class="page-box align-center">
+			<button class="btn-inquiry" onclick="">暂存</button>
+	        <button class="btn-inquiry" onclick="">提交</button>
+	        <button class="btn-cancel" onclick="javascript: history.go(-1);">返回</button>
+        </div>
+	</form>
+</div>
+</body>
+</html>

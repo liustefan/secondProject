@@ -1,0 +1,140 @@
+/*Design By TOPVE*/
+/*www.topve.com*/
+
+html ,body {
+	height: 100%;
+	background: url(../img/web_bg0.jpg) no-repeat 50% 0 #000;
+}
+
+.customer-info {
+	position: relative;
+	top: 500px;
+	width: 500px; 
+	text-align: center;
+	margin: 0 auto;
+	line-height: 38px;
+}
+
+.customer-info span {
+	font-weight: bold;
+	color: #333;
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+.customer-info img {
+	display: inline;
+}
+
+.customer-info p {
+	margin: 0 auto;
+	padding: 0;
+	line-height: 22px;
+}
+
+.box-out {
+	height: 100%;
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+}
+
+.on-index{
+	margin :0 auto;
+	width: 1003px;
+	height: 100%;
+	min-height: 680px;
+	position: relative;
+	text-align: center;
+}
+
+.box {
+	margin: 0 auto;
+	width: 1003px;
+	height: 350px;
+	position: absolute;
+	top: 145px;
+	z-index: 2;
+}
+
+.box-bg {
+	background: url(../img/box_bg.png) no-repeat 50% 0;
+	width: 1003px;
+	height: 350px;
+	position: absolute;
+	top: 160px;
+	z-index: 1;
+}
+
+/*login表单开始*/
+.login {
+	margin: 52px auto 0;
+}
+
+.login-body {
+	margin: 0 auto;
+	width: 420px;
+	font-size: 13px;
+}
+
+.login-body tr td {
+	padding: 5px 0;
+}
+
+.listt {
+	width: 170px;
+	text-align: right;
+}
+
+.listdomain {
+	float: right;
+	font: 18px/18px "Microsoft YaHei",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+	width: 87px;
+	border: 1px solid #677065;
+}
+
+.inputbg2 {
+	/* background:url(file:///C:/Users/bin/Desktop/zkhk/img/inputbg.gif) repeat-x 0 top #fff; */
+	padding: 0 0 0 5px;
+	width: 230px;
+	height: 28px;
+	line-height: 28px;
+	font-size: 12px;
+	font-family: "Microsoft YaHei";
+	border: 1px solid #ccc;
+}
+
+.foot-box {
+	position: absolute;
+	bottom: 10px;
+	color: #fff;
+}
+
+.foot-bottom {
+	width: 1003px;
+	height: 34px;
+	line-height: 34px;
+	background-image: url(../img/foot_bg.png);
+}
+
+.foot-box img {
+	margin: 0px 4px;
+	width: 24px;
+}
+
+.check {
+	height: 14px;
+	vertical-align: text-bottom;
+}
+
+.tips {
+	padding: 50px 0 10px 0;
+	font-size: 14px;
+	color: #54870f;
+}
+
+.inital-height {
+	height: auto;
+	outline: none;
+}

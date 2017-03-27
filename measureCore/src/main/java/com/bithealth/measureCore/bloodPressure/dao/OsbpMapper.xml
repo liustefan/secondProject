@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.measureCore.bloodPressure.dao.OsbpMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.measureCore.bloodPressure.model.Osbp" >
+        <id column="Docentry" property="docentry" jdbcType="BIGINT" />
+        <result column="EventId" property="eventid" jdbcType="BIGINT" />
+        <result column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="UploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+        <result column="TestTime" property="testtime" jdbcType="TIMESTAMP" />
+        <result column="DelTag" property="deltag" jdbcType="CHAR" />
+        <result column="Abnormal" property="abnormal" jdbcType="CHAR" />
+        <result column="timePeriod" property="timeperiod" jdbcType="CHAR" />
+        <result column="SBP" property="sbp" jdbcType="INTEGER" />
+        <result column="DBP" property="dbp" jdbcType="INTEGER" />
+        <result column="PulseRate" property="pulserate" jdbcType="INTEGER" />
+        <result column="BluetoothMacAddr" property="bluetoothmacaddr" jdbcType="VARCHAR" />
+        <result column="DeviceCode" property="devicecode" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Docentry, EventId, Memberid, UploadTime, TestTime, DelTag, Abnormal, timePeriod, 
+        SBP, DBP, PulseRate, BluetoothMacAddr, DeviceCode
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.bloodPressure.model.OsbpExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from osbp
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.bloodPressure.model.OsbpExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from osbp
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from osbp
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.measureCore.bloodPressure.model.Osbp" >
+        insert into osbp (EventId, Memberid, 
+            UploadTime, TestTime, DelTag, 
+            Abnormal, timePeriod, SBP, 
+            DBP, PulseRate, BluetoothMacAddr, 
+            DeviceCode)
+        values (#{eventid,jdbcType=BIGINT}, #{memberid,jdbcType=INTEGER}, 
+            #{uploadtime,jdbcType=TIMESTAMP}, #{testtime,jdbcType=TIMESTAMP}, #{deltag,jdbcType=CHAR}, 
+            #{abnormal,jdbcType=CHAR}, #{timeperiod,jdbcType=CHAR}, #{sbp,jdbcType=INTEGER}, 
+            #{dbp,jdbcType=INTEGER}, #{pulserate,jdbcType=INTEGER}, #{bluetoothmacaddr,jdbcType=VARCHAR}, 
+            #{devicecode,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.measureCore.bloodPressure.model.Osbp" >
+        insert into osbp
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                Docentry,
+            </if>
+            <if test="eventid != null" >
+                EventId,
+            </if>
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime,
+            </if>
+            <if test="testtime != null" >
+                TestTime,
+            </if>
+            <if test="deltag != null" >
+                DelTag,
+            </if>
+            <if test="abnormal != null" >
+                Abnormal,
+            </if>
+            <if test="timeperiod != null" >
+                timePeriod,
+            </if>
+            <if test="sbp != null" >
+                SBP,
+            </if>
+            <if test="dbp != null" >
+                DBP,
+            </if>
+            <if test="pulserate != null" >
+                PulseRate,
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                BluetoothMacAddr,
+            </if>
+            <if test="devicecode != null" >
+                DeviceCode,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                #{docentry,jdbcType=BIGINT},
+            </if>
+            <if test="eventid != null" >
+                #{eventid,jdbcType=BIGINT},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="testtime != null" >
+                #{testtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deltag != null" >
+                #{deltag,jdbcType=CHAR},
+            </if>
+            <if test="abnormal != null" >
+                #{abnormal,jdbcType=CHAR},
+            </if>
+            <if test="timeperiod != null" >
+                #{timeperiod,jdbcType=CHAR},
+            </if>
+            <if test="sbp != null" >
+                #{sbp,jdbcType=INTEGER},
+            </if>
+            <if test="dbp != null" >
+                #{dbp,jdbcType=INTEGER},
+            </if>
+            <if test="pulserate != null" >
+                #{pulserate,jdbcType=INTEGER},
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                #{bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="devicecode != null" >
+                #{devicecode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.measureCore.bloodPressure.model.OsbpExample" resultType="java.lang.Integer" >
+        select count(*) from osbp
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update osbp
+        <set >
+            <if test="record.docentry != null" >
+                Docentry = #{record.docentry,jdbcType=BIGINT},
+            </if>
+            <if test="record.eventid != null" >
+                EventId = #{record.eventid,jdbcType=BIGINT},
+            </if>
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.uploadtime != null" >
+                UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.testtime != null" >
+                TestTime = #{record.testtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.deltag != null" >
+                DelTag = #{record.deltag,jdbcType=CHAR},
+            </if>
+            <if test="record.abnormal != null" >
+                Abnormal = #{record.abnormal,jdbcType=CHAR},
+            </if>
+            <if test="record.timeperiod != null" >
+                timePeriod = #{record.timeperiod,jdbcType=CHAR},
+            </if>
+            <if test="record.sbp != null" >
+                SBP = #{record.sbp,jdbcType=INTEGER},
+            </if>
+            <if test="record.dbp != null" >
+                DBP = #{record.dbp,jdbcType=INTEGER},
+            </if>
+            <if test="record.pulserate != null" >
+                PulseRate = #{record.pulserate,jdbcType=INTEGER},
+            </if>
+            <if test="record.bluetoothmacaddr != null" >
+                BluetoothMacAddr = #{record.bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.devicecode != null" >
+                DeviceCode = #{record.devicecode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update osbp
+        set <!-- Docentry = #{record.docentry,jdbcType=BIGINT}, -->
+            EventId = #{record.eventid,jdbcType=BIGINT},
+            Memberid = #{record.memberid,jdbcType=INTEGER},
+            UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            TestTime = #{record.testtime,jdbcType=TIMESTAMP},
+            DelTag = #{record.deltag,jdbcType=CHAR},
+            Abnormal = #{record.abnormal,jdbcType=CHAR},
+            timePeriod = #{record.timeperiod,jdbcType=CHAR},
+            SBP = #{record.sbp,jdbcType=INTEGER},
+            DBP = #{record.dbp,jdbcType=INTEGER},
+            PulseRate = #{record.pulserate,jdbcType=INTEGER},
+            BluetoothMacAddr = #{record.bluetoothmacaddr,jdbcType=VARCHAR},
+            DeviceCode = #{record.devicecode,jdbcType=VARCHAR}
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.measureCore.bloodPressure.model.Osbp" >
+        update osbp
+        <set >
+            <if test="eventid != null" >
+                EventId = #{eventid,jdbcType=BIGINT},
+            </if>
+            <if test="memberid != null" >
+                Memberid = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="testtime != null" >
+                TestTime = #{testtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deltag != null" >
+                DelTag = #{deltag,jdbcType=CHAR},
+            </if>
+            <if test="abnormal != null" >
+                Abnormal = #{abnormal,jdbcType=CHAR},
+            </if>
+            <if test="timeperiod != null" >
+                timePeriod = #{timeperiod,jdbcType=CHAR},
+            </if>
+            <if test="sbp != null" >
+                SBP = #{sbp,jdbcType=INTEGER},
+            </if>
+            <if test="dbp != null" >
+                DBP = #{dbp,jdbcType=INTEGER},
+            </if>
+            <if test="pulserate != null" >
+                PulseRate = #{pulserate,jdbcType=INTEGER},
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                BluetoothMacAddr = #{bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="devicecode != null" >
+                DeviceCode = #{devicecode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.measureCore.bloodPressure.model.Osbp" >
+        update osbp
+        set EventId = #{eventid,jdbcType=BIGINT},
+            Memberid = #{memberid,jdbcType=INTEGER},
+            UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            TestTime = #{testtime,jdbcType=TIMESTAMP},
+            DelTag = #{deltag,jdbcType=CHAR},
+            Abnormal = #{abnormal,jdbcType=CHAR},
+            timePeriod = #{timeperiod,jdbcType=CHAR},
+            SBP = #{sbp,jdbcType=INTEGER},
+            DBP = #{dbp,jdbcType=INTEGER},
+            PulseRate = #{pulserate,jdbcType=INTEGER},
+            BluetoothMacAddr = #{bluetoothmacaddr,jdbcType=VARCHAR},
+            DeviceCode = #{devicecode,jdbcType=VARCHAR}
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from osbp
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.measureCore.bloodPressure.model.OsbpExample" >
+        delete from osbp
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <select id="selectBloodPresListByGUID" parameterType="java.lang.String" resultMap="BaseResultMap" >
+		SELECT a.* FROM osbp a,omem b 
+		WHERE a.`Memberid` = b.`Memberid` 
+		AND b.`memberGUID` = #{memberGUID}
+    </select>
+
+</mapper>

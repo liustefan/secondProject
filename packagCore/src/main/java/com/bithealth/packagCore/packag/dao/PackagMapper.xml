@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.packagCore.packag.dao.PackagMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.packagCore.packag.model.Packag" >
+        <id column="PackageCode" property="packageCode" jdbcType="INTEGER" />
+        <result column="OrgId" property="orgId" jdbcType="INTEGER" />
+        <result column="PackageName" property="packageName" jdbcType="VARCHAR" />
+        <result column="PackageDesc" property="packageDesc" jdbcType="VARCHAR" />
+        <result column="PackageType" property="packageType" jdbcType="SMALLINT" />
+        <result column="Price" property="price" jdbcType="DECIMAL" />
+        <result column="PackageLevel" property="packageLevel" jdbcType="CHAR" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="Createid" property="createid" jdbcType="INTEGER" />
+        <result column="CreateName" property="createName" jdbcType="VARCHAR" />
+        <result column="UseTag" property="useTag" jdbcType="CHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        PackageCode, OrgId, PackageName, PackageDesc, PackageType, Price, PackageLevel, CreateTime, 
+        Createid, CreateName, UseTag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.PackagExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from opsp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.PackagExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from opsp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from opsp
+        where PackageCode = #{packageCode,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.packagCore.packag.model.Packag"  useGeneratedKeys="true" keyProperty="packageCode">
+        insert into opsp (PackageCode, OrgId, PackageName, 
+            PackageDesc, PackageType, Price, 
+            PackageLevel, CreateTime, Createid, 
+            CreateName, UseTag)
+        values (#{packageCode,jdbcType=INTEGER}, #{orgId,jdbcType=INTEGER}, #{packageName,jdbcType=VARCHAR}, 
+            #{packageDesc,jdbcType=VARCHAR}, #{packageType,jdbcType=SMALLINT}, #{price,jdbcType=DECIMAL}, 
+            #{packageLevel,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createid,jdbcType=INTEGER}, 
+            #{createName,jdbcType=VARCHAR}, #{useTag,jdbcType=CHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.packagCore.packag.model.Packag" useGeneratedKeys="true" keyProperty="packageCode" >
+        insert into opsp
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="packageCode != null" >
+                PackageCode,
+            </if>
+            <if test="orgId != null" >
+                OrgId,
+            </if>
+            <if test="packageName != null" >
+                PackageName,
+            </if>
+            <if test="packageDesc != null" >
+                PackageDesc,
+            </if>
+            <if test="packageType != null" >
+                PackageType,
+            </if>
+            <if test="price != null" >
+                Price,
+            </if>
+            <if test="packageLevel != null" >
+                PackageLevel,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="createid != null" >
+                Createid,
+            </if>
+            <if test="createName != null" >
+                CreateName,
+            </if>
+            <if test="useTag != null" >
+                UseTag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="packageCode != null" >
+                #{packageCode,jdbcType=INTEGER},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="packageName != null" >
+                #{packageName,jdbcType=VARCHAR},
+            </if>
+            <if test="packageDesc != null" >
+                #{packageDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="packageType != null" >
+                #{packageType,jdbcType=SMALLINT},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="packageLevel != null" >
+                #{packageLevel,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createid != null" >
+                #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null" >
+                #{createName,jdbcType=VARCHAR},
+            </if>
+            <if test="useTag != null" >
+                #{useTag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.packagCore.packag.model.PackagExample" resultType="java.lang.Integer" >
+        select count(*) from opsp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update opsp
+        <set >
+            <if test="record.packageCode != null" >
+                PackageCode = #{record.packageCode,jdbcType=INTEGER},
+            </if>
+            <if test="record.orgId != null" >
+                OrgId = #{record.orgId,jdbcType=INTEGER},
+            </if>
+            <if test="record.packageName != null" >
+                PackageName = #{record.packageName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.packageDesc != null" >
+                PackageDesc = #{record.packageDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.packageType != null" >
+                PackageType = #{record.packageType,jdbcType=SMALLINT},
+            </if>
+            <if test="record.price != null" >
+                Price = #{record.price,jdbcType=DECIMAL},
+            </if>
+            <if test="record.packageLevel != null" >
+                PackageLevel = #{record.packageLevel,jdbcType=CHAR},
+            </if>
+            <if test="record.createTime != null" >
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createid != null" >
+                Createid = #{record.createid,jdbcType=INTEGER},
+            </if>
+            <if test="record.createName != null" >
+                CreateName = #{record.createName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.useTag != null" >
+                UseTag = #{record.useTag,jdbcType=CHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update opsp
+        set PackageCode = #{record.packageCode,jdbcType=INTEGER},
+            OrgId = #{record.orgId,jdbcType=INTEGER},
+            PackageName = #{record.packageName,jdbcType=VARCHAR},
+            PackageDesc = #{record.packageDesc,jdbcType=VARCHAR},
+            PackageType = #{record.packageType,jdbcType=SMALLINT},
+            Price = #{record.price,jdbcType=DECIMAL},
+            PackageLevel = #{record.packageLevel,jdbcType=CHAR},
+            CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            Createid = #{record.createid,jdbcType=INTEGER},
+            CreateName = #{record.createName,jdbcType=VARCHAR},
+            UseTag = #{record.useTag,jdbcType=CHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.packagCore.packag.model.Packag" >
+        update opsp
+        <set >
+            <if test="orgId != null" >
+                OrgId = #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="packageName != null" >
+                PackageName = #{packageName,jdbcType=VARCHAR},
+            </if>
+            <if test="packageDesc != null" >
+                PackageDesc = #{packageDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="packageType != null" >
+                PackageType = #{packageType,jdbcType=SMALLINT},
+            </if>
+            <if test="price != null" >
+                Price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="packageLevel != null" >
+                PackageLevel = #{packageLevel,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createid != null" >
+                Createid = #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null" >
+                CreateName = #{createName,jdbcType=VARCHAR},
+            </if>
+            <if test="useTag != null" >
+                UseTag = #{useTag,jdbcType=CHAR},
+            </if>
+        </set>
+        where PackageCode = #{packageCode,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.packagCore.packag.model.Packag" >
+        update opsp
+        set OrgId = #{orgId,jdbcType=INTEGER},
+            PackageName = #{packageName,jdbcType=VARCHAR},
+            PackageDesc = #{packageDesc,jdbcType=VARCHAR},
+            PackageType = #{packageType,jdbcType=SMALLINT},
+            Price = #{price,jdbcType=DECIMAL},
+            PackageLevel = #{packageLevel,jdbcType=CHAR},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            Createid = #{createid,jdbcType=INTEGER},
+            CreateName = #{createName,jdbcType=VARCHAR},
+            UseTag = #{useTag,jdbcType=CHAR}
+        where PackageCode = #{packageCode,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from opsp
+        where PackageCode = #{packageCode,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.packagCore.packag.model.PackagExample" >
+        delete from opsp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>选择会员</title>
+	<link rel="stylesheet" href="../../css/general.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../../layer/layer-v2.0/layer.js"></script>
+	<style type="text/css">
+		.content {
+			margin-top: 8px;
+		}
+	</style>
+	<script type="text/javascript">
+		var index = layer.getFrameIndex(window.name); //获取窗口索引
+		
+		function openMemTag() {
+			layer.closeAll();
+			layer.open({
+		   	    type: 2,
+		   		skin : 'skin1',
+		   	    title: '会员标签',
+		   	    shadeClose: false,
+		   	    shade: 0,
+		   	    area: ['400px', '350px'],
+		   	    content: 'chooseLabel.html', //iframe的url
+		   	}); 
+		}
+	</script>
+</head>
+<body>
+<div class="content">
+    <form action="" method="POST" id="">
+		<div class="search-box-wrapper">
+			<ul class="search-wrapper">
+				<li>
+					<label>会员姓名：</label>
+	                <input type="text">
+				</li>
+				<li>
+					<label>手机号码：</label>
+	                <input type="text">
+				</li>
+				<li>
+					<label>身份证号：</label>
+	                <input type="text">
+				</li>
+				<li>
+					<label>会员分组：</label>
+	                <div class="position-r">
+		                <input type="text" readonly>
+		                <i class="member-search" onclick=""></i>
+                 	</div>
+				</li>
+				<li>
+					<label>会员类型：</label>
+	                <select name="">
+						<option value="0">请选择</option>
+						<option value="1">收费会员</option>
+						<option value="1">免费会员</option>
+					</select>
+				</li>
+				<li>
+					<label>会员疾病史：</label>
+	                <select name="">
+						<option value="0">全部</option>
+						<option value="1">高血压</option>
+						<option value="2">糖尿病</option>
+						<option value="3">冠心病</option>
+						<option value="4">慢性阻塞性肺疾病</option>
+						<option value="5">恶性肿瘤</option>
+						<option value="6">脑卒中</option>
+						<option value="7">重型精神病</option>
+						<option value="8">结核病</option>
+						<option value="9">肝炎</option>
+					</select>
+				</li>
+				<li>
+					<label>会员标签：</label>
+	                <div class="position-r">
+		                <input type="text" readonly>
+		                <i class="member-search" onclick="openMemTag();"></i>
+                 	</div>
+				</li>
+				<li>
+					<button type="button" class="btn-inquiry ico-search" onclick="">查询</button>
+				</li>
+			</ul>
+		</div>
+		<div class="table-box">
+			<table class="table-content">
+				<thead class="table-title">
+					<tr>
+						<th>会员姓名</th>
+						<th>性别</th>
+						<th>手机号码</th>
+						<th>会员类型</th>
+						<th>所属分组</th>
+						<th>会员疾病史</th>
+						<th>会员标签</th>
+						<th>选择</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a href="javascript: void(0);" onclick="parent.window.location.href='editPersonManageMode.html'">选择</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="page-box">
+			<jsp:include page="/public/pageFoot.jsp"></jsp:include>
+		</div>
+	</form>
+</div>
+</body>
+</html>

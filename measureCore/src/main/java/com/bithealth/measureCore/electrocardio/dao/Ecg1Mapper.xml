@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.measureCore.electrocardio.dao.Ecg1Mapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.measureCore.electrocardio.model.Ecg1" >
+        <id column="Docentry" property="docentry" jdbcType="BIGINT" />
+        <id column="LineNum" property="linenum" jdbcType="SMALLINT" />
+        <result column="ObjectId" property="objectid" jdbcType="VARCHAR" />
+        <result column="AbECGType" property="abecgtype" jdbcType="VARCHAR" />
+        <result column="AbECGTime" property="abecgtime" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Docentry, LineNum, ObjectId, AbECGType, AbECGTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ecg1
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ecg1
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1Key" >
+        select 
+        <include refid="Base_Column_List" />
+        from ecg1
+        where Docentry = #{docentry,jdbcType=BIGINT}
+          and LineNum = #{linenum,jdbcType=SMALLINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1" >
+        insert into ecg1 (Docentry, LineNum, ObjectId, 
+            AbECGType, AbECGTime)
+        values (#{docentry,jdbcType=BIGINT}, #{linenum,jdbcType=SMALLINT}, #{objectid,jdbcType=VARCHAR}, 
+            #{abecgtype,jdbcType=VARCHAR}, #{abecgtime,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1" >
+        insert into ecg1
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                Docentry,
+            </if>
+            <if test="linenum != null" >
+                LineNum,
+            </if>
+            <if test="objectid != null" >
+                ObjectId,
+            </if>
+            <if test="abecgtype != null" >
+                AbECGType,
+            </if>
+            <if test="abecgtime != null" >
+                AbECGTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                #{docentry,jdbcType=BIGINT},
+            </if>
+            <if test="linenum != null" >
+                #{linenum,jdbcType=SMALLINT},
+            </if>
+            <if test="objectid != null" >
+                #{objectid,jdbcType=VARCHAR},
+            </if>
+            <if test="abecgtype != null" >
+                #{abecgtype,jdbcType=VARCHAR},
+            </if>
+            <if test="abecgtime != null" >
+                #{abecgtime,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1Example" resultType="java.lang.Integer" >
+        select count(*) from ecg1
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update ecg1
+        <set >
+            <if test="record.docentry != null" >
+                Docentry = #{record.docentry,jdbcType=BIGINT},
+            </if>
+            <if test="record.linenum != null" >
+                LineNum = #{record.linenum,jdbcType=SMALLINT},
+            </if>
+            <if test="record.objectid != null" >
+                ObjectId = #{record.objectid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.abecgtype != null" >
+                AbECGType = #{record.abecgtype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.abecgtime != null" >
+                AbECGTime = #{record.abecgtime,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update ecg1
+        set Docentry = #{record.docentry,jdbcType=BIGINT},
+            LineNum = #{record.linenum,jdbcType=SMALLINT},
+            ObjectId = #{record.objectid,jdbcType=VARCHAR},
+            AbECGType = #{record.abecgtype,jdbcType=VARCHAR},
+            AbECGTime = #{record.abecgtime,jdbcType=INTEGER}
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1" >
+        update ecg1
+        <set >
+            <if test="objectid != null" >
+                ObjectId = #{objectid,jdbcType=VARCHAR},
+            </if>
+            <if test="abecgtype != null" >
+                AbECGType = #{abecgtype,jdbcType=VARCHAR},
+            </if>
+            <if test="abecgtime != null" >
+                AbECGTime = #{abecgtime,jdbcType=INTEGER},
+            </if>
+        </set>
+        where Docentry = #{docentry,jdbcType=BIGINT}
+          and LineNum = #{linenum,jdbcType=SMALLINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1" >
+        update ecg1
+        set ObjectId = #{objectid,jdbcType=VARCHAR},
+            AbECGType = #{abecgtype,jdbcType=VARCHAR},
+            AbECGTime = #{abecgtime,jdbcType=INTEGER}
+        where Docentry = #{docentry,jdbcType=BIGINT}
+          and LineNum = #{linenum,jdbcType=SMALLINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1Key" >
+        delete from ecg1
+        where Docentry = #{docentry,jdbcType=BIGINT}
+          and LineNum = #{linenum,jdbcType=SMALLINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg1Example" >
+        delete from ecg1
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- 批量插入 -->
+    <insert id="addEcg1List"  parameterType="java.util.List">  
+    insert into ecg1 (Docentry,LineNum,ObjectId,AbECGType,AbECGTime)   
+    values  
+    <foreach collection="list" item="item" index="index" separator="," >  
+        (#{docentry,jdbcType=BIGINT}, #{linenum,jdbcType=SMALLINT},#{objectid,jdbcType=VARCHAR},#{abecgtype,jdbcType=VARCHAR},#{abecgtime,jdbcType=INTEGER})  
+    </foreach>  
+	</insert> 
+
+</mapper>

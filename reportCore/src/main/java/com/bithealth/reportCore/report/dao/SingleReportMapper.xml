@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.reportCore.report.dao.SingleReportMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.reportCore.report.model.SingleReport" >
+        <id column="ID" property="ID" jdbcType="INTEGER" />
+        <result column="OrgId" property="orgId" jdbcType="INTEGER" />
+        <result column="ReportCode" property="reportCode" jdbcType="VARCHAR" />
+        <result column="TempCode" property="tempCode" jdbcType="INTEGER" />
+        <result column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="OptId" property="optId" jdbcType="SMALLINT" />
+        <result column="GrenerTime" property="grenerTime" jdbcType="TIMESTAMP" />
+        <result column="MeasTime" property="measTime" jdbcType="TIMESTAMP" />
+        <result column="MeasTermTime" property="measTermTime" jdbcType="TIMESTAMP" />
+        <result column="MeasNum" property="measNum" jdbcType="INTEGER" />
+        <result column="MeasCorrNo" property="measCorrNo" jdbcType="BIGINT" />
+        <result column="MeasCorrTermNo" property="measCorrTermNo" jdbcType="BIGINT" />
+        <result column="ReportState" property="reportState" jdbcType="CHAR" />
+        <result column="PendingLevel" property="pendingLevel" jdbcType="SMALLINT" />
+        <result column="RetrialBackTag" property="retrialBackTag" jdbcType="CHAR" />
+        <result column="ApprovalReason" property="approvalReason" jdbcType="VARCHAR" />
+        <result column="ChkDesc" property="chkDesc" jdbcType="LONGVARCHAR" />
+        <result column="auditLevel" property="auditLevel" jdbcType="SMALLINT" />
+        <result column="TempName" property="templateName" jdbcType="VARCHAR" />
+        <collection property="auditList" ofType="com.bithealth.reportCore.report.model.SingleReportAudit" 
+        			column="ID" select="com.bithealth.reportCore.report.dao.SingleReportAuditMapper.selectByID"></collection>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        ID, OrgId, ReportCode, TempCode, Memberid, OptId, GrenerTime, MeasTime, MeasTermTime, 
+        MeasNum, MeasCorrNo, MeasCorrTermNo, ReportState, PendingLevel, RetrialBackTag, ApprovalReason, 
+        ChkDesc
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.report.model.SingleReportExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omrr
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.report.model.SingleReportExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omrr
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from omrr
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.reportCore.report.model.SingleReport" >
+        insert into omrr
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="ID != null" >
+                ID,
+            </if>
+            <if test="orgId != null" >
+                OrgId,
+            </if>
+            <if test="reportCode != null" >
+                ReportCode,
+            </if>
+            <if test="tempCode != null" >
+                TempCode,
+            </if>
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="optId != null" >
+                OptId,
+            </if>
+            <if test="grenerTime != null" >
+                GrenerTime,
+            </if>
+            <if test="measTime != null" >
+                MeasTime,
+            </if>
+            <if test="measTermTime != null" >
+                MeasTermTime,
+            </if>
+            <if test="measNum != null" >
+                MeasNum,
+            </if>
+            <if test="measCorrNo != null" >
+                MeasCorrNo,
+            </if>
+            <if test="measCorrTermNo != null" >
+                MeasCorrTermNo,
+            </if>
+            <if test="reportState != null" >
+                ReportState,
+            </if>
+            <if test="pendingLevel != null" >
+                PendingLevel,
+            </if>
+            <if test="retrialBackTag != null" >
+                RetrialBackTag,
+            </if>
+            <if test="approvalReason != null" >
+                ApprovalReason,
+            </if>
+            <if test="chkDesc != null" >
+                ChkDesc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="ID != null" >
+                #{ID,jdbcType=INTEGER},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="reportCode != null" >
+                #{reportCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tempCode != null" >
+                #{tempCode,jdbcType=INTEGER},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="optId != null" >
+                #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="grenerTime != null" >
+                #{grenerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measTime != null" >
+                #{measTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measTermTime != null" >
+                #{measTermTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measNum != null" >
+                #{measNum,jdbcType=INTEGER},
+            </if>
+            <if test="measCorrNo != null" >
+                #{measCorrNo,jdbcType=BIGINT},
+            </if>
+            <if test="measCorrTermNo != null" >
+                #{measCorrTermNo,jdbcType=BIGINT},
+            </if>
+            <if test="reportState != null" >
+                #{reportState,jdbcType=CHAR},
+            </if>
+            <if test="pendingLevel != null" >
+                #{pendingLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="retrialBackTag != null" >
+                #{retrialBackTag,jdbcType=CHAR},
+            </if>
+            <if test="approvalReason != null" >
+                #{approvalReason,jdbcType=VARCHAR},
+            </if>
+            <if test="chkDesc != null" >
+                #{chkDesc,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.reportCore.report.model.SingleReportExample" resultType="java.lang.Integer" >
+        select count(*) from omrr
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update omrr
+            <set >
+                <if test="record.ID != null" >
+                    ID = #{record.ID,jdbcType=INTEGER},
+                </if>
+                <if test="record.orgId != null" >
+                    OrgId = #{record.orgId,jdbcType=INTEGER},
+                </if>
+                <if test="record.reportCode != null" >
+                    ReportCode = #{record.reportCode,jdbcType=VARCHAR},
+                </if>
+                <if test="record.tempCode != null" >
+                    TempCode = #{record.tempCode,jdbcType=INTEGER},
+                </if>
+                <if test="record.memberid != null" >
+                    Memberid = #{record.memberid,jdbcType=INTEGER},
+                </if>
+                <if test="record.optId != null" >
+                    OptId = #{record.optId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.grenerTime != null" >
+                    GrenerTime = #{record.grenerTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.measTime != null" >
+                    MeasTime = #{record.measTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.measTermTime != null" >
+                    MeasTermTime = #{record.measTermTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.measNum != null" >
+                    MeasNum = #{record.measNum,jdbcType=INTEGER},
+                </if>
+                <if test="record.measCorrNo != null" >
+                    MeasCorrNo = #{record.measCorrNo,jdbcType=BIGINT},
+                </if>
+                <if test="record.measCorrTermNo != null" >
+                    MeasCorrTermNo = #{record.measCorrTermNo,jdbcType=BIGINT},
+                </if>
+                <if test="record.reportState != null" >
+                    ReportState = #{record.reportState,jdbcType=CHAR},
+                </if>
+                <if test="record.pendingLevel != null" >
+                    PendingLevel = #{record.pendingLevel,jdbcType=SMALLINT},
+                </if>
+                <if test="record.retrialBackTag != null" >
+                    RetrialBackTag = #{record.retrialBackTag,jdbcType=CHAR},
+                </if>
+                <if test="record.approvalReason != null" >
+                    ApprovalReason = #{record.approvalReason,jdbcType=VARCHAR},
+                </if>
+                <if test="record.chkDesc != null" >
+                    ChkDesc = #{record.chkDesc,jdbcType=LONGVARCHAR},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update omrr
+            set ID = #{record.ID,jdbcType=INTEGER},
+                OrgId = #{record.orgId,jdbcType=INTEGER},
+                ReportCode = #{record.reportCode,jdbcType=VARCHAR},
+                TempCode = #{record.tempCode,jdbcType=INTEGER},
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+                OptId = #{record.optId,jdbcType=SMALLINT},
+                GrenerTime = #{record.grenerTime,jdbcType=TIMESTAMP},
+                MeasTime = #{record.measTime,jdbcType=TIMESTAMP},
+                MeasTermTime = #{record.measTermTime,jdbcType=TIMESTAMP},
+                MeasNum = #{record.measNum,jdbcType=INTEGER},
+                MeasCorrNo = #{record.measCorrNo,jdbcType=BIGINT},
+                MeasCorrTermNo = #{record.measCorrTermNo,jdbcType=BIGINT},
+                ReportState = #{record.reportState,jdbcType=CHAR},
+                PendingLevel = #{record.pendingLevel,jdbcType=SMALLINT},
+                RetrialBackTag = #{record.retrialBackTag,jdbcType=CHAR},
+                ApprovalReason = #{record.approvalReason,jdbcType=VARCHAR},
+                ChkDesc = #{record.chkDesc,jdbcType=LONGVARCHAR}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.reportCore.report.model.SingleReport" >
+        update omrr
+        <set >
+            <if test="orgId != null" >
+                OrgId = #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="reportCode != null" >
+                ReportCode = #{reportCode,jdbcType=VARCHAR},
+            </if>
+            <if test="tempCode != null" >
+                TempCode = #{tempCode,jdbcType=INTEGER},
+            </if>
+            <if test="memberid != null" >
+                Memberid = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="optId != null" >
+                OptId = #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="grenerTime != null" >
+                GrenerTime = #{grenerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measTime != null" >
+                MeasTime = #{measTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measTermTime != null" >
+                MeasTermTime = #{measTermTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measNum != null" >
+                MeasNum = #{measNum,jdbcType=INTEGER},
+            </if>
+            <if test="measCorrNo != null" >
+                MeasCorrNo = #{measCorrNo,jdbcType=BIGINT},
+            </if>
+            <if test="measCorrTermNo != null" >
+                MeasCorrTermNo = #{measCorrTermNo,jdbcType=BIGINT},
+            </if>
+            <if test="reportState != null" >
+                ReportState = #{reportState,jdbcType=CHAR},
+            </if>
+            <if test="pendingLevel != null" >
+                PendingLevel = #{pendingLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="retrialBackTag != null" >
+                RetrialBackTag = #{retrialBackTag,jdbcType=CHAR},
+            </if>
+            <if test="approvalReason != null" >
+                ApprovalReason = #{approvalReason,jdbcType=VARCHAR},
+            </if>
+            <if test="chkDesc != null" >
+                ChkDesc = #{chkDesc,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where ID = #{ID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.reportCore.report.model.SingleReport" >
+        update omrr
+        set OrgId = #{orgId,jdbcType=INTEGER},
+            ReportCode = #{reportCode,jdbcType=VARCHAR},
+            TempCode = #{tempCode,jdbcType=INTEGER},
+            Memberid = #{memberid,jdbcType=INTEGER},
+            OptId = #{optId,jdbcType=SMALLINT},
+            GrenerTime = #{grenerTime,jdbcType=TIMESTAMP},
+            MeasTime = #{measTime,jdbcType=TIMESTAMP},
+            MeasTermTime = #{measTermTime,jdbcType=TIMESTAMP},
+            MeasNum = #{measNum,jdbcType=INTEGER},
+            MeasCorrNo = #{measCorrNo,jdbcType=BIGINT},
+            MeasCorrTermNo = #{measCorrTermNo,jdbcType=BIGINT},
+            ReportState = #{reportState,jdbcType=CHAR},
+            PendingLevel = #{pendingLevel,jdbcType=SMALLINT},
+            RetrialBackTag = #{retrialBackTag,jdbcType=CHAR},
+            ApprovalReason = #{approvalReason,jdbcType=VARCHAR},
+            ChkDesc = #{chkDesc,jdbcType=LONGVARCHAR}
+        where ID = #{ID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from omrr
+        where ID = #{ID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.reportCore.report.model.SingleReportExample" >
+        <if test="_parameter != null" >
+            delete from omrr
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <select id="selectBySumReportId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select a.ID, a.OrgId, a.ReportCode, a.TempCode, a.Memberid, a.OptId, a.GrenerTime, a.MeasTime, a.MeasTermTime, 
+        a.MeasNum, a.MeasCorrNo, a.MeasCorrTermNo,a.ReportState, a.PendingLevel, a.RetrialBackTag, a.ApprovalReason, a.ChkDesc
+        FROM omrr a , smr2 b WHERE a.`ID` = b.`SingleID`  AND b.`ID` = #{sumReportId}
+    </select>
+    
+    
+    
+    <select id="selectByDocidAndOrgid" resultMap="BaseResultMap" parameterType="java.util.Map" >
+		SELECT om.ID,om.memberid,om.grenerTime,om.measTime,om.measTermTime,om.measNum,om.ReportState,om.PendingLevel,om.tempCode,m.auditLevel,t.TempName
+<![CDATA[from omrr om LEFT JOIN mrr1 m ON om.ID=m.ID AND om.OptId<5  ]]>
+		LEFT JOIN orts t ON t.TempCode = om.TempCode
+		WHERE m.Docid=#{docId} 
+		OR (m.Docid IS NULL AND om.ReportState IN (2,3) AND om.orgId=#{orgId}) 
+		order by om.id desc
+    </select>
+    
+    
+    
+    
+
+</mapper>

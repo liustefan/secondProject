@@ -1,0 +1,101 @@
+
+body {
+	margin: 0 8px;
+	font-family: 'Arial Normal', 'Arial'; 
+	font-size: 12px;
+}
+
+.tab-content {
+	border: 1px solid #ccc;
+	padding: 15px 8px;
+}
+
+
+.tab-content input[type=text]{width: 60px;}
+.middle {width: 180px !important;}
+.longer {width: 320px !important;}
+
+.memberInfo {
+	width: 70%;
+	height: 30px;
+	line-height: normal !important;
+}
+
+nav {
+	margin-top: 5px;
+}
+
+nav ul#tab_title li.thistab{
+	background: #18A24D;
+}
+
+.btn-box {
+	margin: 15px 0;
+	text-align: center;
+}
+
+.btn-cancel {
+	margin: 0 5px;
+	padding: 0 15px;
+	height: 30px;
+}
+
+.input-center {
+	float: left;
+	margin: 4px 2px 0 0 !important;
+	margin-top:0\9 !important;
+}
+
+.span-center {
+	display: inline-block;
+	float: left;
+	margin: 3px 6px 0 0;	
+}
+
+.left-span {
+	float:left;
+	margin-top:2px;
+}
+
+.li-top {
+	margin-top:5px;
+}
+
+.left-ul {
+	margin-left:8px;
+}
+
+.display-p {
+	display: inline-block;
+	float: left;
+	margin: 0 10px;
+}
+
+.fl-top {
+	float: left;
+	margin-top: 5px !important;
+}
+
+.p-top {
+	margin-top: 30px;
+}
+
+.center-input {
+	margin: 5px 2px !important ;
+}
+
+.input-btm {
+	margin-bottom: 8px !important ;
+}
+
+.padding-no {
+    padding: 5px 0 !important;
+}
+
+.fixed-width {
+	width: 80px;
+}
+
+.s1 li {padding:0 0 2px 2px;}
+
+.s2 li {padding:0 0 2px 2px;}

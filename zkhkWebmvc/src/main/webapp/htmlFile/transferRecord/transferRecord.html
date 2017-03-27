@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>转诊记录</title>
+	<link rel="stylesheet" href="../../css/general.css">
+	<link rel="stylesheet" href="../../js/jquery-ui/themes/overcast/jquery-ui.min.css">
+	
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui/jquery-ui.js"></script>
+	<script type="text/javascript" src="../../js/dataPacker.js"></script>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">
+   		转诊记录
+	</div>
+    <form action="" method="POST" id="">
+		<div class="search-box-wrapper">
+			<ul class="search-wrapper">
+				<!-- <li>
+					<label>姓名：</label>
+	                <input type="text" name="" value="">
+				</li>
+				<li>
+					<label>会员疾病史：</label>
+	                <select name="">
+						<option value="0">全部</option>
+						<option value="1">高血压</option>
+						<option value="2">糖尿病</option>
+						<option value="3">冠心病</option>
+						<option value="4">慢性阻塞性肺疾病</option>
+						<option value="5">恶性肿瘤</option>
+						<option value="6">脑卒中</option>
+						<option value="7">重型精神病</option>
+						<option value="8">结核病</option>
+						<option value="9">肝炎</option>
+					</select>
+				</li> -->
+				<li>
+					<label>状态：</label>
+	                <select name="">
+						<option value="0">全部</option>
+						<option value="1">转诊申请</option>
+						<option value="2">已转诊</option>
+						<option value="3">取消转诊</option>
+					</select>
+				</li>
+				<li>
+					<label>更新日期：</label> 
+					<input class="info-date" id="startDate" type="text" name="" required="required" value='' readonly="readonly" /> 
+					<span class="mar-left">至</span> 
+					<input class="info-date" id="endDate" type="text" name="" required="required" value='' readonly="readonly" />
+				</li>
+				<li>
+					<button type="button" class="btn-inquiry ico-search" onclick="">查询</button>
+					<button type="button" class="btn-inquiry ico-add" onclick="window.location.href='../../htmlFile/transferRecord/editTransfer.html'">新增</button>
+				</li>
+			</ul>
+		</div>
+		<div class="table-box">
+			<table class="table-content">
+				<thead class="table-title">
+					<tr>
+						<!-- <th>姓名</th>
+						<th>性别</th>
+						<th>会员疾病史</th> -->
+						<th>转诊机构和科室</th>
+						<th>转诊原因</th>
+						<th>转诊结果</th>
+						<th>状态</th>
+						<th>创建人</th>
+						<th>更新人</th>
+						<th>更新日期</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<!-- <td></td>
+						<td></td>
+						<td></td> -->
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a href="javascript: void(0);" onclick="">修改</a>
+							<a href="javascript: void(0);" class="mar-left" onclick="">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="page-box">
+			<jsp:include page="/public/pageFoot.jsp"></jsp:include>
+		</div>
+	</form>
+</div>
+</body>
+</html>

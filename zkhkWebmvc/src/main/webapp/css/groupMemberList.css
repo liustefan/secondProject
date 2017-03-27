@@ -1,0 +1,11 @@
+/*
+* groupMemberList.jsp样式表
+*/
+
+#dataTable
+{
+	width: 78%;
+	margin-left: 0;
+	border: 0;
+	height: 500px;
+}

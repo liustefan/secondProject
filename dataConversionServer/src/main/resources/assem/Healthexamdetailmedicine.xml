@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Assemes namespace="com.bithealth.inspectCore.physical.model.PhHealthexamdetailinpatient">
+	<Assem name="hexamid" assembly="hexamid"/>
+	<Assem name="drugName" assembly="drugname"/> 
+	<Assem name="drugUsage" assembly="drugusage"/>
+	<Assem name="drugFreq" assembly="drugfreq"/>
+	<Assem name="drugDose" assembly="drugdosage"/>
+	<Assem name="drugTime" assembly="drugusetime"/>
+	<Assem name="medCom" assembly="drugcompliance"/>
+</Assemes>

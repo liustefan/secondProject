@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.reportCore.report.dao.MemberChatMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.reportCore.report.model.MemberChat" >
+       
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" /> 
+        <result column="MemName" property="memname" jdbcType="VARCHAR" /> 
+        <result column="Gender" property="gender" jdbcType="CHAR" /> 
+        <result column="BirthDate" property="birthdate" jdbcType="DATE" /> 
+        <result column="Tel" property="tel" jdbcType="VARCHAR" /> 
+        <result column="Email" property="email" jdbcType="VARCHAR" /> 
+        <result column="HeadAddress" property="headaddress" jdbcType="VARCHAR" /> 
+        
+        <result column="_logid" property="_logid" jdbcType="INTEGER" />
+        <result column="Sender" property="sender" jdbcType="INTEGER" />
+        <result column="Receiver" property="receiver" jdbcType="INTEGER" />  
+        <result column="SendType" property="sendType" jdbcType="TINYINT" />
+        <result column="ReceiveType" property="receiveType" jdbcType="TINYINT" />  
+        <result column="SendTime" property="sendTime" jdbcType="TIMESTAMP" />
+        <result column="ContentType" property="contentType" jdbcType="TINYINT" />
+        <result column="Content" property="content" jdbcType="LONGVARCHAR" />
+        
+         <result column="RefType" property="refType" jdbcType="TINYINT" />
+         <result column="RefID" property="refID" jdbcType="BIGINT" />
+         <result column="RefStatus" property="refStatus" jdbcType="TINYINT" />
+
+        <association property="doctor" column="Sender" select="com.bithealth.doctorCore.doctor.dao.DoctorMapper.selectByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        Memberid,   MemName, Gender, BirthDate, Tel, Email, HeadAddress,
+       _logid,Sender, Receiver,SendType, ReceiveType, SendTime, ContentType, Content,RefType,RefID,RefStatus
+    </sql>
+ 
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.report.model.MemberChatExample" >
+        SELECT *
+      FROM (SELECT *
+          FROM ( SELECT  
+                SendType, Receiver AS MemberID,MemName, Gender,BirthDate, Tel, Email, HeadAddress,
+                 SendTime, _logid,a.Sender,a.Receiver,a.ReceiveType,a.Content,a.ContentType,a.RefType,a.RefID,a.RefStatus
+                    FROM chat a, omem b
+                   WHERE  SendType = 1 AND a.Receiver = b.Memberid
+                   
+                         and  Sender = #{sender,jdbcType=INTEGER}  
+                      
+                         <if test="memname!=null and memname!=''" >
+                           and b.MemName like CONCAT('%','${memname}','%' )  
+                         </if>
+                            
+               
+             UNION ALL
+               SELECT SendType, Sender AS MemberID, MemName, Gender,BirthDate, Tel, Email,HeadAddress,SendTime,  _logid,a.Sender,a.Receiver,
+               a.ReceiveType,a.Content,a.ContentType,a.RefType,a.RefID,a.RefStatus
+                  FROM chat a, omem b
+                     WHERE   ReceiveType = 1 AND a.Sender = b.Memberid   
+                     and  Receiver =#{receiver,jdbcType=INTEGER}
+                       <if test="memname!=null and memname!=''" >
+                            and  b.MemName like CONCAT('%','${memname}','%' )  
+                         </if>
+                 ORDER BY SendTime DESC )t
+             GROUP BY MemberID)tt 
+             
+             where  1=1  
+             
+              <if test="dateFrom!=null and dateFrom!=''   " >
+                       
+                        and   SendTime <![CDATA[>=]]> #{dateFrom,jdbcType=DATE}  
+             </if> 
+            
+              <if test="dateTo!=null and dateTo!=''   " >
+                       
+                        and   SendTime <![CDATA[<]]> #{endDate,jdbcType=DATE}  
+             </if> 
+             
+              order by  SendTime desc       
+         
+    </select>
+   
+</mapper>

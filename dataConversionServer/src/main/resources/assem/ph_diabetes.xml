@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.dataConversionServer.qiangHua.bean.TdiabetesVisits">
+<!-- name原始对象属性，  assembly 目标对象属性-->
+<Assem name="diabGid" assembly="refdatapk"/>
+<Assem name="hrGid" assembly="uniqueId"/>
+
+<Assem name="name" assembly="name"/>
+<Assem name="visDate" assembly="visitdate"/>
+<!--  --> 
+<Assem name="visDoctor" assembly="visitdrname"/>
+
+</Assemes>

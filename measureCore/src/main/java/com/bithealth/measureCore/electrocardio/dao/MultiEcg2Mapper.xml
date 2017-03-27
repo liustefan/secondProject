@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bithealth.measureCore.electrocardio.dao.MultiEcg2Mapper">
+	<delete id="deleteEcg2ByDocentryAndAbnname" parameterType="java.util.Map">
+		delete from ecg2 where Docentry=#{docentry} and abnName=#{abnName}
+	</delete>
+	
+	<update id="updateEcg2ByDocentryAndAbnname" parameterType="java.util.Map">
+		update ecg2 set AbnNum=#{abnNum} where Docentry=#{docentry} and abnName=#{abnName}
+	</update>
+	
+	<insert id="insertSubEcg2" parameterType="com.bithealth.measureCore.electrocardio.model.Ecg2">
+		insert into ecg2 (Docentry, AbnName, AbnNum) values(#{docentry}, #{abnname}, #{abnnum})
+	</insert>
+</mapper>

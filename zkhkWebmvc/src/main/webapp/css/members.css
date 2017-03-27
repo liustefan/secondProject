@@ -1,0 +1,131 @@
+
+.selinp { width: 150px;}
+
+#btndel1,#btndel2 {
+	padding: 5px 10px;
+	border-radius: 3px;
+	border: none;
+	color: #FFF;
+	background: rgba(072, 214, 096, 0.8);
+	background-image: -moz-linear-gradient(center top, rgba(072, 214, 096, 0.8) , rgba(097, 185, 095, 0.8)) repeat scroll 0 0 rgba(072, 214, 096, 0.8);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(072, 214, 096, 0.8)), color-stop(1, rgba(097, 185, 095, 0.8)));
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#48d660', EndColorStr='#61b95f');
+	cursor: pointer;
+	font-family: "Microsoft YaHei", "SimSun";
+}
+
+#tabel_content tr:nth-child(even) input {
+	background-color: #e0f1f3;
+	border: none;
+	font-family: "Microsoft YaHei", "SimSun";
+	text-align: center;
+}
+
+#tabel_content tr:nth-child(odd) input {
+	background-color: #fff;
+	border: none;
+	font-family: "Microsoft YaHei", "SimSun";
+	text-align: center;
+}
+
+.disabled optgroup {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #333;
+	background-color: #F5F5F5;
+}
+
+.disabled option {
+	padding-left: 0;
+}
+
+.clear { clear: both; } 
+
+ul.search-wrapper {
+	width: 100%;
+	list-style: none;
+	clear: both;
+	overflow: hidden;
+}
+
+.search-wrapper li {
+	position: relative;
+	display: inline-block;
+	float: left;
+	margin: 5px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.search-wrapper li .pos1 {
+	position: relative;
+	left: -25px;
+	pointer-events: none;
+}
+
+.search-wrapper li input,.search-wrapper li select {
+	margin-left: 15px;
+	padding: 3px 5px;
+}
+
+.btn-search {
+	background-image: -moz-linear-gradient(center top, rgba(072, 214, 096, 0.8) , rgba(097, 185, 095, 0.8)) repeat scroll 0 0  rgba(072, 214, 096, 0.8); 
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(072, 214, 096, 0.8)), color-stop(1, rgba(097, 185, 095, 0.8))); 
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#48d660', EndColorStr='#61b95f');
+	border: 0;
+	border-radius: 3px;
+	color: #FFF;
+	padding: 5px 10px;
+	cursor: pointer;
+	font-family: "Microsoft YaHei", "SimSun";
+}
+
+.icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+    position: absolute;
+	top: 6px;
+	right: 15px;
+	cursor: pointer;
+}
+
+.icon-group-search {
+	background: #fff url('../img/u45.png') no-repeat center;
+	right: 5px;
+}
+
+#menuContent .input-search {
+	width: 150px;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #ccc;
+	padding: 3px 5px;
+	margin: 5px;
+}
+
+.menuContent {
+	background: #fff;
+}
+
+.menuContent .left-title {
+	margin: 0;
+}
+
+.menuContent .menu-title {
+	font-size: 13px;
+	padding: 5px 10px;
+	background: #009C45;
+}
+
+.menu-footer {
+	margin: 15px;
+}
+
+.icon-search {
+	top: 10px;
+	right: 20px;
+}
+

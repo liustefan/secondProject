@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>健康管理任务(执行消息类任务)</title>
+	<link rel="stylesheet" href="../../css/general.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../../plugins/My97DatePicker/WdatePicker.js"></script>
+	<style>
+		.info-date {
+		    width: 90px;
+		    background: url("../../img/u17.png") no-repeat scroll right center white;
+		    background-size: 15px 15px;
+		    padding-top: 3px;
+		    padding-bottom: 3px;
+		    background-origin: content-box;
+		    border: 1px solid #a9a9a9;
+		}
+		
+		.detail-box {
+			margin: 20px 0;
+		    padding: 15px;
+		    border: 1px solid #ccc;
+		    font-size: 14px;
+		    line-height: 28px;
+		    background-color: #eff1f0;
+		}
+		
+		.main-box {
+			border: 1px solid #98cc6b;
+		}
+		
+		.main-box ul li {
+			margin: 15px 8px;
+		}
+		
+		.fix-label {
+			text-align: right;
+			font-size: 14px;
+			width: 120px;
+			margin-right: 10px;
+			font-weight: bold;
+		}
+		
+		.mg-right {
+			margin-right: 50px;
+		}
+		
+		.mg-right1 {
+			margin-right: 2%;
+		}
+		
+		.text-top {
+	        vertical-align: text-top;
+	    }
+	    
+	    .task-title {
+	    	height: 30px;
+	    	line-height: 30px;
+	    	color: #007735;
+	    	background: #f2f1f1;
+	    	font-weight: bold;
+	    	padding-left: 8px;
+	    	font-size: 14px;
+	    }
+	    
+	    .div-block {
+	    	display: inline-block;
+	    }
+	    
+	    .blue {
+	    	color: #0000ff;
+	    }
+	    
+	    .Wdate {
+	    	width: 140px;
+	    }
+	    
+	    .width-fl {
+	    	width: 85%;
+	    }
+	    
+	    .width-fr {
+	    	text-align: center;
+		    width: 15%;
+		    line-height: 56px;
+	    }
+	</style>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">健康管理任务</div>
+	<div class="detail-box clearfix">
+		<div class="fl width-fl">
+			<p>姓名：<span class="mg-right">暮雪</span>性别：<span class="mg-right">女</span>年龄：<span class="mg-right">22</span>手机号码：<span class="mg-right">18062402355</span>身份证号：<span class="mg-right">422202199305246888</span>状态：<span>正常</span></p>
+			<p>会员疾病史：<span class="mg-right1">高血压</span>会员标签：<span>高血压；轻度高血压；</span></p>
+		</div>
+		<div class="fr width-fr">
+			<button type="button" class="btn-inquiry" onclick="">查看会员信息</button>
+		</div>
+	</div>
+    <form action="" method="POST" id="">
+		<div class="main-box">
+			<div class="task-title">执行任务</div>
+			<ul>
+				<li>
+					<label class="fix-label">计划执行时间：</label>
+	                <span class="mg-right">2016-08-17</span>
+	                <label class="fix-label">实际执行时间：</label>
+	                <input class="Wdate" id="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly>
+				</li>
+				<li>
+					<label class="fix-label">执行医生：</label>
+	                <span class="mg-right">2016-08-17</span>
+	                <label class="fix-label">执行方式：</label>
+	                <span>医生电话服务</span>
+				</li>
+				<li>
+					<label class="fix-label">任务类型：</label>
+	                <span>健教</span>
+				</li>
+				<li>
+					<label class="fix-label">任务概述：</label>
+	                <span>请清淡饮食，少盐少油，炒菜之前再放盐</span>
+				</li>
+				<li>
+					<label class="fix-label">详情内容：</label>
+	                <span><a href="javascript:void(0);" onclick="window.location.href='taskDetail.html'">点击查看</a></span>
+				</li>
+			</ul>
+		</div>
+		<div class="page-box align-center">
+	        <button type="button" class="btn-cancel" onclick="">立即发送</button>
+	        <button type="button" class="btn-cancel" onclick="history.go(-1);">返回</button>
+        </div>
+	</form>
+</div>
+</body>
+</html>

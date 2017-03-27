@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>短信参数设置</title>
+	<link rel="stylesheet" href="../../css/general.css">
+	
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="../../plugins/My97DatePicker/WdatePicker.js"></script>
+	<style>
+		.main-box ul li {
+			margin: 25px 8px;
+		}
+		
+		.fix-label {
+			text-align: right;
+			font-size: 14px;
+			width: 15%;
+		}
+		
+		.Wdate {
+			width: 75px;
+		}
+		
+		input[type="text"] {
+			width: 181px;
+		}
+		
+		.btn-left {
+			margin: 15px 0 15px 15.5%;
+		}
+		
+		.btn-cancel {
+			margin-left: 30px;
+		}
+		
+		input[type="text"] {
+			margin-right: 10px;
+		}
+	</style>
+	<script type="text/javascript">
+		$(function() {
+			jQuery.validator.addMethod("string", function(value, element) {
+				return this.optional(element) || !(/\<|\>|\'|\"|\\/g.test(value));
+				}, "不允许包含特殊字符!");
+			
+			jQuery.validator.addMethod("isBlank", function(value, element) {
+				return $.trim(value) != ''
+				}, "必填!");
+			
+			// 表单验证
+			var vForm = $("#form_SMS").validate({
+				rules : {
+					'accountSMS' : {
+						isBlank: true,
+					},
+					'password' : {
+						isBlank: true,
+					},
+					'totalNumber' : {
+						digits: true,
+					},
+					'maxNumber' : {
+						digits: true,
+					},
+					'receiveNumber' : {
+						digits: true,
+						max: 99
+					},
+					'duplicateContent' : {
+						digits: true,
+						max: 9
+					},
+					'validNumber' : {
+						isBlank: true,
+					},
+					'inviteModeNumber' : {
+						isBlank: true,
+					}
+				},
+				messages : {
+					'accountSMS' : {
+						isBlank : "必填",
+					},
+					'password' : {
+						isBlank : "必填",
+					},
+					'totalNumber' : {
+						digits : "请输入整数!",
+					},
+					'maxNumber' : {
+						digits : "请输入整数!",
+					},
+					'receiveNumber' : {
+						digits : "请输入整数!",
+						max: "输入值不能大于 99!",
+					},
+					'duplicateContent' : {
+						digits : "请输入整数!",
+						max: "输入值不能大于 9!",
+					},
+					'validNumber' : {
+						isBlank : "必填",
+					},
+					'inviteModeNumber' : {
+						isBlank : "必填",
+					}
+				}
+			});
+			
+			function vilidSendDate() {
+				if($('input[name="startDate"]').val() == '' && $('input[name="endDate"]').val() != ''){
+					$("#numberRange").html("请输入发送短信的开始时间!");
+					return false;
+				}else if($('input[name="endDate"]').val() == '' && $('input[name="startDate"]').val() != ''){
+					$("#numberRange").html("请输入发送短信的结束时间!");
+					return false;
+				}else if($('input[name="endDate"]').val() == '' && $('input[name="startDate"]').val() == ''){
+					$("#numberRange").html("请输入发送短信的时间!");
+					return false;
+				}else {
+					$("#numberRange").html("");
+					return true;
+				}
+			}
+			
+			$("#sava_SMS").on("click", function() {
+				vForm.form();
+				vilidSendDate();
+			});
+		});
+	</script>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">
+   		短信参数设置
+	</div>
+    <form action="" method="POST" id="form_SMS">
+		<div class="main-box">
+			<ul>
+				<li>
+					<label class="fix-label">组织名称：</label>
+	                <span>中科汇康</span>
+				</li>
+				<li>
+					<label class="fix-label"><span class="red">*</span>短信账号：</label>
+	                <input type="text" name="accountSMS" value="" maxlength="20">
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label"><span class="red">*</span>密码：</label>
+	                <input type="text" name="password" value="" maxlength="20">
+				</li>
+				<li>
+					<label class="fix-label">签名：</label>
+	                <input type="text" name="" value="" maxlength="20">
+				</li>
+				<li>
+					<label class="fix-label">短信总条数：</label>
+	                <input type="text" name="totalNumber" value="">
+				</li>
+				<li>
+					<label class="fix-label">每日最大发送：</label>
+	                <input type="text" name="maxNumber" value="">
+	                <span class="mar-right">条</span>
+	                <label id="maxNumber-error" class="error" for="maxNumber"></label>
+				</li>
+				<li>
+					<label class="fix-label">会员每日可接收：</label>
+	                <input type="text" name="receiveNumber" value="">
+	                <span class="mar-right">条</span>
+	                <label id="receiveNumber-error" class="error" for="receiveNumber"></label>
+				</li>
+				<li>
+					<label class="fix-label">每日允许重复内容：</label>
+	                <input type="text" name="duplicateContent" value="">
+	                <span class="mar-right">次</span>
+	                <label id="duplicateContent-error" class="error" for="duplicateContent"></label>
+				</li>
+				<li>
+					<label class="fix-label"><span class="red">*</span>短信发送时间范围：</label>
+					<input class="Wdate" id="" name="startDate" onclick="WdatePicker({dateFmt:'HH:mm:ss'})" value='08:00:00' readonly="readonly"> 
+					<span class="mar-left">至</span> 
+					<input class="Wdate mar-left mar-right" id="" name="endDate" onclick="WdatePicker({dateFmt:'HH:mm:ss'})" value='20:00:00' readonly="readonly">
+					<span id="numberRange" class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label"><span class="red">*</span>验证码模板编号：</label>
+	                <input type="text" name="validNumber" value="">
+				</li>
+				<li>
+					<label class="fix-label"><span class="red">*</span>邀请短信模板编号：</label>
+	                <input type="text" name="inviteModeNumber" value="">
+				</li>
+			</ul>
+		</div>
+		<div class="btn-left">
+	        <button id="sava_SMS" class="btn-inquiry" >保存</button>
+	        <button class="btn-cancel" onclick="javascript: history.go(-1);">返回</button>
+        </div>
+	</form>
+</div>
+</body>
+</html>

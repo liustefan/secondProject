@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.HabitMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.Habit" >
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="Smoking" property="smoking" jdbcType="CHAR" />
+        <result column="DoDrink" property="dodrink" jdbcType="CHAR" />
+        <result column="DoNtFood" property="dontfood" jdbcType="VARCHAR" />
+        <result column="StapleFood" property="staplefood" jdbcType="CHAR" />
+        <result column="SleepCond" property="sleepcond" jdbcType="CHAR" />
+        <result column="LikeSports" property="likesports" jdbcType="VARCHAR" />
+        <result column="MoveLong" property="movelong" jdbcType="VARCHAR" />
+        <result column="TimeSeg" property="timeseg" jdbcType="VARCHAR" />
+        <result column="WeekNumTimes" property="weeknumtimes" jdbcType="SMALLINT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Memberid, Smoking, DoDrink, DoNtFood, StapleFood, SleepCond, LikeSports, MoveLong, 
+        TimeSeg, WeekNumTimes
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.HabitExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem7
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.HabitExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem7
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from mem7
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.Habit" >
+        insert into mem7 (Memberid, Smoking, DoDrink, 
+            DoNtFood, StapleFood, SleepCond, 
+            LikeSports, MoveLong, TimeSeg, 
+            WeekNumTimes)
+        values (#{memberid,jdbcType=INTEGER}, #{smoking,jdbcType=CHAR}, #{dodrink,jdbcType=CHAR}, 
+            #{dontfood,jdbcType=VARCHAR}, #{staplefood,jdbcType=CHAR}, #{sleepcond,jdbcType=CHAR}, 
+            #{likesports,jdbcType=VARCHAR}, #{movelong,jdbcType=VARCHAR}, #{timeseg,jdbcType=VARCHAR}, 
+            #{weeknumtimes,jdbcType=SMALLINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.Habit" >
+        insert into mem7
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="smoking != null" >
+                Smoking,
+            </if>
+            <if test="dodrink != null" >
+                DoDrink,
+            </if>
+            <if test="dontfood != null" >
+                DoNtFood,
+            </if>
+            <if test="staplefood != null" >
+                StapleFood,
+            </if>
+            <if test="sleepcond != null" >
+                SleepCond,
+            </if>
+            <if test="likesports != null" >
+                LikeSports,
+            </if>
+            <if test="movelong != null" >
+                MoveLong,
+            </if>
+            <if test="timeseg != null" >
+                TimeSeg,
+            </if>
+            <if test="weeknumtimes != null" >
+                WeekNumTimes,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="smoking != null" >
+                #{smoking,jdbcType=CHAR},
+            </if>
+            <if test="dodrink != null" >
+                #{dodrink,jdbcType=CHAR},
+            </if>
+            <if test="dontfood != null" >
+                #{dontfood,jdbcType=VARCHAR},
+            </if>
+            <if test="staplefood != null" >
+                #{staplefood,jdbcType=CHAR},
+            </if>
+            <if test="sleepcond != null" >
+                #{sleepcond,jdbcType=CHAR},
+            </if>
+            <if test="likesports != null" >
+                #{likesports,jdbcType=VARCHAR},
+            </if>
+            <if test="movelong != null" >
+                #{movelong,jdbcType=VARCHAR},
+            </if>
+            <if test="timeseg != null" >
+                #{timeseg,jdbcType=VARCHAR},
+            </if>
+            <if test="weeknumtimes != null" >
+                #{weeknumtimes,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.HabitExample" resultType="java.lang.Integer" >
+        select count(*) from mem7
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update mem7
+        <set >
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.smoking != null" >
+                Smoking = #{record.smoking,jdbcType=CHAR},
+            </if>
+            <if test="record.dodrink != null" >
+                DoDrink = #{record.dodrink,jdbcType=CHAR},
+            </if>
+            <if test="record.dontfood != null" >
+                DoNtFood = #{record.dontfood,jdbcType=VARCHAR},
+            </if>
+            <if test="record.staplefood != null" >
+                StapleFood = #{record.staplefood,jdbcType=CHAR},
+            </if>
+            <if test="record.sleepcond != null" >
+                SleepCond = #{record.sleepcond,jdbcType=CHAR},
+            </if>
+            <if test="record.likesports != null" >
+                LikeSports = #{record.likesports,jdbcType=VARCHAR},
+            </if>
+            <if test="record.movelong != null" >
+                MoveLong = #{record.movelong,jdbcType=VARCHAR},
+            </if>
+            <if test="record.timeseg != null" >
+                TimeSeg = #{record.timeseg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.weeknumtimes != null" >
+                WeekNumTimes = #{record.weeknumtimes,jdbcType=SMALLINT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update mem7
+        set Memberid = #{record.memberid,jdbcType=INTEGER},
+            Smoking = #{record.smoking,jdbcType=CHAR},
+            DoDrink = #{record.dodrink,jdbcType=CHAR},
+            DoNtFood = #{record.dontfood,jdbcType=VARCHAR},
+            StapleFood = #{record.staplefood,jdbcType=CHAR},
+            SleepCond = #{record.sleepcond,jdbcType=CHAR},
+            LikeSports = #{record.likesports,jdbcType=VARCHAR},
+            MoveLong = #{record.movelong,jdbcType=VARCHAR},
+            TimeSeg = #{record.timeseg,jdbcType=VARCHAR},
+            WeekNumTimes = #{record.weeknumtimes,jdbcType=SMALLINT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.Habit" >
+        update mem7
+        <set >
+            <if test="smoking != null" >
+                Smoking = #{smoking,jdbcType=CHAR},
+            </if>
+            <if test="dodrink != null" >
+                DoDrink = #{dodrink,jdbcType=CHAR},
+            </if>
+            <if test="dontfood != null" >
+                DoNtFood = #{dontfood,jdbcType=VARCHAR},
+            </if>
+            <if test="staplefood != null" >
+                StapleFood = #{staplefood,jdbcType=CHAR},
+            </if>
+            <if test="sleepcond != null" >
+                SleepCond = #{sleepcond,jdbcType=CHAR},
+            </if>
+            <if test="likesports != null" >
+                LikeSports = #{likesports,jdbcType=VARCHAR},
+            </if>
+            <if test="movelong != null" >
+                MoveLong = #{movelong,jdbcType=VARCHAR},
+            </if>
+            <if test="timeseg != null" >
+                TimeSeg = #{timeseg,jdbcType=VARCHAR},
+            </if>
+            <if test="weeknumtimes != null" >
+                WeekNumTimes = #{weeknumtimes,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.Habit" >
+        update mem7
+        set Smoking = #{smoking,jdbcType=CHAR},
+            DoDrink = #{dodrink,jdbcType=CHAR},
+            DoNtFood = #{dontfood,jdbcType=VARCHAR},
+            StapleFood = #{staplefood,jdbcType=CHAR},
+            SleepCond = #{sleepcond,jdbcType=CHAR},
+            LikeSports = #{likesports,jdbcType=VARCHAR},
+            MoveLong = #{movelong,jdbcType=VARCHAR},
+            TimeSeg = #{timeseg,jdbcType=VARCHAR},
+            WeekNumTimes = #{weeknumtimes,jdbcType=SMALLINT}
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from mem7
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.HabitExample" >
+        delete from mem7
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

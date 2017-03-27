@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.dataConversionServer.qiangHua.bean.TdiabetesVisits">
+<!-- name原始对象属性,强华，  assembly 目标对象属性自己的数据库-->
+<Assem name="visitsSrt" assembly="visitway"/>
+<Assem name="symptom" assembly="symptom"/>
+<Assem name="symptomOth" assembly="symptomDesc"/>
+<Assem name="systolicPre" assembly="systolic"/>
+<Assem name="diastolicPre" assembly="diastolic"/>
+<Assem name="height" assembly="height"/>
+<Assem name="weight" assembly="weight"/>
+<Assem name="tarWeight" assembly="weightNext"/>
+<Assem name="bmi" assembly="bmi"/>
+<Assem name="tarBmi" assembly="bmiNext"/>
+
+
+
+
+<!--  -->
+<Assem name="dorPedPul" assembly="arteriopalmus"/>
+
+<Assem name="posSignsOth" assembly="othersign"/>
+<Assem name="daoSmoking" assembly="dailysmoking"/>
+<Assem name="traDaoSmoking" assembly="dailysmokingNext"/>
+<Assem name="alcConsumption" assembly="dailydrink"/>
+<Assem name="traAlcCon" assembly="dailydrinkNext"/>
+<Assem name="exeFrequency" assembly="sportfrequency"/>
+<Assem name="traExeFrequency" assembly="sportfrequencyNext"/>
+<Assem name="exeDuration" assembly="sportduration"/>
+<Assem name="traExeDuration" assembly="sportdurationNext"/>
+
+<Assem name="daoStaFood" assembly="mainfood"/>
+<Assem name="traDaoStaFood" assembly="mainfoodNext"/>
+<Assem name="psyAdjEva" assembly="psychologicalrecovery"/>
+<Assem name="comBehEva" assembly="compliancebehavior"/>
+
+<Assem name="glu" assembly="fpg"/>
+<Assem name="glyHem" assembly="hba1c"/>
+<Assem name="exDate" assembly="checkdate"/>
+<Assem name="labExamRes" assembly="checkresult"/>
+<Assem name="medCom" assembly="drugcompliance"/>
+<Assem name="advDrugRea" assembly="drugadversereaction"/>
+
+<Assem name="advDrugReaDes"  assembly="drugadversereactionDesc"/>
+<Assem name="lbsRea" assembly="rhg"/>
+<Assem name="refDes" assembly="transferreason"/>
+<Assem name="refDept" assembly="transferorganddept"/>
+
+<Assem name="nexVisDate" assembly="visitdateNext"/>
+
+
+</Assemes>

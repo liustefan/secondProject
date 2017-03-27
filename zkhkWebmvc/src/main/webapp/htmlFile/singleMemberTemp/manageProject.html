@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>管理方案</title>
+	<link rel="stylesheet" href="../../css/general.css">
+	<link rel="stylesheet" href="../../js/jquery-ui/themes/overcast/jquery-ui.min.css">
+	<link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui/jquery-ui.js"></script>
+	<script type="text/javascript" src="../../js/dataPacker.js"></script>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">
+   		管理方案
+	</div>
+    <form action="" method="POST" id="">
+		<div class="search-box-wrapper">
+			<ul class="search-wrapper">
+				<li>
+					<label>管理方案：</label>
+	                <input type="text">
+				</li>
+				<li>
+					<label>状态：</label>
+	                <select name="">
+						<option value="0">全部</option>
+						<option value="1">执行中</option>
+						<option value="2">已终止</option>
+					</select>
+				</li>
+				<li>
+					<button type="button" class="btn-inquiry ico-search" onclick="">查询</button>
+					<button type="button" class="btn-inquiry" onclick="">制定管理方案</button>
+				</li>
+			</ul>
+		</div>
+		<div class="table-box">
+			<table class="table-content">
+				<thead class="table-title">
+					<tr>
+						<th>类别</th>
+						<th>管理方案</th>
+						<th>状态</th>
+						<th>更新人</th>
+						<th>创建日期</th>
+						<th>终止人</th>
+						<th>终止原因</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a href="javascript: void(0);" onclick="">修改</a>
+							<a href="javascript: void(0);" class="mar-left" onclick="">终止</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="page-box">
+			<jsp:include page="/public/pageFoot.jsp"></jsp:include>
+		</div>
+	</form>
+</div>
+</body>
+</html>

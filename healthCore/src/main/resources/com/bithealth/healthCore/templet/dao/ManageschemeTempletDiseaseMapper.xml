@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.healthCore.templet.dao.ManageschemeTempletDiseaseMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.healthCore.templet.model.ManageschemeTempletDisease" >
+        <id column="LogID" property="logID" jdbcType="INTEGER" />
+        <result column="MSTempletID" property="MSTempletID" jdbcType="INTEGER" />
+        <result column="MSDiseaseID" property="MSDiseaseID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, MSTempletID, MSDiseaseID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletDiseaseExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_templet_disease
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletDiseaseExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_templet_disease
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_managescheme_templet_disease
+        where LogID = #{logID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletDisease" useGeneratedKeys="true" keyProperty="logID" >
+        insert into tb_managescheme_templet_disease
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="MSTempletID != null" >
+                MSTempletID,
+            </if>
+            <if test="MSDiseaseID != null" >
+                MSDiseaseID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="MSTempletID != null" >
+                #{MSTempletID,jdbcType=INTEGER},
+            </if>
+            <if test="MSDiseaseID != null" >
+                #{MSDiseaseID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletDiseaseExample" resultType="java.lang.Integer" >
+        select count(*) from tb_managescheme_templet_disease
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_templet_disease
+            <set >
+                <if test="record.logID != null" >
+                    LogID = #{record.logID,jdbcType=INTEGER},
+                </if>
+                <if test="record.MSTempletID != null" >
+                    MSTempletID = #{record.MSTempletID,jdbcType=INTEGER},
+                </if>
+                <if test="record.MSDiseaseID != null" >
+                    MSDiseaseID = #{record.MSDiseaseID,jdbcType=INTEGER},
+                </if>
+                <if test="record.updateTime != null" >
+                    UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_templet_disease
+            set LogID = #{record.logID,jdbcType=INTEGER},
+                MSTempletID = #{record.MSTempletID,jdbcType=INTEGER},
+                MSDiseaseID = #{record.MSDiseaseID,jdbcType=INTEGER},
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletDisease" >
+        update tb_managescheme_templet_disease
+        <set >
+            <if test="MSTempletID != null" >
+                MSTempletID = #{MSTempletID,jdbcType=INTEGER},
+            </if>
+            <if test="MSDiseaseID != null" >
+                MSDiseaseID = #{MSDiseaseID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletDisease" >
+        update tb_managescheme_templet_disease
+        set MSTempletID = #{MSTempletID,jdbcType=INTEGER},
+            MSDiseaseID = #{MSDiseaseID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_managescheme_templet_disease
+        where LogID = #{logID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletDiseaseExample" >
+        <if test="_parameter != null and _parameter != ''" >
+            delete from tb_managescheme_templet_disease
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+	<select id="selectList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        SELECT a.*, b.DiseaseName FROM `tb_managescheme_templet_disease` a 
+        JOIN `tb_managescheme_disease` b ON a.MSDiseaseID = b.MSDiseaseID 
+        WHERE a.MSTempletID = #{masterId,jdbcType=INTEGER}
+    </select>
+</mapper>

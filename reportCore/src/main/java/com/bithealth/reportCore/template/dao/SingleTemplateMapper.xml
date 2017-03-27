@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.reportCore.template.dao.SingleTemplateMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.reportCore.template.model.SingleTemplate" >
+        <id column="TempCode" property="tempCode" jdbcType="INTEGER" />
+        <result column="TempName" property="tempName" jdbcType="VARCHAR" />
+        <result column="FunId" property="funId" jdbcType="SMALLINT" />
+        <result column="OptId" property="optId" jdbcType="SMALLINT" />
+        <result column="SetDesc" property="setDesc" jdbcType="VARCHAR" />
+        <result column="MinRecords" property="minRecords" jdbcType="SMALLINT" />
+        <result column="MinDisDay" property="minDisDay" jdbcType="SMALLINT" />
+        <result column="MaxMumDay" property="maxMumDay" jdbcType="SMALLINT" />
+        <result column="ChTag" property="chTag" jdbcType="CHAR" />
+        <result column="ValiTag" property="valiTag" jdbcType="CHAR" />
+        <result column="OrgId" property="orgId" jdbcType="INTEGER" />
+        <result column="MaxCycle" property="maxCycle" jdbcType="SMALLINT" />
+        <result column="OptName" property="optName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        TempCode, TempName, FunId, OptId, SetDesc, MinRecords, MinDisDay, MaxMumDay, ChTag, 
+        ValiTag, OrgId, MaxCycle
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.SingleTemplateExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from orts
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.SingleTemplateExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from orts
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from orts
+        where TempCode = #{tempCode,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.reportCore.template.model.SingleTemplate"  useGeneratedKeys="true" keyProperty="tempCode" >
+        insert into orts
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="tempCode != null" >
+                TempCode,
+            </if>
+            <if test="tempName != null" >
+                TempName,
+            </if>
+            <if test="funId != null" >
+                FunId,
+            </if>
+            <if test="optId != null" >
+                OptId,
+            </if>
+            <if test="setDesc != null" >
+                SetDesc,
+            </if>
+            <if test="minRecords != null" >
+                MinRecords,
+            </if>
+            <if test="minDisDay != null" >
+                MinDisDay,
+            </if>
+            <if test="maxMumDay != null" >
+                MaxMumDay,
+            </if>
+            <if test="chTag != null" >
+                ChTag,
+            </if>
+            <if test="valiTag != null" >
+                ValiTag,
+            </if>
+            <if test="orgId != null" >
+                OrgId,
+            </if>
+            <if test="maxCycle != null" >
+                MaxCycle,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="tempCode != null" >
+                #{tempCode,jdbcType=INTEGER},
+            </if>
+            <if test="tempName != null" >
+                #{tempName,jdbcType=VARCHAR},
+            </if>
+            <if test="funId != null" >
+                #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="optId != null" >
+                #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="setDesc != null" >
+                #{setDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="minRecords != null" >
+                #{minRecords,jdbcType=SMALLINT},
+            </if>
+            <if test="minDisDay != null" >
+                #{minDisDay,jdbcType=SMALLINT},
+            </if>
+            <if test="maxMumDay != null" >
+                #{maxMumDay,jdbcType=SMALLINT},
+            </if>
+            <if test="chTag != null" >
+                #{chTag,jdbcType=CHAR},
+            </if>
+            <if test="valiTag != null" >
+                #{valiTag,jdbcType=CHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="maxCycle != null" >
+                #{maxCycle,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.reportCore.template.model.SingleTemplateExample" resultType="java.lang.Integer" >
+        select count(*) from orts
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update orts
+            <set >
+                <if test="record.tempCode != null" >
+                    TempCode = #{record.tempCode,jdbcType=INTEGER},
+                </if>
+                <if test="record.tempName != null" >
+                    TempName = #{record.tempName,jdbcType=VARCHAR},
+                </if>
+                <if test="record.funId != null" >
+                    FunId = #{record.funId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.optId != null" >
+                    OptId = #{record.optId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.setDesc != null" >
+                    SetDesc = #{record.setDesc,jdbcType=VARCHAR},
+                </if>
+                <if test="record.minRecords != null" >
+                    MinRecords = #{record.minRecords,jdbcType=SMALLINT},
+                </if>
+                <if test="record.minDisDay != null" >
+                    MinDisDay = #{record.minDisDay,jdbcType=SMALLINT},
+                </if>
+                <if test="record.maxMumDay != null" >
+                    MaxMumDay = #{record.maxMumDay,jdbcType=SMALLINT},
+                </if>
+                <if test="record.chTag != null" >
+                    ChTag = #{record.chTag,jdbcType=CHAR},
+                </if>
+                <if test="record.valiTag != null" >
+                    ValiTag = #{record.valiTag,jdbcType=CHAR},
+                </if>
+                <if test="record.orgId != null" >
+                    OrgId = #{record.orgId,jdbcType=INTEGER},
+                </if>
+                <if test="record.maxCycle != null" >
+                    MaxCycle = #{record.maxCycle,jdbcType=SMALLINT},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update orts
+            set TempCode = #{record.tempCode,jdbcType=INTEGER},
+                TempName = #{record.tempName,jdbcType=VARCHAR},
+                FunId = #{record.funId,jdbcType=SMALLINT},
+                OptId = #{record.optId,jdbcType=SMALLINT},
+                SetDesc = #{record.setDesc,jdbcType=VARCHAR},
+                MinRecords = #{record.minRecords,jdbcType=SMALLINT},
+                MinDisDay = #{record.minDisDay,jdbcType=SMALLINT},
+                MaxMumDay = #{record.maxMumDay,jdbcType=SMALLINT},
+                ChTag = #{record.chTag,jdbcType=CHAR},
+                ValiTag = #{record.valiTag,jdbcType=CHAR},
+                OrgId = #{record.orgId,jdbcType=INTEGER},
+                MaxCycle = #{record.maxCycle,jdbcType=SMALLINT}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.reportCore.template.model.SingleTemplate" >
+        update orts
+        <set >
+            <if test="tempName != null" >
+                TempName = #{tempName,jdbcType=VARCHAR},
+            </if>
+            <if test="funId != null" >
+                FunId = #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="optId != null" >
+                OptId = #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="setDesc != null" >
+                SetDesc = #{setDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="minRecords != null" >
+                MinRecords = #{minRecords,jdbcType=SMALLINT},
+            </if>
+            <if test="minDisDay != null" >
+                MinDisDay = #{minDisDay,jdbcType=SMALLINT},
+            </if>
+            <if test="maxMumDay != null" >
+                MaxMumDay = #{maxMumDay,jdbcType=SMALLINT},
+            </if>
+            <if test="chTag != null" >
+                ChTag = #{chTag,jdbcType=CHAR},
+            </if>
+            <if test="valiTag != null" >
+                ValiTag = #{valiTag,jdbcType=CHAR},
+            </if>
+            <if test="orgId != null" >
+                OrgId = #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="maxCycle != null" >
+                MaxCycle = #{maxCycle,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where TempCode = #{tempCode,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.reportCore.template.model.SingleTemplate" >
+        update orts
+        set TempName = #{tempName,jdbcType=VARCHAR},
+            FunId = #{funId,jdbcType=SMALLINT},
+            OptId = #{optId,jdbcType=SMALLINT},
+            SetDesc = #{setDesc,jdbcType=VARCHAR},
+            MinRecords = #{minRecords,jdbcType=SMALLINT},
+            MinDisDay = #{minDisDay,jdbcType=SMALLINT},
+            MaxMumDay = #{maxMumDay,jdbcType=SMALLINT},
+            ChTag = #{chTag,jdbcType=CHAR},
+            ValiTag = #{valiTag,jdbcType=CHAR},
+            OrgId = #{orgId,jdbcType=INTEGER},
+            MaxCycle = #{maxCycle,jdbcType=SMALLINT}
+        where TempCode = #{tempCode,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from orts
+        where TempCode = #{tempCode,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.reportCore.template.model.SingleTemplateExample" >
+        <if test="_parameter != null" >
+            delete from orts
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    
+    
+    <!-- 多表查询，根据汇总模板代码获取单项模板列表 -->
+    <select id="selectSingleTemplateBySummaryCode" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select a.TempCode, a.TempName, a.FunId, a.OptId, a.SetDesc, a.MinRecords, a.MinDisDay, a.MaxMumDay, a.ChTag, 
+               a.ValiTag, a.OrgId, a.MaxCycle
+         from  orts a , sms2 b 
+        WHERE  a.`TempCode` = b.`TempCode`
+          AND  b.`SumRepTempCode` = #{sumRepTempCode,jdbcType=INTEGER}
+    </select>
+    
+    <!-- 关联查询获取单项模板及其oopt名称 -->
+    <select id="selectByOrgId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+		SELECT  a.TempCode, a.TempName, a.FunId, a.OptId, a.SetDesc, a.MinRecords, a.MinDisDay, a.MaxMumDay, a.ChTag,  a.ValiTag, a.OrgId, a.MaxCycle,b.`OptName`	
+          FROM  orts a LEFT JOIN oopt b ON a.`OptId` = b.`OptId`
+         WHERE  a.`OrgId` =  #{orgId}
+           AND  a.`ValiTag` = 'T';
+    </select>
+    
+    <!-- 关联查询获取单项模板的最大审核级别 -->  
+    <select id="selectMaxAuditLevelByParams" resultType="java.lang.Integer" parameterType="java.util.Map" >
+		select max(AuditLevel) as maxLevel from rts1 
+		where TempCode in (select TempCode from orts where OrgId=  #{orgId} and FunId = #{funId} and OptId = #{optId} and ValiTag='T')
+    </select>
+    
+    
+    <!-- 多表查询，获取汇总模板关联之外的单项模板 -->
+    <select id="selectOtherSingelTemplateList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+		SELECT o.* FROM orts o 
+		WHERE o.orgId=#{orgId} AND o.valiTag='T' 
+		  AND NOT EXISTS ( SELECT 1 FROM sms2 b WHERE b.`SumRepTempCode` = #{sumRepTempCode} AND o.`TempCode` = b.`TempCode`)
+    </select>
+    
+    
+
+
+</mapper>

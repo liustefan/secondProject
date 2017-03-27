@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.healthCore.managescheme.dao.ManageschemeDesignTaskMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.healthCore.managescheme.model.ManageschemeDesignTask" >
+        <id column="MSDTaskID" property="MSDTaskID" jdbcType="INTEGER" />
+        <result column="MSDesignID" property="MSDesignID" jdbcType="INTEGER" />
+        <result column="PlanTimeValue" property="planTimeValue" jdbcType="SMALLINT" />
+        <result column="PlanTimeType" property="planTimeType" jdbcType="TINYINT" />
+        <result column="TaskType" property="taskType" jdbcType="TINYINT" />
+        <result column="TaskRefID" property="taskRefID" jdbcType="BIGINT" />
+        <result column="ExecWay" property="execWay" jdbcType="TINYINT" />
+        <result column="Summary" property="summary" jdbcType="VARCHAR" />
+        <result column="Content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="CreateID" property="createID" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <association property="taskRef" column="{id=TaskRefID, taskType=TaskType}" select="com.bithealth.healthCore.templet.dao.ManageschemeTempletTaskMapper.selectTaskRefName"/>
+    </resultMap>
+    
+    <resultMap id="ResultMap" type="com.bithealth.healthCore.managescheme.model.ManageschemeDesignTask" extends="BaseResultMap">
+    	<association column="MSDTaskID" property="execTask" select="com.bithealth.healthCore.managescheme.dao.ManageschemeExecTaskMapper.selectByMSDTaskID"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        MSDTaskID, MSDesignID, PlanTimeValue, PlanTimeType, TaskType, TaskRefID, ExecWay, 
+        Summary, Content, CreateID, CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignTaskExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_design_task
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignTaskExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_design_task
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_managescheme_design_task
+        where MSDTaskID = #{MSDTaskID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignTask" useGeneratedKeys="true" keyProperty="MSDTaskID" >
+        insert into tb_managescheme_design_task
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="MSDesignID != null" >
+                MSDesignID,
+            </if>
+            <if test="planTimeValue != null" >
+                PlanTimeValue,
+            </if>
+            <if test="planTimeType != null" >
+                PlanTimeType,
+            </if>
+            <if test="taskType != null" >
+                TaskType,
+            </if>
+            <if test="taskRefID != null" >
+                TaskRefID,
+            </if>
+            <if test="execWay != null" >
+                ExecWay,
+            </if>
+            <if test="summary != null" >
+                Summary,
+            </if>
+            <if test="content != null" >
+                Content,
+            </if>
+            <if test="createID != null" >
+                CreateID,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateID != null" >
+                UpdateID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="MSDesignID != null" >
+                #{MSDesignID,jdbcType=INTEGER},
+            </if>
+            <if test="planTimeValue != null" >
+                #{planTimeValue,jdbcType=SMALLINT},
+            </if>
+            <if test="planTimeType != null" >
+                #{planTimeType,jdbcType=TINYINT},
+            </if>
+            <if test="taskType != null" >
+                #{taskType,jdbcType=TINYINT},
+            </if>
+            <if test="taskRefID != null" >
+                #{taskRefID,jdbcType=BIGINT},
+            </if>
+            <if test="execWay != null" >
+                #{execWay,jdbcType=TINYINT},
+            </if>
+            <if test="summary != null" >
+                #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="createID != null" >
+                #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignTaskExample" resultType="java.lang.Integer" >
+        select count(*) from tb_managescheme_design_task
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_design_task
+            <set >
+                <if test="record.MSDTaskID != null" >
+                    MSDTaskID = #{record.MSDTaskID,jdbcType=INTEGER},
+                </if>
+                <if test="record.MSDesignID != null" >
+                    MSDesignID = #{record.MSDesignID,jdbcType=INTEGER},
+                </if>
+                <if test="record.planTimeValue != null" >
+                    PlanTimeValue = #{record.planTimeValue,jdbcType=SMALLINT},
+                </if>
+                <if test="record.planTimeType != null" >
+                    PlanTimeType = #{record.planTimeType,jdbcType=TINYINT},
+                </if>
+                <if test="record.taskType != null" >
+                    TaskType = #{record.taskType,jdbcType=TINYINT},
+                </if>
+                <if test="record.taskRefID != null" >
+                    TaskRefID = #{record.taskRefID,jdbcType=BIGINT},
+                </if>
+                <if test="record.execWay != null" >
+                    ExecWay = #{record.execWay,jdbcType=TINYINT},
+                </if>
+                <if test="record.summary != null" >
+                    Summary = #{record.summary,jdbcType=VARCHAR},
+                </if>
+                <if test="record.content != null" >
+                    Content = #{record.content,jdbcType=LONGVARCHAR},
+                </if>
+                <if test="record.createID != null" >
+                    CreateID = #{record.createID,jdbcType=INTEGER},
+                </if>
+                <if test="record.createTime != null" >
+                    CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateID != null" >
+                    UpdateID = #{record.updateID,jdbcType=INTEGER},
+                </if>
+                <if test="record.updateTime != null" >
+                    UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_design_task
+            set MSDTaskID = #{record.MSDTaskID,jdbcType=INTEGER},
+                MSDesignID = #{record.MSDesignID,jdbcType=INTEGER},
+                PlanTimeValue = #{record.planTimeValue,jdbcType=SMALLINT},
+                PlanTimeType = #{record.planTimeType,jdbcType=TINYINT},
+                TaskType = #{record.taskType,jdbcType=TINYINT},
+                TaskRefID = #{record.taskRefID,jdbcType=BIGINT},
+                ExecWay = #{record.execWay,jdbcType=TINYINT},
+                Summary = #{record.summary,jdbcType=VARCHAR},
+                Content = #{record.content,jdbcType=LONGVARCHAR},
+                CreateID = #{record.createID,jdbcType=INTEGER},
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                UpdateID = #{record.updateID,jdbcType=INTEGER},
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignTask" >
+        update tb_managescheme_design_task
+        <set >
+            <if test="MSDesignID != null" >
+                MSDesignID = #{MSDesignID,jdbcType=INTEGER},
+            </if>
+            <if test="planTimeValue != null" >
+                PlanTimeValue = #{planTimeValue,jdbcType=SMALLINT},
+            </if>
+            <if test="planTimeType != null" >
+                PlanTimeType = #{planTimeType,jdbcType=TINYINT},
+            </if>
+            <if test="taskType != null" >
+                TaskType = #{taskType,jdbcType=TINYINT},
+            </if>
+            <if test="taskRefID != null" >
+                TaskRefID = #{taskRefID,jdbcType=BIGINT},
+            </if>
+            <if test="execWay != null" >
+                ExecWay = #{execWay,jdbcType=TINYINT},
+            </if>
+            <if test="summary != null" >
+                Summary = #{summary,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                Content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="createID != null" >
+                CreateID = #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                UpdateID = #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where MSDTaskID = #{MSDTaskID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignTask" >
+        update tb_managescheme_design_task
+        set MSDesignID = #{MSDesignID,jdbcType=INTEGER},
+            PlanTimeValue = #{planTimeValue,jdbcType=SMALLINT},
+            PlanTimeType = #{planTimeType,jdbcType=TINYINT},
+            TaskType = #{taskType,jdbcType=TINYINT},
+            TaskRefID = #{taskRefID,jdbcType=BIGINT},
+            ExecWay = #{execWay,jdbcType=TINYINT},
+            Summary = #{summary,jdbcType=VARCHAR},
+            Content = #{content,jdbcType=LONGVARCHAR},
+            CreateID = #{createID,jdbcType=INTEGER},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where MSDTaskID = #{MSDTaskID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_managescheme_design_task
+        where MSDTaskID = #{MSDTaskID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignTaskExample" >
+        <if test="_parameter != null and _parameter != ''" >
+            delete from tb_managescheme_design_task
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <select id="selectByMSDTaskID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from tb_managescheme_design_task where MSDTaskID = #{MSDTaskID,jdbcType=INTEGER}
+    </select>
+ 	<select id="selectByMasterId" resultMap="ResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from tb_managescheme_design_task where MSDesignID = #{MSDesignID,jdbcType=INTEGER}
+    </select>
+</mapper>

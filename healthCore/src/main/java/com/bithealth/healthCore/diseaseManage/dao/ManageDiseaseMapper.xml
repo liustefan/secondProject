@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.healthCore.diseaseManage.dao.ManageDiseaseMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.healthCore.diseaseManage.model.ManageDisease" >
+        <id column="MSDiseaseID" property="msdiseaseid" jdbcType="INTEGER" />
+        <result column="DiseaseName" property="diseasename" jdbcType="VARCHAR" />
+        <result column="ParentID" property="parentid" jdbcType="INTEGER" />
+        <result column="SortNo" property="sortno" jdbcType="INTEGER" />
+        <result column="Description" property="description" jdbcType="VARCHAR" />
+        <result column="Path" property="path" jdbcType="VARCHAR" />
+        <result column="IsDeleted" property="isdeleted" jdbcType="TINYINT" />
+        <result column="CreateID" property="createid" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateid" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+        <association property="parentDisease" column="parentid" select="selectByPrimaryKey"/>
+   		<collection property="children" column="MSDiseaseID" select="selectChildren"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        MSDiseaseID, DiseaseName, ParentID, SortNo, Description, Path, CreateID, 
+        CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.diseaseManage.model.ManageDiseaseExample" >
+        SELECT 
+        MSDiseaseID, DiseaseName, ParentID, SortNo, Description, Path, CreateID, CreateTime, UpdateID, UpdateTime
+        FROM tb_managescheme_disease
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.diseaseManage.model.ManageDiseaseExample" >
+        SELECT 
+        MSDiseaseID, DiseaseName, ParentID, SortNo, Description, Path, CreateID, CreateTime, UpdateID, UpdateTime,b.DocName
+        FROM tb_managescheme_disease LEFT JOIN odoc b ON tb_managescheme_disease.UpdateID = b.Docid 
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_managescheme_disease
+        where MSDiseaseID = #{msdiseaseid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.healthCore.diseaseManage.model.ManageDisease" useGeneratedKeys="true" keyProperty="msdiseaseid">
+        insert into tb_managescheme_disease
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="msdiseaseid != null" >
+                MSDiseaseID,
+            </if>
+            <if test="diseasename != null" >
+                DiseaseName,
+            </if>
+            <if test="parentid != null" >
+                ParentID,
+            </if>
+            <if test="sortno != null" >
+                SortNo,
+            </if>
+            <if test="description != null" >
+                Description,
+            </if>
+            <if test="path != null" >
+                Path,
+            </if>
+            <if test="createid != null" >
+                CreateID,
+            </if>
+            <if test="createtime != null" >
+                CreateTime,
+            </if>
+            <if test="updateid != null" >
+                UpdateID,
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="msdiseaseid != null" >
+                #{msdiseaseid,jdbcType=INTEGER},
+            </if>
+            <if test="diseasename != null" >
+                #{diseasename,jdbcType=VARCHAR},
+            </if>
+            <if test="parentid != null" >
+                #{parentid,jdbcType=INTEGER},
+            </if>
+            <if test="sortno != null" >
+                #{sortno,jdbcType=INTEGER},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null" >
+                #{path,jdbcType=VARCHAR},
+            </if>       
+            <if test="createid != null" >
+                #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateid != null" >
+                #{updateid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.healthCore.diseaseManage.model.ManageDiseaseExample" resultType="java.lang.Integer" >
+        select count(*) from tb_managescheme_disease
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_managescheme_disease
+            <set >
+                <if test="record.msdiseaseid != null" >
+                    MSDiseaseID = #{record.msdiseaseid,jdbcType=INTEGER},
+                </if>
+                <if test="record.diseasename != null" >
+                    DiseaseName = #{record.diseasename,jdbcType=VARCHAR},
+                </if>
+                <if test="record.parentid != null" >
+                    ParentID = #{record.parentid,jdbcType=INTEGER},
+                </if>
+                <if test="record.sortno != null" >
+                    SortNo = #{record.sortno,jdbcType=INTEGER},
+                </if>
+                <if test="record.description != null" >
+                    Description = #{record.description,jdbcType=VARCHAR},
+                </if>
+                <if test="record.path != null" >
+                    Path = #{record.path,jdbcType=VARCHAR},
+                </if>               
+                <if test="record.createid != null" >
+                    CreateID = #{record.createid,jdbcType=INTEGER},
+                </if>
+                <if test="record.createtime != null" >
+                    CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateid != null" >
+                    UpdateID = #{record.updateid,jdbcType=INTEGER},
+                </if>
+                <if test="record.updatetime != null" >
+                    UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_managescheme_disease
+            set MSDiseaseID = #{record.msdiseaseid,jdbcType=INTEGER},
+                DiseaseName = #{record.diseasename,jdbcType=VARCHAR},
+                ParentID = #{record.parentid,jdbcType=INTEGER},
+                SortNo = #{record.sortno,jdbcType=INTEGER},
+                Description = #{record.description,jdbcType=VARCHAR},
+                Path = #{record.path,jdbcType=VARCHAR},
+                CreateID = #{record.createid,jdbcType=INTEGER},
+                CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+                UpdateID = #{record.updateid,jdbcType=INTEGER},
+                UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.healthCore.diseaseManage.model.ManageDisease" >
+        update tb_managescheme_disease
+        <set >
+            <if test="diseasename != null" >
+                DiseaseName = #{diseasename,jdbcType=VARCHAR},
+            </if>
+            <if test="parentid != null" >
+                ParentID = #{parentid,jdbcType=INTEGER},
+            </if>
+            <if test="sortno != null" >
+                SortNo = #{sortno,jdbcType=INTEGER},
+            </if>
+            <if test="description != null" >
+                Description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null" >
+                Path = #{path,jdbcType=VARCHAR},
+            </if>         
+            <if test="createid != null" >
+                CreateID = #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateid != null" >
+                UpdateID = #{updateid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where MSDiseaseID = #{msdiseaseid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.healthCore.diseaseManage.model.ManageDisease" >
+        update tb_managescheme_disease
+        set DiseaseName = #{diseasename,jdbcType=VARCHAR},
+            ParentID = #{parentid,jdbcType=INTEGER},
+            SortNo = #{sortno,jdbcType=INTEGER},
+            Description = #{description,jdbcType=VARCHAR},
+            Path = #{path,jdbcType=VARCHAR},
+            <!-- CreateID = #{createid,jdbcType=INTEGER}, 
+            CreateTime = #{createtime,jdbcType=TIMESTAMP},-->
+            UpdateID = #{updateid,jdbcType=INTEGER},
+            UpdateTime = #{updatetime,jdbcType=TIMESTAMP}
+        where MSDiseaseID = #{msdiseaseid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_managescheme_disease
+        where MSDiseaseID = #{msdiseaseid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.healthCore.diseaseManage.model.ManageDiseaseExample" >
+        <if test="_parameter != null" >
+            delete from tb_managescheme_disease
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- 自定义SQL -->
+    <select id="selectChildren" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	 select 
+        <include refid="Base_Column_List" />
+        from tb_managescheme_disease
+        where ParentID = #{msdiseaseid,jdbcType=INTEGER}
+	</select>
+	
+    <delete id="deleteChildren" parameterType="java.lang.Integer" >
+        delete from tb_managescheme_disease where ParentID = #{msdiseaseid,jdbcType=INTEGER}
+    </delete>
+    
+</mapper>

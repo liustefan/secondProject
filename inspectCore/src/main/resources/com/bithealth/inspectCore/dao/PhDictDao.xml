@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.inspectCore.dao.PhDictDao" >
+	<resultMap id="BaseResultMap" type="com.bithealth.inspectCore.dict.model.PhDictitem" >
+        <id column="LogID" property="logID" jdbcType="INTEGER" />
+        <result column="DTypeID" property="DTypeID" jdbcType="SMALLINT" />
+        <result column="DItemID" property="DItemID" jdbcType="TINYINT" />
+        <result column="DItemName" property="DItemName" jdbcType="VARCHAR" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="Source" property="source" jdbcType="VARCHAR" />
+        <result column="DTypeName" property="DTypeName" jdbcType="VARCHAR" />
+    </resultMap>
+	<select id="selectAllSecond" resultMap="BaseResultMap">
+        SELECT a.Source, a.DTypeName, b.* FROM `ph_dicttype` a JOIN `ph_dictitem` b ON a.DTypeID = b.DTypeID
+    </select>
+</mapper>

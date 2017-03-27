@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>健康管理任务</title>
+	<link rel="stylesheet" href="../../css/general.css">
+	<link rel="stylesheet" href="../../js/jquery-ui/themes/overcast/jquery-ui.min.css">
+	<link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui/jquery-ui.js"></script>
+	<script type="text/javascript" src="../../js/dataPacker.js"></script>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">
+   		健康管理任务
+	</div>
+    <form action="" method="POST" id="">
+		<div class="search-box-wrapper">
+			<ul class="search-wrapper">
+				<li>
+					<label>管理方案：</label>
+	                <input type="text" >
+				</li>
+				<li>
+					<label>任务执行日期：</label> 
+					<input class="info-date" id="startDate" type="text" name="" value='' required="required" readonly /> 
+					<span class="mar-left">至</span> 
+					<input class="info-date" id="endDate" type="text" name="" value='' required="required" readonly />
+				</li>
+				<li>
+					<label>状态：</label>
+	                <select name="">
+						<option value="">全部</option>
+						<option value="1">待执行</option>
+						<option value="2">已执行</option>
+						<option value="3">已终止</option>
+					</select>
+				</li>
+				<li>
+					<button type="button" class="btn-inquiry ico-search" onclick="">查询</button>
+				</li>
+			</ul>
+		</div>
+		<div class="table-box">
+			<table class="table-content">
+				<thead class="table-title">
+					<tr>
+						<th>管理方案</th>
+						<th>任务类别</th>
+						<th>任务执行方式</th>
+						<th>计划执行时间</th>
+						<th>实际执行日期</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a href="javascript: void(0);" onclick="">执行任务</a>
+							<a href="javascript: void(0);" class="mar-left" onclick="">修改计划时间</a>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a href="javascript: void(0);" onclick="">查看</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="page-box">
+			<jsp:include page="/public/pageFoot.jsp"></jsp:include>
+		</div>
+	</form>
+</div>
+</body>
+</html>

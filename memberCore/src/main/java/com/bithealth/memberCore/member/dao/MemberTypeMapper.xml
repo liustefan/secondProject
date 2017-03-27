@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.MemberTypeMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.MemberType" >
+        <id column="MemId" property="memid" jdbcType="SMALLINT" />
+        <result column="OrgId" property="orgid" jdbcType="INTEGER" />
+        <result column="MemName" property="memname" jdbcType="VARCHAR" />
+        <result column="MemDesc" property="memdesc" jdbcType="VARCHAR" />
+        <result column="Tag" property="tag" jdbcType="CHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        MemId, OrgId, MemName, MemDesc, Tag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemberTypeExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omes
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemberTypeExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omes
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+        select 
+        <include refid="Base_Column_List" />
+        from omes
+        where MemId = #{memid,jdbcType=SMALLINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.MemberType" >
+        insert into omes (MemId, OrgId, MemName, 
+            MemDesc, Tag)
+        values (#{memid,jdbcType=SMALLINT}, #{orgid,jdbcType=INTEGER}, #{memname,jdbcType=VARCHAR}, 
+            #{memdesc,jdbcType=VARCHAR}, #{tag,jdbcType=CHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.MemberType" >
+        insert into omes
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memid != null" >
+                MemId,
+            </if>
+            <if test="orgid != null" >
+                OrgId,
+            </if>
+            <if test="memname != null" >
+                MemName,
+            </if>
+            <if test="memdesc != null" >
+                MemDesc,
+            </if>
+            <if test="tag != null" >
+                Tag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memid != null" >
+                #{memid,jdbcType=SMALLINT},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="memname != null" >
+                #{memname,jdbcType=VARCHAR},
+            </if>
+            <if test="memdesc != null" >
+                #{memdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.MemberTypeExample" resultType="java.lang.Integer" >
+        select count(*) from omes
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update omes
+        <set >
+            <if test="record.memid != null" >
+                MemId = #{record.memid,jdbcType=SMALLINT},
+            </if>
+            <if test="record.orgid != null" >
+                OrgId = #{record.orgid,jdbcType=INTEGER},
+            </if>
+            <if test="record.memname != null" >
+                MemName = #{record.memname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memdesc != null" >
+                MemDesc = #{record.memdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tag != null" >
+                Tag = #{record.tag,jdbcType=CHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update omes
+        set MemId = #{record.memid,jdbcType=SMALLINT},
+            OrgId = #{record.orgid,jdbcType=INTEGER},
+            MemName = #{record.memname,jdbcType=VARCHAR},
+            MemDesc = #{record.memdesc,jdbcType=VARCHAR},
+            Tag = #{record.tag,jdbcType=CHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.MemberType" >
+        update omes
+        <set >
+            <if test="orgid != null" >
+                OrgId = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="memname != null" >
+                MemName = #{memname,jdbcType=VARCHAR},
+            </if>
+            <if test="memdesc != null" >
+                MemDesc = #{memdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                Tag = #{tag,jdbcType=CHAR},
+            </if>
+        </set>
+        where MemId = #{memid,jdbcType=SMALLINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.MemberType" >
+        update omes
+        set OrgId = #{orgid,jdbcType=INTEGER},
+            MemName = #{memname,jdbcType=VARCHAR},
+            MemDesc = #{memdesc,jdbcType=VARCHAR},
+            Tag = #{tag,jdbcType=CHAR}
+        where MemId = #{memid,jdbcType=SMALLINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+        delete from omes
+        where MemId = #{memid,jdbcType=SMALLINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.MemberTypeExample" >
+        delete from omes
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

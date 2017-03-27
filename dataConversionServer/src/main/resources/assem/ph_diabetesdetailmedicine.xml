@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.dataConversionServer.qiangHua.bean.TdiabetesVisits">
+<!-- name原始对象属性,强华，  assembly 目标对象属性自己的数据库-->
+<!--
+<Assem name="" assembly="logid"/> 记录ID -->
+
+<Assem name="drugName" assembly="drugname"/>
+ <!-- <Assem name="" assembly="drugusage"/> 用法 -->
+<Assem name="drugFreq" assembly="drugfreq"/>
+<Assem name="drugDose" assembly="drugdosage"/> <!-- 用量 -->
+<Assem name="drugDoseUnit" assembly="drugunit"/>
+
+
+</Assemes>

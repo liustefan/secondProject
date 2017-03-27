@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.centCore.care.dao.FamilyNewsMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.centCore.care.model.FamilyNews" >
+        <id column="LogID" property="logID" jdbcType="INTEGER" />
+        <result column="MsgType" property="msgType" jdbcType="TINYINT" />
+        <result column="Sender" property="sender" jdbcType="CHAR" />
+        <result column="Receiver" property="receiver" jdbcType="CHAR" />
+        <result column="SourceID" property="sourceID" jdbcType="BIGINT" />
+        <result column="Content" property="content" jdbcType="VARCHAR" />
+        <result column="IsSend" property="isSend" jdbcType="TINYINT" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="HeadAddress" property="headAddress" jdbcType="VARCHAR" />
+        <result column="ServerID" property="serverId" jdbcType="INTEGER" />
+        <result column="Number" property="number" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, MsgType, Sender, Receiver, SourceID, Content, IsSend, CreateTime, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.care.model.FamilyNewsExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from m_focus_familynews
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.care.model.FamilyNewsExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from m_focus_familynews
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from m_focus_familynews
+        where LogID = #{logID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.centCore.care.model.FamilyNews"  useGeneratedKeys="true" keyProperty="logID">
+        insert into m_focus_familynews
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="logID != null" >
+                LogID,
+            </if>
+            <if test="msgType != null" >
+                MsgType,
+            </if>
+            <if test="sender != null" >
+                Sender,
+            </if>
+            <if test="receiver != null" >
+                Receiver,
+            </if>
+            <if test="sourceID != null" >
+                SourceID,
+            </if>
+            <if test="content != null" >
+                Content,
+            </if>
+            <if test="isSend != null" >
+                IsSend,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="logID != null" >
+                #{logID,jdbcType=INTEGER},
+            </if>
+            <if test="msgType != null" >
+                #{msgType,jdbcType=TINYINT},
+            </if>
+            <if test="sender != null" >
+                #{sender,jdbcType=CHAR},
+            </if>
+            <if test="receiver != null" >
+                #{receiver,jdbcType=CHAR},
+            </if>
+            <if test="sourceID != null" >
+                #{sourceID,jdbcType=BIGINT},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="isSend != null" >
+                #{isSend,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.centCore.care.model.FamilyNewsExample" resultType="java.lang.Integer" >
+        select count(*) from m_focus_familynews
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update m_focus_familynews
+            <set >
+                <if test="record.logID != null" >
+                    LogID = #{record.logID,jdbcType=INTEGER},
+                </if>
+                <if test="record.msgType != null" >
+                    MsgType = #{record.msgType,jdbcType=TINYINT},
+                </if>
+                <if test="record.sender != null" >
+                    Sender = #{record.sender,jdbcType=CHAR},
+                </if>
+                <if test="record.receiver != null" >
+                    Receiver = #{record.receiver,jdbcType=CHAR},
+                </if>
+                <if test="record.sourceID != null" >
+                    SourceID = #{record.sourceID,jdbcType=BIGINT},
+                </if>
+                <if test="record.content != null" >
+                    Content = #{record.content,jdbcType=VARCHAR},
+                </if>
+                <if test="record.isSend != null" >
+                    IsSend = #{record.isSend,jdbcType=TINYINT},
+                </if>
+                <if test="record.createTime != null" >
+                    CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateTime != null" >
+                    UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update m_focus_familynews
+            set LogID = #{record.logID,jdbcType=INTEGER},
+                MsgType = #{record.msgType,jdbcType=TINYINT},
+                Sender = #{record.sender,jdbcType=CHAR},
+                Receiver = #{record.receiver,jdbcType=CHAR},
+                SourceID = #{record.sourceID,jdbcType=BIGINT},
+                Content = #{record.content,jdbcType=VARCHAR},
+                IsSend = #{record.isSend,jdbcType=TINYINT},
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.centCore.care.model.FamilyNews" >
+        update m_focus_familynews
+        <set >
+            <if test="msgType != null" >
+                MsgType = #{msgType,jdbcType=TINYINT},
+            </if>
+            <if test="sender != null" >
+                Sender = #{sender,jdbcType=CHAR},
+            </if>
+            <if test="receiver != null" >
+                Receiver = #{receiver,jdbcType=CHAR},
+            </if>
+            <if test="sourceID != null" >
+                SourceID = #{sourceID,jdbcType=BIGINT},
+            </if>
+            <if test="content != null" >
+                Content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="isSend != null" >
+                IsSend = #{isSend,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.centCore.care.model.FamilyNews" >
+        update m_focus_familynews
+        set MsgType = #{msgType,jdbcType=TINYINT},
+            Sender = #{sender,jdbcType=CHAR},
+            Receiver = #{receiver,jdbcType=CHAR},
+            SourceID = #{sourceID,jdbcType=BIGINT},
+            Content = #{content,jdbcType=VARCHAR},
+            IsSend = #{isSend,jdbcType=TINYINT},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from m_focus_familynews
+        where LogID = #{logID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.centCore.care.model.FamilyNewsExample" >
+        <if test="_parameter != null" >
+            delete from m_focus_familynews
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    
+        <!-- 获取我关注的人且有权限的查看的最新动态 -->
+    <select id="getMyCareMemberNews" resultMap="BaseResultMap" parameterType="java.lang.String" >
+		SELECT  a.* ,c.`HeadAddress`,c.`ServerID` 
+		  FROM  m_focus_familynews a 
+		  JOIN  m_focus_info b  ON a.Sender = b.focusGUID AND a.Receiver = b.memberGUID
+		  LEFT  JOIN `tb_member` c ON a.Sender = c.`MemberID`
+		 WHERE  FIND_IN_SET(a.MsgType, CASE b.focusP WHEN '1,2' THEN '11,12,13,15,16,17,18' WHEN '1' THEN '15,16,17,18' WHEN '2' THEN '11,12,13' END)		
+		   AND  a.`Receiver` = #{memberGUID}
+		   AND  a.IsSend = 1
+		  ORDER BY a.`CreateTime` DESC
+    </select>
+    
+    
+    <!-- 获取亲友的最新一条动态及阅读状态 -->
+    <select id="getLastFamilyNewsAndReadStatus" resultMap="BaseResultMap" parameterType="java.util.Map" >
+		SELECT a.*,IFNULL(b.`Number`,0 ) AS  Number 
+		FROM  m_focus_familynews a  
+		LEFT JOIN `tb_messagecenter` b ON a.`SourceID` = b.`LastSourceID`  AND a.`Sender` = b.`Sender` AND a.`Receiver` = b.`Receiver` AND a.`MsgType` = b.`MsgType`
+		WHERE a.`Sender` = #{sender}
+		AND a.`Receiver` = #{receiver}
+		ORDER BY a.`LogID` DESC
+    </select>
+    
+
+</mapper>

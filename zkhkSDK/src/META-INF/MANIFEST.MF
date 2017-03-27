@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Specification-Title: KingdeeSDK
+Specification-Version: ${project.version}
+Specification-Vendor: Kingdee Inc.
+Implementation-Title: KingdeeSDK
+Implementation-Version: ${project.version}
+Implementation-Vendor: Kingdee Inc.
+Built-By: ${user.name}
+Build-Jdk: ${java.version}
+Build-Time: ${build.time}

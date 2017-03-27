@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.doctorCore.docGroup.dao.DoctorGroupMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.doctorCore.docGroup.model.DoctorGroup" >
+        <id column="OdgpId" property="odgpid" jdbcType="INTEGER" />
+        <result column="OdgpName" property="odgpname" jdbcType="VARCHAR" />
+        <result column="Remark" property="remark" jdbcType="VARCHAR" />
+        <result column="FathId" property="fathid" jdbcType="INTEGER" />
+        <result column="DocNum" property="docnum" jdbcType="INTEGER" />
+        <result column="ChLevel" property="chlevel" jdbcType="SMALLINT" />
+        <result column="OrgId" property="orgid" jdbcType="INTEGER" />
+        <result column="OptId" property="optid" jdbcType="SMALLINT" />
+        <result column="FunId" property="funid" jdbcType="SMALLINT" />
+        <result column="EndBlockTag" property="endblocktag" jdbcType="BIT" />
+        <result column="UseTag" property="usetag" jdbcType="CHAR" />
+        <result column="order" property="order" jdbcType="INTEGER" />
+        <result column="Path" property="path" jdbcType="VARCHAR" />
+        <association property="parentGroup" column="FathId" select="selectByPrimaryKey"/>
+        <collection property="children" column="OdgpId" select="selectByParentKey"/>
+    </resultMap>
+    
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        OdgpId, OdgpName, Remark, FathId, DocNum, ChLevel, OrgId, OptId, FunId, EndBlockTag, 
+        UseTag, `order`, `Path`
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.doctorCore.docGroup.model.DoctorGroupExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from odgp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.doctorCore.docGroup.model.DoctorGroupExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from odgp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from odgp
+        where OdgpId = #{odgpid,jdbcType=INTEGER}
+    </select>
+    
+     <select id="selectByParentKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from odgp
+        where FathId = #{odgpid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.doctorCore.docGroup.model.DoctorGroup" useGeneratedKeys="true" keyProperty="odgpid">
+        insert into odgp (OdgpId, OdgpName, Remark, 
+            FathId, DocNum, ChLevel, 
+            OrgId, OptId, FunId, 
+            EndBlockTag, UseTag, `order`, 
+            Path)
+        values (#{odgpid,jdbcType=INTEGER}, #{odgpname,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+            #{fathid,jdbcType=INTEGER}, #{docnum,jdbcType=INTEGER}, #{chlevel,jdbcType=SMALLINT}, 
+            #{orgid,jdbcType=INTEGER}, #{optid,jdbcType=SMALLINT}, #{funid,jdbcType=SMALLINT}, 
+            #{endblocktag,jdbcType=BIT}, #{usetag,jdbcType=CHAR}, #{order,jdbcType=INTEGER}, 
+            #{path,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.doctorCore.docGroup.model.DoctorGroup" useGeneratedKeys="true" keyProperty="odgpid">
+        insert into odgp
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="odgpid != null" >
+                OdgpId,
+            </if>
+            <if test="odgpname != null" >
+                OdgpName,
+            </if>
+            <if test="remark != null" >
+                Remark,
+            </if>
+            <if test="fathid != null" >
+                FathId,
+            </if>
+            <if test="docnum != null" >
+                DocNum,
+            </if>
+            <if test="chlevel != null" >
+                ChLevel,
+            </if>
+            <if test="orgid != null" >
+                OrgId,
+            </if>
+            <if test="optid != null" >
+                OptId,
+            </if>
+            <if test="funid != null" >
+                FunId,
+            </if>
+            <if test="endblocktag != null" >
+                EndBlockTag,
+            </if>
+            <if test="usetag != null" >
+                UseTag,
+            </if>
+            <if test="order != null" >
+                `order`,
+            </if>
+            <if test="path != null" >
+                Path,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="odgpid != null" >
+                #{odgpid,jdbcType=INTEGER},
+            </if>
+            <if test="odgpname != null" >
+                #{odgpname,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="fathid != null" >
+                #{fathid,jdbcType=INTEGER},
+            </if>
+            <if test="docnum != null" >
+                #{docnum,jdbcType=INTEGER},
+            </if>
+            <if test="chlevel != null" >
+                #{chlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="optid != null" >
+                #{optid,jdbcType=SMALLINT},
+            </if>
+            <if test="funid != null" >
+                #{funid,jdbcType=SMALLINT},
+            </if>
+            <if test="endblocktag != null" >
+                #{endblocktag,jdbcType=BIT},
+            </if>
+            <if test="usetag != null" >
+                #{usetag,jdbcType=CHAR},
+            </if>
+            <if test="order != null" >
+                #{order,jdbcType=INTEGER},
+            </if>
+            <if test="path != null" >
+                #{path,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.doctorCore.docGroup.model.DoctorGroupExample" resultType="java.lang.Integer" >
+        select count(*) from odgp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update odgp
+        <set >
+            <if test="record.odgpid != null" >
+                OdgpId = #{record.odgpid,jdbcType=INTEGER},
+            </if>
+            <if test="record.odgpname != null" >
+                OdgpName = #{record.odgpname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null" >
+                Remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fathid != null" >
+                FathId = #{record.fathid,jdbcType=INTEGER},
+            </if>
+            <if test="record.docnum != null" >
+                DocNum = #{record.docnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.chlevel != null" >
+                ChLevel = #{record.chlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.orgid != null" >
+                OrgId = #{record.orgid,jdbcType=INTEGER},
+            </if>
+            <if test="record.optid != null" >
+                OptId = #{record.optid,jdbcType=SMALLINT},
+            </if>
+            <if test="record.funid != null" >
+                FunId = #{record.funid,jdbcType=SMALLINT},
+            </if>
+            <if test="record.endblocktag != null" >
+                EndBlockTag = #{record.endblocktag,jdbcType=BIT},
+            </if>
+            <if test="record.usetag != null" >
+                UseTag = #{record.usetag,jdbcType=CHAR},
+            </if>
+            <if test="record.order != null" >
+                `order` = #{record.order,jdbcType=INTEGER},
+            </if>
+            <if test="record.path != null" >
+                Path = #{record.path,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update odgp
+        set OdgpId = #{record.odgpid,jdbcType=INTEGER},
+            OdgpName = #{record.odgpname,jdbcType=VARCHAR},
+            Remark = #{record.remark,jdbcType=VARCHAR},
+            FathId = #{record.fathid,jdbcType=INTEGER},
+            DocNum = #{record.docnum,jdbcType=INTEGER},
+            ChLevel = #{record.chlevel,jdbcType=SMALLINT},
+            OrgId = #{record.orgid,jdbcType=INTEGER},
+            OptId = #{record.optid,jdbcType=SMALLINT},
+            FunId = #{record.funid,jdbcType=SMALLINT},
+            EndBlockTag = #{record.endblocktag,jdbcType=BIT},
+            UseTag = #{record.usetag,jdbcType=CHAR},
+            `order` = #{record.order,jdbcType=INTEGER},
+            Path = #{record.path,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.doctorCore.docGroup.model.DoctorGroup" >
+        update odgp
+        <set >
+            <if test="odgpname != null" >
+                OdgpName = #{odgpname,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                Remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="fathid != null" >
+                FathId = #{fathid,jdbcType=INTEGER},
+            </if>
+            <if test="docnum != null" >
+                DocNum = #{docnum,jdbcType=INTEGER},
+            </if>
+            <if test="chlevel != null" >
+                ChLevel = #{chlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="orgid != null" >
+                OrgId = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="optid != null" >
+                OptId = #{optid,jdbcType=SMALLINT},
+            </if>
+            <if test="funid != null" >
+                FunId = #{funid,jdbcType=SMALLINT},
+            </if>
+            <if test="endblocktag != null" >
+                EndBlockTag = #{endblocktag,jdbcType=BIT},
+            </if>
+            <if test="usetag != null" >
+                UseTag = #{usetag,jdbcType=CHAR},
+            </if>
+            <if test="order != null" >
+                `order` = #{order,jdbcType=INTEGER},
+            </if>
+            <if test="path != null" >
+                Path = #{path,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where OdgpId = #{odgpid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.doctorCore.docGroup.model.DoctorGroup" >
+        update odgp
+        set OdgpName = #{odgpname,jdbcType=VARCHAR},
+            Remark = #{remark,jdbcType=VARCHAR},
+            FathId = #{fathid,jdbcType=INTEGER},
+            DocNum = #{docnum,jdbcType=INTEGER},
+            ChLevel = #{chlevel,jdbcType=SMALLINT},
+            OrgId = #{orgid,jdbcType=INTEGER},
+            OptId = #{optid,jdbcType=SMALLINT},
+            FunId = #{funid,jdbcType=SMALLINT},
+            EndBlockTag = #{endblocktag,jdbcType=BIT},
+            UseTag = #{usetag,jdbcType=CHAR},
+            `order` = #{order,jdbcType=INTEGER},
+            Path = #{path,jdbcType=VARCHAR}
+        where OdgpId = #{odgpid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from odgp
+        where OdgpId = #{odgpid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.doctorCore.docGroup.model.DoctorGroupExample" >
+        delete from odgp
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- ########################## -->
+    <update id="updateTemParamClear" parameterType="map">
+    UPDATE odgp SET ChLevel=NULL ,OptId=NULL,FunId=NULL WHERE OptId=#{optId, jdbcType=SMALLINT} 
+    AND FunId=#{funId,jdbcType=SMALLINT} AND OrgId=#{orgId,jdbcType=INTEGER}
+    </update>
+    
+    <resultMap type="com.bithealth.doctorCore.docGroup.model.DoctorGroupExt" id="BaseResultMapExt" extends="BaseResultMap">
+    <collection property="memGrpList" column="OdgpId" select="com.bithealth.doctorCore.docGroup.dao.DocGrpToMemGrpMapper.selectMemGrpByDocGrp"/>
+    <collection property="doctorList" column="OdgpId" select="com.bithealth.doctorCore.docGroup.dao.DocToGroupMapper.selectDoctorByGrpId"/>
+    </resultMap>
+    <select id="selectGrpWithMemGrpById" parameterType="java.lang.Integer" resultMap="BaseResultMapExt">
+    SELECT 
+    <include refid="Base_Column_List" />
+        from odgp
+        where OdgpId = #{odgpid,jdbcType=INTEGER}
+    </select>
+
+</mapper>

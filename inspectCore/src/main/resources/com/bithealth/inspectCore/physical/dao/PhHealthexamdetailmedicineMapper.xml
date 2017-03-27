@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.inspectCore.physical.dao.PhHealthexamdetailmedicineMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicine" >
+        <id column="LogID" property="logID" jdbcType="BIGINT" />
+        <result column="HExamID" property="HExamID" jdbcType="BIGINT" />
+        <result column="DrugName" property="drugName" jdbcType="VARCHAR" />
+        <result column="DrugUsage" property="drugUsage" jdbcType="VARCHAR" />
+        <result column="DrugFreq" property="drugFreq" jdbcType="VARCHAR" />
+        <result column="DrugDosage" property="drugDosage" jdbcType="VARCHAR" />
+        <result column="DrugUnit" property="drugUnit" jdbcType="VARCHAR" />
+        <result column="DrugUseTime" property="drugUseTime" jdbcType="VARCHAR" />
+        <result column="DrugCompliance" property="drugCompliance" jdbcType="TINYINT" />
+        <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, HExamID, DrugName, DrugUsage, DrugFreq, DrugDosage, DrugUnit, DrugUseTime, 
+        DrugCompliance, Remarks
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicineExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ph_healthexamdetailmedicine
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicineExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ph_healthexamdetailmedicine
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from ph_healthexamdetailmedicine
+        where LogID = #{logID,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicine" >
+        insert into ph_healthexamdetailmedicine (LogID, HExamID, DrugName, 
+            DrugUsage, DrugFreq, DrugDosage, 
+            DrugUnit, DrugUseTime, DrugCompliance, 
+            Remarks)
+        values (#{logID,jdbcType=BIGINT}, #{HExamID,jdbcType=INTEGER}, #{drugName,jdbcType=VARCHAR}, 
+            #{drugUsage,jdbcType=VARCHAR}, #{drugFreq,jdbcType=VARCHAR}, #{drugDosage,jdbcType=VARCHAR}, 
+            #{drugUnit,jdbcType=VARCHAR}, #{drugUseTime,jdbcType=VARCHAR}, #{drugCompliance,jdbcType=TINYINT}, 
+            #{remarks,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicine" >
+        insert into ph_healthexamdetailmedicine
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="logID != null" >
+                LogID,
+            </if>
+            <if test="HExamID != null" >
+                HExamID,
+            </if>
+            <if test="drugName != null" >
+                DrugName,
+            </if>
+            <if test="drugUsage != null" >
+                DrugUsage,
+            </if>
+            <if test="drugFreq != null" >
+                DrugFreq,
+            </if>
+            <if test="drugDosage != null" >
+                DrugDosage,
+            </if>
+            <if test="drugUnit != null" >
+                DrugUnit,
+            </if>
+            <if test="drugUseTime != null" >
+                DrugUseTime,
+            </if>
+            <if test="drugCompliance != null" >
+                DrugCompliance,
+            </if>
+            <if test="remarks != null" >
+                Remarks,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="logID != null" >
+                #{logID,jdbcType=BIGINT},
+            </if>
+            <if test="HExamID != null" >
+                #{HExamID,jdbcType=INTEGER},
+            </if>
+            <if test="drugName != null" >
+                #{drugName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugUsage != null" >
+                #{drugUsage,jdbcType=VARCHAR},
+            </if>
+            <if test="drugFreq != null" >
+                #{drugFreq,jdbcType=VARCHAR},
+            </if>
+            <if test="drugDosage != null" >
+                #{drugDosage,jdbcType=VARCHAR},
+            </if>
+            <if test="drugUnit != null" >
+                #{drugUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="drugUseTime != null" >
+                #{drugUseTime,jdbcType=VARCHAR},
+            </if>
+            <if test="drugCompliance != null" >
+                #{drugCompliance,jdbcType=TINYINT},
+            </if>
+            <if test="remarks != null" >
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicineExample" resultType="java.lang.Integer" >
+        select count(*) from ph_healthexamdetailmedicine
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ph_healthexamdetailmedicine
+        <set >
+            <if test="record.logID != null" >
+                LogID = #{record.logID,jdbcType=BIGINT},
+            </if>
+            <if test="record.HExamID != null" >
+                HExamID = #{record.HExamID,jdbcType=INTEGER},
+            </if>
+            <if test="record.drugName != null" >
+                DrugName = #{record.drugName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.drugUsage != null" >
+                DrugUsage = #{record.drugUsage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.drugFreq != null" >
+                DrugFreq = #{record.drugFreq,jdbcType=VARCHAR},
+            </if>
+            <if test="record.drugDosage != null" >
+                DrugDosage = #{record.drugDosage,jdbcType=VARCHAR},
+            </if>
+            <if test="record.drugUnit != null" >
+                DrugUnit = #{record.drugUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.drugUseTime != null" >
+                DrugUseTime = #{record.drugUseTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.drugCompliance != null" >
+                DrugCompliance = #{record.drugCompliance,jdbcType=TINYINT},
+            </if>
+            <if test="record.remarks != null" >
+                Remarks = #{record.remarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ph_healthexamdetailmedicine
+        set LogID = #{record.logID,jdbcType=BIGINT},
+            HExamID = #{record.HExamID,jdbcType=INTEGER},
+            DrugName = #{record.drugName,jdbcType=VARCHAR},
+            DrugUsage = #{record.drugUsage,jdbcType=VARCHAR},
+            DrugFreq = #{record.drugFreq,jdbcType=VARCHAR},
+            DrugDosage = #{record.drugDosage,jdbcType=VARCHAR},
+            DrugUnit = #{record.drugUnit,jdbcType=VARCHAR},
+            DrugUseTime = #{record.drugUseTime,jdbcType=VARCHAR},
+            DrugCompliance = #{record.drugCompliance,jdbcType=TINYINT},
+            Remarks = #{record.remarks,jdbcType=VARCHAR}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicine" >
+        update ph_healthexamdetailmedicine
+        <set >
+            <if test="HExamID != null" >
+                HExamID = #{HExamID,jdbcType=INTEGER},
+            </if>
+            <if test="drugName != null" >
+                DrugName = #{drugName,jdbcType=VARCHAR},
+            </if>
+            <if test="drugUsage != null" >
+                DrugUsage = #{drugUsage,jdbcType=VARCHAR},
+            </if>
+            <if test="drugFreq != null" >
+                DrugFreq = #{drugFreq,jdbcType=VARCHAR},
+            </if>
+            <if test="drugDosage != null" >
+                DrugDosage = #{drugDosage,jdbcType=VARCHAR},
+            </if>
+            <if test="drugUnit != null" >
+                DrugUnit = #{drugUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="drugUseTime != null" >
+                DrugUseTime = #{drugUseTime,jdbcType=VARCHAR},
+            </if>
+            <if test="drugCompliance != null" >
+                DrugCompliance = #{drugCompliance,jdbcType=TINYINT},
+            </if>
+            <if test="remarks != null" >
+                Remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where LogID = #{logID,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicine" >
+        update ph_healthexamdetailmedicine
+        set HExamID = #{HExamID,jdbcType=INTEGER},
+            DrugName = #{drugName,jdbcType=VARCHAR},
+            DrugUsage = #{drugUsage,jdbcType=VARCHAR},
+            DrugFreq = #{drugFreq,jdbcType=VARCHAR},
+            DrugDosage = #{drugDosage,jdbcType=VARCHAR},
+            DrugUnit = #{drugUnit,jdbcType=VARCHAR},
+            DrugUseTime = #{drugUseTime,jdbcType=VARCHAR},
+            DrugCompliance = #{drugCompliance,jdbcType=TINYINT},
+            Remarks = #{remarks,jdbcType=VARCHAR}
+        where LogID = #{logID,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from ph_healthexamdetailmedicine
+        where LogID = #{logID,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicineExample" >
+    	<if test="_parameter != null and _parameter != '' ">
+        delete from ph_healthexamdetailmedicine
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+
+</mapper>

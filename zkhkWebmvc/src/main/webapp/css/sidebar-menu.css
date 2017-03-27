@@ -1,0 +1,114 @@
+.sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: #6dbb95;
+  font-size: 14px !important;
+}
+
+.sidebar-menu > li {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar-menu > li > a {
+  padding: 12px 5px 12px 15px;
+  display: block;
+  border-left: 3px solid transparent;
+  color: #FFF;
+}
+
+.sidebar-menu > li > a > .fa {
+  width: 20px;
+}
+
+/* .sidebar-menu > li.active > a {
+  color: green;
+  background: #FFF;
+} */
+
+.sidebar-menu > li > .treeview-menu {
+  margin: 0 1px;
+  background: #6dbb95;
+}
+
+.sidebar-menu > li .label,
+.sidebar-menu > li .badge {
+  margin-top: 3px;
+  margin-right: 5px;
+}
+
+.sidebar-menu li > a > .fa-angle-left {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+.sidebar-menu li.active > a > .fa-angle-right {
+  transform: rotate(90deg);
+  margin: 10px 8px 0 0;
+}
+
+.sidebar-menu li.active > .treeview-menu {
+  display: block;
+}
+
+.sidebar-menu a {
+  color: green;
+  text-decoration: none;
+}
+
+.sidebar-menu .treeview-menu {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 25px;
+}
+
+.sidebar-menu .treeview-menu .treeview-menu {
+  padding-left: 20px;
+}
+
+.border-bottom1 {
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar-menu .treeview-menu > li {
+  margin: 0;
+}
+
+
+.sidebar-menu .treeview-menu > li > a {
+  padding: 12px 0 12px 15px;
+  display: block;
+  font-size: 14px;
+  color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.sidebar-menu .treeview-menu > li:last-of-type > a {
+  border-bottom: 0;
+}
+
+.sidebar-menu .treeview-menu > li > a > .fa {
+  width: 20px;
+}
+
+.sidebar-menu .treeview-menu > li > a > .fa-angle-right,
+.sidebar-menu .treeview-menu > li > a > .fa-angle-down {
+  width: auto;
+}
+
+.changge-bgcolor {
+  color: green !important;
+  background-color: #fff;
+}
+
+.changge-bgcolor > a {
+  color: green !important;
+}

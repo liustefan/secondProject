@@ -1,0 +1,128 @@
+body, div, h2, h1 {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: 14px/1.5 "Microsoft YaHei";
+}
+
+h3 {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+.main {
+	width: 1024px;
+	margin: 20px auto;
+	padding: 10px;
+	border: 1px solid;
+}
+
+.hospitalName {
+	font-size: 19px;
+	font-weight: normal;
+}
+
+.title {
+	text-align: center;
+	padding: 15px 0;
+}
+
+.user_info {
+	font-size: 14px;
+	width: 80%;
+	margin: 10px auto;
+	width: 80%;
+}
+
+.user_info strong {
+	width: 70px;
+	display: inline-block;
+}
+
+.table-heavy {
+	border: 1px #ddd solid;
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+	font-size: 13px;
+	margin: 10px 0;
+}
+
+.table-heavy thead th {
+	font-weight: bold;
+	font-size: 13px;
+	background: #BCDEE0;
+	border: 1px solid #ddd;
+}
+
+.table-heavy tr td {
+	font-size: 13px;
+	border: 1px solid #ddd;
+}
+
+.table-heavy tbody tr {
+	background: #fff;
+}
+
+.table-heavy tbody tr.alt-row {
+	background: #f3f3f3;
+}
+
+.table-heavy td, .table-heavy th {
+	padding: 10px;
+	line-height: 1.3em;
+}
+
+.table-heavy tfoot td .bulk-actions {
+	padding: 15px 0 5px 0;
+}
+
+.table-heavy tfoot td .bulk-actions select {
+	padding: 4px;
+	border: 1px solid #ccc;
+}
+
+.fr {
+	float: right;
+}
+
+.btn-normal {
+	padding: 5px 10px;
+	border: 0px;
+	border-radius: 3px;
+	color: #FFF;
+	cursor: pointer;
+	font-family: "Microsoft YaHei", "SimSun";
+	font-size: 12px;
+	display: inline-block;
+	font-family: "Microsoft YaHei";
+	background-image: -moz-linear-gradient(center top, rgba(072, 214, 096, 0.8),
+		rgba(097, 185, 095, 0.8)) repeat scroll 0 0 rgba(072, 214, 096, 0.8);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(072,
+		214, 096, 0.8)), color-stop(1, rgba(097, 185, 095, 0.8)));
+	filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,
+		StartColorStr='#48d660', EndColorStr='#61b95f');
+}
+
+.btns {
+	position: fixed;
+	bottom: 42px;
+	right: 20px;
+}
+
+#myAdvice {
+	margin: 0;
+	padding: 10px;
+	border: 1px solid;
+	width: 97%;
+	resize: none;
+	font-family: "Microsoft YaHei";
+	color: #333;
+}
+
+.doctorName {
+    padding-right: 150px;
+}

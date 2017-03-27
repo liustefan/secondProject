@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.answer.dao.OuaiMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.questionCore.answer.model.Ouai" >
+        <id column="AnsNumber" property="ansNumber" jdbcType="INTEGER" />
+        <result column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="Qustid" property="qustid" jdbcType="INTEGER" />
+        <result column="QustVer" property="qustVer" jdbcType="VARCHAR" />
+        <result column="AssessDate" property="assessDate" jdbcType="DATE" />
+        <result column="ChTag" property="chTag" jdbcType="CHAR" />
+        <result column="QustTag" property="qustTag" jdbcType="CHAR" />
+        <result column="QustCode" property="qustCode" jdbcType="VARCHAR" />
+        <result column="PublisherTime" property="publisherTime" jdbcType="TIMESTAMP" />
+        <result column="FailureTime" property="failureTime" jdbcType="TIMESTAMP" />
+        <result column="FunId" property="funId" jdbcType="SMALLINT" />
+        <result column="OptId" property="optId" jdbcType="SMALLINT" />
+        <result column="Docid" property="docid" jdbcType="INTEGER" />
+        <result column="DocName" property="docName" jdbcType="VARCHAR" />
+        <result column="answerTime" property="answerTime" jdbcType="TIMESTAMP" />
+        <result column="readStatus" property="readStatus" jdbcType="INTEGER" />
+        <result column="HExamID" property="HExamID" jdbcType="BIGINT" />
+        <result column="MSETaskID" property="MSETaskID" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                                <when test="criterion.listOr">
+                                	and 
+                                	<foreach collection="criterion.conditions" item="item" open="(" close=")" separator="or" >
+                                        ${item} #{criterion.value}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        AnsNumber, Memberid, Qustid, QustVer, AssessDate, ChTag, QustTag, QustCode, PublisherTime, 
+        FailureTime, FunId, OptId, Docid, DocName, answerTime, readStatus, HExamID, MSETaskID
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.answer.model.OuaiExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ouai
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.answer.model.OuaiExample" >
+        select
+		ouai.*, omem.memname as `member.memname`, omfq.`Qustname` AS `omfq.qustname`
+        from ouai JOIN omfq ON ouai.`Qustid`=omfq.`Qustid` join omem on ouai.Memberid = omem.Memberid and ouai.ansNumber NOT IN (SELECT ansNumber FROM cam1) and omem.UseTag='T'
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        order by AnsNumber desc
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        ouai.*, omem.memname as `member.memname`, omem.gender as `member.gender`, omem.birthdate as `member.birthdate`, oopt.OptName as optName, omem.memberid as `member.memberid` 
+        from ouai join omem on ouai.Memberid = omem.Memberid join oopt on ouai.optId = oopt.optId
+        where AnsNumber = #{ansNumber,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.questionCore.answer.model.Ouai" useGeneratedKeys="true" keyProperty="ansNumber" >
+        insert into ouai
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="qustid != null" >
+                Qustid,
+            </if>
+            <if test="qustVer != null" >
+                QustVer,
+            </if>
+            <if test="assessDate != null" >
+                AssessDate,
+            </if>
+            <if test="chTag != null" >
+                ChTag,
+            </if>
+            <if test="qustTag != null" >
+                QustTag,
+            </if>
+            <if test="qustCode != null" >
+                QustCode,
+            </if>
+            <if test="publisherTime != null" >
+                PublisherTime,
+            </if>
+            <if test="failureTime != null" >
+                FailureTime,
+            </if>
+            <if test="funId != null" >
+                FunId,
+            </if>
+            <if test="optId != null" >
+                OptId,
+            </if>
+            <if test="docid != null" >
+                Docid,
+            </if>
+            <if test="docName != null" >
+                DocName,
+            </if>
+            <if test="answerTime != null" >
+                answerTime,
+            </if>
+            <if test="readStatus != null" >
+                readStatus,
+            </if>
+            <if test="HExamID != null">
+            	HExamID,
+            </if>
+            <if test="MSETaskID != null" >
+                MSETaskID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="qustid != null" >
+                #{qustid,jdbcType=INTEGER},
+            </if>
+            <if test="qustVer != null" >
+                #{qustVer,jdbcType=VARCHAR},
+            </if>
+            <if test="assessDate != null" >
+                #{assessDate,jdbcType=DATE},
+            </if>
+            <if test="chTag != null" >
+                #{chTag,jdbcType=CHAR},
+            </if>
+            <if test="qustTag != null" >
+                #{qustTag,jdbcType=CHAR},
+            </if>
+            <if test="qustCode != null" >
+                #{qustCode,jdbcType=VARCHAR},
+            </if>
+            <if test="publisherTime != null" >
+                #{publisherTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="failureTime != null" >
+                #{failureTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="funId != null" >
+                #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="optId != null" >
+                #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="docid != null" >
+                #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="docName != null" >
+                #{docName,jdbcType=VARCHAR},
+            </if>
+            <if test="answerTime != null" >
+                #{answerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="readStatus != null" >
+                #{readStatus,jdbcType=INTEGER},
+            </if>
+            <if test="HExamID != null">
+            	#{HExamID,jdbcType=BIGINT},
+            </if>
+            <if test="MSETaskID != null" >
+                #{MSETaskID,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.questionCore.answer.model.OuaiExample" resultType="java.lang.Integer" >
+        select count(*) from ouai
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ouai
+        <set >
+            <if test="record.ansNumber != null" >
+                AnsNumber = #{record.ansNumber,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.qustid != null" >
+                Qustid = #{record.qustid,jdbcType=INTEGER},
+            </if>
+            <if test="record.qustVer != null" >
+                QustVer = #{record.qustVer,jdbcType=VARCHAR},
+            </if>
+            <if test="record.assessDate != null" >
+                AssessDate = #{record.assessDate,jdbcType=DATE},
+            </if>
+            <if test="record.chTag != null" >
+                ChTag = #{record.chTag,jdbcType=CHAR},
+            </if>
+            <if test="record.qustTag != null" >
+                QustTag = #{record.qustTag,jdbcType=CHAR},
+            </if>
+            <if test="record.qustCode != null" >
+                QustCode = #{record.qustCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.publisherTime != null" >
+                PublisherTime = #{record.publisherTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.failureTime != null" >
+                FailureTime = #{record.failureTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.funId != null" >
+                FunId = #{record.funId,jdbcType=SMALLINT},
+            </if>
+            <if test="record.optId != null" >
+                OptId = #{record.optId,jdbcType=SMALLINT},
+            </if>
+            <if test="record.docid != null" >
+                Docid = #{record.docid,jdbcType=INTEGER},
+            </if>
+            <if test="record.docName != null" >
+                DocName = #{record.docName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.answerTime != null" >
+                answerTime = #{record.answerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.readStatus != null" >
+                readStatus = #{record.readStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.HExamID != null">
+           		HExamID = #{record.HExamID,jdbcType=BIGINT},
+            </if>
+	    <if test="record.MSETaskID != null" >
+	    	MSETaskID = #{record.MSETaskID,jdbcType=BIGINT},
+	    </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ouai
+        set AnsNumber = #{record.ansNumber,jdbcType=INTEGER},
+            Memberid = #{record.memberid,jdbcType=INTEGER},
+            Qustid = #{record.qustid,jdbcType=INTEGER},
+            QustVer = #{record.qustVer,jdbcType=VARCHAR},
+            AssessDate = #{record.assessDate,jdbcType=DATE},
+            ChTag = #{record.chTag,jdbcType=CHAR},
+            QustTag = #{record.qustTag,jdbcType=CHAR},
+            QustCode = #{record.qustCode,jdbcType=VARCHAR},
+            PublisherTime = #{record.publisherTime,jdbcType=TIMESTAMP},
+            FailureTime = #{record.failureTime,jdbcType=TIMESTAMP},
+            FunId = #{record.funId,jdbcType=SMALLINT},
+            OptId = #{record.optId,jdbcType=SMALLINT},
+            Docid = #{record.docid,jdbcType=INTEGER},
+            DocName = #{record.docName,jdbcType=VARCHAR},
+            answerTime = #{record.answerTime,jdbcType=TIMESTAMP},
+            readStatus = #{record.readStatus,jdbcType=INTEGER},
+            HExamID = #{record.HExamID,jdbcType=BIGINT},
+            MSETaskID = #{record.MSETaskID,jdbcType=BIGINT}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.questionCore.answer.model.Ouai" >
+        update ouai
+        <set >
+            <if test="memberid != null" >
+                Memberid = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="qustid != null" >
+                Qustid = #{qustid,jdbcType=INTEGER},
+            </if>
+            <if test="qustVer != null" >
+                QustVer = #{qustVer,jdbcType=VARCHAR},
+            </if>
+            <if test="assessDate != null" >
+                AssessDate = #{assessDate,jdbcType=DATE},
+            </if>
+            <if test="chTag != null" >
+                ChTag = #{chTag,jdbcType=CHAR},
+            </if>
+            <if test="qustTag != null" >
+                QustTag = #{qustTag,jdbcType=CHAR},
+            </if>
+            <if test="qustCode != null" >
+                QustCode = #{qustCode,jdbcType=VARCHAR},
+            </if>
+            <if test="publisherTime != null" >
+                PublisherTime = #{publisherTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="failureTime != null" >
+                FailureTime = #{failureTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="funId != null" >
+                FunId = #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="optId != null" >
+                OptId = #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="docid != null" >
+                Docid = #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="docName != null" >
+                DocName = #{docName,jdbcType=VARCHAR},
+            </if>
+            <if test="answerTime != null" >
+                answerTime = #{answerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="readStatus != null" >
+                readStatus = #{readStatus,jdbcType=INTEGER},
+            </if>
+            <if test="HExamID != null">
+           		HExamID = #{HExamID,jdbcType=BIGINT},
+            </if>
+            <if test="MSETaskID != null" >
+                MSETaskID = #{MSETaskID,jdbcType=BIGINT},
+            </if>
+        </set>
+        where AnsNumber = #{ansNumber,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.questionCore.answer.model.Ouai" >
+        update ouai
+        set Memberid = #{memberid,jdbcType=INTEGER},
+            Qustid = #{qustid,jdbcType=INTEGER},
+            QustVer = #{qustVer,jdbcType=VARCHAR},
+            AssessDate = #{assessDate,jdbcType=DATE},
+            ChTag = #{chTag,jdbcType=CHAR},
+            QustTag = #{qustTag,jdbcType=CHAR},
+            QustCode = #{qustCode,jdbcType=VARCHAR},
+            PublisherTime = #{publisherTime,jdbcType=TIMESTAMP},
+            FailureTime = #{failureTime,jdbcType=TIMESTAMP},
+            FunId = #{funId,jdbcType=SMALLINT},
+            OptId = #{optId,jdbcType=SMALLINT},
+            Docid = #{docid,jdbcType=INTEGER},
+            DocName = #{docName,jdbcType=VARCHAR},
+            answerTime = #{answerTime,jdbcType=TIMESTAMP},
+            readStatus = #{readStatus,jdbcType=INTEGER},
+            HExamID = #{HExamID,jdbcType=BIGINT},
+            MSETaskID = #{MSETaskID,jdbcType=BIGINT}
+        where AnsNumber = #{ansNumber,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from ouai
+        where AnsNumber = #{ansNumber,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.questionCore.answer.model.OuaiExample" >
+        <if test="_parameter != null and _parameter != '' ">
+        delete from ouai
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+
+</mapper>

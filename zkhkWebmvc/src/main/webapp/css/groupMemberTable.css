@@ -1,0 +1,21 @@
+.selinp {
+	width: 150px;
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+}
+
+#content #content_title {
+	height: inherit;
+	padding: 5px 15px;
+	border-bottom: 1px solid;
+	margin-bottom: 15px;
+}
+
+#memberGroupName {
+	padding: 5px;
+}
+
+#pre span,
+#nex span {
+	top:0;
+}

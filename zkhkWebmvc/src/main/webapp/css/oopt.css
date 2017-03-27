@@ -1,0 +1,183 @@
+/*
+ * �ʾ����ҳ�� ��������ʽ����
+*/
+div {
+	border: 0px solid #949494;
+}
+
+#ques_type_2 select,
+#ques_type_3 select {
+	width: 208px;
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+	color: #333;
+}
+
+#ques_type_3 select:disabled {
+	color: grayText;
+}
+
+#ques_type_2,
+#ques_type_3 {
+	background-color: #fff;
+	left: 43%;
+	margin: -200px 0 0 -200px;
+	position: fixed !important;
+	position: absolute;
+	top: 43%;
+	width: 510px;
+	z-index: 5;
+	display: none;
+}
+
+#ques_type_2 p,
+#ques_type_3 p {
+	margin-bottom: 12px;
+	height: 35px;
+	line-height: 35px;
+	background: #64C25A;
+	font-size: 15px;
+}
+
+#ques_type_2 p img.btn-close,
+#ques_type_3 p img.btn-close {
+	float: right;
+	margin-top: 7px;
+	margin-right: 8px;
+	width: 21px;
+	height: 21px;
+}
+
+#ques_type_2 p.close,
+#ques_type_3 p.close {
+	/* text-align: right; */
+	padding-left: 10px;
+}
+
+#ques_type_2 p.close a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#ques_type_2 img {
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+#ques_type_2 td {
+	padding: 10px 0px 0px 0px;
+	font-size: 12px;
+	vertical-align: top;
+}
+
+#ques_type_2 label {
+	text-decoration: none;
+	color: #8196FE;
+	padding-left: 5px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.ques_type table {
+	width: 100%;
+}
+
+#ques_type_3 p.close a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#ques_type_3 img {
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+
+#ques_type_3 td {
+	padding: 10px 0px 0px 0px;
+	font-size: 12px;
+    vertical-align: top;
+}
+
+#ques_type_3 label {
+	text-decoration: none;
+	color: #8196FE;
+	padding-left: 5px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.ques_type_but {
+	margin-top: 20px;
+	padding-left: 20%;
+	margin-bottom: 20px;
+}
+
+.ques_type_but button {
+	margin-right: 30px;
+	width: 70px;
+	height: 24px;
+	font-size: 12px;
+	background: #fff;
+	border: 1px solid #CCCCCC;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.ques_type_but input.btn-OK {
+	border: 1px solid #50b750;
+    background: #daf6d7;
+}
+
+.ques_type_but .but {
+	margin-right: 30px;
+	width: 70px;
+	height: 24px;
+	font-size: 12px;
+	background: #fff;
+	border: 1px solid #CCCCCC;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.quer_td_title {
+	width: 100px;
+	text-align: right;
+}
+
+input.ipnutcontent,
+select.ipnutcontent {
+	width: 200px;
+	font-size: 12px;
+}
+
+textarea.ipnutcontent {
+	width: 350px;
+	color: #333;
+	font-size: 12px;
+	padding: 0.3em;
+}
+
+#fullbg {
+	background-color: #000;
+	left: 0;
+	opacity: 0.5;
+	position: absolute;
+	top: 0;
+	z-index: 3;
+	filter: alpha(opacity = 50);
+	-moz-opacity: 0.5;
+	-khtml-opacity: 0.5;
+}
+
+.ques_cap,
+.ques_cap_1,
+.del_cap {
+	height: 28px;
+	color: #333;
+	text-align: center;
+	font-weight: bold;
+	font-size: 14px;
+	font-family: "Microsoft YaHei", "SimSun";
+}

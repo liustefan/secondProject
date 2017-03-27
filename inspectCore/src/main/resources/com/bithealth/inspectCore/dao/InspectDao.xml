@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.inspectCore.dao.InspectDao" >
+	<resultMap type="com.bithealth.memberCore.member.vo.MemberVo" id="memberVoResultMap">
+	    <id column="Memberid" property="memberId" jdbcType="INTEGER"/>
+	    <result column="MemName" property="memName" jdbcType="VARCHAR"/>
+	    <result column="Gender" property="gender" jdbcType="VARCHAR"/>
+	    <result column="BirthDate" property="birthDay" jdbcType="DATE"/>
+	    <result column="Tel" property="tel" jdbcType="VARCHAR"/>
+	    <result column="status" property="status" jdbcType="VARCHAR"/>
+	    <result column="DiseaseName_List" property="diseaseNames" jdbcType="VARCHAR"/>
+	    <result column="MemGrpName_List" property="memGrpNames" jdbcType="VARCHAR"/>
+	    <result column="MemGrpID_List" property="memGrpIDs" jdbcType="VARCHAR"/>
+	    <result column="MemDesc" property="memDesc" jdbcType="VARCHAR"/>
+	    <result column="last_UploadTime" property="lastTestTime" jdbcType="TIMESTAMP"/>
+	    <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+	    <result column="IdCard" property="idcard" jdbcType="VARCHAR"/>
+	    <result column="unique_id" property="uniqueId" jdbcType="VARCHAR"/>
+    </resultMap>
+	<parameterMap type="map" id="parameterMap">  
+		<parameter property="iDocId" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="vMemName" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vTel" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vIdCard" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="dSCreateTime" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="dECreateTime" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="iCurrentPageIndex" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iPageSize" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iCount" jdbcType="INTEGER" mode="OUT"/>
+	</parameterMap> 
+	<select id="exProcGetDiabetesMemList" parameterMap="parameterMap" statementType="CALLABLE" resultMap="memberVoResultMap">  
+		<![CDATA[  
+		    {call proc_getDiabetesMemList (?,?,?,?,?,?,?,?,?)}  
+		]]>  
+	</select> 
+	<select id="exProcGetHypertensionMemList" parameterMap="parameterMap" statementType="CALLABLE" resultMap="memberVoResultMap">  
+		<![CDATA[  
+		    {call proc_getHypertensionMemList (?,?,?,?,?,?,?,?,?)}  
+		]]>  
+	</select> 
+	<select id="selectOdgpIdsByDocId" parameterType="java.lang.Integer" resultType="java.lang.Integer">  
+		SELECT DISTINCT a.OdgpId FROM dgp1 a JOIN odgp b ON b.OdgpId = a.OdgpId AND a.Docid = #{docId,jdbcType=INTEGER};  
+	</select> 
+	<select id="selectInspectPage" parameterType="map" resultType="com.bithealth.inspectCore.model.Inspect">
+		SELECT phDate, CONCAT('[',GROUP_CONCAT(CONCAT('{id:', id,',type:',`type`, ',phDate:"', phDate, '",conclusionCode:', conclusionCode,',conclusionDesc:"',conclusionDesc,'"}')),']') AS json FROM (
+		SELECT ph_healthexam.HExamID AS id, 1 AS `type`, ph_healthexam.`ExamDate` AS phDate, IFNULL(ph_healthexamdetail.HealthEvaluate, 0) AS conclusionCode, IFNULL(ph_healthexamdetail.HealthEvaluate_Desc, '') AS conclusionDesc 
+		FROM  `ph_healthexam` 
+		JOIN `ph_healthexamdetail` ON `ph_healthexam`.HExamID=`ph_healthexamdetail`.HExamID 
+		WHERE ph_healthexam.IsDeleted=0 AND ph_healthexam.MemberID=#{memberID,jdbcType=INTEGER}
+		UNION ALL 
+		SELECT DiabetesID AS id, 2 AS `type`, VisitDate AS phDate, IFNULL(VisitClass, 0) AS conclusionCode, '' AS conclusionDesc
+		FROM `ph_diabetes` 
+		WHERE IsDeleted=0 AND VisitClass>0 AND ph_diabetes.MemberID=#{memberID,jdbcType=INTEGER}
+		UNION ALL 
+		SELECT HypertensionID AS id, 3 AS `type`, VisitDate AS phDate, IFNULL(VisitClass, 0) AS conclusionCode, '' AS conclusionDesc 
+		FROM `ph_hypertension` 
+		WHERE IsDeleted=0 AND VisitClass>0 AND ph_hypertension.MemberID=#{memberID,jdbcType=INTEGER}
+		) temp GROUP BY temp.phDate ORDER BY temp.phDate DESC
+	</select>
+</mapper>

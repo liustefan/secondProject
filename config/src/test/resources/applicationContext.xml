@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/jdbc
+    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+    http://www.springframework.org/schema/cache
+    http://www.springframework.org/schema/cache/spring-cache.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- 引入配置文件 -->
+   <!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:application.properties</value>
+            </list>
+        </property>
+    </bean>
+--> 
+	
+	
+	<bean id="preferencesFactory" class="com.bithealth.sdk.client.pref.impl.FileSystemPreferencesFactory">
+		<constructor-arg value="E:\newworkspace\config\src\main\resources" /> 
+	</bean>
+	
+	
+	  <!-- 将多个配置文件读取到容器中，交给Spring管理 -->   
+	<bean id="propertyConfigurer" class="com.bithealth.sdk.config.PreferencesPlaceholderConfigurer">
+		<constructor-arg ref="preferencesFactory"></constructor-arg>
+		<constructor-arg value="platform-usermgr"></constructor-arg>
+  	</bean>
+  	 
+   
+	 
+	<bean id="public-datasource"
+		class="com.bithealth.sdk.config.ZKHKConfigPreferencesImpl">
+		<constructor-arg ref="preferencesFactory"></constructor-arg>
+		<constructor-arg value="public-datasource"></constructor-arg>
+	</bean>
+	  
+	<bean id="platform-sso-sp-config"
+		class="com.bithealth.sdk.config.ZKHKConfigPreferencesImpl">
+		<constructor-arg ref="preferencesFactory"></constructor-arg> 
+		<constructor-arg value="platform-usermgr"></constructor-arg>
+	</bean>
+	  
+	<bean id="rdConfig"
+		class="com.bithealth.sdk.config.ZKHKConfigPreferencesImpl">
+		<constructor-arg ref="preferencesFactory"></constructor-arg>
+		<constructor-arg value="platform-common"></constructor-arg>		
+	</bean>
+	 
+          
+</beans>

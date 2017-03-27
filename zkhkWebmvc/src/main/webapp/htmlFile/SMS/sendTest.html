@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>短信发送测试</title>
+	<link rel="stylesheet" href="../../css/general.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<style>
+		.search-term {
+			padding: 10px;
+		}
+		
+		.add-bottom {
+			border-bottom: 1px solid #000; 
+		}
+		
+		.mg-right {
+			margin-right: 50px;
+		}
+		
+		.circle {
+			height: 25px;
+			width: 25px;
+		    border-radius: 3px;
+		    -moz-border-radius: 3px;
+		    -webkit-border-radius: 3px;
+		    border: none;
+		    outline: none;
+		    background: url(../../img/u100.png) no-repeat center center;
+		    float: right;
+		}
+		
+		.btn-box {
+			padding: 10px 20px 0 0;
+		}
+		
+		.text-top {
+	        vertical-align: text-top;
+	    } 
+	    
+	    .send-detail li {
+	    	margin: 20px 0;
+	    	font-size: 14px;
+	    }
+	    
+	    .send-detail label {
+	    	width: 160px;
+	    	text-align: right;
+	    }
+	    
+	    .width-nomal {
+	    	width: 200px;
+	    }
+	    
+	    .width-select {
+	    	width: 208px;
+	    }
+	    
+	    .width-large {
+	    	width: 626px;
+	    }
+	    
+	    .relative {
+	    	display: inline-block;
+	    	position: relative;
+	    }
+	    
+	    .word-limit {
+	    	position: absolute;
+	    	bottom: 8px;
+	    	right: 10px;
+	    }
+	</style>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">
+   		短信发送测试
+	</div>
+    <div class="search-term add-bottom">
+    	<div class="send-detail">
+			<ul>
+				<li>
+					<label><span class="red">*</span>组织名称：</label>
+					<input type="text" class="mg-right width-nomal">
+					<label>组织ID：</label>
+					<span>0001</span>
+				</li>
+				<li>
+					<label><span class="red">*</span>发送号码：</label>
+					<input type="text" class="width-large">
+				</li>
+				<li>
+					<label><span class="red">*</span>短信类型：</label>
+					<select class="mg-right width-select" name="">
+						<option value="0">请选择</option>
+						<option value="1">会员注册</option>
+						<option value="2">忘记密码</option>
+						<option value="3">邀请短信</option>
+					</select>
+					<label>优先级：</label>
+					<select name="" class="width-select">
+						<option value="0">请选择</option>
+						<option value="1">紧急</option>
+						<option value="2">较高</option>
+						<option value="3">普通</option>
+						<option value="4">较低</option>
+						<option value="5">最低</option>
+					</select>
+				</li>
+				<li>
+					<label>发送内容：</label>
+					<div class="relative">
+	                	<textarea class="text-top" name="" cols="87" rows="9" maxlength="300" ></textarea>
+	                	<span class="word-limit">300字</span>
+                	</div>
+				</li>
+			</ul>
+		</div>
+    </div>
+    <div class="btn-box clearfix">
+    	<button type="button" class="circle"></button>
+    </div>
+	<div class="page-box align-center">
+        <button class="btn-inquiry" onclick="">保存</button>
+      	<button class="btn-cancel" onclick="">返回</button>
+	</div>
+</div>
+</body>
+</html>

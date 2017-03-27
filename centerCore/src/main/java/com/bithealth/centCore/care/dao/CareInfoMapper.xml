@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.centCore.care.dao.CareInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.centCore.care.model.CareInfo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="focusType" property="focusType" jdbcType="INTEGER" />
+        <result column="memberId" property="memberId" jdbcType="INTEGER" />
+        <result column="memberGUID" property="memberGUID" jdbcType="CHAR" />
+        <result column="focusId" property="focusId" jdbcType="INTEGER" />
+        <result column="focusGUID" property="focusGUID" jdbcType="CHAR" />
+        <result column="focusStatus" property="focusStatus" jdbcType="INTEGER" />
+        <result column="focusP" property="focusP" jdbcType="VARCHAR" />
+        <result column="focusPed" property="focusPed" jdbcType="VARCHAR" />
+        <result column="tag" property="tag" jdbcType="VARCHAR" />
+        <result column="createTime" property="createTime" jdbcType="VARCHAR" />
+        <result column="newsLetter" property="newsLetter" jdbcType="SMALLINT" />
+        <result column="memberRemark" property="memberRemark" jdbcType="VARCHAR" />
+        <result column="focusRemark" property="focusRemark" jdbcType="VARCHAR" />
+        
+        <result column="ServerID" property="serverID" jdbcType="INTEGER" />
+        <result column="MemberName" property="memberName" jdbcType="VARCHAR" />
+        <result column="MemberSex" property="memberSex" jdbcType="VARCHAR" />
+        <result column="Mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="IDCard" property="IDCard" jdbcType="VARCHAR" />
+        <result column="HeadAddress" property="headAddress" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, focusType, memberId, memberGUID, focusId, focusGUID, focusStatus, focusP, focusPed, 
+        tag, createTime, newsLetter, memberRemark, focusRemark
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.care.model.CareInfoExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from m_focus_info
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.care.model.CareInfoExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from m_focus_info
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from m_focus_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.centCore.care.model.CareInfo"   useGeneratedKeys="true" keyProperty="id">
+        insert into m_focus_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="focusType != null" >
+                focusType,
+            </if>
+            <if test="memberId != null" >
+                memberId,
+            </if>
+            <if test="memberGUID != null" >
+                memberGUID,
+            </if>
+            <if test="focusId != null" >
+                focusId,
+            </if>
+            <if test="focusGUID != null" >
+                focusGUID,
+            </if>
+            <if test="focusStatus != null" >
+                focusStatus,
+            </if>
+            <if test="focusP != null" >
+                focusP,
+            </if>
+            <if test="focusPed != null" >
+                focusPed,
+            </if>
+            <if test="tag != null" >
+                tag,
+            </if>
+            <if test="createTime != null" >
+                createTime,
+            </if>
+            <if test="newsLetter != null" >
+                newsLetter,
+            </if>
+            <if test="memberRemark != null" >
+                memberRemark,
+            </if>
+            <if test="focusRemark != null" >
+                focusRemark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="focusType != null" >
+                #{focusType,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null" >
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="memberGUID != null" >
+                #{memberGUID,jdbcType=CHAR},
+            </if>
+            <if test="focusId != null" >
+                #{focusId,jdbcType=INTEGER},
+            </if>
+            <if test="focusGUID != null" >
+                #{focusGUID,jdbcType=CHAR},
+            </if>
+            <if test="focusStatus != null" >
+                #{focusStatus,jdbcType=INTEGER},
+            </if>
+            <if test="focusP != null" >
+                #{focusP,jdbcType=VARCHAR},
+            </if>
+            <if test="focusPed != null" >
+                #{focusPed,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="newsLetter != null" >
+                #{newsLetter,jdbcType=SMALLINT},
+            </if>
+            <if test="memberRemark != null" >
+                #{memberRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="focusRemark != null" >
+                #{focusRemark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.centCore.care.model.CareInfoExample" resultType="java.lang.Integer" >
+        select count(*) from m_focus_info
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update m_focus_info
+            <set >
+                <if test="record.id != null" >
+                    id = #{record.id,jdbcType=BIGINT},
+                </if>
+                <if test="record.focusType != null" >
+                    focusType = #{record.focusType,jdbcType=INTEGER},
+                </if>
+                <if test="record.memberId != null" >
+                    memberId = #{record.memberId,jdbcType=INTEGER},
+                </if>
+                <if test="record.memberGUID != null" >
+                    memberGUID = #{record.memberGUID,jdbcType=CHAR},
+                </if>
+                <if test="record.focusId != null" >
+                    focusId = #{record.focusId,jdbcType=INTEGER},
+                </if>
+                <if test="record.focusGUID != null" >
+                    focusGUID = #{record.focusGUID,jdbcType=CHAR},
+                </if>
+                <if test="record.focusStatus != null" >
+                    focusStatus = #{record.focusStatus,jdbcType=INTEGER},
+                </if>
+                <if test="record.focusP != null" >
+                    focusP = #{record.focusP,jdbcType=VARCHAR},
+                </if>
+                <if test="record.focusPed != null" >
+                    focusPed = #{record.focusPed,jdbcType=VARCHAR},
+                </if>
+                <if test="record.tag != null" >
+                    tag = #{record.tag,jdbcType=VARCHAR},
+                </if>
+                <if test="record.createTime != null" >
+                    createTime = #{record.createTime,jdbcType=VARCHAR},
+                </if>
+                <if test="record.newsLetter != null" >
+                    newsLetter = #{record.newsLetter,jdbcType=SMALLINT},
+                </if>
+                <if test="record.memberRemark != null" >
+                    memberRemark = #{record.memberRemark,jdbcType=VARCHAR},
+                </if>
+                <if test="record.focusRemark != null" >
+                    focusRemark = #{record.focusRemark,jdbcType=VARCHAR},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update m_focus_info
+            set id = #{record.id,jdbcType=BIGINT},
+                focusType = #{record.focusType,jdbcType=INTEGER},
+                memberId = #{record.memberId,jdbcType=INTEGER},
+                memberGUID = #{record.memberGUID,jdbcType=CHAR},
+                focusId = #{record.focusId,jdbcType=INTEGER},
+                focusGUID = #{record.focusGUID,jdbcType=CHAR},
+                focusStatus = #{record.focusStatus,jdbcType=INTEGER},
+                focusP = #{record.focusP,jdbcType=VARCHAR},
+                focusPed = #{record.focusPed,jdbcType=VARCHAR},
+                tag = #{record.tag,jdbcType=VARCHAR},
+                createTime = #{record.createTime,jdbcType=VARCHAR},
+                newsLetter = #{record.newsLetter,jdbcType=SMALLINT},
+                memberRemark = #{record.memberRemark,jdbcType=VARCHAR},
+                focusRemark = #{record.focusRemark,jdbcType=VARCHAR}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.centCore.care.model.CareInfo" >
+        update m_focus_info
+        <set >
+            <if test="focusType != null" >
+                focusType = #{focusType,jdbcType=INTEGER},
+            </if>
+            <if test="memberId != null" >
+                memberId = #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="memberGUID != null" >
+                memberGUID = #{memberGUID,jdbcType=CHAR},
+            </if>
+            <if test="focusId != null" >
+                focusId = #{focusId,jdbcType=INTEGER},
+            </if>
+            <if test="focusGUID != null" >
+                focusGUID = #{focusGUID,jdbcType=CHAR},
+            </if>
+            <if test="focusStatus != null" >
+                focusStatus = #{focusStatus,jdbcType=INTEGER},
+            </if>
+            <if test="focusP != null" >
+                focusP = #{focusP,jdbcType=VARCHAR},
+            </if>
+            <if test="focusPed != null" >
+                focusPed = #{focusPed,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                createTime = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="newsLetter != null" >
+                newsLetter = #{newsLetter,jdbcType=SMALLINT},
+            </if>
+            <if test="memberRemark != null" >
+                memberRemark = #{memberRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="focusRemark != null" >
+                focusRemark = #{focusRemark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.centCore.care.model.CareInfo" >
+        update m_focus_info
+        set focusType = #{focusType,jdbcType=INTEGER},
+            memberId = #{memberId,jdbcType=INTEGER},
+            memberGUID = #{memberGUID,jdbcType=CHAR},
+            focusId = #{focusId,jdbcType=INTEGER},
+            focusGUID = #{focusGUID,jdbcType=CHAR},
+            focusStatus = #{focusStatus,jdbcType=INTEGER},
+            focusP = #{focusP,jdbcType=VARCHAR},
+            focusPed = #{focusPed,jdbcType=VARCHAR},
+            tag = #{tag,jdbcType=VARCHAR},
+            createTime = #{createTime,jdbcType=VARCHAR},
+            newsLetter = #{newsLetter,jdbcType=SMALLINT},
+            memberRemark = #{memberRemark,jdbcType=VARCHAR},
+            focusRemark = #{focusRemark,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from m_focus_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.centCore.care.model.CareInfoExample" >
+        <if test="_parameter != null" >
+            delete from m_focus_info
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    
+    <!-- 根据参数查询会员 -->
+    <select id="selectBySearchParam" parameterType="java.util.Map" resultMap="BaseResultMap">	
+		SELECT a.`MemberID` as memberGUID ,a.`MemberName`,a.`IDCard`,a.`Mobile` ,a.`ServerID` ,a.`HeadAddress` ,
+				c.`id`,c.`focusGUID`,c.`focusP`,c.`focusPed`,c.`focusStatus`,c.`memberRemark`,c.`focusRemark`,c.`tag`,a.MemberSex
+		FROM tb_member a  
+		LEFT JOIN  memberunifiedlogin b ON a.`MemberID` = b.`MemberID`
+		LEFT JOIN `m_focus_info` c ON c.focusGUID = a.`MemberID` AND c.memberGUID = #{memberGUID}
+		WHERE (a.`Mobile` = #{param}  OR a.`IDCard` =#{param}  OR b.`Account` = #{param}   ) GROUP BY  a.`MemberID` 
+		
+    </select> 
+    
+    
+    <select id="selectMergeData" parameterType="java.util.Map" resultMap="BaseResultMap">	
+		SELECT * FROM `m_focus_info` a WHERE a.`focusGUID` IN(#{memberGUID},#{focusGUID}) 
+		GROUP BY a.`memberGUID` HAVING COUNT(id) > 1
+    </select> 
+    
+
+</mapper>

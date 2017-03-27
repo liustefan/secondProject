@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.doctorCore.doctor.dao.DoctorAccountMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.doctorCore.doctor.model.DoctorAccount" >
+        <id column="Docid" property="docid" jdbcType="INTEGER" />
+        <result column="OrgId" property="orgid" jdbcType="INTEGER" />
+        <result column="DocAcc" property="docacc" jdbcType="VARCHAR" />
+        <result column="DocPass" property="docpass" jdbcType="VARCHAR" />
+        <result column="LogRole" property="logrole" jdbcType="CHAR" />
+        <result column="Tag" property="tag" jdbcType="CHAR" />
+        <result column="failTime" property="failtime" jdbcType="TIMESTAMP" />
+        <result column="failCount" property="failcount" jdbcType="INTEGER" />
+        <result column="lastLoginAddr" property="lastloginaddr" jdbcType="VARCHAR" />
+        <result column="lastLoginTime" property="lastlogintime" jdbcType="TIMESTAMP" />
+        <association property="doctor" column="Docid" select="com.bithealth.doctorCore.doctor.dao.DoctorMapper.selectByPrimaryKey"/>
+        <association property="orol" column="LogRole" select="com.bithealth.doctorCore.doctor.dao.OrolMapper.selectByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Docid, OrgId, DocAcc, DocPass, LogRole, Tag, failTime, failCount, lastLoginAddr, 
+        lastLoginTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.doctorCore.doctor.model.DoctorAccountExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from doc1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.doctorCore.doctor.model.DoctorAccountExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from doc1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from doc1
+        where Docid = #{docid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.doctorCore.doctor.model.DoctorAccount" >
+        insert into doc1 (Docid, OrgId, DocAcc, 
+            DocPass, LogRole, Tag, 
+            failTime, failCount, lastLoginAddr, 
+            lastLoginTime)
+        values (#{docid,jdbcType=INTEGER}, #{orgid,jdbcType=INTEGER}, #{docacc,jdbcType=VARCHAR}, 
+            #{docpass,jdbcType=VARCHAR}, #{logrole,jdbcType=CHAR}, #{tag,jdbcType=CHAR}, 
+            #{failtime,jdbcType=TIMESTAMP}, #{failcount,jdbcType=INTEGER}, #{lastloginaddr,jdbcType=VARCHAR}, 
+            #{lastlogintime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.doctorCore.doctor.model.DoctorAccount" >
+        insert into doc1
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="docid != null" >
+                Docid,
+            </if>
+            <if test="orgid != null" >
+                OrgId,
+            </if>
+            <if test="docacc != null" >
+                DocAcc,
+            </if>
+            <if test="docpass != null" >
+                DocPass,
+            </if>
+            <if test="logrole != null" >
+                LogRole,
+            </if>
+            <if test="tag != null" >
+                Tag,
+            </if>
+            <if test="failtime != null" >
+                failTime,
+            </if>
+            <if test="failcount != null" >
+                failCount,
+            </if>
+            <if test="lastloginaddr != null" >
+                lastLoginAddr,
+            </if>
+            <if test="lastlogintime != null" >
+                lastLoginTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="docid != null" >
+                #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="docacc != null" >
+                #{docacc,jdbcType=VARCHAR},
+            </if>
+            <if test="docpass != null" >
+                #{docpass,jdbcType=VARCHAR},
+            </if>
+            <if test="logrole != null" >
+                #{logrole,jdbcType=CHAR},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=CHAR},
+            </if>
+            <if test="failtime != null" >
+                #{failtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="failcount != null" >
+                #{failcount,jdbcType=INTEGER},
+            </if>
+            <if test="lastloginaddr != null" >
+                #{lastloginaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="lastlogintime != null" >
+                #{lastlogintime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.doctorCore.doctor.model.DoctorAccountExample" resultType="java.lang.Integer" >
+        select count(*) from doc1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update doc1
+        <set >
+            <if test="record.docid != null" >
+                Docid = #{record.docid,jdbcType=INTEGER},
+            </if>
+            <if test="record.orgid != null" >
+                OrgId = #{record.orgid,jdbcType=INTEGER},
+            </if>
+            <if test="record.docacc != null" >
+                DocAcc = #{record.docacc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.docpass != null" >
+                DocPass = #{record.docpass,jdbcType=VARCHAR},
+            </if>
+            <if test="record.logrole != null" >
+                LogRole = #{record.logrole,jdbcType=CHAR},
+            </if>
+            <if test="record.tag != null" >
+                Tag = #{record.tag,jdbcType=CHAR},
+            </if>
+            <if test="record.failtime != null" >
+                failTime = #{record.failtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.failcount != null" >
+                failCount = #{record.failcount,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastloginaddr != null" >
+                lastLoginAddr = #{record.lastloginaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastlogintime != null" >
+                lastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update doc1
+        set Docid = #{record.docid,jdbcType=INTEGER},
+            OrgId = #{record.orgid,jdbcType=INTEGER},
+            DocAcc = #{record.docacc,jdbcType=VARCHAR},
+            DocPass = #{record.docpass,jdbcType=VARCHAR},
+            LogRole = #{record.logrole,jdbcType=CHAR},
+            Tag = #{record.tag,jdbcType=CHAR},
+            failTime = #{record.failtime,jdbcType=TIMESTAMP},
+            failCount = #{record.failcount,jdbcType=INTEGER},
+            lastLoginAddr = #{record.lastloginaddr,jdbcType=VARCHAR},
+            lastLoginTime = #{record.lastlogintime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.doctorCore.doctor.model.DoctorAccount" >
+        update doc1
+        <set >
+            <if test="orgid != null" >
+                OrgId = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="docacc != null" >
+                DocAcc = #{docacc,jdbcType=VARCHAR},
+            </if>
+            <if test="docpass != null" >
+                DocPass = #{docpass,jdbcType=VARCHAR},
+            </if>
+            <if test="logrole != null" >
+                LogRole = #{logrole,jdbcType=CHAR},
+            </if>
+            <if test="tag != null" >
+                Tag = #{tag,jdbcType=CHAR},
+            </if>
+            <if test="failtime != null" >
+                failTime = #{failtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="failcount != null" >
+                failCount = #{failcount,jdbcType=INTEGER},
+            </if>
+            <if test="lastloginaddr != null" >
+                lastLoginAddr = #{lastloginaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="lastlogintime != null" >
+                lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where Docid = #{docid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.doctorCore.doctor.model.DoctorAccount" >
+        update doc1
+        set OrgId = #{orgid,jdbcType=INTEGER},
+            DocAcc = #{docacc,jdbcType=VARCHAR},
+            DocPass = #{docpass,jdbcType=VARCHAR},
+            LogRole = #{logrole,jdbcType=CHAR},
+            Tag = #{tag,jdbcType=CHAR},
+            failTime = #{failtime,jdbcType=TIMESTAMP},
+            failCount = #{failcount,jdbcType=INTEGER},
+            lastLoginAddr = #{lastloginaddr,jdbcType=VARCHAR},
+            lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP}
+        where Docid = #{docid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from doc1
+        where Docid = #{docid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.doctorCore.doctor.model.DoctorAccountExample" >
+        delete from doc1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.dataConversionServer.dao.BloodPressureMapper" >
+
+    <resultMap id="ResultMap" type="com.bithealth.dataConversionServer.bean.BloodPressure">
+        <id property="id" column="Docentry" />
+        <result property="eventId" column="EventId" />
+        <result property="memberId" column="Memberid" />
+        <result property="uploadTime" column="UploadTime" />
+        <result property="testTime" column="TestTime" />       
+        <result property="delTag" column="DelTag" />
+        <result property="abnormal" column="Abnormal" />     
+        <result property="timePeriod" column="timePeriod" />
+        <result property="sbp" column="SBP" />
+        <result property="dbp" column="DBP" />
+        <result property="pulseRate" column="PulseRate" />
+        <result property="bluetoothMacAddr" column="BluetoothMacAddr" />
+        <result property="deviceCode" column="DeviceCode" />
+        <result property="identification" column="IdCard" />
+        <result property="hrGid" column="unique_id" />
+        <result property="prgid" column="prgid" />
+        
+    </resultMap>
+    
+    <sql id="All_Column_List">
+        Docentry,EventId,Memberid,UploadTime,TestTime,DelTag,Abnormal
+        ,timePeriod,SBP,DBP,PulseRate,BluetoothMacAddr,DeviceCode
+    </sql>
+    
+    <sql id="querySql">
+        <if test="id != null and id > 0">
+            and Docentry = #{id}
+        </if>
+        <if test="eventId != null and eventId != ''">
+            and EventId = #{eventId}
+        </if>
+        <if test="memberId != null and memberId != ''">
+            and Memberid = #{memberId}
+        </if>
+        <if test="uploadTime != null and uploadTime != ''">
+            and UploadTime = #{uploadTime}
+        </if>
+        <if test="testTime != null and testTime != ''">
+            and TestTime = #{testTime}
+        </if>
+    </sql>
+    
+    <select id="findBloodPressureByParam" resultMap="ResultMap" parameterType="com.bithealth.dataConversionServer.bean.BloodPressure">
+        select <include refid="All_Column_List"/> from osbp 
+        <where>
+            DelTag = 0
+            <include refid="querySql"/>
+        </where>
+    </select>
+    
+    <select id="findBloodPressureList" resultMap="ResultMap" parameterType="com.bithealth.dataConversionServer.bean.SendDataBean">
+       SELECT DISTINCT
+            a.IdCard,
+            a.unique_id,
+            d.prgid,
+            b.*
+        FROM
+            omem a
+        LEFT JOIN osbp b ON a.Memberid = b.Memberid
+        LEFT JOIN d_omem_relation d on d.unique_id = a.unique_id 
+        WHERE  DATE_FORMAT(b.UploadTime,'%Y-%m-%d') = str_to_date(#{sendTime},'%Y-%m-%d')
+        AND a.source = #{source}
+        AND a.unique_id is not null
+        AND (b.DelTag = 0 or b.DelTag is null)
+        AND d.prgid LIKE CONCAT('${prgid}','%' )
+    </select>
+    
+    
+    
+    
+    <select id="findBloodPressureMemsList" resultMap="ResultMap" >
+        SELECT DISTINCT
+            a.IdCard,
+            a.unique_id,
+            b.Docentry
+        FROM
+            omem a
+        LEFT JOIN osbp b ON a.Memberid = b.Memberid
+        WHERE
+            b.TestTime >= CURDATE()
+        AND b.TestTime &lt; (SUBDATE(CURDATE(), INTERVAL -1 DAY))
+        AND a.source = 1
+        AND (a.unique_id != NULL OR a.unique_id != '')
+    </select>
+    
+    
+</mapper>

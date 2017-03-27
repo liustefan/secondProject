@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.group.dao.MemberGroupMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.group.model.MemberGroup" >
+        <id column="MemGrpid" property="memgrpid" jdbcType="INTEGER" />
+        <result column="MemGrpName" property="memgrpname" jdbcType="VARCHAR" />
+        <result column="MemGrpDesc" property="memgrpdesc" jdbcType="VARCHAR" />
+        <result column="faMemid" property="famemid" jdbcType="INTEGER" />
+        <result column="OrgId" property="orgid" jdbcType="INTEGER" />
+        <result column="UseTag" property="usetag" jdbcType="CHAR" />
+        <result column="order" property="order" jdbcType="INTEGER" />
+        <result column="Path" property="path" jdbcType="VARCHAR" />
+        <association property="parentGroup" column="faMemid" select="selectByPrimaryKey"/>
+        <collection property="children" column="MemGrpid" select="selectByParentKey"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        MemGrpid, MemGrpName, MemGrpDesc, faMemid, OrgId, UseTag, `order`, Path
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.group.model.MemberGroupExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omgs
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.group.model.MemberGroupExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omgs
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from omgs
+        where MemGrpid = #{memgrpid,jdbcType=INTEGER}
+    </select>
+    
+    <insert id="insert" parameterType="com.bithealth.memberCore.group.model.MemberGroup" useGeneratedKeys="true" keyProperty="memgrpid">
+        insert into omgs (MemGrpid, MemGrpName, MemGrpDesc, 
+            faMemid, OrgId, UseTag, 
+            `order`, Path)
+        values (#{memgrpid,jdbcType=INTEGER}, #{memgrpname,jdbcType=VARCHAR}, #{memgrpdesc,jdbcType=VARCHAR}, 
+            #{famemid,jdbcType=INTEGER}, #{orgid,jdbcType=INTEGER}, #{usetag,jdbcType=CHAR}, 
+            #{order,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.group.model.MemberGroup" useGeneratedKeys="true" keyProperty="memgrpid">
+        insert into omgs
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memgrpid != null" >
+                MemGrpid,
+            </if>
+            <if test="memgrpname != null" >
+                MemGrpName,
+            </if>
+            <if test="memgrpdesc != null" >
+                MemGrpDesc,
+            </if>
+            <if test="famemid != null" >
+                faMemid,
+            </if>
+            <if test="orgid != null" >
+                OrgId,
+            </if>
+            <if test="usetag != null" >
+                UseTag,
+            </if>
+            <if test="order != null" >
+                `order`,
+            </if>
+            <if test="path != null" >
+                Path,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memgrpid != null" >
+                #{memgrpid,jdbcType=INTEGER},
+            </if>
+            <if test="memgrpname != null" >
+                #{memgrpname,jdbcType=VARCHAR},
+            </if>
+            <if test="memgrpdesc != null" >
+                #{memgrpdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="famemid != null" >
+                #{famemid,jdbcType=INTEGER},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="usetag != null" >
+                #{usetag,jdbcType=CHAR},
+            </if>
+            <if test="order != null" >
+                #{order,jdbcType=INTEGER},
+            </if>
+            <if test="path != null" >
+                #{path,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.group.model.MemberGroupExample" resultType="java.lang.Integer" >
+        select count(*) from omgs
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update omgs
+        <set >
+            <if test="record.memgrpid != null" >
+                MemGrpid = #{record.memgrpid,jdbcType=INTEGER},
+            </if>
+            <if test="record.memgrpname != null" >
+                MemGrpName = #{record.memgrpname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memgrpdesc != null" >
+                MemGrpDesc = #{record.memgrpdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.famemid != null" >
+                faMemid = #{record.famemid,jdbcType=INTEGER},
+            </if>
+            <if test="record.orgid != null" >
+                OrgId = #{record.orgid,jdbcType=INTEGER},
+            </if>
+            <if test="record.usetag != null" >
+                UseTag = #{record.usetag,jdbcType=CHAR},
+            </if>
+            <if test="record.order != null" >
+                `order` = #{record.order,jdbcType=INTEGER},
+            </if>
+            <if test="record.path != null" >
+                Path = #{record.path,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update omgs
+        set MemGrpid = #{record.memgrpid,jdbcType=INTEGER},
+            MemGrpName = #{record.memgrpname,jdbcType=VARCHAR},
+            MemGrpDesc = #{record.memgrpdesc,jdbcType=VARCHAR},
+            faMemid = #{record.famemid,jdbcType=INTEGER},
+            OrgId = #{record.orgid,jdbcType=INTEGER},
+            UseTag = #{record.usetag,jdbcType=CHAR},
+            `order` = #{record.order,jdbcType=INTEGER},
+            Path = #{record.path,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.group.model.MemberGroup" >
+        update omgs
+        <set >
+            <if test="memgrpname != null" >
+                MemGrpName = #{memgrpname,jdbcType=VARCHAR},
+            </if>
+            <if test="memgrpdesc != null" >
+                MemGrpDesc = #{memgrpdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="famemid != null" >
+                faMemid = #{famemid,jdbcType=INTEGER},
+            </if>
+            <if test="orgid != null" >
+                OrgId = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="usetag != null" >
+                UseTag = #{usetag,jdbcType=CHAR},
+            </if>
+            <if test="order != null" >
+                `order` = #{order,jdbcType=INTEGER},
+            </if>
+            <if test="path != null" >
+                Path = #{path,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where MemGrpid = #{memgrpid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.group.model.MemberGroup" >
+        update omgs
+        set MemGrpName = #{memgrpname,jdbcType=VARCHAR},
+            MemGrpDesc = #{memgrpdesc,jdbcType=VARCHAR},
+            faMemid = #{famemid,jdbcType=INTEGER},
+            OrgId = #{orgid,jdbcType=INTEGER},
+            UseTag = #{usetag,jdbcType=CHAR},
+            `order` = #{order,jdbcType=INTEGER},
+            Path = #{path,jdbcType=VARCHAR}
+        where MemGrpid = #{memgrpid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from omgs
+        where MemGrpid = #{memgrpid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.group.model.MemberGroupExample" >
+        delete from omgs
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+     <!-- 自定义SQL################################################ -->
+     <resultMap type="com.bithealth.memberCore.group.model.MemGroupExt" id="BaseResultMapExt" extends="BaseResultMap">
+      <collection property="doctorGrpList" column="MemGrpid" select="selectDocGrpByMemGrp"/>
+      <collection property="memberList" column="MemGrpid" select="com.bithealth.memberCore.member.dao.MemberMapper.selectByMemGrp"/>
+     </resultMap>
+     <resultMap type="com.bithealth.memberCore.group.model.DoctorGrp" id="doctorGrpResultMap">
+      <id column="OdgpId" property="doctorGrpId"/>
+      <result column="OdgpName" property="doctorGrpName"/>
+     </resultMap>
+     <!-- MemberMapper.xml文件使用 -->
+    <select id="selectMemGroupByMemId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT m.*
+     FROM omgs m INNER JOIN ompb o ON m.`MemGrpid`=o.`MemGrpid` AND o.`Memberid`=#{memberid,jdbcType=INTEGER}
+    </select>
+    
+     <select id="selectByParentKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from omgs
+        where faMemid = #{memgrpid,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectDocGrpByMemGrp" resultMap="doctorGrpResultMap" parameterType="java.lang.Integer">
+    SELECT dg.OdgpId,dg.OdgpName FROM odgp dg INNER JOIN odmt dm ON dg.`OdgpId`=dm.`OdgpId` AND dm.`MemGrpid`=#{memgrpid,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectMemGrpExtById" resultMap="BaseResultMapExt" parameterType="java.lang.Integer">
+    select 
+     <include refid="Base_Column_List" /> 
+     from omgs  where MemGrpid = #{memgrpid,jdbcType=INTEGER}
+    </select>
+</mapper>

@@ -1,0 +1,148 @@
+.ui-menu-second-list { padding:5px 0; background:#f2faff url(../Images/ui-bg_scd_menu.gif) repeat-x;}
+.ui-menu-second {
+	display: block;
+	margin:1px 0 0 0;
+	border:1px solid #f2faff;
+	height: 26px;	
+	line-height: 26px;
+}
+.ui-menu-second a {
+	padding-left: 30px;	
+	display:block;
+	background:url(../images/ui-icon_dot_blue.gif) no-repeat 15px center;
+	color: #0069ac;
+	text-decoration: none;
+	border:1px solid #f2faff;
+}
+.ui-menu-second a:link {
+	color: #0069ac;
+	text-decoration: none;
+	border:1px solid #f2faff;
+}
+.ui-menu-second a:visited {
+	color: #0069ac;
+	text-decoration: none;
+	border:1px solid #f2faff;
+}
+.ui-menu-second a:hover{
+	color: #0069ac;
+	text-decoration: none;
+	background:#e4f5ff url(../images/ui-icon_dot_blue.gif) no-repeat 15px center;
+	border:1px solid #c2ddf0;
+}
+ .ui-menu-second a:active {
+	 color: #0069ac;
+	 font-size: 12px;
+	 text-decoration: none;
+	 border:1px solid #f2faff;
+}
+
+.ui-menu-second-select {
+	display: block;
+	line-height: 26px;
+	height: 26px;
+	margin:1px 0 0 0;
+	background: url(../images/ui-bg_orange.gif) repeat-x;
+	border:1px solid #dbce59;
+}
+.ui-menu-second-select a {
+	display: block;
+	padding-left: 30px;
+	background:url(../images/ui-icon_dot_orange.gif) no-repeat 15px center;
+	color: #7c4306;
+	text-decoration:none;
+}
+.ui-menu-second-select a:link {
+	color: #7c4306;
+	text-decoration: none;
+}
+.ui-menu-second-select a:visited {
+	color: #7c4306;
+	text-decoration: none;
+}
+
+.ui-menu-second-select a:hover {
+	color: #7c4306;
+	text-decoration: none;
+}
+ .ui-menu-second-select a:active {
+	 color: #7c4306;
+	 font-size: 12px;
+	 text-decoration: none;
+}
+/**三级菜单**/
+.ui-menu-thrid-list { /* padding:5px 0; margin:0 10px;border:1px solid #cde3f0;  border-top:0; background:#e4f5ff;*/}
+.ui-menu-third {
+	display: block;
+	margin:0 10px 1px 10px;
+	height: 26px;
+	line-height: 26px;
+	border:1px solid #f2faff;
+}
+.ui-menu-third a {
+	padding-left: 40px;	
+	display:block;
+	background:url(../images/ui-icon_third_blue.gif) no-repeat 25px center;
+	border:1px solid #f2faff;
+	color: #0069ac;
+	text-decoration: none;
+}
+.ui-menu-third a:link {
+	border:1px solid #f2faff;
+	color: #0069ac;
+	text-decoration: none;
+}
+.ui-menu-third a:visited {
+	color: #0069ac;
+	text-decoration: none;
+	border:1px solid #f2faff;
+}
+.ui-menu-third a:hover{
+	color: #0069ac;
+	text-decoration: none;
+	background:#dbf0ff url(../images/ui-icon_third_blue.gif) no-repeat 25px center;
+	border:1px solid #c2ddf0;
+}
+ .ui-menu-third a:active {
+ color: #0069ac;
+ font-size: 12px;
+ text-decoration: none;
+border:1px solid #e4f5ff;
+}
+
+.ui-menu-third-select {
+	display: block;
+	line-height: 26px;
+	height: 26px;
+	margin:0 10px 1px 10px;
+	background: url(../images/ui-bg_orange.gif) repeat-x;
+	border:1px solid #dbce59;
+}
+.ui-menu-third-select a {
+	display: block;
+	padding-left: 40px;
+	background:url(../images/ui-icon_third_orange.gif) no-repeat 25px center;
+	color: #7c4306;
+	text-decoration:none;
+}
+.ui-menu-third-select a:link {
+	color: #7c4306;
+	text-decoration: none;
+}
+.ui-menu-third-select a:visited {
+	color: #7c4306;
+	text-decoration: none;
+}
+
+.ui-menu-third-select a:hover {
+	color: #7c4306;
+	text-decoration: none;
+}
+ .ui-menu-third-select a:active {
+	color: #fff;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+
+

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.dataConversionServer.qiangHua.bean.ThypertensionVisits">
+<!-- 会员基本资料信息,通过查询数据库获取 -->
+<Assem name="uniqueId" assembly="DGrdabh"/>   <!-- 个人档案编号 -->
+<Assem name="memname" assembly="DXm"/>   <!-- 姓名 -->
+<Assem name="idcard" assembly="DSfzh"/>  <!-- 身份证号 -->
+<Assem name="gender"  assembly="DXb" assemCls="com.bithealth.dataConversionServer.assemble.PhHypertensionAssem" method="gender"/>  <!-- 性别 -->
+<Assem name="birthdate" assembly="DCsrq"/> <!-- 出生日期 -->
+<Assem name="nation" assembly="DMz"/>  <!-- 民族 -->
+<Assem name="email" assembly="DEmail"/> <!-- 邮箱 -->
+<Assem name="occupation" assembly="DZy"/> <!-- 职业 -->
+<Assem name="tel" assembly="DLxdh"/> <!-- 联系电话 -->
+<Assem name="province" assembly="DSheng"/> <!-- 省份 -->
+<Assem name="city" assembly="DShi"/> <!-- 市 -->
+<Assem name="area" assembly="DQu"/> <!-- 区 -->
+<Assem name="village" assembly="DJd"/> <!-- 街道 -->
+<Assem name="neighborhoodCommittee" assembly="DJwh"/> <!-- 居委会 -->
+<Assem name="address" assembly="DXxdz"/> <!-- 详细地址 -->
+<Assem name="prgid" assembly="PRgid"/> <!-- 传的机构代码 -->
+<Assem name="prgid" assembly="creatregion"/> <!-- 所上传的机构代码 -->
+
+<Assem name="dailysmoking" assembly="MXysl"/> <!-- 日吸烟量 -->
+<Assem name="dailydrink" assembly="MYjsl"/> <!-- 日饮酒量 -->
+<Assem name="sportfrequency" assembly="MYdpl"/> <!-- 运动频率 -->
+<Assem name="sportduration" assembly="MYdcxsj"/> <!-- 每次持续时间 本次值 -->
+<Assem name="height" assembly="DSg"/> <!-- 升高 -->
+<Assem name="weight" assembly="DTz"/> <!-- 体重 -->
+<Assem name="bmi" assembly="DBmi"/> <!-- 体质指数 -->
+<Assem name="uploadtime" assembly="DYw"/> <!-- 腰围 -->
+<Assem name="systolic" assembly="DSsy"/> <!-- 血压 收缩压 -->
+<Assem name="diastolic" assembly="DSzy"/> <!-- 舒张压 -->
+<Assem name="visitway" assembly="GSffs"/> <!-- 随访方式 1.门诊 2.家庭 3.电话 99.其他 -->
+<Assem name="symptom" assembly="GMqzz" assemCls="com.bithealth.dataConversionServer.assemble.PhHypertensionAssem" method="assemSymptom"/> <!-- 症状 0.无症状 1.头晕头疼 2.恶心呕吐 3.眼花耳鸣 4.呼吸困难 5.心悸胸闷 6.鼻衄出血不止 7.四肢发麻 8.下肢水肿 99.其他症状 -->
+<Assem name="symptomDesc" assembly="GMqzzqt"/> <!-- 其他症 -->
+<Assem name="uploadtime" assembly="GJyy"/> <!-- 用药情况 1.使用 2.不使用 -->
+<Assem name="drugcompliance" assembly="GFyycx"/> <!-- 服药依从性 1.规律 2.间断 3.不服药  -->
+<Assem name="drugadversereaction" assembly="GYwfzy"/> <!-- 药物不良反映 1.无 2.有 -->
+<Assem name="drugadversereactionDesc" assembly="GFzyxs"/> <!-- /副作用详述 -->
+<Assem name="TransferOrgAndDept" assembly="GZzyy"/> <!-- 转诊机构或医院，可不填写 -->
+<Assem name="TransferOrgAndDept" assembly="GZzkb"/> <!-- 机构及转诊科别 ，可不填写-->
+<Assem name="transferreason" assembly="GZzyuanyin"/> <!-- 转诊原因 -->
+<Assem name="visitclass" assembly="GCcsffl"/> <!-- 随访分类 1.控制满意 2.控制不满意 3.不良反应 4.并发症 -->
+<!-- <Assem name="" assembly="GSfysjy"/>  随访医生建议 -->
+<Assem name="visitdrname" assembly="GSfys"/> <!-- 随访医生签名 -->
+<Assem name="createtime" assembly="createtime"/> <!-- 录入时间 -->
+<Assem name="createDrName" assembly="createuser"/> <!-- 录入人 -->
+<Assem name="updatetime" assembly="updatetime"/> <!-- 最近更新时间 -->
+<Assem name="updateDrName" assembly="updateuser"/> <!-- 最近更新人 -->
+<Assem name="visitdate" assembly="happentime"/> <!-- 随访日期 -->
+<Assem name="psychologicalrecovery" assembly="DXltz"/> <!-- 心理调整 1.良好 2.一般 3.较差 -->
+<Assem name="compliancebehavior" assembly="DZyxw"/> <!-- 遵医行为 1.良好 2.一般 3.较差 -->
+<Assem name="intakesalt" assembly="DSyqk"/> <!-- 摄盐情况 1.轻 2.中 3.重 -->
+<Assem name="checkresult" assembly="GFzjc"/> <!-- 辅助检查 -->
+<Assem name="heartrate" assembly="DXl"/> <!-- 心率 -->
+<Assem name="visitdateNext" assembly="GXcsfsj"/> <!-- 下次随访时间 -->
+<!-- 
+<Assem name="" assembly="GMbbfz"/>  
+并发症 1.脑卒中 2.冠心病 99.其他[这项目前没有，可否不做对应？可不用填写] 
+-->
+<Assem name="uploadtime" assembly="GZzjl"/> <!-- /转诊情况 1.是 2.否-->
+<Assem name="weightNext" assembly="DTz2"/> <!-- 目标体重 -->
+<Assem name="dailysmokingNext" assembly="MXysl2"/> <!-- 日吸烟量 -->
+<Assem name="sportfrequencyNext" assembly="MYdpl2"/> <!-- 运动频率  目标值 -->
+<Assem name="dailydrinkNext" assembly="MYdcxsj2"/> <!-- 日饮酒量  目标值运动持续时间 目标值 -->
+<Assem name="intakesaltNext" assembly="DSyqk2"/> <!-- 摄盐目标值1.轻 2.中 3.重 -->
+<Assem name="bmiNext" assembly="DBmi2"/> <!-- 体质指数  目标值 -->
+</Assemes>

@@ -1,0 +1,53 @@
+/* 
+* hypertensionFllowDetail.jsp页面样式
+*/
+
+/* 查看页面table样式 */
+.table-normal {
+	width: 100%;
+	border: 1px solid  #999;
+	border-collapse: collapse;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.table-normal tr td ,
+.table-normal tr th {
+	padding: 5px 8px;
+	border: 1px solid #999;
+}
+
+.table-normal tr th {
+	font-style: normal;
+	font-weight: normal;
+	background-color: #bcdee0;
+	width: 10%;
+}
+
+.table-normal tr.bgfff {
+	background-color: #fff;
+}
+
+.table-normal .top-info {
+	font-weight: bold;
+}
+
+.table-normal tr:nth-child(odd) { 
+	background-color: #e0f1f3;
+}
+
+.table-normal tr:nth-child(even) { 
+	background-color: #fff;
+}
+
+.detail {
+	margin: 10px 0;
+}
+
+.detail .detail-list {
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+	padding-right: 20px;
+}
+

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.measureCore.common.dao.OmdsMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.measureCore.common.model.Omds" >
+        <id column="eventid" property="eventid" jdbcType="BIGINT" />
+        <result column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="TimeLength" property="timelength" jdbcType="INTEGER" />
+        <result column="UploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+        <result column="EventType" property="eventtype" jdbcType="CHAR" />
+        <result column="WheAbnTag" property="wheabntag" jdbcType="CHAR" />
+        <result column="StatusTag" property="statustag" jdbcType="SMALLINT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        eventid, Memberid, TimeLength, UploadTime, EventType, WheAbnTag, StatusTag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.common.model.OmdsExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omds
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.common.model.OmdsExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omds
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from omds
+        where eventid = #{eventid,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.measureCore.common.model.Omds" >
+        insert into omds (Memberid, TimeLength, 
+            UploadTime, EventType, WheAbnTag, 
+            StatusTag)
+        values (#{memberid,jdbcType=INTEGER}, #{timelength,jdbcType=INTEGER}, 
+            #{uploadtime,jdbcType=TIMESTAMP}, #{eventtype,jdbcType=CHAR}, #{wheabntag,jdbcType=CHAR}, 
+            #{statustag,jdbcType=SMALLINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.measureCore.common.model.Omds" useGeneratedKeys="true" keyProperty="eventid" >
+        insert into omds
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="eventid != null" >
+                eventid,
+            </if>
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="timelength != null" >
+                TimeLength,
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime,
+            </if>
+            <if test="eventtype != null" >
+                EventType,
+            </if>
+            <if test="wheabntag != null" >
+                WheAbnTag,
+            </if>
+            <if test="statustag != null" >
+                StatusTag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="eventid != null" >
+                #{eventid,jdbcType=BIGINT},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="timelength != null" >
+                #{timelength,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="eventtype != null" >
+                #{eventtype,jdbcType=CHAR},
+            </if>
+            <if test="wheabntag != null" >
+                #{wheabntag,jdbcType=CHAR},
+            </if>
+            <if test="statustag != null" >
+                #{statustag,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.measureCore.common.model.OmdsExample" resultType="java.lang.Integer" >
+        select count(*) from omds
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update omds
+        <set >
+            <if test="record.eventid != null" >
+                eventid = #{record.eventid,jdbcType=BIGINT},
+            </if>
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.timelength != null" >
+                TimeLength = #{record.timelength,jdbcType=INTEGER},
+            </if>
+            <if test="record.uploadtime != null" >
+                UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.eventtype != null" >
+                EventType = #{record.eventtype,jdbcType=CHAR},
+            </if>
+            <if test="record.wheabntag != null" >
+                WheAbnTag = #{record.wheabntag,jdbcType=CHAR},
+            </if>
+            <if test="record.statustag != null" >
+                StatusTag = #{record.statustag,jdbcType=SMALLINT},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update omds
+        set <!-- eventid = #{record.eventid,jdbcType=BIGINT}, -->
+            Memberid = #{record.memberid,jdbcType=INTEGER},
+            TimeLength = #{record.timelength,jdbcType=INTEGER},
+            UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            EventType = #{record.eventtype,jdbcType=CHAR},
+            WheAbnTag = #{record.wheabntag,jdbcType=CHAR},
+            StatusTag = #{record.statustag,jdbcType=SMALLINT}
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.measureCore.common.model.Omds" >
+        update omds
+        <set >
+            <if test="memberid != null" >
+                Memberid = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="timelength != null" >
+                TimeLength = #{timelength,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="eventtype != null" >
+                EventType = #{eventtype,jdbcType=CHAR},
+            </if>
+            <if test="wheabntag != null" >
+                WheAbnTag = #{wheabntag,jdbcType=CHAR},
+            </if>
+            <if test="statustag != null" >
+                StatusTag = #{statustag,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where eventid = #{eventid,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.measureCore.common.model.Omds" >
+        update omds
+        set Memberid = #{memberid,jdbcType=INTEGER},
+            TimeLength = #{timelength,jdbcType=INTEGER},
+            UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            EventType = #{eventtype,jdbcType=CHAR},
+            WheAbnTag = #{wheabntag,jdbcType=CHAR},
+            StatusTag = #{statustag,jdbcType=SMALLINT}
+        where eventid = #{eventid,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from omds
+        where eventid = #{eventid,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.measureCore.common.model.OmdsExample" >
+        delete from omds
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+
+
+    <select id="getOmdsByGUIDAndEnventType" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT a.* FROM omds a ,omem b 
+		WHERE a.`Memberid` = b.`Memberid` 
+		AND a.`EventType` = #{eventType}
+		AND  b.`memberGUID` = #{memberGUID}
+    </select>
+
+
+
+
+
+
+</mapper>

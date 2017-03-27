@@ -1,0 +1,73 @@
+/* odgplist.jsp的样式表 */
+
+div,label,input,table,th,tr,td {
+	margin: 0;
+	padding: 0;
+}
+
+.createGroup-left {
+	width: 21%;
+	float: left;
+	position: fixed;
+	overflow: hidden;
+}
+
+.text-edit {
+	display: inline-block;
+	position: relative;
+	margin-left: 20px;
+}
+
+.createGroup-details {
+	width: 100%;
+	float: left;
+}
+
+.table-bordered tr th {
+	text-align: center;
+}
+
+#pre span,
+#nex span {
+	top: 0 !important;
+}
+
+.page-go {
+	top: 1px !important;
+}
+
+.input-sm {
+	height: 26px;
+}
+
+.ztree {
+	/* background-color: #17A14D; */
+	/* min-height: 550px; */
+	width: 100%;
+	padding: 0 !important;
+	/* overflow: scroll; */
+}
+
+.icon-search {
+	top: 2px;
+	right: 8px;
+	top: 1px\0;
+}
+
+#dataTable {
+	width: 78%;
+	height: 669px;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	border: 0;
+	float: right;
+}
+
+.table-control-wrapper span {
+	display: inline-block;
+	margin: 0 8px;
+}
+
+.left-title, .tree-wrapper {
+	margin: 0 5px 5px 10px !important;
+}

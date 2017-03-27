@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>编辑转诊</title>
+	<link rel="stylesheet" href="../../css/general.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<style>
+		.detail-box {
+			margin: 20px 0;
+		    padding-left: 8px;
+		    border: 1px solid #ccc;
+		    font-size: 14px;
+		    line-height: 28px;
+		    background-color: #eff1f0;
+		}
+		
+		.mg-right {
+			margin-right: 50px;
+		}
+		
+		.main-box ul li {
+			margin: 25px 8px;
+		}
+		
+		.fix-label {
+			text-align: right;
+			font-size: 14px;
+			width: 120px;
+			margin-right: 10px;
+		}
+		
+		.text-top {
+	        vertical-align: text-top;
+	    }
+	</style>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">
+   		新增转诊
+	</div>
+	<!-- <div class="detail-box">
+		<p>姓名：<span class="mg-right">暮雪</span>性别：<span class="mg-right">女</span>年龄：<span class="mg-right">22</span>手机号码：<span class="mg-right">18062402355</span>身份证号：<span>422202199305246888</span></p>
+		<p>会员标签：<span>高血压；轻度高血压；</span></p>
+	</div> -->
+    <form action="" method="POST" id="">
+		<div class="main-box">
+			<ul>
+				<li>
+					<label class="fix-label"><span class="red">*</span>转诊机构和科室：</label>
+	                <input type="text" maxlength="50" value="">
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label"><span class="red">*</span>转诊原因：</label>
+	                <textarea name="" cols="50" rows="4" maxlength="100" class="text-top"></textarea>
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label">转诊结果：</label>
+	                <textarea name="" cols="50" rows="4" maxlength="100" class="text-top"></textarea>
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label">转诊时间：</label> 
+					<input class="info-date" id="startDate" type="text" name="" required="required" value='' readonly="readonly" />
+				</li>
+				<li>
+					<label class="fix-label"><span class="red">*</span>状态：</label>
+	                <select name="">
+						<option value="0">请选择</option>
+						<option value="1">转诊申请</option>
+						<option value="2">取消转诊</option>
+						<option value="3">已转诊</option>
+					</select>
+					<span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label">创建人：</label>
+	                <span>张三</span>
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label">更新人：</label>
+	                <span>李四</span>
+	                <span class="red"></span>
+				</li>
+			</ul>
+		</div>
+		<div class="page-box align-center">
+	        <button class="btn-inquiry" onclick="">保存</button>
+	        <button class="btn-cancel" onclick="">返回</button>
+        </div>
+	</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+.mg-10 {
+	margin: 10px 15px;
+}
+
+.tree-box {
+	height: 190px;
+}
+
+#selectedList {
+	height: 150px;
+}
+
+#selectedList li .wd4 {
+	display: inline-block;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 10em;
+}
+
+#selectedList li .wd4 i {
+	font-style: normal;
+}
+
+#selectedList li {
+	width: 150px;
+	margin: 10px 5px;
+	float: left;
+	border: 1px solid #ccc;
+	padding: 5px 5px;
+	background-color: #F2F2F2; 
+}
+
+#selectedList li a {
+	font-size: 12px;
+	color: inherit;
+}
+
+.footer {
+	margin: 15px;
+}

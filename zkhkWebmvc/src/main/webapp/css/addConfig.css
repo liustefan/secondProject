@@ -1,0 +1,74 @@
+/*
+* 组织机构配置
+*/
+.content-slice {
+	margin-top: 20px;
+}
+
+.content-slice input[type='text'] {
+	padding: 2px 5px;
+	width: 180px;
+	margin-right: 5px;
+}
+
+.content-box {
+	padding-left: 30px;
+}
+
+.fix-width {
+	width: 255px;
+	border: 1px solid #ccc;
+	padding: 2px 0 2px 8px;
+}
+
+.content-slice label {
+	display: inline-block;
+	width: 115px;
+}
+
+.right li {
+	display: inline-block;
+	margin-right: 8px;
+	width: 75px;
+	height: 18px;
+	float: left;
+}
+
+.right li input {
+	float: left;
+	margin: 4px 2px 0 0 !important;
+	margin-top: 2px\0 !important;
+}
+
+.padding-t {
+	padding-top: 5px;
+}
+
+.align-radiu {
+	float: left;
+	margin: 3px 4px 0 0 ! important;
+}
+
+.span-center {
+  display: inline-block;
+  float: left;
+  margin-right: 6px;
+}
+
+.padding-r {
+	padding-right: 5px;
+}
+
+.mar-20 {
+	margin-top: 20px;
+}
+
+.fixed-width {
+	width: 10px !important;
+}
+
+.input-checkbox {
+	float: left;
+	margin: 3px 2px 0 0 !important;
+	margin-top: 2px\0 !important;
+}

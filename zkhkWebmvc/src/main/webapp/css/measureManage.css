@@ -1,0 +1,32 @@
+.quick-search-box {
+	position: relative;
+	top: 15px; 
+	right: 0;
+}
+
+#select1 {
+	position: absolute; 
+	top: 6px; 
+	top: 8px\0 !important;
+	right: 6px;
+	background: #fff;
+	cursor: pointer;
+	border: none;
+}
+
+#select1 img {
+	width: 18px;
+	height: 18px;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+#find {
+	width: 325px;
+	height: 24px;
+	line-height: 24px;
+	border: 1px solid #ccc; 
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+	padding-left: 2px;
+}

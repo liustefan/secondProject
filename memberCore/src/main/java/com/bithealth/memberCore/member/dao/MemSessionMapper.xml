@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.MemSessionMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.MemSession" >
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="PassWord" property="password" jdbcType="VARCHAR" />
+        <result column="Session" property="session" jdbcType="VARCHAR" />
+        <result column="curTag" property="curtag" jdbcType="CHAR" />
+        <result column="LoginTime" property="logintime" jdbcType="TIMESTAMP" />
+        <result column="Device" property="device" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Memberid, PassWord, Session, curTag, LoginTime, Device
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemSessionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from memlog
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemSessionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from memlog
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from memlog
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.MemSession" >
+        insert into memlog (Memberid, PassWord, Session, 
+            curTag, LoginTime, Device
+            )
+        values (#{memberid,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{session,jdbcType=VARCHAR}, 
+            #{curtag,jdbcType=CHAR}, #{logintime,jdbcType=TIMESTAMP}, #{device,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.MemSession" >
+        insert into memlog
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="password != null" >
+                PassWord,
+            </if>
+            <if test="session != null" >
+                Session,
+            </if>
+            <if test="curtag != null" >
+                curTag,
+            </if>
+            <if test="logintime != null" >
+                LoginTime,
+            </if>
+            <if test="device != null" >
+                Device,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="session != null" >
+                #{session,jdbcType=VARCHAR},
+            </if>
+            <if test="curtag != null" >
+                #{curtag,jdbcType=CHAR},
+            </if>
+            <if test="logintime != null" >
+                #{logintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="device != null" >
+                #{device,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.MemSessionExample" resultType="java.lang.Integer" >
+        select count(*) from memlog
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update memlog
+        <set >
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.password != null" >
+                PassWord = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.session != null" >
+                Session = #{record.session,jdbcType=VARCHAR},
+            </if>
+            <if test="record.curtag != null" >
+                curTag = #{record.curtag,jdbcType=CHAR},
+            </if>
+            <if test="record.logintime != null" >
+                LoginTime = #{record.logintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.device != null" >
+                Device = #{record.device,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update memlog
+        set Memberid = #{record.memberid,jdbcType=INTEGER},
+            PassWord = #{record.password,jdbcType=VARCHAR},
+            Session = #{record.session,jdbcType=VARCHAR},
+            curTag = #{record.curtag,jdbcType=CHAR},
+            LoginTime = #{record.logintime,jdbcType=TIMESTAMP},
+            Device = #{record.device,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.MemSession" >
+        update memlog
+        <set >
+            <if test="password != null" >
+                PassWord = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="session != null" >
+                Session = #{session,jdbcType=VARCHAR},
+            </if>
+            <if test="curtag != null" >
+                curTag = #{curtag,jdbcType=CHAR},
+            </if>
+            <if test="logintime != null" >
+                LoginTime = #{logintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="device != null" >
+                Device = #{device,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.MemSession" >
+        update memlog
+        set PassWord = #{password,jdbcType=VARCHAR},
+            Session = #{session,jdbcType=VARCHAR},
+            curTag = #{curtag,jdbcType=CHAR},
+            LoginTime = #{logintime,jdbcType=TIMESTAMP},
+            Device = #{device,jdbcType=VARCHAR}
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from memlog
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.MemSessionExample" >
+        delete from memlog
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

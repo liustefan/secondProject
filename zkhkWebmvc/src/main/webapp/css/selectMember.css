@@ -1,0 +1,47 @@
+/* 选择会员样式表  */
+body {
+	margin: 8px;
+}
+
+.search-wrapper label {
+	margin-left: 15px;
+}
+
+.search-wrapper .mg-0 {
+	margin: 0;
+}
+
+.btn-center {
+	float: left;
+	margin-left: 20px;
+	padding-top: 25px;
+}
+
+.mr-span {
+	display: inline-block;
+	margin: 0 4px 0 13px;
+}
+
+.search-wrapper input {
+	margin-left: 8px;
+}
+
+.search-wrapper p {
+	margin: 12px 0;
+}
+
+.search-wrapper .info-idCard {
+	width: 228px;
+}
+
+.search-wrapper .info-tel {
+	width: 90px;
+}
+
+.btn-box {
+	margin: 15px 0;
+}
+
+.info-idCard {
+	width: 204px !important;
+}

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.question.dao.Cqt1Mapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.questionCore.question.model.Cqt1" >
+        <id column="CombQustid" property="combQustid" jdbcType="INTEGER" />
+        <id column="Qustid" property="qustid" jdbcType="INTEGER" />
+        <result column="QustCode" property="qustCode" jdbcType="VARCHAR" />
+        <result column="OptId" property="optId" jdbcType="SMALLINT" />
+        <result column="FunId" property="funId" jdbcType="SMALLINT" />
+        <result column="Qustname" property="qustname" jdbcType="VARCHAR" />
+        <result column="QustVer" property="qustVer" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        CombQustid, Qustid, QustCode, OptId, FunId, Qustname, QustVer
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.Cqt1Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from cqt1
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.Cqt1Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from cqt1
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.Cqt1Key" >
+        select 
+        <include refid="Base_Column_List" />
+        from cqt1
+        where CombQustid = #{combQustid,jdbcType=INTEGER}
+          and Qustid = #{qustid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.questionCore.question.model.Cqt1" >
+        insert into cqt1
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="combQustid != null" >
+                CombQustid,
+            </if>
+            <if test="qustid != null" >
+                Qustid,
+            </if>
+            <if test="qustCode != null" >
+                QustCode,
+            </if>
+            <if test="optId != null" >
+                OptId,
+            </if>
+            <if test="funId != null" >
+                FunId,
+            </if>
+            <if test="qustname != null" >
+                Qustname,
+            </if>
+            <if test="qustVer != null" >
+                QustVer,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="combQustid != null" >
+                #{combQustid,jdbcType=INTEGER},
+            </if>
+            <if test="qustid != null" >
+                #{qustid,jdbcType=INTEGER},
+            </if>
+            <if test="qustCode != null" >
+                #{qustCode,jdbcType=VARCHAR},
+            </if>
+            <if test="optId != null" >
+                #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="funId != null" >
+                #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="qustname != null" >
+                #{qustname,jdbcType=VARCHAR},
+            </if>
+            <if test="qustVer != null" >
+                #{qustVer,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.questionCore.question.model.Cqt1Example" resultType="java.lang.Integer" >
+        select count(*) from cqt1
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update cqt1
+        <set >
+            <if test="record.combQustid != null" >
+                CombQustid = #{record.combQustid,jdbcType=INTEGER},
+            </if>
+            <if test="record.qustid != null" >
+                Qustid = #{record.qustid,jdbcType=INTEGER},
+            </if>
+            <if test="record.qustCode != null" >
+                QustCode = #{record.qustCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.optId != null" >
+                OptId = #{record.optId,jdbcType=SMALLINT},
+            </if>
+            <if test="record.funId != null" >
+                FunId = #{record.funId,jdbcType=SMALLINT},
+            </if>
+            <if test="record.qustname != null" >
+                Qustname = #{record.qustname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qustVer != null" >
+                QustVer = #{record.qustVer,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update cqt1
+        set CombQustid = #{record.combQustid,jdbcType=INTEGER},
+            Qustid = #{record.qustid,jdbcType=INTEGER},
+            QustCode = #{record.qustCode,jdbcType=VARCHAR},
+            OptId = #{record.optId,jdbcType=SMALLINT},
+            FunId = #{record.funId,jdbcType=SMALLINT},
+            Qustname = #{record.qustname,jdbcType=VARCHAR},
+            QustVer = #{record.qustVer,jdbcType=VARCHAR}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.questionCore.question.model.Cqt1" >
+        update cqt1
+        <set >
+            <if test="qustCode != null" >
+                QustCode = #{qustCode,jdbcType=VARCHAR},
+            </if>
+            <if test="optId != null" >
+                OptId = #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="funId != null" >
+                FunId = #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="qustname != null" >
+                Qustname = #{qustname,jdbcType=VARCHAR},
+            </if>
+            <if test="qustVer != null" >
+                QustVer = #{qustVer,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where CombQustid = #{combQustid,jdbcType=INTEGER}
+          and Qustid = #{qustid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.questionCore.question.model.Cqt1" >
+        update cqt1
+        set QustCode = #{qustCode,jdbcType=VARCHAR},
+            OptId = #{optId,jdbcType=SMALLINT},
+            FunId = #{funId,jdbcType=SMALLINT},
+            Qustname = #{qustname,jdbcType=VARCHAR},
+            QustVer = #{qustVer,jdbcType=VARCHAR}
+        where CombQustid = #{combQustid,jdbcType=INTEGER}
+          and Qustid = #{qustid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.questionCore.question.model.Cqt1Key" >
+        delete from cqt1
+        where CombQustid = #{combQustid,jdbcType=INTEGER}
+          and Qustid = #{qustid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.questionCore.question.model.Cqt1Example" >
+        <if test="_parameter != null and _parameter != '' ">
+        delete from cqt1
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+
+</mapper>

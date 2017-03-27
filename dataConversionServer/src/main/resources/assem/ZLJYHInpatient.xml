@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.inspectCore.physical.model.PhHealthexamdetailinpatient">
+<!-- 会员基本资料信息,通过查询数据库获取 -->
+<Assem name="uniqueId" assembly="DGrdabh"/>   <!-- 个人档案编号 -->
+<Assem name="startdate" assembly="ZRyjcrq"/>   <!-- 入院日期-->
+<Assem name="endtime" assembly="ZCyccrq"/>  <!-- 出院日期 -->
+<Assem name="resson"  assembly="ZYuanyin"/>  <!-- 原 因 -->
+<Assem name="institution" assembly="ZYljgmc"/> <!-- 医疗机构名称 -->
+<Assem name="patientid" assembly="ZBingah"/>  <!-- 病案号 -->
+<Assem name="updatetime" assembly="ZHappentime"/>  <!-- 发生时间 -->
+</Assemes>

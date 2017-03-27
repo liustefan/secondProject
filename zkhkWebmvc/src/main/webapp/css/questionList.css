@@ -1,0 +1,104 @@
+body, div, ul, li, p, h3, input {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+    font-size: 12px;
+	line-height: 1.5;
+	color: #333;
+}
+
+.header {
+	margin: 15px 20px;
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.question-list-wrapper {
+	/* width: 1000px; */
+	width: 100%;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.question-list-box {
+	/* width: 950px; */
+    border: 1px solid;
+    background-color: #F6F6F6;
+    padding: 20px;
+    /* margin: 50px 0; */
+}
+
+.question-name {
+	text-align: center;
+	font-size: 2em;
+	margin: 30px 0;
+	color: #333333;
+	
+}
+
+.question-warpper {
+	/* padding-left: 30%; */
+	margin: 20px;
+}
+
+ul.answer-box {
+	list-style: none;
+	font-size: 1em;
+	margin-left: 15px;
+	
+}
+
+ul.answer-box li {
+	float: left;
+	font-size: 13px;
+	font-family: tahoma;
+}
+
+ul.answer-box li label {
+	margin: 0 15px;
+	vertical-align: middle;
+}
+
+ul.answer-box li input {
+	margin-right: 15px;
+}
+
+ul.answer-box li input[type='checkbox'] {
+	vertical-align: middle;	
+}
+
+.question-body {
+	width: 100%;
+	font-size: 1.5em;
+	font-weight: bold;
+	margin: 15px;
+}
+
+.mg-left-5 {
+	margin-left: 5%;
+}
+
+.diagnose-result p {
+	display: inline-block;
+	border-bottom: 1px solid;
+	width: 90%;
+}
+
+.inactive {
+	color: #ccc;
+}
+
+/* 复选框和单选框对齐样式 */
+.input-center {
+    float: left;
+    margin: 5px 2px 0 0 !important;
+    margin-top: 3px\0 !important;
+}
+
+.span-center {
+    display: inline-block;
+    float: left;
+    margin: 3px 6px 0 0;
+}

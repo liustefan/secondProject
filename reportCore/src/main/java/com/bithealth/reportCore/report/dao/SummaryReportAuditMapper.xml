@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.reportCore.report.dao.SummaryReportAuditMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.reportCore.report.model.SummaryReportAudit" >
+        <id column="logid" property="logid" jdbcType="INTEGER" />
+        <result column="ID" property="ID" jdbcType="INTEGER" />
+        <result column="serialNumber" property="serialNumber" jdbcType="BIGINT" />
+        <result column="DocGrpCode" property="docGrpCode" jdbcType="INTEGER" />
+        <result column="AuditLevel" property="auditLevel" jdbcType="SMALLINT" />
+        <result column="Docid" property="docid" jdbcType="INTEGER" />
+        <result column="AuditDesc" property="auditDesc" jdbcType="LONGVARCHAR" />
+        <result column="AuditTime" property="auditTime" jdbcType="TIMESTAMP" />
+        <result column="AuditMode" property="auditMode" jdbcType="CHAR" />
+        <result column="Stat" property="stat" jdbcType="SMALLINT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        logid, ID, serialNumber, DocGrpCode, AuditLevel, Docid, AuditDesc, AuditTime, AuditMode, 
+        Stat
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.report.model.SummaryReportAuditExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from smr1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.report.model.SummaryReportAuditExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from smr1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from smr1
+        where logid = #{logid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.reportCore.report.model.SummaryReportAudit" >
+        insert into smr1
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="logid != null" >
+                logid,
+            </if>
+            <if test="ID != null" >
+                ID,
+            </if>
+            <if test="serialNumber != null" >
+                serialNumber,
+            </if>
+            <if test="docGrpCode != null" >
+                DocGrpCode,
+            </if>
+            <if test="auditLevel != null" >
+                AuditLevel,
+            </if>
+            <if test="docid != null" >
+                Docid,
+            </if>
+            <if test="auditDesc != null" >
+                AuditDesc,
+            </if>
+            <if test="auditTime != null" >
+                AuditTime,
+            </if>
+            <if test="auditMode != null" >
+                AuditMode,
+            </if>
+            <if test="stat != null" >
+                Stat,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="logid != null" >
+                #{logid,jdbcType=INTEGER},
+            </if>
+            <if test="ID != null" >
+                #{ID,jdbcType=INTEGER},
+            </if>
+            <if test="serialNumber != null" >
+                #{serialNumber,jdbcType=BIGINT},
+            </if>
+            <if test="docGrpCode != null" >
+                #{docGrpCode,jdbcType=INTEGER},
+            </if>
+            <if test="auditLevel != null" >
+                #{auditLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="docid != null" >
+                #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="auditDesc != null" >
+                #{auditDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditMode != null" >
+                #{auditMode,jdbcType=CHAR},
+            </if>
+            <if test="stat != null" >
+                #{stat,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.reportCore.report.model.SummaryReportAuditExample" resultType="java.lang.Integer" >
+        select count(*) from smr1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update smr1
+            <set >
+                <if test="record.logid != null" >
+                    logid = #{record.logid,jdbcType=INTEGER},
+                </if>
+                <if test="record.ID != null" >
+                    ID = #{record.ID,jdbcType=INTEGER},
+                </if>
+                <if test="record.serialNumber != null" >
+                    serialNumber = #{record.serialNumber,jdbcType=BIGINT},
+                </if>
+                <if test="record.docGrpCode != null" >
+                    DocGrpCode = #{record.docGrpCode,jdbcType=INTEGER},
+                </if>
+                <if test="record.auditLevel != null" >
+                    AuditLevel = #{record.auditLevel,jdbcType=SMALLINT},
+                </if>
+                <if test="record.docid != null" >
+                    Docid = #{record.docid,jdbcType=INTEGER},
+                </if>
+                <if test="record.auditDesc != null" >
+                    AuditDesc = #{record.auditDesc,jdbcType=LONGVARCHAR},
+                </if>
+                <if test="record.auditTime != null" >
+                    AuditTime = #{record.auditTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.auditMode != null" >
+                    AuditMode = #{record.auditMode,jdbcType=CHAR},
+                </if>
+                <if test="record.stat != null" >
+                    Stat = #{record.stat,jdbcType=SMALLINT},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update smr1
+            set logid = #{record.logid,jdbcType=INTEGER},
+                ID = #{record.ID,jdbcType=INTEGER},
+                serialNumber = #{record.serialNumber,jdbcType=BIGINT},
+                DocGrpCode = #{record.docGrpCode,jdbcType=INTEGER},
+                AuditLevel = #{record.auditLevel,jdbcType=SMALLINT},
+                Docid = #{record.docid,jdbcType=INTEGER},
+                AuditDesc = #{record.auditDesc,jdbcType=LONGVARCHAR},
+                AuditTime = #{record.auditTime,jdbcType=TIMESTAMP},
+                AuditMode = #{record.auditMode,jdbcType=CHAR},
+                Stat = #{record.stat,jdbcType=SMALLINT}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.reportCore.report.model.SummaryReportAudit" >
+        update smr1
+        <set >
+            <if test="ID != null" >
+                ID = #{ID,jdbcType=INTEGER},
+            </if>
+            <if test="serialNumber != null" >
+                serialNumber = #{serialNumber,jdbcType=BIGINT},
+            </if>
+            <if test="docGrpCode != null" >
+                DocGrpCode = #{docGrpCode,jdbcType=INTEGER},
+            </if>
+            <if test="auditLevel != null" >
+                AuditLevel = #{auditLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="docid != null" >
+                Docid = #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="auditDesc != null" >
+                AuditDesc = #{auditDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                AuditTime = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditMode != null" >
+                AuditMode = #{auditMode,jdbcType=CHAR},
+            </if>
+            <if test="stat != null" >
+                Stat = #{stat,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where logid = #{logid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.reportCore.report.model.SummaryReportAudit" >
+        update smr1
+        set ID = #{ID,jdbcType=INTEGER},
+            serialNumber = #{serialNumber,jdbcType=BIGINT},
+            DocGrpCode = #{docGrpCode,jdbcType=INTEGER},
+            AuditLevel = #{auditLevel,jdbcType=SMALLINT},
+            Docid = #{docid,jdbcType=INTEGER},
+            AuditDesc = #{auditDesc,jdbcType=LONGVARCHAR},
+            AuditTime = #{auditTime,jdbcType=TIMESTAMP},
+            AuditMode = #{auditMode,jdbcType=CHAR},
+            Stat = #{stat,jdbcType=SMALLINT}
+        where logid = #{logid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from smr1
+        where logid = #{logid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.reportCore.report.model.SummaryReportAuditExample" >
+        <if test="_parameter != null" >
+            delete from smr1
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+
+    <select id="selectByID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from smr1
+        where ID = #{ID,jdbcType=INTEGER}
+        ORDER BY AuditTime DESC 
+    </select>
+
+
+
+
+
+</mapper>

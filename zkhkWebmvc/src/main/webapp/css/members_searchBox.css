@@ -1,0 +1,49 @@
+body {
+	/* min-width: 1280px; */
+}
+.search-box-wrapper {
+  background: #f3f3f3;
+  padding: 5px 10px;
+  border: 1px solid #000;
+  
+}
+.search-box {
+  width: 100%;
+}
+
+table.search-box tr td {
+  height: 3em;
+  line-height: 3em;
+}
+
+.search-box .label {
+  display: inline-block;
+  /* width: 70px; */
+} 
+
+.label-4x {
+	width: 4.3em;
+}
+
+.label-5x {
+	width: 5.3em;
+}
+
+
+.search-box .info {
+  display: inline-block;
+  padding: 5px 0em;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  outline: none;
+  text-indent: 0.1em;
+  
+}
+
+.search-box .info-2x {
+  width: 55%;
+}
+
+.control-select {
+	width: 100px;
+}

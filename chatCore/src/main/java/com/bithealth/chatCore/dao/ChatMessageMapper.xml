@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.chatCore.dao.ChatMessageMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.chatCore.model.ChatMessage" >
+        <id column="_logid" property="_logid" jdbcType="INTEGER" />
+        <result column="SendType" property="sendType" jdbcType="TINYINT" />
+        <result column="Sender" property="sender" jdbcType="INTEGER" />
+        <result column="SenderGUID" property="senderGUID" jdbcType="CHAR" />
+        <result column="SendTime" property="sendTime" jdbcType="TIMESTAMP" />
+        <result column="ReceiveType" property="receiveType" jdbcType="TINYINT" />
+        <result column="Receiver" property="receiver" jdbcType="INTEGER" />
+        <result column="ReceiverGUID" property="receiverGUID" jdbcType="CHAR" />
+        <result column="ReceiveTime" property="receiveTime" jdbcType="TIMESTAMP" />
+        <result column="ContentType" property="contentType" jdbcType="TINYINT" />
+        <result column="Content" property="content" jdbcType="LONGVARCHAR" />
+        
+        <result column="RefType" property="refType" jdbcType="TINYINT" />
+        <result column="RefID" property="refID" jdbcType="BIGINT" />
+        <result column="RefStatus" property="refStatus" jdbcType="TINYINT" />
+       
+    </resultMap>
+
+    <resultMap id="BaseResultVoMap" type="com.bithealth.chatCore.model.ChatMessageVo" >
+        <id column="_logid" property="_logid" jdbcType="INTEGER" />
+        <result column="SendType" property="sendType" jdbcType="TINYINT" />
+        <result column="Sender" property="sender" jdbcType="INTEGER" />
+        <result column="SenderGUID" property="senderGUID" jdbcType="CHAR" />
+        <result column="SendTime" property="sendTime" jdbcType="TIMESTAMP" />
+        <result column="ReceiveType" property="receiveType" jdbcType="TINYINT" />
+        <result column="Receiver" property="receiver" jdbcType="INTEGER" />
+        <result column="ReceiverGUID" property="receiverGUID" jdbcType="CHAR" />
+        <result column="ReceiveTime" property="receiveTime" jdbcType="TIMESTAMP" />
+        <result column="ContentType" property="contentType" jdbcType="TINYINT" />
+        <result column="Content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="userId" property="userId" jdbcType="INTEGER" />
+        <result column="userName" property="userName" jdbcType="CHAR" />
+        <result column="gender" property="gender" jdbcType="CHAR" />
+        <result column="birthDate" property="birthDate" jdbcType="DATE" />
+        <result column="workdepart" property="workdepart" jdbcType="CHAR" />
+        <result column="userGUID" property="userGUID" jdbcType="CHAR" />
+        <result column="headaddress" property="headaddress" jdbcType="CHAR" />
+        <result column="orderNumber" property="hasReply" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        _logid, SendType, Sender, SenderGUID, SendTime, ReceiveType, Receiver, ReceiverGUID, 
+        ReceiveTime, ContentType, Content,RefType,RefID,RefStatus
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.chatCore.model.ChatMessageExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from chat
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from chat
+        where _logid = #{_logid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.chatCore.model.ChatMessage" >
+        insert into chat (_logid, SendType, Sender, 
+            SenderGUID, SendTime, ReceiveType, 
+            Receiver, ReceiverGUID, ReceiveTime, 
+            ContentType, Content,RefType,RefID,RefStatus)
+        values (#{_logid,jdbcType=INTEGER}, #{sendType,jdbcType=TINYINT}, #{sender,jdbcType=INTEGER}, 
+            #{senderGUID,jdbcType=CHAR}, #{sendTime,jdbcType=TIMESTAMP}, #{receiveType,jdbcType=TINYINT}, 
+            #{receiver,jdbcType=INTEGER}, #{receiverGUID,jdbcType=CHAR}, #{receiveTime,jdbcType=TIMESTAMP}, 
+            #{contentType,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR},
+             #{refType,jdbcType=TINYINT},
+             #{refID,jdbcType=BIGINT},
+             #{refStatus,jdbcType=TINYINT}
+            )
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.chatCore.model.ChatMessageExample" resultType="java.lang.Integer" >
+        select count(*) from chat
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update chat
+        <set >
+            <if test="record._logid != null" >
+                _logid = #{record._logid,jdbcType=INTEGER},
+            </if>
+            <if test="record.sendType != null" >
+                SendType = #{record.sendType,jdbcType=TINYINT},
+            </if>
+            <if test="record.sender != null" >
+                Sender = #{record.sender,jdbcType=INTEGER},
+            </if>
+            <if test="record.senderGUID != null" >
+                SenderGUID = #{record.senderGUID,jdbcType=CHAR},
+            </if>
+            <if test="record.sendTime != null" >
+                SendTime = #{record.sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.receiveType != null" >
+                ReceiveType = #{record.receiveType,jdbcType=TINYINT},
+            </if>
+            <if test="record.receiver != null" >
+                Receiver = #{record.receiver,jdbcType=INTEGER},
+            </if>
+            <if test="record.receiverGUID != null" >
+                ReceiverGUID = #{record.receiverGUID,jdbcType=CHAR},
+            </if>
+            <if test="record.receiveTime != null" >
+                ReceiveTime = #{record.receiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.contentType != null" >
+                ContentType = #{record.contentType,jdbcType=TINYINT},
+            </if>
+            <if test="record.content != null" >
+                Content = #{record.content,jdbcType=LONGVARCHAR},
+            </if>
+            
+            <if test="record.refType != null" >
+                RefType = #{record.refType,jdbcType=TINYINT},
+            </if>
+            <if test="record.refID != null" >
+                RefID = #{record.refID,jdbcType=BIGINT},
+            </if>
+               <if test="record.refStatus != null" >
+                RefStatus = #{record.refStatus,jdbcType=TINYINT} 
+            </if>
+            
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update chat
+        set _logid = #{record._logid,jdbcType=INTEGER},
+            SendType = #{record.sendType,jdbcType=TINYINT},
+            Sender = #{record.sender,jdbcType=INTEGER},
+            SenderGUID = #{record.senderGUID,jdbcType=CHAR},
+            SendTime = #{record.sendTime,jdbcType=TIMESTAMP},
+            ReceiveType = #{record.receiveType,jdbcType=TINYINT},
+            Receiver = #{record.receiver,jdbcType=INTEGER},
+            ReceiverGUID = #{record.receiverGUID,jdbcType=CHAR},
+            ReceiveTime = #{record.receiveTime,jdbcType=TIMESTAMP},
+            ContentType = #{record.contentType,jdbcType=TINYINT},
+            Content = #{record.content,jdbcType=LONGVARCHAR},
+            RefType = #{record.refType,jdbcType=TINYINT}, 
+            RefID = #{record.refID,jdbcType=BIGINT},
+            RefStatus = #{record.refStatus,jdbcType=TINYINT} 
+            
+            
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.chatCore.model.ChatMessage" >
+        update chat
+        <set >
+            <if test="sendType != null" >
+                SendType = #{sendType,jdbcType=TINYINT},
+            </if>
+            <if test="sender != null" >
+                Sender = #{sender,jdbcType=INTEGER},
+            </if>
+            <if test="senderGUID != null" >
+                SenderGUID = #{senderGUID,jdbcType=CHAR},
+            </if>
+            <if test="sendTime != null" >
+                SendTime = #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiveType != null" >
+                ReceiveType = #{receiveType,jdbcType=TINYINT},
+            </if>
+            <if test="receiver != null" >
+                Receiver = #{receiver,jdbcType=INTEGER},
+            </if>
+            <if test="receiverGUID != null" >
+                ReceiverGUID = #{receiverGUID,jdbcType=CHAR},
+            </if>
+            <if test="receiveTime != null" >
+                ReceiveTime = #{receiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="contentType != null" >
+                ContentType = #{contentType,jdbcType=TINYINT},
+            </if>
+            <if test="content != null" >
+                Content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            
+              <if test="refType != null" >
+                RefType = #{refType,jdbcType=TINYINT},
+            </if>
+            <if test="refID != null" >
+                RefID = #{refID,jdbcType=BIGINT},
+            </if>
+               <if test="refStatus != null" >
+                RefStatus = #{refStatus,jdbcType=TINYINT} 
+            </if>
+            
+            
+            
+        </set>
+        where _logid = #{_logid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from chat
+        where _logid = #{_logid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.chatCore.model.ChatMessageExample" >
+        delete from chat
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+	<select id="selectByChat" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        SELECT *
+          FROM (SELECT SendType, Receiver, SendTime, _logid
+                  FROM chat a
+                 WHERE Sender = #{id,jdbcType=INTEGER} AND SendType = 1 
+                 UNION ALL
+                SELECT SendType, Sender AS MemberID, SendTime, _logid
+                  FROM chat a
+                 WHERE Receiver = #{id,jdbcType=INTEGER} AND ReceiveType = 1 
+                 ORDER BY SendTime DESC)t
+         GROUP BY Receiver
+         <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+	<select id="selectByChatCode" resultMap="BaseResultMap" parameterType="com.bithealth.chatCore.model.ChatMessage" >
+        select
+	        _logid, SendType, Sender, SenderGUID, SendTime, ReceiveType, Receiver, ReceiverGUID, 
+	        ReceiveTime, ContentType, LEFT(Content,24) AS contentStr ,Content,RefType,RefID,RefStatus
+        from chat
+        	where  ((Sender = #{sender,jdbcType=INTEGER} and Receiver = #{receiver,jdbcType=INTEGER}) or 
+        	(Sender = #{receiver,jdbcType=INTEGER} and Receiver = #{sender,jdbcType=INTEGER}))
+        	order by SendTime desc
+    </select>
+
+	<select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.chatCore.model.ChatMessageExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from chat
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <!-- 新加  begin -->
+    <select id="selectDoctorToMemberMsgsPage" resultMap="BaseResultVoMap" parameterType="java.util.Map" >
+        SELECT cc._logid,cc.orderNumber,cc.Content,cc.SendTime,cc.ContentType,dd.Docid AS userId,dd.DocName AS userName,dd.Gender AS gender,dd.BirthDate AS birthDate, dd.WorkDepart AS workdepart,dd.DocGUID AS userGUID,dd.HeadAddress AS headaddress 
+        FROM
+		(
+		   SELECT MAX(aaa._logid) AS _logid,aaa.orderNumber,aaa.Docid,aaa.Content,aaa.SendTime,aaa.ContentType 
+           FROM
+           (
+               SELECT aa._logid, 2 AS orderNumber,bb.Sender AS Docid,bb.Content,bb.SendTime,bb.ContentType FROM ( SELECT MAX(a._logid) AS _logid FROM (SELECT _logid, Sender,SendTime FROM chat WHERE Receiver = #{receiver,jdbcType=INTEGER}
+               AND SendType = 1 ORDER BY SendTime DESC)a GROUP BY Sender  ORDER BY a.SendTime DESC) aa LEFT JOIN chat bb ON aa._logid = bb._logid
+               UNION
+               SELECT aa._logid, 1 AS orderNumber,bb.Receiver AS Docid,bb.Content,bb.SendTime,bb.ContentType FROM ( SELECT MAX(a._logid) AS _logid FROM (SELECT _logid, Receiver,SendTime FROM chat WHERE Sender = #{receiver,jdbcType=INTEGER} 
+               AND SendType = 2 ORDER BY SendTime DESC)a GROUP BY Receiver  ORDER BY a.SendTime DESC) aa LEFT JOIN chat bb ON aa._logid = bb._logid 
+               ORDER BY SendTime DESC
+           )aaa GROUP BY aaa.Docid
+		)cc LEFT JOIN odoc dd ON cc.Docid = dd.Docid
+		ORDER BY SendTime DESC 
+        limit ${pageNow},${pageSize}
+    </select>
+    
+    <select id="selectMemberToDoctorsgsPage" resultMap="BaseResultVoMap" parameterType="java.util.Map" >
+        SELECT mm._logid,mm.orderNumber,mm.Content,mm.SendTime,mm.ContentType,nn.* FROM
+		(
+		    SELECT DISTINCT o.Memberid AS userId,o.MemName AS userName,o.Gender AS gender,o.BirthDate AS birthDate,o.memberGUID AS userGUID,o.HeadAddress AS headaddress
+		    FROM omem o, ompb m, odmt d, dgp1 g
+		    WHERE o.useTag = 'T' AND o.orgId = g.OrgId AND g.Docid = #{receiver,jdbcType=INTEGER} AND m.memberid = o.memberid AND m.memGrpid = d.MemGrpid AND d.OdgpId = g.OdgpId
+		) nn LEFT JOIN
+		(
+		    SELECT MAX(aaa._logid) AS _logid,aaa.orderNumber,aaa.userId,aaa.Content,aaa.SendTime,aaa.ContentType
+		    FROM
+		    (
+		        SELECT aa._logid, 2 AS orderNumber,bb.Sender AS userId,bb.Content,bb.SendTime,bb.ContentType FROM (SELECT MAX(a._logid) AS _logid FROM (SELECT _logid, Sender,SendTime FROM chat WHERE Receiver = #{receiver,jdbcType=INTEGER} 
+				AND SendType = 2 ORDER BY SendTime DESC)a GROUP BY Sender  ORDER BY a.SendTime DESC)aa LEFT JOIN chat bb ON aa._logid = bb._logid
+				UNION
+				SELECT aa._logid, 1 AS orderNumber,bb.Receiver AS userId,bb.Content,bb.SendTime,bb.ContentType FROM ( SELECT MAX(a._logid) AS _logid FROM (SELECT _logid, Receiver,SendTime FROM chat WHERE Sender = #{receiver,jdbcType=INTEGER} 
+				AND SendType = 1 ORDER BY SendTime DESC)a GROUP BY Receiver  ORDER BY a.SendTime DESC) aa LEFT JOIN chat bb ON aa._logid = bb._logid
+				ORDER BY SendTime DESC
+		    )aaa GROUP BY aaa.userId
+		)mm ON mm.userId = nn.userId
+        <if test="userName != null " >
+           where nn.userName like #{userName,jdbcType=CHAR}
+       </if>
+       ORDER BY mm.SendTime DESC 
+       limit ${pageNow},${pageSize}
+    </select>
+    
+    <!-- 新加  end -->
+	<select id="selectSendersNewMsgToReceiverPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
+       SELECT b.* FROM 
+              ( SELECT MAX(_logid) AS _logid, Sender FROM chat WHERE Receiver = #{receiver,jdbcType=INTEGER} 
+              AND Sender IN (${senders}) GROUP BY Sender)a 
+              LEFT JOIN chat b 
+              ON a._logid = b._logid 
+              ORDER BY b.SendTime DESC
+    </select>
+     <insert id="insertSelective" parameterType="com.bithealth.chatCore.model.ChatMessage" useGeneratedKeys="true" keyProperty="_logid">
+        insert into chat
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="_logid != null" >
+                _logid,
+            </if>
+            <if test="sendType != null" >
+                SendType,
+            </if>
+            <if test="sender != null" >
+                Sender,
+            </if>
+            <if test="sendTime != null" >
+                SendTime,
+            </if>
+            <if test="receiverGUID != null" >
+                ReceiverGUID,
+        	</if>
+        	<if test="senderGUID != null" >
+                SenderGUID,
+         	</if>
+            <if test="receiveType != null" >
+                ReceiveType,
+            </if>
+            <if test="receiver != null" >
+                Receiver,
+            </if>
+            <if test="receiveTime != null" >
+                ReceiveTime,
+            </if>
+            <if test="contentType != null" >
+                ContentType,
+            </if>
+            <if test="content != null" >
+                Content,
+            </if>
+            
+            <if test="refType != null" >
+                 refType, 
+            </if>
+            <if test="refID != null" >
+                 refID, 
+            </if>
+           <if test="refStatus != null" >
+                 refStatus, 
+            </if> 
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="_logid != null" >
+                #{_logid,jdbcType=INTEGER},
+            </if>
+            <if test="sendType != null" >
+                #{sendType,jdbcType=TINYINT},
+            </if>
+            <if test="sender != null" >
+                #{sender,jdbcType=INTEGER},
+            </if>
+            <if test="sendTime != null" >
+                #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiverGUID != null" >
+                 #{receiverGUID,jdbcType=CHAR},
+	        </if>
+			<if test="senderGUID != null" >
+                #{senderGUID,jdbcType=CHAR},
+         	</if>
+            
+            <if test="receiveType != null" >
+                #{receiveType,jdbcType=TINYINT},
+            </if>
+            <if test="receiver != null" >
+                #{receiver,jdbcType=INTEGER},
+            </if>
+            <if test="receiveTime != null" >
+                #{receiveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="contentType != null" >
+                #{contentType,jdbcType=TINYINT},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            
+            
+              <if test="refType != null" >
+                 #{refType,jdbcType=TINYINT},
+            </if>
+            <if test="refID != null" >
+                 #{refID,jdbcType=BIGINT},
+            </if>
+               <if test="refStatus != null" >
+                  #{refStatus,jdbcType=TINYINT} 
+            </if>
+            
+        </trim>
+    </insert>
+
+</mapper>

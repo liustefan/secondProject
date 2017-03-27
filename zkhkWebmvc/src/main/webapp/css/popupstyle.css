@@ -1,0 +1,18 @@
+.float {
+	float: right;
+	margin-right: 15px;
+	margin-top: 5px;
+}
+
+.table {
+	text-align: center;
+	width: 100%;
+	border: solid #000;
+	border-width: 1px 0 0 1px;
+}
+
+.table td, .table th {
+	border: solid #000;
+	border-width: 0 1px 1px 0;
+	padding: 5px 0;
+}

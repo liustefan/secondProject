@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.inspectCore.physical.dao.PhHealthexamMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.inspectCore.physical.model.PhHealthexam" >
+        <id column="HExamID" property="HExamID" jdbcType="BIGINT" />
+        <result column="MemberID" property="memberID" jdbcType="INTEGER" />
+        <result column="Unique_ID" property="unique_ID" jdbcType="VARCHAR" />
+        <result column="RefCompany" property="refCompany" jdbcType="TINYINT" />
+        <result column="RefDataPK" property="refDataPK" jdbcType="VARCHAR" />
+        <result column="IDCard" property="IDCard" jdbcType="VARCHAR" />
+        <result column="Name" property="name" jdbcType="VARCHAR" />
+        <result column="ExamDate" property="examDate" jdbcType="TIMESTAMP" />
+        <result column="ResponsibleDrName" property="responsibleDrName" jdbcType="VARCHAR" />
+        <result column="GetTime" property="getTime" jdbcType="TIMESTAMP" />
+        <result column="IsDeleted" property="isDeleted" jdbcType="TINYINT" />
+        <result column="CreateDrID" property="createDrID" jdbcType="INTEGER" />
+        <result column="CreateDrName" property="createDrName" jdbcType="VARCHAR" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateDrID" property="updateDrID" jdbcType="INTEGER" />
+        <result column="UpdateDrName" property="updateDrName" jdbcType="VARCHAR" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="LatestTime" property="latestTime" jdbcType="TIMESTAMP" />
+<!--         <association column="MemberID" property="member" select="com.bithealth.memberCore.member.dao.MemberMapper.selectByPrimaryKey"/> -->
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        HExamID, MemberID, Unique_ID, RefCompany, RefDataPK, IDCard, Name, ExamDate, ResponsibleDrName, 
+        GetTime, IsDeleted, CreateDrID, CreateDrName, CreateTime, UpdateDrID, UpdateDrName, 
+        UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ph_healthexam
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ph_healthexam
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select ph_healthexam.*, 
+        omem.Memberid AS `member.memberid`, 
+		omem.MemName AS `member.memname`, 
+		omem.Gender AS `member.gender`, 
+		omem.BirthDate AS `member.birthdate`, 
+		omem.Tel AS `member.tel`, 
+		omem.IdCard AS `member.idcard`
+        from ph_healthexam join omem on ph_healthexam.MemberID = omem.Memberid
+        where HExamID = #{HExamID,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexam" >
+        <selectKey resultType="java.lang.Long" keyProperty="HExamID" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into ph_healthexam (HExamID, MemberID, Unique_ID, 
+            RefCompany, RefDataPK, IDCard, 
+            Name, ExamDate, ResponsibleDrName, 
+            GetTime, IsDeleted, CreateDrID, 
+            CreateDrName, CreateTime, UpdateDrID, 
+            UpdateDrName, UpdateTime)
+        values (#{HExamID,jdbcType=BIGINT}, #{memberID,jdbcType=INTEGER}, #{unique_ID,jdbcType=VARCHAR}, 
+            #{refCompany,jdbcType=TINYINT}, #{refDataPK,jdbcType=VARCHAR}, #{IDCard,jdbcType=VARCHAR}, 
+            #{name,jdbcType=VARCHAR}, #{examDate,jdbcType=TIMESTAMP}, #{responsibleDrName,jdbcType=VARCHAR}, 
+            #{getTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}, #{createDrID,jdbcType=INTEGER}, 
+            #{createDrName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateDrID,jdbcType=INTEGER}, 
+            #{updateDrName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexam" >
+        <selectKey resultType="java.lang.Long" keyProperty="HExamID" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into ph_healthexam
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            HExamID,
+            <if test="memberID != null" >
+                MemberID,
+            </if>
+            <if test="unique_ID != null" >
+                Unique_ID,
+            </if>
+            <if test="refCompany != null" >
+                RefCompany,
+            </if>
+            <if test="refDataPK != null" >
+                RefDataPK,
+            </if>
+            <if test="IDCard != null" >
+                IDCard,
+            </if>
+            <if test="name != null" >
+                Name,
+            </if>
+            <if test="examDate != null" >
+                ExamDate,
+            </if>
+            <if test="responsibleDrName != null" >
+                ResponsibleDrName,
+            </if>
+            <if test="getTime != null" >
+                GetTime,
+            </if>
+            <if test="isDeleted != null" >
+                IsDeleted,
+            </if>
+            <if test="createDrID != null" >
+                CreateDrID,
+            </if>
+            <if test="createDrName != null" >
+                CreateDrName,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateDrID != null" >
+                UpdateDrID,
+            </if>
+            <if test="updateDrName != null" >
+                UpdateDrName,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            #{HExamID,jdbcType=BIGINT},
+            <if test="memberID != null" >
+                #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="unique_ID != null" >
+                #{unique_ID,jdbcType=VARCHAR},
+            </if>
+            <if test="refCompany != null" >
+                #{refCompany,jdbcType=TINYINT},
+            </if>
+            <if test="refDataPK != null" >
+                #{refDataPK,jdbcType=VARCHAR},
+            </if>
+            <if test="IDCard != null" >
+                #{IDCard,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="examDate != null" >
+                #{examDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="responsibleDrName != null" >
+                #{responsibleDrName,jdbcType=VARCHAR},
+            </if>
+            <if test="getTime != null" >
+                #{getTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createDrID != null" >
+                #{createDrID,jdbcType=INTEGER},
+            </if>
+            <if test="createDrName != null" >
+                #{createDrName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDrID != null" >
+                #{updateDrID,jdbcType=INTEGER},
+            </if>
+            <if test="updateDrName != null" >
+                #{updateDrName,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamExample" resultType="java.lang.Integer" >
+        select count(*) from ph_healthexam
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ph_healthexam
+        <set >
+            <if test="record.HExamID != null" >
+                HExamID = #{record.HExamID,jdbcType=BIGINT},
+            </if>
+            <if test="record.memberID != null" >
+                MemberID = #{record.memberID,jdbcType=INTEGER},
+            </if>
+            <if test="record.unique_ID != null" >
+                Unique_ID = #{record.unique_ID,jdbcType=VARCHAR},
+            </if>
+            <if test="record.refCompany != null" >
+                RefCompany = #{record.refCompany,jdbcType=TINYINT},
+            </if>
+            <if test="record.refDataPK != null" >
+                RefDataPK = #{record.refDataPK,jdbcType=VARCHAR},
+            </if>
+            <if test="record.IDCard != null" >
+                IDCard = #{record.IDCard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null" >
+                Name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.examDate != null" >
+                ExamDate = #{record.examDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.responsibleDrName != null" >
+                ResponsibleDrName = #{record.responsibleDrName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.getTime != null" >
+                GetTime = #{record.getTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isDeleted != null" >
+                IsDeleted = #{record.isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="record.createDrID != null" >
+                CreateDrID = #{record.createDrID,jdbcType=INTEGER},
+            </if>
+            <if test="record.createDrName != null" >
+                CreateDrName = #{record.createDrName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateDrID != null" >
+                UpdateDrID = #{record.updateDrID,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateDrName != null" >
+                UpdateDrName = #{record.updateDrName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateTime != null" >
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ph_healthexam
+        set HExamID = #{record.HExamID,jdbcType=BIGINT},
+            MemberID = #{record.memberID,jdbcType=INTEGER},
+            Unique_ID = #{record.unique_ID,jdbcType=VARCHAR},
+            RefCompany = #{record.refCompany,jdbcType=TINYINT},
+            RefDataPK = #{record.refDataPK,jdbcType=VARCHAR},
+            IDCard = #{record.IDCard,jdbcType=VARCHAR},
+            Name = #{record.name,jdbcType=VARCHAR},
+            ExamDate = #{record.examDate,jdbcType=TIMESTAMP},
+            ResponsibleDrName = #{record.responsibleDrName,jdbcType=VARCHAR},
+            GetTime = #{record.getTime,jdbcType=TIMESTAMP},
+<!--             IsDeleted = #{record.isDeleted,jdbcType=TINYINT}, -->
+<!--             CreateDrID = #{record.createDrID,jdbcType=INTEGER}, -->
+<!--             CreateDrName = #{record.createDrName,jdbcType=VARCHAR}, -->
+<!--             CreateTime = #{record.createTime,jdbcType=TIMESTAMP}, -->
+            UpdateDrID = #{record.updateDrID,jdbcType=INTEGER},
+            UpdateDrName = #{record.updateDrName,jdbcType=VARCHAR},
+            UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexam" >
+        update ph_healthexam
+        <set >
+            <if test="memberID != null" >
+                MemberID = #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="unique_ID != null" >
+                Unique_ID = #{unique_ID,jdbcType=VARCHAR},
+            </if>
+            <if test="refCompany != null" >
+                RefCompany = #{refCompany,jdbcType=TINYINT},
+            </if>
+            <if test="refDataPK != null" >
+                RefDataPK = #{refDataPK,jdbcType=VARCHAR},
+            </if>
+            <if test="IDCard != null" >
+                IDCard = #{IDCard,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                Name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="examDate != null" >
+                ExamDate = #{examDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="responsibleDrName != null" >
+                ResponsibleDrName = #{responsibleDrName,jdbcType=VARCHAR},
+            </if>
+            <if test="getTime != null" >
+                GetTime = #{getTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null" >
+                IsDeleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createDrID != null" >
+                CreateDrID = #{createDrID,jdbcType=INTEGER},
+            </if>
+            <if test="createDrName != null" >
+                CreateDrName = #{createDrName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDrID != null" >
+                UpdateDrID = #{updateDrID,jdbcType=INTEGER},
+            </if>
+            <if test="updateDrName != null" >
+                UpdateDrName = #{updateDrName,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where HExamID = #{HExamID,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexam" >
+        update ph_healthexam
+        set MemberID = #{memberID,jdbcType=INTEGER},
+            Unique_ID = #{unique_ID,jdbcType=VARCHAR},
+            RefCompany = #{refCompany,jdbcType=TINYINT},
+            RefDataPK = #{refDataPK,jdbcType=VARCHAR},
+            IDCard = #{IDCard,jdbcType=VARCHAR},
+            Name = #{name,jdbcType=VARCHAR},
+            ExamDate = #{examDate,jdbcType=TIMESTAMP},
+            ResponsibleDrName = #{responsibleDrName,jdbcType=VARCHAR},
+            GetTime = #{getTime,jdbcType=TIMESTAMP},
+<!--             IsDeleted = #{isDeleted,jdbcType=TINYINT}, -->
+<!--             CreateDrID = #{createDrID,jdbcType=INTEGER}, -->
+<!--             CreateDrName = #{createDrName,jdbcType=VARCHAR}, -->
+<!--             CreateTime = #{createTime,jdbcType=TIMESTAMP}, -->
+            UpdateDrID = #{updateDrID,jdbcType=INTEGER},
+            UpdateDrName = #{updateDrName,jdbcType=VARCHAR},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where HExamID = #{HExamID,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from ph_healthexam
+        where HExamID = #{HExamID,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamExample" >
+    	<if test="_parameter != null and _parameter != '' ">
+        delete from ph_healthexam
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+
+	<!-- 查询会员最新健康体检信息 -->
+	<select id="selectLatestPhHealthexamByMemberId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        SELECT
+        <include refid="Base_Column_List" />, IFNULL(UpdateTime, GetTime) AS LatestTime
+        FROM ph_healthexam WHERE IsDeleted = 0 AND MemberID = #{memberID,jdbcType=INTEGER}
+        ORDER BY LatestTime DESC LIMIT 1
+    </select>
+    <!-- 对接调用 -->
+    <select id="selectPhHealthexamList" resultMap="BaseResultMap" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexam" >  
+  		select a.* 
+    	from ph_healthexam a ,omem b ,d_omem_relation c
+   		where DATE_FORMAT(a.GetTime,'%Y-%m-%d') = str_to_date(#{getTime},'%Y-%m-%d')
+	 	and a.Unique_ID = b.unique_id 
+	 	and b.unique_id = c.unique_id
+	 	and b.source = #{member.source}
+	 	and c.prgid LIKE CONCAT(#{memRelation.prgid},'%' );
+   </select>
+   	<select id="selectPage" resultMap="BaseResultMap" parameterType="map">
+	    SELECT ph_healthexam.HExamID, ph_healthexam.ExamDate, ph_healthexam.ResponsibleDrName, ph_healthexam.RefCompany, ph_healthexam.MemberID, 
+		omem.Memberid AS `member.memberid`, 
+		omem.MemName AS `member.memname`, 
+		omem.Gender AS `member.gender`, 
+		omem.BirthDate AS `member.birthdate`, 
+		omem.Tel AS `member.tel`, 
+		omem.IdCard AS `member.idcard`
+		<if test="model.criteria != null">
+		,ph_healthexamdetail.healthEvaluate AS `phHealthexamdetail.healthEvaluate`, 
+		ph_healthexamdetail.HealthEvaluate_Desc AS `phHealthexamdetail.healthEvaluate_Desc`
+		</if>
+		FROM ph_healthexam 
+		JOIN omem ON ph_healthexam.MemberID = omem.MemberID 
+		JOIN ompb ON ph_healthexam.MemberID = ompb.memberid 
+		JOIN odmt ON ompb.MemGrpid = odmt.MemGrpid 
+		<if test="model.criteria != null">
+		JOIN ph_healthexamdetail ON ph_healthexam.HExamID=ph_healthexamdetail.HExamID 
+		</if> 
+		WHERE ph_healthexam.IsDeleted = 0
+		<choose>
+			<when test="model.memberID != null">
+				and ph_healthexam.MemberID = #{model.memberID}
+			</when>
+			<otherwise>
+				and odmt.OdgpId in
+				<foreach collection="odgpIds" item="listItem" open="(" close=")" separator="," >
+	                #{listItem}
+	            </foreach>
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="model.criteria != null">
+				<if test="model.criteria !=''">
+				and (omem.MemName like CONCAT('%', #{model.criteria}, '%') or omem.Tel like CONCAT('%', #{model.criteria}, '%') or omem.IdCard like CONCAT('%', #{model.criteria}, '%'))
+				</if>
+			</when>
+			<otherwise>
+				<if test="model.member != null">
+					<if test="model.member.memname != null and model.member.memname !=''">
+						and omem.MemName like CONCAT('%', #{model.member.memname}, '%')
+					</if>
+					<if test="model.member.tel != null and model.member.tel !=''">
+						and omem.Tel like CONCAT('%', #{model.member.tel}, '%')
+					</if>
+					<if test="model.member.idcard != null and model.member.idcard !=''">
+						and omem.IdCard like CONCAT('%', #{model.member.idcard}, '%')
+					</if>
+				</if>
+			</otherwise>
+		</choose>
+		<if test="model.startExamDate != null">
+			and ph_healthexam.ExamDate <![CDATA[>=]]> #{model.startExamDate}
+		</if>
+		<if test="model.endExamDate != null">
+			and ph_healthexam.ExamDate <![CDATA[<=]]> #{model.endExamDate}
+		</if>
+		GROUP BY ph_healthexam.HExamID ORDER BY ph_healthexam.ExamDate DESC
+	</select>
+</mapper>

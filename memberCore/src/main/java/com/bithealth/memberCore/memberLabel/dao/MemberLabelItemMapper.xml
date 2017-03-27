@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.memberLabel.dao.MemberLabelItemMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.memberLabel.model.MemberLabelItem" >
+        <id column="LogID" property="logID" jdbcType="INTEGER" />
+        <result column="MemberID" property="memberID" jdbcType="INTEGER" />
+        <result column="LItemID" property="LItemID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, MemberID, LItemID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.memberLabel.model.MemberLabelItemExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem_labelitem
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.memberLabel.model.MemberLabelItemExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem_labelitem
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from omem_labelitem
+        where LogID = #{logID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.memberLabel.model.MemberLabelItem" useGeneratedKeys="true" keyProperty="logID" >
+        insert into omem_labelitem (MemberID, LItemID, UpdateTime
+            )
+        values (#{memberID,jdbcType=INTEGER}, #{LItemID,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.memberLabel.model.MemberLabelItem" useGeneratedKeys="true" keyProperty="logID" >
+        insert into omem_labelitem
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberID != null" >
+                MemberID,
+            </if>
+            <if test="LItemID != null" >
+                LItemID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberID != null" >
+                #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="LItemID != null" >
+                #{LItemID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.memberLabel.model.MemberLabelItemExample" resultType="java.lang.Integer" >
+        select count(*) from omem_labelitem
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update omem_labelitem
+        <set >
+            <if test="record.logID != null" >
+                LogID = #{record.logID,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberID != null" >
+                MemberID = #{record.memberID,jdbcType=INTEGER},
+            </if>
+            <if test="record.LItemID != null" >
+                LItemID = #{record.LItemID,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null" >
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update omem_labelitem
+        set LogID = #{record.logID,jdbcType=INTEGER},
+            MemberID = #{record.memberID,jdbcType=INTEGER},
+            LItemID = #{record.LItemID,jdbcType=INTEGER},
+            UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.memberLabel.model.MemberLabelItem" >
+        update omem_labelitem
+        <set >
+            <if test="memberID != null" >
+                MemberID = #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="LItemID != null" >
+                LItemID = #{LItemID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.memberLabel.model.MemberLabelItem" >
+        update omem_labelitem
+        set MemberID = #{memberID,jdbcType=INTEGER},
+            LItemID = #{LItemID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from omem_labelitem
+        where LogID = #{logID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.memberLabel.model.MemberLabelItemExample" >
+        delete from omem_labelitem
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <insert id="insertBatch" parameterType="java.util.List">
+    insert into omem_labelitem (MemberID, LItemID, UpdateTime)
+        values 
+        <foreach collection="list" item="item" separator=",">
+         (#{item.memberID,jdbcType=INTEGER}, #{item.LItemID,jdbcType=INTEGER}, #{item.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+    
+    <!-- 自定义SQL -->
+    <select id="selectMemberLabelItems" resultMap="com.bithealth.memberCore.memberLabel.dao.LabelItemMapper.BaseResultMap" parameterType="map">
+    SELECT it.`ItemName`,it.`LItemID` FROM `tb_label_item` it INNER JOIN `omem_labelitem` o ON it.`LItemID`=o.`LItemID` 
+    AND it.`ItemStatus`=#{status} AND o.`MemberID`=#{memberId}
+    <if test="items != null and items != ''">
+    AND it.`LItemID` IN 
+    <foreach collection="items" open="(" close=")" separator="," item="item">
+    #{item.litemid}
+    </foreach>
+    </if>
+    
+    
+    </select>
+
+</mapper>

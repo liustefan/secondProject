@@ -1,0 +1,143 @@
+/* 
+* editHypertensionFllow.jsp页面样式
+*/
+
+.out-box {
+	border: 1px solid #999999;
+	height: 600px;
+	overflow-y: scroll;
+}
+
+.detail {
+	margin: 10px 0;
+}
+
+.detail .detail-list {
+	height: 30px;
+	line-height: normal !important;
+	display: inline-block;
+	padding-right: 20px;
+}
+
+/* 单选框和复选框居中显示 */
+.input-center {
+	float: left;
+	margin: 3px 4px 0 0;
+	margin-top:0\9 !important;
+}
+
+.span-center {
+	display: inline-block;
+	float: left;
+	margin-right: 12px;
+}
+
+.input-margin {
+	margin: 0 10px;
+}
+
+.span-margin {
+	margin: 2px 8px 2px 0;
+	display: inline-block;
+}
+
+.none-border {
+	border-right: 0 !important;
+}
+
+.button-box {
+	width: 42px;
+	margin: 0 auto;
+}
+
+.full {
+	padding: 0 !important;
+	margin: 0 !important;
+	text-align: center;
+	border-left: 0 !important;
+}
+
+.small-table {
+	width: 99% !important;
+	border-collapse: collapse;
+}
+
+/* 输入框宽度调整 */
+.inspect {
+	width: 80%;
+}
+
+.reason {
+	width: 80%;
+}
+
+.span-width {
+	width: 60%;
+}
+
+.cancel-btn {
+    margin: 0 5px;
+    padding: 0 15px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    font-family: "Microsoft YaHei", "SimSun";
+    font-weight: normal;
+    text-decoration: none;
+    color: black;
+}
+
+.btn-center {
+	padding-top: 10px;
+	text-align: center;
+}
+
+.follow-date {
+	background: url("../img/u17.png") no-repeat scroll right center white;
+    background-size: 15px 15px;
+    padding: 2px 10px;
+    background-origin: content-box;
+    border: 1px inset;
+}
+
+.span-align {
+	margin-right: 26px;
+    display: inline-block;
+}
+
+.fl-center {
+    float: left;
+    margin-top: 5px;
+}
+
+.fixed-width {
+	width: 400px;
+}
+
+.error {color: red;}
+
+/* .table-content {
+	width: 100%;
+	border:1px solid  #000;
+	border-collapse: collapse;
+}
+
+.table-content th {
+	width: 15%;
+	text-align: right;
+	background-color: #bcdee0;
+	padding: 5px 8px;
+	border:1px solid  #000;
+	fone
+}
+
+.table-content td {
+	padding: 5px 8px;
+	border:1px solid  #000;
+}
+
+.table-content tr:nth-child(even) {background-color: #e0f1f3;}
+
+.table-content tr:nth-child(odd) {background-color: #fff;} */

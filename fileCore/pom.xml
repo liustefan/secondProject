@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.bithealth</groupId>
+	<artifactId>fileCore</artifactId>
+	<version>3.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>fileCore</name>
+
+	<parent>
+		<groupId>com.bithealth</groupId>
+		<artifactId>platform-pom</artifactId>
+		<version>3.0.0</version>
+
+	</parent> 
+	
+	<dependencies>
+	
+	 <dependency>
+			<groupId>rt</groupId>
+			<artifactId>rt</artifactId>
+			<version>1.7</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>jce</groupId>
+			<artifactId>jce</artifactId>
+			<version>1.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.bithealth</groupId>
+			<artifactId>zkhkSDK</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+<dependency>
+  <groupId>it.sauronsoftware</groupId>
+  <artifactId>jave</artifactId>
+  <version>1.0.2</version>
+</dependency>
+
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.bithealth</groupId>
+			<artifactId>platform-common</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+<!-- 
+		<dependency>
+			<groupId>com.bithealth</groupId>
+			<artifactId>memberCore</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.bithealth</groupId>
+			<artifactId>measureCore</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		 -->
+	
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+	</dependencies>
+</project>

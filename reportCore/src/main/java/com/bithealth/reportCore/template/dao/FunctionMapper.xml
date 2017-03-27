@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.reportCore.template.dao.FunctionMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.reportCore.template.model.Function" >
+        <id column="FunId" property="funId" jdbcType="SMALLINT" />
+        <result column="FunName" property="funName" jdbcType="VARCHAR" />
+        <result column="FunDes" property="funDes" jdbcType="VARCHAR" />
+        <result column="Tag" property="tag" jdbcType="CHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        FunId, FunName, FunDes, Tag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.FunctionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ofun
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.FunctionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ofun
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+        select 
+        <include refid="Base_Column_List" />
+        from ofun
+        where FunId = #{funId,jdbcType=SMALLINT}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.reportCore.template.model.Function" >
+        insert into ofun
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="funId != null" >
+                FunId,
+            </if>
+            <if test="funName != null" >
+                FunName,
+            </if>
+            <if test="funDes != null" >
+                FunDes,
+            </if>
+            <if test="tag != null" >
+                Tag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="funId != null" >
+                #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="funName != null" >
+                #{funName,jdbcType=VARCHAR},
+            </if>
+            <if test="funDes != null" >
+                #{funDes,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.reportCore.template.model.FunctionExample" resultType="java.lang.Integer" >
+        select count(*) from ofun
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update ofun
+            <set >
+                <if test="record.funId != null" >
+                    FunId = #{record.funId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.funName != null" >
+                    FunName = #{record.funName,jdbcType=VARCHAR},
+                </if>
+                <if test="record.funDes != null" >
+                    FunDes = #{record.funDes,jdbcType=VARCHAR},
+                </if>
+                <if test="record.tag != null" >
+                    Tag = #{record.tag,jdbcType=CHAR},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update ofun
+            set FunId = #{record.funId,jdbcType=SMALLINT},
+                FunName = #{record.funName,jdbcType=VARCHAR},
+                FunDes = #{record.funDes,jdbcType=VARCHAR},
+                Tag = #{record.tag,jdbcType=CHAR}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.reportCore.template.model.Function" >
+        update ofun
+        <set >
+            <if test="funName != null" >
+                FunName = #{funName,jdbcType=VARCHAR},
+            </if>
+            <if test="funDes != null" >
+                FunDes = #{funDes,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                Tag = #{tag,jdbcType=CHAR},
+            </if>
+        </set>
+        where FunId = #{funId,jdbcType=SMALLINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.reportCore.template.model.Function" >
+        update ofun
+        set FunName = #{funName,jdbcType=VARCHAR},
+            FunDes = #{funDes,jdbcType=VARCHAR},
+            Tag = #{tag,jdbcType=CHAR}
+        where FunId = #{funId,jdbcType=SMALLINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+        delete from ofun
+        where FunId = #{funId,jdbcType=SMALLINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.reportCore.template.model.FunctionExample" >
+        <if test="_parameter != null" >
+            delete from ofun
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

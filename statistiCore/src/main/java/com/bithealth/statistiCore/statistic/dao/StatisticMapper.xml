@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+   
+<mapper namespace="com.bithealth.statistiCore.statistic.dao.StatisticMapper"> 
+    <!--查询存储过程,展示数据-->
+     <!--测量状况统计-->
+     
+    <parameterMap type="map" id="selectMeasurementStatics">  
+     	<parameter property="iOrgID" jdbcType="INTEGER" mode="IN"/>    
+    	<parameter property="dSMeasureTime" jdbcType="VARCHAR" mode="IN"/>    
+   		<parameter property="dEMeasureTime" jdbcType="VARCHAR" mode="IN"/>    
+   		<parameter property="dSBirthDate" jdbcType="VARCHAR" mode="IN"/>    
+  		<parameter property="dEBirthDate" jdbcType="VARCHAR" mode="IN"/>    
+   		<parameter property="cGender" jdbcType="VARCHAR" mode="IN"/> 
+   		<parameter property="vDiseaseIDList" jdbcType="VARCHAR" mode="IN"/>    
+   		<parameter property="iCurrentPageIndex" jdbcType="INTEGER" mode="IN"/> 
+   		<parameter property="iPageSize" jdbcType="INTEGER" mode="IN"/>    
+   		<parameter property="iCount" jdbcType="INTEGER" mode="OUT"/>  
+ 	</parameterMap>    
+    <select id="exProcSelectMeasurementStatics" parameterMap="selectMeasurementStatics" resultType="java.util.Map" statementType="CALLABLE">
+        	 CALL proc_getMeasureInfoStatistic(?,?,?,?,?,?,?,?,?,?)
+        
+    </select>
+     <!--查询人口基本状况-->
+     <parameterMap type="map" id="selectPopulation">  
+     	<parameter property="iOrgID" jdbcType="INTEGER" mode="IN"/>    
+ 	</parameterMap>    
+    <select id="exProcSelectPopulation" parameterMap="selectPopulation" resultType="java.util.Map" statementType="CALLABLE">
+        	 CALL proc_statistic_PopulationBaseInfo(?)
+    </select>
+     <!--统计老年人接受健康管理状况-->
+     <parameterMap type="map" id="selectElderlyHealthManagement">  
+     	<parameter property="iOrgID" jdbcType="INTEGER" mode="IN"/>    
+    	<parameter property="iYear" jdbcType="INTEGER" mode="IN"/>    
+ 	</parameterMap> 
+	<select id="exProcSelectElderlyHealthManagement" parameterMap="selectElderlyHealthManagement" resultType="java.util.Map" statementType="CALLABLE">
+       		CALL proc_statistic_HealthManageInfo(?,?)
+    </select>
+     <!--统计老年人年度体检信息-->
+     <parameterMap type="map" id="selectElderlyHealthByYear">  
+     	<parameter property="iOrgID" jdbcType="INTEGER" mode="IN"/>    
+    	<parameter property="iYear" jdbcType="INTEGER" mode="IN"/>    
+ 	</parameterMap> 
+    <select id="exProcSelectElderlyHealthByYear" parameterMap="selectElderlyHealthByYear" resultType="java.util.Map" statementType="CALLABLE">
+        	CALL proc_statistic_ExamInfoByYear(?,?)
+    </select>
+     <!--统计高血压随访-->
+     <parameterMap type="map" id="selectHypertensionVisit">  
+     	<parameter property="iOrgID" jdbcType="INTEGER" mode="IN"/>    
+    	<parameter property="iYear" jdbcType="INTEGER" mode="IN"/>    
+ 	</parameterMap> 
+    <select id="exProcSelectHypertensionVisit" parameterMap="selectHypertensionVisit" resultType="java.util.Map"  statementType="CALLABLE">
+         	CALL proc_statistic_HypertensionVisit(?,?)
+    </select>
+  	<!--统计糖尿病随访-->
+  	<parameterMap type="map" id="selectDiabetesVisit">  
+     	<parameter property="iOrgID" jdbcType="INTEGER" mode="IN"/>    
+    	<parameter property="iYear" jdbcType="INTEGER" mode="IN"/>    
+ 	</parameterMap> 
+    <select id="exProcSelectDiabetesVisit" parameterMap="selectDiabetesVisit" resultType="java.util.Map"  statementType="CALLABLE">
+       	    CALL proc_statistic_DiabetesVisit(?,?)
+    </select>
+</mapper>  

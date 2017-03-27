@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Assemes namespace="com.bithealth.inspectCore.physical.model.PhHealthexamdetailnonimmune">
+	<Assem name="hexamid" assembly="hexamid"/>
+	<Assem name="vaccine" assembly="vaccinatename"/> 
+	<Assem name="vaccineDate" assembly="vaccinatedate"/>
+	<Assem name="vaccineIns" assembly="institution"/>
+</Assemes>

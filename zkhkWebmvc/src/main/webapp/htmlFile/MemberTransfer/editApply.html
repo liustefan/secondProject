@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   	<title>编辑会员转移</title>
+   	<meta charset="utf-8">
+   	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<link rel="stylesheet" href="../../css/general.css">
+	
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../../layer/layer-v2.0/layer.js"></script>
+	<style type="text/css">
+		.main-box ul li {
+			margin: 15px 8px;
+		}
+		
+		.fix-label {
+			text-align: right;
+			font-size: 14px;
+			width: 15%;
+		}
+		
+		.mg-left {
+			margin-left: 15.3%;
+		}
+		
+		.btn-cancel {
+			margin-left: 30px;
+		}
+		
+		.org-width {
+			width: 350px;
+		}
+	</style>
+	<script>
+		function getRootPath(){
+			return top.getRoot();
+		}
+	
+		var index = layer.getFrameIndex(window.name); //获取窗口索引
+		
+		function chooseMember(title){
+			layer.closeAll();
+			layer.open({
+		   	    type: 2,
+		   		skin : 'skin1',
+		   	    title: title,
+		   	    shadeClose: false,
+		   	    shade: 0,
+		   	    area: ['800px', '450px'],
+		   	    content: 'chooseDevolveMember.html', //iframe的url
+		   	}); 
+		}
+		
+		function chooseDoc(title){
+			layer.closeAll();
+			layer.open({
+		   	    type: 2,
+		   		skin : 'skin1',
+		   	    title: title,
+		   	    shadeClose: false,
+		   	    shade: 0,
+		   	    area: ['800px', '450px'],
+		   	    content: '../chooseDoctor.html', //iframe的url
+		   	}); 
+		}
+		
+		function chooseGroup(title){
+			layer.closeAll();
+			layer.open({
+		   	    type: 2,
+		   		skin : 'skin1',
+		   	    title: title,
+		   	    shadeClose: false,
+		   	    shade: 0,
+		   	    area: ['800px', '450px'],
+		   	    content: '', //iframe的url
+		   	}); 
+		}
+		
+		function chooseGroup(memberid, name, memGrpid) {
+			layer.closeAll();
+			var url = getRootPath() + '/member/reviseMemberGroup.jsp?name=' + encodeURI(encodeURI(name)) + '&memberid=' + memberid + '&memGrpid=' + memGrpid;
+			if(memGrpid == '') {
+				url = getRootPath() + '/member/reviseMemberGroup.jsp?name=' + encodeURI(encodeURI(name)) + '&memberid=' + memberid + '&batch=N';  //其他会员单个会员加入分组
+			}
+			layer.open({
+				type : 2,
+				skin : 'skin1',
+				title : '选择会员分组',
+				shadeClose : true,
+				shade : 0,
+				area : [ '300px', '370px' ],
+				content : url // iframe的url
+			});
+		}
+	</script>
+</head>
+<body>
+	<div class="content">
+		<div class="content-title">新增/修改/查看转入申请</div>
+		<form action="" id="">
+			<div class="main-box">
+				<ul>
+					<li>
+						<label class="fix-label">会员姓名：</label>
+						<div class="position-r">
+							<input class="info info-search" type="text" name ="" value="" id="" readonly />
+	                 		<i class="member-search2" onclick="chooseMember('选择会员');"></i>
+						</div>
+					</li>
+					<li>
+						<label class="fix-label">性别：</label>
+						<input type="text" readonly>
+					</li>
+					<li>
+						<label class="fix-label">手机号码：</label>
+						<input type="text" readonly>
+					</li>
+					<li>
+						<label class="fix-label">转出确认医生：</label>
+						<div class="position-r">
+							<input class="" type="text" name ="" value="" id="" readonly />
+	                 		<i class="member-search" onclick="chooseDoc('选择医生');"></i>
+                 		</div>
+					</li>
+					<li>
+						<label class="fix-label">转出组织：</label>
+						<input type="text" class="org-width" readonly>
+					</li>
+					<li>
+						<label class="fix-label">申请转入分组：</label>
+						<div class="position-r">
+							<input class="org-width" type="text" name ="" value="" id="" readonly />
+	                 		<i class="member-search" onclick="chooseGroup();"></i>
+                 		</div>
+					</li>
+					<li>
+						<label class="fix-label">申请时间：</label>
+						<span>2016-11-02</span>
+					</li>
+					<li>
+						<label class="fix-label">确认时间：</label>
+						<span>2016-11-03</span>
+					</li>
+					<li>
+						<label class="fix-label">拒绝原因：</label>
+						<span>没有理由</span>
+					</li>
+					<li>
+						<label class="fix-label">状态：</label>
+						<span>已同意</span>
+					</li>
+				</ul>
+			</div>
+			<div class="page-box mg-left">
+				<input type="button" id="" class="btn-inquiry" value="保存">
+	   			<input type="button" class="btn-cancel" value="返回">
+			</div>
+		</form>
+	</div>	  
+</body>
+</html>

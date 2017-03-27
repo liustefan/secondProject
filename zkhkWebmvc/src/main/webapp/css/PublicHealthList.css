@@ -1,0 +1,33 @@
+/* 公卫服务list共用样式  */
+
+/* 设置search-box-wrapper输入框宽度 */
+.search-wrapper .info-name {
+	width: 65px;
+}
+
+.search-wrapper .info-tel {
+	width: 90px;
+}
+
+.search-wrapper .info-idCard {
+	width: 130px;
+}
+
+/* tab 切换页样式 */
+nav ul li {
+	float: left;
+	margin-bottom: 2px;
+	width: 157px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 16px;
+	color: #333;
+	text-align: center;
+	background: #E4E4E4;
+	cursor: pointer;
+}
+
+nav ul li.active {
+	background: #67C15F;
+	color: #fff;
+}

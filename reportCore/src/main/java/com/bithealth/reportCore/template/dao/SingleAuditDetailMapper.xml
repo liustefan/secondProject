@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.reportCore.template.dao.SingleAuditDetailMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.reportCore.template.model.SingleAuditDetail" >
+        <id column="TempCode" property="tempCode" jdbcType="INTEGER" />
+        <id column="AuditLevel" property="auditLevel" jdbcType="SMALLINT" />
+        <result column="SubmitOther" property="submitOther" jdbcType="CHAR" />
+        <result column="Tag" property="tag" jdbcType="CHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        TempCode, AuditLevel, SubmitOther, Tag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.SingleAuditDetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from rts1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.SingleAuditDetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from rts1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.SingleAuditDetailKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from rts1
+        where TempCode = #{tempCode,jdbcType=INTEGER}
+          and AuditLevel = #{auditLevel,jdbcType=SMALLINT}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.reportCore.template.model.SingleAuditDetail" >
+        insert into rts1
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="tempCode != null" >
+                TempCode,
+            </if>
+            <if test="auditLevel != null" >
+                AuditLevel,
+            </if>
+            <if test="submitOther != null" >
+                SubmitOther,
+            </if>
+            <if test="tag != null" >
+                Tag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="tempCode != null" >
+                #{tempCode,jdbcType=INTEGER},
+            </if>
+            <if test="auditLevel != null" >
+                #{auditLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="submitOther != null" >
+                #{submitOther,jdbcType=CHAR},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.reportCore.template.model.SingleAuditDetailExample" resultType="java.lang.Integer" >
+        select count(*) from rts1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update rts1
+            <set >
+                <if test="record.tempCode != null" >
+                    TempCode = #{record.tempCode,jdbcType=INTEGER},
+                </if>
+                <if test="record.auditLevel != null" >
+                    AuditLevel = #{record.auditLevel,jdbcType=SMALLINT},
+                </if>
+                <if test="record.submitOther != null" >
+                    SubmitOther = #{record.submitOther,jdbcType=CHAR},
+                </if>
+                <if test="record.tag != null" >
+                    Tag = #{record.tag,jdbcType=CHAR},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update rts1
+            set TempCode = #{record.tempCode,jdbcType=INTEGER},
+                AuditLevel = #{record.auditLevel,jdbcType=SMALLINT},
+                SubmitOther = #{record.submitOther,jdbcType=CHAR},
+                Tag = #{record.tag,jdbcType=CHAR}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.reportCore.template.model.SingleAuditDetail" >
+        update rts1
+        <set >
+            <if test="submitOther != null" >
+                SubmitOther = #{submitOther,jdbcType=CHAR},
+            </if>
+            <if test="tag != null" >
+                Tag = #{tag,jdbcType=CHAR},
+            </if>
+        </set>
+        where TempCode = #{tempCode,jdbcType=INTEGER}
+          and AuditLevel = #{auditLevel,jdbcType=SMALLINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.reportCore.template.model.SingleAuditDetail" >
+        update rts1
+        set SubmitOther = #{submitOther,jdbcType=CHAR},
+            Tag = #{tag,jdbcType=CHAR}
+        where TempCode = #{tempCode,jdbcType=INTEGER}
+          and AuditLevel = #{auditLevel,jdbcType=SMALLINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.reportCore.template.model.SingleAuditDetailKey" >
+        delete from rts1
+        where TempCode = #{tempCode,jdbcType=INTEGER}
+          and AuditLevel = #{auditLevel,jdbcType=SMALLINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.reportCore.template.model.SingleAuditDetailExample" >
+        <if test="_parameter != null" >
+            delete from rts1
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+	<!-- 批量插入  -->
+	<insert id="insertByBatch" parameterType="java.util.List" >
+        insert into rts1 (TempCode, AuditLevel, SubmitOther, Tag) values 
+        <foreach collection="list" item="item" index="index" separator=",">
+	        (#{item.tempCode}, #{item.auditLevel}, #{item.submitOther},  #{item.tag})
+        </foreach>
+    </insert>
+
+
+</mapper>

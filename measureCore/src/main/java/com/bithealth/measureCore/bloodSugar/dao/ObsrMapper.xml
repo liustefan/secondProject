@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.measureCore.bloodSugar.dao.ObsrMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.measureCore.bloodSugar.model.Obsr" >
+        <id column="Docentry" property="docentry" jdbcType="BIGINT" />
+        <result column="EventId" property="eventid" jdbcType="BIGINT" />
+        <result column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="UploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+        <result column="TestTime" property="testtime" jdbcType="TIMESTAMP" />
+        <result column="DelTag" property="deltag" jdbcType="CHAR" />
+        <result column="BsValue" property="bsvalue" jdbcType="DECIMAL" />
+        <result column="timePeriod" property="timeperiod" jdbcType="CHAR" />
+        <result column="AnalysisResult" property="analysisresult" jdbcType="CHAR" />
+        <result column="DeviceCode" property="devicecode" jdbcType="VARCHAR" />
+        <result column="BluetoothMacAddr" property="bluetoothmacaddr" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Docentry, EventId, Memberid, UploadTime, TestTime, DelTag, BsValue, timePeriod, AnalysisResult, 
+        DeviceCode, BluetoothMacAddr
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.bloodSugar.model.ObsrExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from obsr
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.bloodSugar.model.ObsrExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from obsr
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from obsr
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.measureCore.bloodSugar.model.Obsr" >
+        insert into obsr (EventId, Memberid, 
+            UploadTime, TestTime, DelTag, 
+            BsValue, timePeriod, AnalysisResult, 
+            DeviceCode, BluetoothMacAddr)
+        values (#{eventid,jdbcType=BIGINT}, #{memberid,jdbcType=INTEGER}, 
+            #{uploadtime,jdbcType=TIMESTAMP}, #{testtime,jdbcType=TIMESTAMP}, #{deltag,jdbcType=CHAR}, 
+            #{bsvalue,jdbcType=DECIMAL}, #{timeperiod,jdbcType=CHAR}, #{analysisresult,jdbcType=CHAR}, 
+            #{devicecode,jdbcType=VARCHAR}, #{bluetoothmacaddr,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.measureCore.bloodSugar.model.Obsr" useGeneratedKeys="true" keyProperty="docentry">
+        insert into obsr
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                Docentry,
+            </if>
+            <if test="eventid != null" >
+                EventId,
+            </if>
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime,
+            </if>
+            <if test="testtime != null" >
+                TestTime,
+            </if>
+            <if test="deltag != null" >
+                DelTag,
+            </if>
+            <if test="bsvalue != null" >
+                BsValue,
+            </if>
+            <if test="timeperiod != null" >
+                timePeriod,
+            </if>
+            <if test="analysisresult != null" >
+                AnalysisResult,
+            </if>
+            <if test="devicecode != null" >
+                DeviceCode,
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                BluetoothMacAddr,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                #{docentry,jdbcType=BIGINT},
+            </if>
+            <if test="eventid != null" >
+                #{eventid,jdbcType=BIGINT},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="testtime != null" >
+                #{testtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deltag != null" >
+                #{deltag,jdbcType=CHAR},
+            </if>
+            <if test="bsvalue != null" >
+                #{bsvalue,jdbcType=DECIMAL},
+            </if>
+            <if test="timeperiod != null" >
+                #{timeperiod,jdbcType=CHAR},
+            </if>
+            <if test="analysisresult != null" >
+                #{analysisresult,jdbcType=CHAR},
+            </if>
+            <if test="devicecode != null" >
+                #{devicecode,jdbcType=VARCHAR},
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                #{bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.measureCore.bloodSugar.model.ObsrExample" resultType="java.lang.Integer" >
+        select count(*) from obsr
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update obsr
+        <set >
+            <if test="record.docentry != null" >
+                Docentry = #{record.docentry,jdbcType=BIGINT},
+            </if>
+            <if test="record.eventid != null" >
+                EventId = #{record.eventid,jdbcType=BIGINT},
+            </if>
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.uploadtime != null" >
+                UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.testtime != null" >
+                TestTime = #{record.testtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.deltag != null" >
+                DelTag = #{record.deltag,jdbcType=CHAR},
+            </if>
+            <if test="record.bsvalue != null" >
+                BsValue = #{record.bsvalue,jdbcType=DECIMAL},
+            </if>
+            <if test="record.timeperiod != null" >
+                timePeriod = #{record.timeperiod,jdbcType=CHAR},
+            </if>
+            <if test="record.analysisresult != null" >
+                AnalysisResult = #{record.analysisresult,jdbcType=CHAR},
+            </if>
+            <if test="record.devicecode != null" >
+                DeviceCode = #{record.devicecode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bluetoothmacaddr != null" >
+                BluetoothMacAddr = #{record.bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update obsr
+        set <!-- Docentry = #{record.docentry,jdbcType=BIGINT}, -->
+            EventId = #{record.eventid,jdbcType=BIGINT},
+            Memberid = #{record.memberid,jdbcType=INTEGER},
+            UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            TestTime = #{record.testtime,jdbcType=TIMESTAMP},
+            DelTag = #{record.deltag,jdbcType=CHAR},
+            BsValue = #{record.bsvalue,jdbcType=DECIMAL},
+            timePeriod = #{record.timeperiod,jdbcType=CHAR},
+            AnalysisResult = #{record.analysisresult,jdbcType=CHAR},
+            DeviceCode = #{record.devicecode,jdbcType=VARCHAR},
+            BluetoothMacAddr = #{record.bluetoothmacaddr,jdbcType=VARCHAR}
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.measureCore.bloodSugar.model.Obsr" >
+        update obsr
+        <set >
+            <if test="eventid != null" >
+                EventId = #{eventid,jdbcType=BIGINT},
+            </if>
+            <if test="memberid != null" >
+                Memberid = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="testtime != null" >
+                TestTime = #{testtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deltag != null" >
+                DelTag = #{deltag,jdbcType=CHAR},
+            </if>
+            <if test="bsvalue != null" >
+                BsValue = #{bsvalue,jdbcType=DECIMAL},
+            </if>
+            <if test="timeperiod != null" >
+                timePeriod = #{timeperiod,jdbcType=CHAR},
+            </if>
+            <if test="analysisresult != null" >
+                AnalysisResult = #{analysisresult,jdbcType=CHAR},
+            </if>
+            <if test="devicecode != null" >
+                DeviceCode = #{devicecode,jdbcType=VARCHAR},
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                BluetoothMacAddr = #{bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.measureCore.bloodSugar.model.Obsr" >
+        update obsr
+        set EventId = #{eventid,jdbcType=BIGINT},
+            Memberid = #{memberid,jdbcType=INTEGER},
+            UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            TestTime = #{testtime,jdbcType=TIMESTAMP},
+            DelTag = #{deltag,jdbcType=CHAR},
+            BsValue = #{bsvalue,jdbcType=DECIMAL},
+            timePeriod = #{timeperiod,jdbcType=CHAR},
+            AnalysisResult = #{analysisresult,jdbcType=CHAR},
+            DeviceCode = #{devicecode,jdbcType=VARCHAR},
+            BluetoothMacAddr = #{bluetoothmacaddr,jdbcType=VARCHAR}
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from obsr
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.measureCore.bloodSugar.model.ObsrExample" >
+        delete from obsr
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <select id="selectBloodSugarByGUID" parameterType="java.lang.String" resultMap="BaseResultMap" >
+		SELECT a.* FROM obsr a,omem b 
+		WHERE a.`Memberid` = b.`Memberid` 
+		AND b.`memberGUID` = #{memberGUID}
+    </select>
+
+
+
+
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.inspectCore.inspect.model.PhDiabetes">
+<Assem name="uniqueId" assembly="DGrdabh"/>   <!-- DGrdabh-->
+
+<Assem name="name" assembly="DXm"/>   <!-- 姓名-->
+<Assem name="idcard" assembly="DSfzh"/>   <!-- 身份证号 -->
+<Assem name="name" assembly="DXm"/>   <!-- 姓名-->
+<Assem name="visitdrname" assembly="TSfys"/>   <!-- 随访医生签名  -->
+<Assem name="prgid" assembly="creatregion"/>   <!-- 创建机构  -->
+<Assem name="prgid" assembly="PRgid"/>   <!-- 当前机构 -->
+<Assem name="createtime" assembly="createtime"/>   <!-- 录入时间-->
+<Assem name="createdrid" assembly="createuser"/>   <!-- 录入人 -->
+<Assem name="updatetime" assembly="updatetime"/>   <!-- 最近更新时间-->
+<Assem name="updatedrid" assembly="updateuser"/>   <!-- 最近更新ren -->
+<Assem name="visitdate" assembly="happentime"/>   <!-- 随访日期-->
+
+
+
+</Assemes>

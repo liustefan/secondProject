@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="taskMgrServer">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="zkhkSDK-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zkhkSDK/zkhkSDK">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-common-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-common/platform-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="taskMgrCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/taskMgrCore/taskMgrCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="agentCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/agentCore/agentCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="memberCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/memberCore/memberCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="measureCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/measureCore/measureCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="msgCenterCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/msgCenterCore/msgCenterCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="careCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/careCore/careCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/taskMgrServer/target/classes"/>
+        <property name="context-root" value="taskMgrServer"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,49 @@
+/* 问卷管理样式 */
+.quick-search-box {
+	position: relative;
+	top: 0; 
+	right: 0;
+}
+
+#content_title_img_2.search-icon {
+	position: absolute; 
+	top: 0; 
+	right: 2px;
+}
+
+#find {
+	width: 325px;
+	height: 24px;
+	line-height: 24px;
+	border: 1px solid #ccc; 
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+	padding-left: 2px;
+}
+
+.table-content-td a {
+    color: #0000ee;
+    cursor: pointer;
+}
+
+.search-wrapper select {
+	width: 150px;
+}
+
+#select1 {
+	position: relative;
+	left: 0;
+	top: 0;
+	top: 6px\0;
+	background: #fff;
+	height: 22px;
+	border: none;
+	cursor: pointer;
+	outline: none;
+}
+
+#select1 img {
+	height: 18px;
+	vertical-align: top;
+	width: 18px;
+}

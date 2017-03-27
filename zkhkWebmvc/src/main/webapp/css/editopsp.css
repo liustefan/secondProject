@@ -1,0 +1,102 @@
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,form,sub,dl,dd,ol,ul,li,tbody {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 12px;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+body {
+	background: #FFF;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	font: 12px "微软雅黑",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+    overflow: auto;
+}
+
+#content_new_top {
+	font-size: 14px;
+	height: 48px;
+	line-height: 35px;
+	text-align: left;
+	font-weight: bold;
+}
+
+#content_table {
+	background: #fff;
+	width: 100%;
+	text-align: center;
+	border: 1px solid #ccc;
+	height: auto;
+	background-color: #f7f7f6;
+}
+
+#table_new {
+	margin: 0 auto;
+}
+
+#table_new td {
+	padding: 8px 5px;
+}
+
+#table_new td h3 {
+	font-size: 14px;
+}
+
+.table_new_title {
+	padding-left: 10px;
+}
+
+.table_new_input {
+	width: 80%;
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+	height: 25px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+.table_new_textipt {
+	text-align: left;
+}
+
+#table_new_textarea {
+	text-align: left;
+}
+
+#table_new_textarea textarea {
+	width: 90%;
+	height: 50px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	resize: none;
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+}
+
+.table_new_table {
+	background: #fcf8e3;
+	box-shadow: 0px 1px 5px #ded6ac;
+}
+
+#button td {
+	padding-top: 15px;
+	text-align: left;
+}
+
+.num {
+	padding-left: 5px; 
+	font-family: "Arial"; 
+	font-size: 14px;
+}
+
+span.red {
+	display: inline-block;
+}
+
+.table_new_textipt input[type="radio"] {
+	vertical-align: text-bottom;
+}

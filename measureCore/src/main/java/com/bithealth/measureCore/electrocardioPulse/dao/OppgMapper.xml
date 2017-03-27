@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.measureCore.electrocardioPulse.dao.OppgMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.measureCore.electrocardioPulse.model.Oppg" >
+        <id column="Docentry" property="docentry" jdbcType="BIGINT" />
+        <result column="EventId" property="eventid" jdbcType="BIGINT" />
+        <result column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="TimeLength" property="timelength" jdbcType="INTEGER" />
+        <result column="UploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+        <result column="MeasureTime" property="measuretime" jdbcType="TIMESTAMP" />
+        <result column="PulsebeatCount" property="pulsebeatcount" jdbcType="SMALLINT" />
+        <result column="SlowPulse" property="slowpulse" jdbcType="SMALLINT" />
+        <result column="SlowTime" property="slowtime" jdbcType="SMALLINT" />
+        <result column="QuickPulse" property="quickpulse" jdbcType="SMALLINT" />
+        <result column="QuickTime" property="quicktime" jdbcType="SMALLINT" />
+        <result column="PulseRate" property="pulserate" jdbcType="SMALLINT" />
+        <result column="Spo" property="spo" jdbcType="SMALLINT" />
+        <result column="SPO1" property="spo1" jdbcType="SMALLINT" />
+        <result column="CO" property="co" jdbcType="DECIMAL" />
+        <result column="SI" property="si" jdbcType="DECIMAL" />
+        <result column="SV" property="sv" jdbcType="DECIMAL" />
+        <result column="CI" property="ci" jdbcType="DECIMAL" />
+        <result column="SPI" property="spi" jdbcType="DECIMAL" />
+        <result column="K" property="k" jdbcType="DECIMAL" />
+        <result column="K1" property="k1" jdbcType="DECIMAL" />
+        <result column="V" property="v" jdbcType="DECIMAL" />
+        <result column="TPR" property="tpr" jdbcType="DECIMAL" />
+        <result column="PWTT" property="pwtt" jdbcType="DECIMAL" />
+        <result column="Pm" property="pm" jdbcType="DECIMAL" />
+        <result column="AC" property="ac" jdbcType="DECIMAL" />
+        <result column="ImageNum" property="imagenum" jdbcType="SMALLINT" />
+        <result column="PRLevel" property="prlevel" jdbcType="SMALLINT" />
+        <result column="KLevel" property="klevel" jdbcType="SMALLINT" />
+        <result column="SVLevel" property="svlevel" jdbcType="SMALLINT" />
+        <result column="COLevel" property="colevel" jdbcType="SMALLINT" />
+        <result column="ACLevel" property="aclevel" jdbcType="SMALLINT" />
+        <result column="SILevel" property="silevel" jdbcType="SMALLINT" />
+        <result column="VLevel" property="vlevel" jdbcType="SMALLINT" />
+        <result column="TPRLevel" property="tprlevel" jdbcType="SMALLINT" />
+        <result column="SPOLevel" property="spolevel" jdbcType="SMALLINT" />
+        <result column="CILevel" property="cilevel" jdbcType="SMALLINT" />
+        <result column="SPILevel" property="spilevel" jdbcType="SMALLINT" />
+        <result column="PWTTLevel" property="pwttlevel" jdbcType="SMALLINT" />
+        <result column="AbnormalData" property="abnormaldata" jdbcType="INTEGER" />
+        <result column="Ppgrr" property="ppgrr" jdbcType="VARCHAR" />
+        <result column="RawPPG" property="rawppg" jdbcType="VARCHAR" />
+        <result column="BluetoothMacAddr" property="bluetoothmacaddr" jdbcType="VARCHAR" />
+        <result column="DeviceCode" property="devicecode" jdbcType="VARCHAR" />
+        <result column="ICount" property="icount" jdbcType="SMALLINT" />
+        <result column="AddValue" property="addvalue" jdbcType="INTEGER" />
+        <result column="Fs" property="fs" jdbcType="SMALLINT" />
+        <result column="PPGResult" property="ppgresult" jdbcType="SMALLINT" />
+        <result column="StatusTag" property="statustag" jdbcType="SMALLINT" />
+        <result column="DelTag" property="deltag" jdbcType="CHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Docentry, EventId, Memberid, TimeLength, UploadTime, MeasureTime, PulsebeatCount, 
+        SlowPulse, SlowTime, QuickPulse, QuickTime, PulseRate, Spo, SPO1, CO, SI, SV, CI, 
+        SPI, K, K1, V, TPR, PWTT, Pm, AC, ImageNum, PRLevel, KLevel, SVLevel, COLevel, ACLevel, 
+        SILevel, VLevel, TPRLevel, SPOLevel, CILevel, SPILevel, PWTTLevel, AbnormalData, 
+        Ppgrr, RawPPG, BluetoothMacAddr, DeviceCode, ICount, AddValue, Fs, PPGResult, StatusTag, 
+        DelTag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.electrocardioPulse.model.OppgExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from oppg
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.electrocardioPulse.model.OppgExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from oppg
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from oppg
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.measureCore.electrocardioPulse.model.Oppg" >
+        insert into oppg (EventId, Memberid, 
+            TimeLength, UploadTime, MeasureTime, 
+            PulsebeatCount, SlowPulse, SlowTime, 
+            QuickPulse, QuickTime, PulseRate, 
+            Spo, SPO1, CO, 
+            SI, SV, CI, SPI, 
+            K, K1, V, TPR, 
+            PWTT, Pm, AC, ImageNum, 
+            PRLevel, KLevel, SVLevel, 
+            COLevel, ACLevel, SILevel, 
+            VLevel, TPRLevel, SPOLevel, 
+            CILevel, SPILevel, PWTTLevel, 
+            AbnormalData, Ppgrr, RawPPG, 
+            BluetoothMacAddr, DeviceCode, ICount, 
+            AddValue, Fs, PPGResult, 
+            StatusTag, DelTag)
+        values (#{eventid,jdbcType=BIGINT}, #{memberid,jdbcType=INTEGER}, 
+            #{timelength,jdbcType=INTEGER}, #{uploadtime,jdbcType=TIMESTAMP}, #{measuretime,jdbcType=TIMESTAMP}, 
+            #{pulsebeatcount,jdbcType=SMALLINT}, #{slowpulse,jdbcType=SMALLINT}, #{slowtime,jdbcType=SMALLINT}, 
+            #{quickpulse,jdbcType=SMALLINT}, #{quicktime,jdbcType=SMALLINT}, #{pulserate,jdbcType=SMALLINT}, 
+            #{spo,jdbcType=SMALLINT}, #{spo1,jdbcType=SMALLINT}, #{co,jdbcType=DECIMAL}, 
+            #{si,jdbcType=DECIMAL}, #{sv,jdbcType=DECIMAL}, #{ci,jdbcType=DECIMAL}, #{spi,jdbcType=DECIMAL}, 
+            #{k,jdbcType=DECIMAL}, #{k1,jdbcType=DECIMAL}, #{v,jdbcType=DECIMAL}, #{tpr,jdbcType=DECIMAL}, 
+            #{pwtt,jdbcType=DECIMAL}, #{pm,jdbcType=DECIMAL}, #{ac,jdbcType=DECIMAL}, #{imagenum,jdbcType=SMALLINT}, 
+            #{prlevel,jdbcType=SMALLINT}, #{klevel,jdbcType=SMALLINT}, #{svlevel,jdbcType=SMALLINT}, 
+            #{colevel,jdbcType=SMALLINT}, #{aclevel,jdbcType=SMALLINT}, #{silevel,jdbcType=SMALLINT}, 
+            #{vlevel,jdbcType=SMALLINT}, #{tprlevel,jdbcType=SMALLINT}, #{spolevel,jdbcType=SMALLINT}, 
+            #{cilevel,jdbcType=SMALLINT}, #{spilevel,jdbcType=SMALLINT}, #{pwttlevel,jdbcType=SMALLINT}, 
+            #{abnormaldata,jdbcType=INTEGER}, #{ppgrr,jdbcType=VARCHAR}, #{rawppg,jdbcType=VARCHAR}, 
+            #{bluetoothmacaddr,jdbcType=VARCHAR}, #{devicecode,jdbcType=VARCHAR}, #{icount,jdbcType=SMALLINT}, 
+            #{addvalue,jdbcType=INTEGER}, #{fs,jdbcType=SMALLINT}, #{ppgresult,jdbcType=SMALLINT}, 
+            #{statustag,jdbcType=SMALLINT}, #{deltag,jdbcType=CHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.measureCore.electrocardioPulse.model.Oppg" useGeneratedKeys="true" keyProperty="docentry" >
+        insert into oppg
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                Docentry,
+            </if>
+            <if test="eventid != null" >
+                EventId,
+            </if>
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="timelength != null" >
+                TimeLength,
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime,
+            </if>
+            <if test="measuretime != null" >
+                MeasureTime,
+            </if>
+            <if test="pulsebeatcount != null" >
+                PulsebeatCount,
+            </if>
+            <if test="slowpulse != null" >
+                SlowPulse,
+            </if>
+            <if test="slowtime != null" >
+                SlowTime,
+            </if>
+            <if test="quickpulse != null" >
+                QuickPulse,
+            </if>
+            <if test="quicktime != null" >
+                QuickTime,
+            </if>
+            <if test="pulserate != null" >
+                PulseRate,
+            </if>
+            <if test="spo != null" >
+                Spo,
+            </if>
+            <if test="spo1 != null" >
+                SPO1,
+            </if>
+            <if test="co != null" >
+                CO,
+            </if>
+            <if test="si != null" >
+                SI,
+            </if>
+            <if test="sv != null" >
+                SV,
+            </if>
+            <if test="ci != null" >
+                CI,
+            </if>
+            <if test="spi != null" >
+                SPI,
+            </if>
+            <if test="k != null" >
+                K,
+            </if>
+            <if test="k1 != null" >
+                K1,
+            </if>
+            <if test="v != null" >
+                V,
+            </if>
+            <if test="tpr != null" >
+                TPR,
+            </if>
+            <if test="pwtt != null" >
+                PWTT,
+            </if>
+            <if test="pm != null" >
+                Pm,
+            </if>
+            <if test="ac != null" >
+                AC,
+            </if>
+            <if test="imagenum != null" >
+                ImageNum,
+            </if>
+            <if test="prlevel != null" >
+                PRLevel,
+            </if>
+            <if test="klevel != null" >
+                KLevel,
+            </if>
+            <if test="svlevel != null" >
+                SVLevel,
+            </if>
+            <if test="colevel != null" >
+                COLevel,
+            </if>
+            <if test="aclevel != null" >
+                ACLevel,
+            </if>
+            <if test="silevel != null" >
+                SILevel,
+            </if>
+            <if test="vlevel != null" >
+                VLevel,
+            </if>
+            <if test="tprlevel != null" >
+                TPRLevel,
+            </if>
+            <if test="spolevel != null" >
+                SPOLevel,
+            </if>
+            <if test="cilevel != null" >
+                CILevel,
+            </if>
+            <if test="spilevel != null" >
+                SPILevel,
+            </if>
+            <if test="pwttlevel != null" >
+                PWTTLevel,
+            </if>
+            <if test="abnormaldata != null" >
+                AbnormalData,
+            </if>
+            <if test="ppgrr != null" >
+                Ppgrr,
+            </if>
+            <if test="rawppg != null" >
+                RawPPG,
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                BluetoothMacAddr,
+            </if>
+            <if test="devicecode != null" >
+                DeviceCode,
+            </if>
+            <if test="icount != null" >
+                ICount,
+            </if>
+            <if test="addvalue != null" >
+                AddValue,
+            </if>
+            <if test="fs != null" >
+                Fs,
+            </if>
+            <if test="ppgresult != null" >
+                PPGResult,
+            </if>
+            <if test="statustag != null" >
+                StatusTag,
+            </if>
+            <if test="deltag != null" >
+                DelTag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                #{docentry,jdbcType=BIGINT},
+            </if>
+            <if test="eventid != null" >
+                #{eventid,jdbcType=BIGINT},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="timelength != null" >
+                #{timelength,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measuretime != null" >
+                #{measuretime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pulsebeatcount != null" >
+                #{pulsebeatcount,jdbcType=SMALLINT},
+            </if>
+            <if test="slowpulse != null" >
+                #{slowpulse,jdbcType=SMALLINT},
+            </if>
+            <if test="slowtime != null" >
+                #{slowtime,jdbcType=SMALLINT},
+            </if>
+            <if test="quickpulse != null" >
+                #{quickpulse,jdbcType=SMALLINT},
+            </if>
+            <if test="quicktime != null" >
+                #{quicktime,jdbcType=SMALLINT},
+            </if>
+            <if test="pulserate != null" >
+                #{pulserate,jdbcType=SMALLINT},
+            </if>
+            <if test="spo != null" >
+                #{spo,jdbcType=SMALLINT},
+            </if>
+            <if test="spo1 != null" >
+                #{spo1,jdbcType=SMALLINT},
+            </if>
+            <if test="co != null" >
+                #{co,jdbcType=DECIMAL},
+            </if>
+            <if test="si != null" >
+                #{si,jdbcType=DECIMAL},
+            </if>
+            <if test="sv != null" >
+                #{sv,jdbcType=DECIMAL},
+            </if>
+            <if test="ci != null" >
+                #{ci,jdbcType=DECIMAL},
+            </if>
+            <if test="spi != null" >
+                #{spi,jdbcType=DECIMAL},
+            </if>
+            <if test="k != null" >
+                #{k,jdbcType=DECIMAL},
+            </if>
+            <if test="k1 != null" >
+                #{k1,jdbcType=DECIMAL},
+            </if>
+            <if test="v != null" >
+                #{v,jdbcType=DECIMAL},
+            </if>
+            <if test="tpr != null" >
+                #{tpr,jdbcType=DECIMAL},
+            </if>
+            <if test="pwtt != null" >
+                #{pwtt,jdbcType=DECIMAL},
+            </if>
+            <if test="pm != null" >
+                #{pm,jdbcType=DECIMAL},
+            </if>
+            <if test="ac != null" >
+                #{ac,jdbcType=DECIMAL},
+            </if>
+            <if test="imagenum != null" >
+                #{imagenum,jdbcType=SMALLINT},
+            </if>
+            <if test="prlevel != null" >
+                #{prlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="klevel != null" >
+                #{klevel,jdbcType=SMALLINT},
+            </if>
+            <if test="svlevel != null" >
+                #{svlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="colevel != null" >
+                #{colevel,jdbcType=SMALLINT},
+            </if>
+            <if test="aclevel != null" >
+                #{aclevel,jdbcType=SMALLINT},
+            </if>
+            <if test="silevel != null" >
+                #{silevel,jdbcType=SMALLINT},
+            </if>
+            <if test="vlevel != null" >
+                #{vlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="tprlevel != null" >
+                #{tprlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="spolevel != null" >
+                #{spolevel,jdbcType=SMALLINT},
+            </if>
+            <if test="cilevel != null" >
+                #{cilevel,jdbcType=SMALLINT},
+            </if>
+            <if test="spilevel != null" >
+                #{spilevel,jdbcType=SMALLINT},
+            </if>
+            <if test="pwttlevel != null" >
+                #{pwttlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="abnormaldata != null" >
+                #{abnormaldata,jdbcType=INTEGER},
+            </if>
+            <if test="ppgrr != null" >
+                #{ppgrr,jdbcType=VARCHAR},
+            </if>
+            <if test="rawppg != null" >
+                #{rawppg,jdbcType=VARCHAR},
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                #{bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="devicecode != null" >
+                #{devicecode,jdbcType=VARCHAR},
+            </if>
+            <if test="icount != null" >
+                #{icount,jdbcType=SMALLINT},
+            </if>
+            <if test="addvalue != null" >
+                #{addvalue,jdbcType=INTEGER},
+            </if>
+            <if test="fs != null" >
+                #{fs,jdbcType=SMALLINT},
+            </if>
+            <if test="ppgresult != null" >
+                #{ppgresult,jdbcType=SMALLINT},
+            </if>
+            <if test="statustag != null" >
+                #{statustag,jdbcType=SMALLINT},
+            </if>
+            <if test="deltag != null" >
+                #{deltag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.measureCore.electrocardioPulse.model.OppgExample" resultType="java.lang.Integer" >
+        select count(*) from oppg
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update oppg
+        <set >
+            <if test="record.docentry != null" >
+                Docentry = #{record.docentry,jdbcType=BIGINT},
+            </if>
+            <if test="record.eventid != null" >
+                EventId = #{record.eventid,jdbcType=BIGINT},
+            </if>
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.timelength != null" >
+                TimeLength = #{record.timelength,jdbcType=INTEGER},
+            </if>
+            <if test="record.uploadtime != null" >
+                UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.measuretime != null" >
+                MeasureTime = #{record.measuretime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.pulsebeatcount != null" >
+                PulsebeatCount = #{record.pulsebeatcount,jdbcType=SMALLINT},
+            </if>
+            <if test="record.slowpulse != null" >
+                SlowPulse = #{record.slowpulse,jdbcType=SMALLINT},
+            </if>
+            <if test="record.slowtime != null" >
+                SlowTime = #{record.slowtime,jdbcType=SMALLINT},
+            </if>
+            <if test="record.quickpulse != null" >
+                QuickPulse = #{record.quickpulse,jdbcType=SMALLINT},
+            </if>
+            <if test="record.quicktime != null" >
+                QuickTime = #{record.quicktime,jdbcType=SMALLINT},
+            </if>
+            <if test="record.pulserate != null" >
+                PulseRate = #{record.pulserate,jdbcType=SMALLINT},
+            </if>
+            <if test="record.spo != null" >
+                Spo = #{record.spo,jdbcType=SMALLINT},
+            </if>
+            <if test="record.spo1 != null" >
+                SPO1 = #{record.spo1,jdbcType=SMALLINT},
+            </if>
+            <if test="record.co != null" >
+                CO = #{record.co,jdbcType=DECIMAL},
+            </if>
+            <if test="record.si != null" >
+                SI = #{record.si,jdbcType=DECIMAL},
+            </if>
+            <if test="record.sv != null" >
+                SV = #{record.sv,jdbcType=DECIMAL},
+            </if>
+            <if test="record.ci != null" >
+                CI = #{record.ci,jdbcType=DECIMAL},
+            </if>
+            <if test="record.spi != null" >
+                SPI = #{record.spi,jdbcType=DECIMAL},
+            </if>
+            <if test="record.k != null" >
+                K = #{record.k,jdbcType=DECIMAL},
+            </if>
+            <if test="record.k1 != null" >
+                K1 = #{record.k1,jdbcType=DECIMAL},
+            </if>
+            <if test="record.v != null" >
+                V = #{record.v,jdbcType=DECIMAL},
+            </if>
+            <if test="record.tpr != null" >
+                TPR = #{record.tpr,jdbcType=DECIMAL},
+            </if>
+            <if test="record.pwtt != null" >
+                PWTT = #{record.pwtt,jdbcType=DECIMAL},
+            </if>
+            <if test="record.pm != null" >
+                Pm = #{record.pm,jdbcType=DECIMAL},
+            </if>
+            <if test="record.ac != null" >
+                AC = #{record.ac,jdbcType=DECIMAL},
+            </if>
+            <if test="record.imagenum != null" >
+                ImageNum = #{record.imagenum,jdbcType=SMALLINT},
+            </if>
+            <if test="record.prlevel != null" >
+                PRLevel = #{record.prlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.klevel != null" >
+                KLevel = #{record.klevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.svlevel != null" >
+                SVLevel = #{record.svlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.colevel != null" >
+                COLevel = #{record.colevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.aclevel != null" >
+                ACLevel = #{record.aclevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.silevel != null" >
+                SILevel = #{record.silevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.vlevel != null" >
+                VLevel = #{record.vlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.tprlevel != null" >
+                TPRLevel = #{record.tprlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.spolevel != null" >
+                SPOLevel = #{record.spolevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.cilevel != null" >
+                CILevel = #{record.cilevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.spilevel != null" >
+                SPILevel = #{record.spilevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.pwttlevel != null" >
+                PWTTLevel = #{record.pwttlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.abnormaldata != null" >
+                AbnormalData = #{record.abnormaldata,jdbcType=INTEGER},
+            </if>
+            <if test="record.ppgrr != null" >
+                Ppgrr = #{record.ppgrr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rawppg != null" >
+                RawPPG = #{record.rawppg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bluetoothmacaddr != null" >
+                BluetoothMacAddr = #{record.bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.devicecode != null" >
+                DeviceCode = #{record.devicecode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.icount != null" >
+                ICount = #{record.icount,jdbcType=SMALLINT},
+            </if>
+            <if test="record.addvalue != null" >
+                AddValue = #{record.addvalue,jdbcType=INTEGER},
+            </if>
+            <if test="record.fs != null" >
+                Fs = #{record.fs,jdbcType=SMALLINT},
+            </if>
+            <if test="record.ppgresult != null" >
+                PPGResult = #{record.ppgresult,jdbcType=SMALLINT},
+            </if>
+            <if test="record.statustag != null" >
+                StatusTag = #{record.statustag,jdbcType=SMALLINT},
+            </if>
+            <if test="record.deltag != null" >
+                DelTag = #{record.deltag,jdbcType=CHAR},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update oppg
+        set <!-- Docentry = #{record.docentry,jdbcType=BIGINT}, -->
+            EventId = #{record.eventid,jdbcType=BIGINT},
+            Memberid = #{record.memberid,jdbcType=INTEGER},
+            TimeLength = #{record.timelength,jdbcType=INTEGER},
+            UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            MeasureTime = #{record.measuretime,jdbcType=TIMESTAMP},
+            PulsebeatCount = #{record.pulsebeatcount,jdbcType=SMALLINT},
+            SlowPulse = #{record.slowpulse,jdbcType=SMALLINT},
+            SlowTime = #{record.slowtime,jdbcType=SMALLINT},
+            QuickPulse = #{record.quickpulse,jdbcType=SMALLINT},
+            QuickTime = #{record.quicktime,jdbcType=SMALLINT},
+            PulseRate = #{record.pulserate,jdbcType=SMALLINT},
+            Spo = #{record.spo,jdbcType=SMALLINT},
+            SPO1 = #{record.spo1,jdbcType=SMALLINT},
+            CO = #{record.co,jdbcType=DECIMAL},
+            SI = #{record.si,jdbcType=DECIMAL},
+            SV = #{record.sv,jdbcType=DECIMAL},
+            CI = #{record.ci,jdbcType=DECIMAL},
+            SPI = #{record.spi,jdbcType=DECIMAL},
+            K = #{record.k,jdbcType=DECIMAL},
+            K1 = #{record.k1,jdbcType=DECIMAL},
+            V = #{record.v,jdbcType=DECIMAL},
+            TPR = #{record.tpr,jdbcType=DECIMAL},
+            PWTT = #{record.pwtt,jdbcType=DECIMAL},
+            Pm = #{record.pm,jdbcType=DECIMAL},
+            AC = #{record.ac,jdbcType=DECIMAL},
+            ImageNum = #{record.imagenum,jdbcType=SMALLINT},
+            PRLevel = #{record.prlevel,jdbcType=SMALLINT},
+            KLevel = #{record.klevel,jdbcType=SMALLINT},
+            SVLevel = #{record.svlevel,jdbcType=SMALLINT},
+            COLevel = #{record.colevel,jdbcType=SMALLINT},
+            ACLevel = #{record.aclevel,jdbcType=SMALLINT},
+            SILevel = #{record.silevel,jdbcType=SMALLINT},
+            VLevel = #{record.vlevel,jdbcType=SMALLINT},
+            TPRLevel = #{record.tprlevel,jdbcType=SMALLINT},
+            SPOLevel = #{record.spolevel,jdbcType=SMALLINT},
+            CILevel = #{record.cilevel,jdbcType=SMALLINT},
+            SPILevel = #{record.spilevel,jdbcType=SMALLINT},
+            PWTTLevel = #{record.pwttlevel,jdbcType=SMALLINT},
+            AbnormalData = #{record.abnormaldata,jdbcType=INTEGER},
+            Ppgrr = #{record.ppgrr,jdbcType=VARCHAR},
+            RawPPG = #{record.rawppg,jdbcType=VARCHAR},
+            BluetoothMacAddr = #{record.bluetoothmacaddr,jdbcType=VARCHAR},
+            DeviceCode = #{record.devicecode,jdbcType=VARCHAR},
+            ICount = #{record.icount,jdbcType=SMALLINT},
+            AddValue = #{record.addvalue,jdbcType=INTEGER},
+            Fs = #{record.fs,jdbcType=SMALLINT},
+            PPGResult = #{record.ppgresult,jdbcType=SMALLINT},
+            StatusTag = #{record.statustag,jdbcType=SMALLINT},
+            DelTag = #{record.deltag,jdbcType=CHAR}
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.measureCore.electrocardioPulse.model.Oppg" >
+        update oppg
+        <set >
+            <if test="eventid != null" >
+                EventId = #{eventid,jdbcType=BIGINT},
+            </if>
+            <if test="memberid != null" >
+                Memberid = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="timelength != null" >
+                TimeLength = #{timelength,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measuretime != null" >
+                MeasureTime = #{measuretime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pulsebeatcount != null" >
+                PulsebeatCount = #{pulsebeatcount,jdbcType=SMALLINT},
+            </if>
+            <if test="slowpulse != null" >
+                SlowPulse = #{slowpulse,jdbcType=SMALLINT},
+            </if>
+            <if test="slowtime != null" >
+                SlowTime = #{slowtime,jdbcType=SMALLINT},
+            </if>
+            <if test="quickpulse != null" >
+                QuickPulse = #{quickpulse,jdbcType=SMALLINT},
+            </if>
+            <if test="quicktime != null" >
+                QuickTime = #{quicktime,jdbcType=SMALLINT},
+            </if>
+            <if test="pulserate != null" >
+                PulseRate = #{pulserate,jdbcType=SMALLINT},
+            </if>
+            <if test="spo != null" >
+                Spo = #{spo,jdbcType=SMALLINT},
+            </if>
+            <if test="spo1 != null" >
+                SPO1 = #{spo1,jdbcType=SMALLINT},
+            </if>
+            <if test="co != null" >
+                CO = #{co,jdbcType=DECIMAL},
+            </if>
+            <if test="si != null" >
+                SI = #{si,jdbcType=DECIMAL},
+            </if>
+            <if test="sv != null" >
+                SV = #{sv,jdbcType=DECIMAL},
+            </if>
+            <if test="ci != null" >
+                CI = #{ci,jdbcType=DECIMAL},
+            </if>
+            <if test="spi != null" >
+                SPI = #{spi,jdbcType=DECIMAL},
+            </if>
+            <if test="k != null" >
+                K = #{k,jdbcType=DECIMAL},
+            </if>
+            <if test="k1 != null" >
+                K1 = #{k1,jdbcType=DECIMAL},
+            </if>
+            <if test="v != null" >
+                V = #{v,jdbcType=DECIMAL},
+            </if>
+            <if test="tpr != null" >
+                TPR = #{tpr,jdbcType=DECIMAL},
+            </if>
+            <if test="pwtt != null" >
+                PWTT = #{pwtt,jdbcType=DECIMAL},
+            </if>
+            <if test="pm != null" >
+                Pm = #{pm,jdbcType=DECIMAL},
+            </if>
+            <if test="ac != null" >
+                AC = #{ac,jdbcType=DECIMAL},
+            </if>
+            <if test="imagenum != null" >
+                ImageNum = #{imagenum,jdbcType=SMALLINT},
+            </if>
+            <if test="prlevel != null" >
+                PRLevel = #{prlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="klevel != null" >
+                KLevel = #{klevel,jdbcType=SMALLINT},
+            </if>
+            <if test="svlevel != null" >
+                SVLevel = #{svlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="colevel != null" >
+                COLevel = #{colevel,jdbcType=SMALLINT},
+            </if>
+            <if test="aclevel != null" >
+                ACLevel = #{aclevel,jdbcType=SMALLINT},
+            </if>
+            <if test="silevel != null" >
+                SILevel = #{silevel,jdbcType=SMALLINT},
+            </if>
+            <if test="vlevel != null" >
+                VLevel = #{vlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="tprlevel != null" >
+                TPRLevel = #{tprlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="spolevel != null" >
+                SPOLevel = #{spolevel,jdbcType=SMALLINT},
+            </if>
+            <if test="cilevel != null" >
+                CILevel = #{cilevel,jdbcType=SMALLINT},
+            </if>
+            <if test="spilevel != null" >
+                SPILevel = #{spilevel,jdbcType=SMALLINT},
+            </if>
+            <if test="pwttlevel != null" >
+                PWTTLevel = #{pwttlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="abnormaldata != null" >
+                AbnormalData = #{abnormaldata,jdbcType=INTEGER},
+            </if>
+            <if test="ppgrr != null" >
+                Ppgrr = #{ppgrr,jdbcType=VARCHAR},
+            </if>
+            <if test="rawppg != null" >
+                RawPPG = #{rawppg,jdbcType=VARCHAR},
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                BluetoothMacAddr = #{bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="devicecode != null" >
+                DeviceCode = #{devicecode,jdbcType=VARCHAR},
+            </if>
+            <if test="icount != null" >
+                ICount = #{icount,jdbcType=SMALLINT},
+            </if>
+            <if test="addvalue != null" >
+                AddValue = #{addvalue,jdbcType=INTEGER},
+            </if>
+            <if test="fs != null" >
+                Fs = #{fs,jdbcType=SMALLINT},
+            </if>
+            <if test="ppgresult != null" >
+                PPGResult = #{ppgresult,jdbcType=SMALLINT},
+            </if>
+            <if test="statustag != null" >
+                StatusTag = #{statustag,jdbcType=SMALLINT},
+            </if>
+            <if test="deltag != null" >
+                DelTag = #{deltag,jdbcType=CHAR},
+            </if>
+        </set>
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.measureCore.electrocardioPulse.model.Oppg" >
+        update oppg
+        set EventId = #{eventid,jdbcType=BIGINT},
+            Memberid = #{memberid,jdbcType=INTEGER},
+            TimeLength = #{timelength,jdbcType=INTEGER},
+            UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            MeasureTime = #{measuretime,jdbcType=TIMESTAMP},
+            PulsebeatCount = #{pulsebeatcount,jdbcType=SMALLINT},
+            SlowPulse = #{slowpulse,jdbcType=SMALLINT},
+            SlowTime = #{slowtime,jdbcType=SMALLINT},
+            QuickPulse = #{quickpulse,jdbcType=SMALLINT},
+            QuickTime = #{quicktime,jdbcType=SMALLINT},
+            PulseRate = #{pulserate,jdbcType=SMALLINT},
+            Spo = #{spo,jdbcType=SMALLINT},
+            SPO1 = #{spo1,jdbcType=SMALLINT},
+            CO = #{co,jdbcType=DECIMAL},
+            SI = #{si,jdbcType=DECIMAL},
+            SV = #{sv,jdbcType=DECIMAL},
+            CI = #{ci,jdbcType=DECIMAL},
+            SPI = #{spi,jdbcType=DECIMAL},
+            K = #{k,jdbcType=DECIMAL},
+            K1 = #{k1,jdbcType=DECIMAL},
+            V = #{v,jdbcType=DECIMAL},
+            TPR = #{tpr,jdbcType=DECIMAL},
+            PWTT = #{pwtt,jdbcType=DECIMAL},
+            Pm = #{pm,jdbcType=DECIMAL},
+            AC = #{ac,jdbcType=DECIMAL},
+            ImageNum = #{imagenum,jdbcType=SMALLINT},
+            PRLevel = #{prlevel,jdbcType=SMALLINT},
+            KLevel = #{klevel,jdbcType=SMALLINT},
+            SVLevel = #{svlevel,jdbcType=SMALLINT},
+            COLevel = #{colevel,jdbcType=SMALLINT},
+            ACLevel = #{aclevel,jdbcType=SMALLINT},
+            SILevel = #{silevel,jdbcType=SMALLINT},
+            VLevel = #{vlevel,jdbcType=SMALLINT},
+            TPRLevel = #{tprlevel,jdbcType=SMALLINT},
+            SPOLevel = #{spolevel,jdbcType=SMALLINT},
+            CILevel = #{cilevel,jdbcType=SMALLINT},
+            SPILevel = #{spilevel,jdbcType=SMALLINT},
+            PWTTLevel = #{pwttlevel,jdbcType=SMALLINT},
+            AbnormalData = #{abnormaldata,jdbcType=INTEGER},
+            Ppgrr = #{ppgrr,jdbcType=VARCHAR},
+            RawPPG = #{rawppg,jdbcType=VARCHAR},
+            BluetoothMacAddr = #{bluetoothmacaddr,jdbcType=VARCHAR},
+            DeviceCode = #{devicecode,jdbcType=VARCHAR},
+            ICount = #{icount,jdbcType=SMALLINT},
+            AddValue = #{addvalue,jdbcType=INTEGER},
+            Fs = #{fs,jdbcType=SMALLINT},
+            PPGResult = #{ppgresult,jdbcType=SMALLINT},
+            StatusTag = #{statustag,jdbcType=SMALLINT},
+            DelTag = #{deltag,jdbcType=CHAR}
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from oppg
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.measureCore.electrocardioPulse.model.OppgExample" >
+        delete from oppg
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

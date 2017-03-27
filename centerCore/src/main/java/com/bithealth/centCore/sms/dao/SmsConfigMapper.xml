@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.centCore.sms.dao.SmsConfigMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.centCore.sms.model.SmsConfig" >
+        <id column="SCfgID" property="SCfgID" jdbcType="INTEGER" />
+        <result column="ServerID" property="serverID" jdbcType="INTEGER" />
+        <result column="OrgID" property="orgID" jdbcType="INTEGER" />
+        <result column="Account" property="account" jdbcType="VARCHAR" />
+        <result column="Passwd" property="passwd" jdbcType="VARCHAR" />
+        <result column="Signature" property="signature" jdbcType="VARCHAR" />
+        <result column="TotalSendLimit" property="totalSendLimit" jdbcType="INTEGER" />
+        <result column="DailyMaxSend" property="dailyMaxSend" jdbcType="INTEGER" />
+        <result column="MemberDailyMaxRecv" property="memberDailyMaxRecv" jdbcType="SMALLINT" />
+        <result column="MemberDailyMaxRepl" property="memberDailyMaxRepl" jdbcType="TINYINT" />
+        <result column="SendStartTime" property="sendStartTime" jdbcType="TIME" />
+        <result column="SendEndTime" property="sendEndTime" jdbcType="TIME" />
+        <result column="CaptchaTempletNo" property="captchaTempletNo" jdbcType="VARCHAR" />
+        <result column="InviteSMSTempletNo" property="inviteSMSTempletNo" jdbcType="VARCHAR" />
+        <result column="TestSMSTempletNo" property="testSMSTempletNo" jdbcType="VARCHAR" />
+        <result column="CreateID" property="createID" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        
+        <result column="RecvNumber" property="recvNumber" jdbcType="VARCHAR" />
+        <result column="Content" property="content" jdbcType="VARCHAR" />
+        <result column="SSendID" property="SSendID" jdbcType="INTEGER" />
+        <result column="SmsType" property="smsType" jdbcType="INTEGER" />
+        <result column="queryDate" property="queryDate" jdbcType="VARCHAR" />
+        <result column="FailCount" property="failCount" jdbcType="INTEGER" />
+        <result column="SSDetailID" property="SSDetailID" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        SCfgID, ServerID, OrgID, Account, Passwd, Signature, TotalSendLimit, DailyMaxSend, 
+        MemberDailyMaxRecv, MemberDailyMaxRepl, SendStartTime, SendEndTime, CaptchaTempletNo, 
+        InviteSMSTempletNo, TestSMSTempletNo, CreateID, CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.sms.model.SmsConfigExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_sms_cfg
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.sms.model.SmsConfigExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_sms_cfg
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_sms_cfg
+        where SCfgID = #{SCfgID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.centCore.sms.model.SmsConfig" >
+        insert into tb_sms_cfg
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="SCfgID != null" >
+                SCfgID,
+            </if>
+            <if test="serverID != null" >
+                ServerID,
+            </if>
+            <if test="orgID != null" >
+                OrgID,
+            </if>
+            <if test="account != null" >
+                Account,
+            </if>
+            <if test="passwd != null" >
+                Passwd,
+            </if>
+            <if test="signature != null" >
+                Signature,
+            </if>
+            <if test="totalSendLimit != null" >
+                TotalSendLimit,
+            </if>
+            <if test="dailyMaxSend != null" >
+                DailyMaxSend,
+            </if>
+            <if test="memberDailyMaxRecv != null" >
+                MemberDailyMaxRecv,
+            </if>
+            <if test="memberDailyMaxRepl != null" >
+                MemberDailyMaxRepl,
+            </if>
+            <if test="sendStartTime != null" >
+                SendStartTime,
+            </if>
+            <if test="sendEndTime != null" >
+                SendEndTime,
+            </if>
+            <if test="captchaTempletNo != null" >
+                CaptchaTempletNo,
+            </if>
+            <if test="inviteSMSTempletNo != null" >
+                InviteSMSTempletNo,
+            </if>
+            <if test="testSMSTempletNo != null" >
+                TestSMSTempletNo,
+            </if>
+            <if test="createID != null" >
+                CreateID,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateID != null" >
+                UpdateID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="SCfgID != null" >
+                #{SCfgID,jdbcType=INTEGER},
+            </if>
+            <if test="serverID != null" >
+                #{serverID,jdbcType=INTEGER},
+            </if>
+            <if test="orgID != null" >
+                #{orgID,jdbcType=INTEGER},
+            </if>
+            <if test="account != null" >
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null" >
+                #{passwd,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null" >
+                #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="totalSendLimit != null" >
+                #{totalSendLimit,jdbcType=INTEGER},
+            </if>
+            <if test="dailyMaxSend != null" >
+                #{dailyMaxSend,jdbcType=INTEGER},
+            </if>
+            <if test="memberDailyMaxRecv != null" >
+                #{memberDailyMaxRecv,jdbcType=SMALLINT},
+            </if>
+            <if test="memberDailyMaxRepl != null" >
+                #{memberDailyMaxRepl,jdbcType=TINYINT},
+            </if>
+            <if test="sendStartTime != null" >
+                #{sendStartTime,jdbcType=TIME},
+            </if>
+            <if test="sendEndTime != null" >
+                #{sendEndTime,jdbcType=TIME},
+            </if>
+            <if test="captchaTempletNo != null" >
+                #{captchaTempletNo,jdbcType=VARCHAR},
+            </if>
+            <if test="inviteSMSTempletNo != null" >
+                #{inviteSMSTempletNo,jdbcType=VARCHAR},
+            </if>
+            <if test="testSMSTempletNo != null" >
+                #{testSMSTempletNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createID != null" >
+                #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.centCore.sms.model.SmsConfigExample" resultType="java.lang.Integer" >
+        select count(*) from tb_sms_cfg
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_sms_cfg
+            <set >
+                <if test="record.SCfgID != null" >
+                    SCfgID = #{record.SCfgID,jdbcType=INTEGER},
+                </if>
+                <if test="record.serverID != null" >
+                    ServerID = #{record.serverID,jdbcType=INTEGER},
+                </if>
+                <if test="record.orgID != null" >
+                    OrgID = #{record.orgID,jdbcType=INTEGER},
+                </if>
+                <if test="record.account != null" >
+                    Account = #{record.account,jdbcType=VARCHAR},
+                </if>
+                <if test="record.passwd != null" >
+                    Passwd = #{record.passwd,jdbcType=VARCHAR},
+                </if>
+                <if test="record.signature != null" >
+                    Signature = #{record.signature,jdbcType=VARCHAR},
+                </if>
+                <if test="record.totalSendLimit != null" >
+                    TotalSendLimit = #{record.totalSendLimit,jdbcType=INTEGER},
+                </if>
+                <if test="record.dailyMaxSend != null" >
+                    DailyMaxSend = #{record.dailyMaxSend,jdbcType=INTEGER},
+                </if>
+                <if test="record.memberDailyMaxRecv != null" >
+                    MemberDailyMaxRecv = #{record.memberDailyMaxRecv,jdbcType=SMALLINT},
+                </if>
+                <if test="record.memberDailyMaxRepl != null" >
+                    MemberDailyMaxRepl = #{record.memberDailyMaxRepl,jdbcType=TINYINT},
+                </if>
+                <if test="record.sendStartTime != null" >
+                    SendStartTime = #{record.sendStartTime,jdbcType=TIME},
+                </if>
+                <if test="record.sendEndTime != null" >
+                    SendEndTime = #{record.sendEndTime,jdbcType=TIME},
+                </if>
+                <if test="record.captchaTempletNo != null" >
+                    CaptchaTempletNo = #{record.captchaTempletNo,jdbcType=VARCHAR},
+                </if>
+                <if test="record.inviteSMSTempletNo != null" >
+                    InviteSMSTempletNo = #{record.inviteSMSTempletNo,jdbcType=VARCHAR},
+                </if>
+                <if test="record.testSMSTempletNo != null" >
+                    TestSMSTempletNo = #{record.testSMSTempletNo,jdbcType=VARCHAR},
+                </if>
+                <if test="record.createID != null" >
+                    CreateID = #{record.createID,jdbcType=INTEGER},
+                </if>
+                <if test="record.createTime != null" >
+                    CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateID != null" >
+                    UpdateID = #{record.updateID,jdbcType=INTEGER},
+                </if>
+                <if test="record.updateTime != null" >
+                    UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_sms_cfg
+            set SCfgID = #{record.SCfgID,jdbcType=INTEGER},
+                ServerID = #{record.serverID,jdbcType=INTEGER},
+                OrgID = #{record.orgID,jdbcType=INTEGER},
+                Account = #{record.account,jdbcType=VARCHAR},
+                Passwd = #{record.passwd,jdbcType=VARCHAR},
+                Signature = #{record.signature,jdbcType=VARCHAR},
+                TotalSendLimit = #{record.totalSendLimit,jdbcType=INTEGER},
+                DailyMaxSend = #{record.dailyMaxSend,jdbcType=INTEGER},
+                MemberDailyMaxRecv = #{record.memberDailyMaxRecv,jdbcType=SMALLINT},
+                MemberDailyMaxRepl = #{record.memberDailyMaxRepl,jdbcType=TINYINT},
+                SendStartTime = #{record.sendStartTime,jdbcType=TIME},
+                SendEndTime = #{record.sendEndTime,jdbcType=TIME},
+                CaptchaTempletNo = #{record.captchaTempletNo,jdbcType=VARCHAR},
+                InviteSMSTempletNo = #{record.inviteSMSTempletNo,jdbcType=VARCHAR},
+                TestSMSTempletNo = #{record.testSMSTempletNo,jdbcType=VARCHAR},
+                CreateID = #{record.createID,jdbcType=INTEGER},
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                UpdateID = #{record.updateID,jdbcType=INTEGER},
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.centCore.sms.model.SmsConfig" >
+        update tb_sms_cfg
+        <set >
+            <if test="serverID != null" >
+                ServerID = #{serverID,jdbcType=INTEGER},
+            </if>
+            <if test="orgID != null" >
+                OrgID = #{orgID,jdbcType=INTEGER},
+            </if>
+            <if test="account != null" >
+                Account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null" >
+                Passwd = #{passwd,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null" >
+                Signature = #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="totalSendLimit != null" >
+                TotalSendLimit = #{totalSendLimit,jdbcType=INTEGER},
+            </if>
+            <if test="dailyMaxSend != null" >
+                DailyMaxSend = #{dailyMaxSend,jdbcType=INTEGER},
+            </if>
+            <if test="memberDailyMaxRecv != null" >
+                MemberDailyMaxRecv = #{memberDailyMaxRecv,jdbcType=SMALLINT},
+            </if>
+            <if test="memberDailyMaxRepl != null" >
+                MemberDailyMaxRepl = #{memberDailyMaxRepl,jdbcType=TINYINT},
+            </if>
+            <if test="sendStartTime != null" >
+                SendStartTime = #{sendStartTime,jdbcType=TIME},
+            </if>
+            <if test="sendEndTime != null" >
+                SendEndTime = #{sendEndTime,jdbcType=TIME},
+            </if>
+            <if test="captchaTempletNo != null" >
+                CaptchaTempletNo = #{captchaTempletNo,jdbcType=VARCHAR},
+            </if>
+            <if test="inviteSMSTempletNo != null" >
+                InviteSMSTempletNo = #{inviteSMSTempletNo,jdbcType=VARCHAR},
+            </if>
+            <if test="testSMSTempletNo != null" >
+                TestSMSTempletNo = #{testSMSTempletNo,jdbcType=VARCHAR},
+            </if>
+            <if test="createID != null" >
+                CreateID = #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                UpdateID = #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where SCfgID = #{SCfgID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.centCore.sms.model.SmsConfig" >
+        update tb_sms_cfg
+        set ServerID = #{serverID,jdbcType=INTEGER},
+            OrgID = #{orgID,jdbcType=INTEGER},
+            Account = #{account,jdbcType=VARCHAR},
+            Passwd = #{passwd,jdbcType=VARCHAR},
+            Signature = #{signature,jdbcType=VARCHAR},
+            TotalSendLimit = #{totalSendLimit,jdbcType=INTEGER},
+            DailyMaxSend = #{dailyMaxSend,jdbcType=INTEGER},
+            MemberDailyMaxRecv = #{memberDailyMaxRecv,jdbcType=SMALLINT},
+            MemberDailyMaxRepl = #{memberDailyMaxRepl,jdbcType=TINYINT},
+            SendStartTime = #{sendStartTime,jdbcType=TIME},
+            SendEndTime = #{sendEndTime,jdbcType=TIME},
+            CaptchaTempletNo = #{captchaTempletNo,jdbcType=VARCHAR},
+            InviteSMSTempletNo = #{inviteSMSTempletNo,jdbcType=VARCHAR},
+            TestSMSTempletNo = #{testSMSTempletNo,jdbcType=VARCHAR},
+            CreateID = #{createID,jdbcType=INTEGER},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where SCfgID = #{SCfgID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_sms_cfg
+        where SCfgID = #{SCfgID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.centCore.sms.model.SmsConfigExample" >
+        <if test="_parameter != null" >
+            delete from tb_sms_cfg
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    
+    <select id="selectToBeSendSms" resultMap="BaseResultMap"  >
+		SELECT a.`RecvNumber`,a.`FailCount`,b.`Content`,b.`SSendID`,b.`SmsType` ,c.*  FROM  `tb_sms_send_detail` a , `tb_sms_send` b,`tb_sms_cfg` c
+		WHERE a.`SSendID` = b.`SSendID` 
+		  AND b.`ServerID` = c.`ServerID` 
+		  AND b.`OrgID` = c.`OrgID`
+		  AND a.`SendStatus` = 1
+		  AND a.`FailCount` <![CDATA[<]]> 3   
+    </select>
+
+	<!-- 查询发送状态为已发送的短信呢记录，并按日期，发送号码分组 -->
+    <select id="selectHaveSendStatusSms" resultMap="BaseResultMap" >
+		SELECT a.`RecvNumber`, DATE_FORMAT(a.`SendTime`, '%Y%m%d')AS queryDate ,c.`Account`,c.`Passwd`,a.`SSDetailID`
+		FROM `tb_sms_send_detail` a ,`tb_sms_send` b , `tb_sms_cfg` c
+		WHERE a.`SendStatus` = 2
+		AND a.`SSendID` = b.`SSendID` 
+		AND b.`ServerID` = c.`ServerID`
+		AND b.`OrgID` = c.`OrgID`
+		AND a.`SendTime` <![CDATA[>=]]> DATE_ADD(NOW(), INTERVAL -30 DAY)
+		GROUP BY a.`RecvNumber` ,queryDate
+		LIMIT 1000
+    </select>
+
+
+</mapper>

@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.PhysicalExaminationMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.PhysicalExamination" >
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="BloodType" property="bloodtype" jdbcType="VARCHAR" />
+        <result column="AllergicHis" property="allergichis" jdbcType="CHAR" />
+        <result column="AllergicHisName" property="allergichisname" jdbcType="VARCHAR" />
+        <result column="Height" property="height" jdbcType="INTEGER" />
+        <result column="Weight" property="weight" jdbcType="DECIMAL" />
+        <result column="Waist" property="waist" jdbcType="INTEGER" />
+        <result column="Hip" property="hip" jdbcType="INTEGER" />
+        <result column="Pulse" property="pulse" jdbcType="INTEGER" />
+        <result column="HeartRate" property="heartrate" jdbcType="INTEGER" />
+        <result column="BloodH" property="bloodh" jdbcType="SMALLINT" />
+        <result column="BloodL" property="bloodl" jdbcType="SMALLINT" />
+        <result column="FastingGlucose" property="fastingglucose" jdbcType="DECIMAL" />
+        <result column="UricAcid" property="uricacid" jdbcType="INTEGER" />
+        <result column="TotalCholesterol" property="totalcholesterol" jdbcType="DECIMAL" />
+        <result column="Triglyceride" property="triglyceride" jdbcType="DECIMAL" />
+        <result column="DensityLipop" property="densitylipop" jdbcType="DECIMAL" />
+        <result column="LDLip" property="ldlip" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Memberid, BloodType, AllergicHis, AllergicHisName, Height, Weight, Waist, Hip, Pulse, 
+        HeartRate, BloodH, BloodL, FastingGlucose, UricAcid, TotalCholesterol, Triglyceride, 
+        DensityLipop, LDLip
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.PhysicalExaminationExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem2
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.PhysicalExaminationExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem2
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from mem2
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.PhysicalExamination" >
+        insert into mem2 (Memberid, BloodType, AllergicHis, 
+            AllergicHisName, Height, Weight, 
+            Waist, Hip, Pulse, 
+            HeartRate, BloodH, BloodL, 
+            FastingGlucose, UricAcid, TotalCholesterol, 
+            Triglyceride, DensityLipop, LDLip
+            )
+        values (#{memberid,jdbcType=INTEGER}, #{bloodtype,jdbcType=VARCHAR}, #{allergichis,jdbcType=CHAR}, 
+            #{allergichisname,jdbcType=VARCHAR}, #{height,jdbcType=INTEGER}, #{weight,jdbcType=DECIMAL}, 
+            #{waist,jdbcType=INTEGER}, #{hip,jdbcType=INTEGER}, #{pulse,jdbcType=INTEGER}, 
+            #{heartrate,jdbcType=INTEGER}, #{bloodh,jdbcType=SMALLINT}, #{bloodl,jdbcType=SMALLINT}, 
+            #{fastingglucose,jdbcType=DECIMAL}, #{uricacid,jdbcType=INTEGER}, #{totalcholesterol,jdbcType=DECIMAL}, 
+            #{triglyceride,jdbcType=DECIMAL}, #{densitylipop,jdbcType=DECIMAL}, #{ldlip,jdbcType=DECIMAL}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.PhysicalExamination" >
+        insert into mem2
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="bloodtype != null" >
+                BloodType,
+            </if>
+            <if test="allergichis != null" >
+                AllergicHis,
+            </if>
+            <if test="allergichisname != null" >
+                AllergicHisName,
+            </if>
+            <if test="height != null" >
+                Height,
+            </if>
+            <if test="weight != null" >
+                Weight,
+            </if>
+            <if test="waist != null" >
+                Waist,
+            </if>
+            <if test="hip != null" >
+                Hip,
+            </if>
+            <if test="pulse != null" >
+                Pulse,
+            </if>
+            <if test="heartrate != null" >
+                HeartRate,
+            </if>
+            <if test="bloodh != null" >
+                BloodH,
+            </if>
+            <if test="bloodl != null" >
+                BloodL,
+            </if>
+            <if test="fastingglucose != null" >
+                FastingGlucose,
+            </if>
+            <if test="uricacid != null" >
+                UricAcid,
+            </if>
+            <if test="totalcholesterol != null" >
+                TotalCholesterol,
+            </if>
+            <if test="triglyceride != null" >
+                Triglyceride,
+            </if>
+            <if test="densitylipop != null" >
+                DensityLipop,
+            </if>
+            <if test="ldlip != null" >
+                LDLip,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="bloodtype != null" >
+                #{bloodtype,jdbcType=VARCHAR},
+            </if>
+            <if test="allergichis != null" >
+                #{allergichis,jdbcType=CHAR},
+            </if>
+            <if test="allergichisname != null" >
+                #{allergichisname,jdbcType=VARCHAR},
+            </if>
+            <if test="height != null" >
+                #{height,jdbcType=INTEGER},
+            </if>
+            <if test="weight != null" >
+                #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="waist != null" >
+                #{waist,jdbcType=INTEGER},
+            </if>
+            <if test="hip != null" >
+                #{hip,jdbcType=INTEGER},
+            </if>
+            <if test="pulse != null" >
+                #{pulse,jdbcType=INTEGER},
+            </if>
+            <if test="heartrate != null" >
+                #{heartrate,jdbcType=INTEGER},
+            </if>
+            <if test="bloodh != null" >
+                #{bloodh,jdbcType=SMALLINT},
+            </if>
+            <if test="bloodl != null" >
+                #{bloodl,jdbcType=SMALLINT},
+            </if>
+            <if test="fastingglucose != null" >
+                #{fastingglucose,jdbcType=DECIMAL},
+            </if>
+            <if test="uricacid != null" >
+                #{uricacid,jdbcType=INTEGER},
+            </if>
+            <if test="totalcholesterol != null" >
+                #{totalcholesterol,jdbcType=DECIMAL},
+            </if>
+            <if test="triglyceride != null" >
+                #{triglyceride,jdbcType=DECIMAL},
+            </if>
+            <if test="densitylipop != null" >
+                #{densitylipop,jdbcType=DECIMAL},
+            </if>
+            <if test="ldlip != null" >
+                #{ldlip,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.PhysicalExaminationExample" resultType="java.lang.Integer" >
+        select count(*) from mem2
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update mem2
+        <set >
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.bloodtype != null" >
+                BloodType = #{record.bloodtype,jdbcType=VARCHAR},
+            </if>
+            <if test="record.allergichis != null" >
+                AllergicHis = #{record.allergichis,jdbcType=CHAR},
+            </if>
+            <if test="record.allergichisname != null" >
+                AllergicHisName = #{record.allergichisname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.height != null" >
+                Height = #{record.height,jdbcType=INTEGER},
+            </if>
+            <if test="record.weight != null" >
+                Weight = #{record.weight,jdbcType=DECIMAL},
+            </if>
+            <if test="record.waist != null" >
+                Waist = #{record.waist,jdbcType=INTEGER},
+            </if>
+            <if test="record.hip != null" >
+                Hip = #{record.hip,jdbcType=INTEGER},
+            </if>
+            <if test="record.pulse != null" >
+                Pulse = #{record.pulse,jdbcType=INTEGER},
+            </if>
+            <if test="record.heartrate != null" >
+                HeartRate = #{record.heartrate,jdbcType=INTEGER},
+            </if>
+            <if test="record.bloodh != null" >
+                BloodH = #{record.bloodh,jdbcType=SMALLINT},
+            </if>
+            <if test="record.bloodl != null" >
+                BloodL = #{record.bloodl,jdbcType=SMALLINT},
+            </if>
+            <if test="record.fastingglucose != null" >
+                FastingGlucose = #{record.fastingglucose,jdbcType=DECIMAL},
+            </if>
+            <if test="record.uricacid != null" >
+                UricAcid = #{record.uricacid,jdbcType=INTEGER},
+            </if>
+            <if test="record.totalcholesterol != null" >
+                TotalCholesterol = #{record.totalcholesterol,jdbcType=DECIMAL},
+            </if>
+            <if test="record.triglyceride != null" >
+                Triglyceride = #{record.triglyceride,jdbcType=DECIMAL},
+            </if>
+            <if test="record.densitylipop != null" >
+                DensityLipop = #{record.densitylipop,jdbcType=DECIMAL},
+            </if>
+            <if test="record.ldlip != null" >
+                LDLip = #{record.ldlip,jdbcType=DECIMAL},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update mem2
+        set Memberid = #{record.memberid,jdbcType=INTEGER},
+            BloodType = #{record.bloodtype,jdbcType=VARCHAR},
+            AllergicHis = #{record.allergichis,jdbcType=CHAR},
+            AllergicHisName = #{record.allergichisname,jdbcType=VARCHAR},
+            Height = #{record.height,jdbcType=INTEGER},
+            Weight = #{record.weight,jdbcType=DECIMAL},
+            Waist = #{record.waist,jdbcType=INTEGER},
+            Hip = #{record.hip,jdbcType=INTEGER},
+            Pulse = #{record.pulse,jdbcType=INTEGER},
+            HeartRate = #{record.heartrate,jdbcType=INTEGER},
+            BloodH = #{record.bloodh,jdbcType=SMALLINT},
+            BloodL = #{record.bloodl,jdbcType=SMALLINT},
+            FastingGlucose = #{record.fastingglucose,jdbcType=DECIMAL},
+            UricAcid = #{record.uricacid,jdbcType=INTEGER},
+            TotalCholesterol = #{record.totalcholesterol,jdbcType=DECIMAL},
+            Triglyceride = #{record.triglyceride,jdbcType=DECIMAL},
+            DensityLipop = #{record.densitylipop,jdbcType=DECIMAL},
+            LDLip = #{record.ldlip,jdbcType=DECIMAL}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.PhysicalExamination" >
+        update mem2
+        <set >
+            <if test="bloodtype != null" >
+                BloodType = #{bloodtype,jdbcType=VARCHAR},
+            </if>
+            <if test="allergichis != null" >
+                AllergicHis = #{allergichis,jdbcType=CHAR},
+            </if>
+            <if test="allergichisname != null" >
+                AllergicHisName = #{allergichisname,jdbcType=VARCHAR},
+            </if>
+            <if test="height != null" >
+                Height = #{height,jdbcType=INTEGER},
+            </if>
+            <if test="weight != null" >
+                Weight = #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="waist != null" >
+                Waist = #{waist,jdbcType=INTEGER},
+            </if>
+            <if test="hip != null" >
+                Hip = #{hip,jdbcType=INTEGER},
+            </if>
+            <if test="pulse != null" >
+                Pulse = #{pulse,jdbcType=INTEGER},
+            </if>
+            <if test="heartrate != null" >
+                HeartRate = #{heartrate,jdbcType=INTEGER},
+            </if>
+            <if test="bloodh != null" >
+                BloodH = #{bloodh,jdbcType=SMALLINT},
+            </if>
+            <if test="bloodl != null" >
+                BloodL = #{bloodl,jdbcType=SMALLINT},
+            </if>
+            <if test="fastingglucose != null" >
+                FastingGlucose = #{fastingglucose,jdbcType=DECIMAL},
+            </if>
+            <if test="uricacid != null" >
+                UricAcid = #{uricacid,jdbcType=INTEGER},
+            </if>
+            <if test="totalcholesterol != null" >
+                TotalCholesterol = #{totalcholesterol,jdbcType=DECIMAL},
+            </if>
+            <if test="triglyceride != null" >
+                Triglyceride = #{triglyceride,jdbcType=DECIMAL},
+            </if>
+            <if test="densitylipop != null" >
+                DensityLipop = #{densitylipop,jdbcType=DECIMAL},
+            </if>
+            <if test="ldlip != null" >
+                LDLip = #{ldlip,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.PhysicalExamination" >
+        update mem2
+        set BloodType = #{bloodtype,jdbcType=VARCHAR},
+            AllergicHis = #{allergichis,jdbcType=CHAR},
+            AllergicHisName = #{allergichisname,jdbcType=VARCHAR},
+            Height = #{height,jdbcType=INTEGER},
+            Weight = #{weight,jdbcType=DECIMAL},
+            Waist = #{waist,jdbcType=INTEGER},
+            Hip = #{hip,jdbcType=INTEGER},
+            Pulse = #{pulse,jdbcType=INTEGER},
+            HeartRate = #{heartrate,jdbcType=INTEGER},
+            BloodH = #{bloodh,jdbcType=SMALLINT},
+            BloodL = #{bloodl,jdbcType=SMALLINT},
+            FastingGlucose = #{fastingglucose,jdbcType=DECIMAL},
+            UricAcid = #{uricacid,jdbcType=INTEGER},
+            TotalCholesterol = #{totalcholesterol,jdbcType=DECIMAL},
+            Triglyceride = #{triglyceride,jdbcType=DECIMAL},
+            DensityLipop = #{densitylipop,jdbcType=DECIMAL},
+            LDLip = #{ldlip,jdbcType=DECIMAL}
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from mem2
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.PhysicalExaminationExample" >
+        delete from mem2
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

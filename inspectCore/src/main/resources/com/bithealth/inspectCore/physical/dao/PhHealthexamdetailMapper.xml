@@ -1,0 +1,3237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.inspectCore.physical.dao.PhHealthexamdetailMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.inspectCore.physical.model.PhHealthexamdetail" >
+        <id column="HExamID" property="HExamID" jdbcType="BIGINT" />
+        <result column="Symptom" property="symptom" jdbcType="VARCHAR" />
+        <result column="Symptom_Desc" property="symptom_Desc" jdbcType="VARCHAR" />
+        <result column="BodyTemperature" property="bodyTemperature" jdbcType="DECIMAL" />
+        <result column="PulseRate" property="pulseRate" jdbcType="SMALLINT" />
+        <result column="RespiratoryRate" property="respiratoryRate" jdbcType="SMALLINT" />
+        <result column="LeftSystolic" property="leftSystolic" jdbcType="SMALLINT" />
+        <result column="LeftDiastolic" property="leftDiastolic" jdbcType="SMALLINT" />
+        <result column="RightSystolic" property="rightSystolic" jdbcType="SMALLINT" />
+        <result column="RightDiastolic" property="rightDiastolic" jdbcType="SMALLINT" />
+        <result column="Height" property="height" jdbcType="DECIMAL" />
+        <result column="Weight" property="weight" jdbcType="DECIMAL" />
+        <result column="Waist" property="waist" jdbcType="DECIMAL" />
+        <result column="BMI" property="BMI" jdbcType="DECIMAL" />
+        <result column="AgedHealthEvaluate" property="agedHealthEvaluate" jdbcType="TINYINT" />
+        <result column="AgedLifeEvaluate" property="agedLifeEvaluate" jdbcType="TINYINT" />
+        <result column="AgedCognition" property="agedCognition" jdbcType="TINYINT" />
+        <result column="AgedCognitionScore" property="agedCognitionScore" jdbcType="TINYINT" />
+        <result column="AgedFeeling" property="agedFeeling" jdbcType="TINYINT" />
+        <result column="AgedFeelingScore" property="agedFeelingScore" jdbcType="TINYINT" />
+        <result column="SportFrequency" property="sportFrequency" jdbcType="TINYINT" />
+        <result column="SportDuration" property="sportDuration" jdbcType="SMALLINT" />
+        <result column="SportTotalTime" property="sportTotalTime" jdbcType="TINYINT" />
+        <result column="SportWay" property="sportWay" jdbcType="VARCHAR" />
+        <result column="EatingHabits" property="eatingHabits" jdbcType="VARCHAR" />
+        <result column="SmokingState" property="smokingState" jdbcType="TINYINT" />
+        <result column="DailySmoking" property="dailySmoking" jdbcType="SMALLINT" />
+        <result column="SmokingStartAge" property="smokingStartAge" jdbcType="TINYINT" />
+        <result column="SmokingEndAge" property="smokingEndAge" jdbcType="TINYINT" />
+        <result column="DrinkFrequency" property="drinkFrequency" jdbcType="TINYINT" />
+        <result column="DailyDrink" property="dailyDrink" jdbcType="DECIMAL" />
+        <result column="IsAbstinence" property="isAbstinence" jdbcType="TINYINT" />
+        <result column="AbstinenceAge" property="abstinenceAge" jdbcType="TINYINT" />
+        <result column="DrinkStartAge" property="drinkStartAge" jdbcType="TINYINT" />
+        <result column="IsTemulenceLastYear" property="isTemulenceLastYear" jdbcType="TINYINT" />
+        <result column="DrinkType" property="drinkType" jdbcType="VARCHAR" />
+        <result column="DrinkOther_Desc" property="drinkOther_Desc" jdbcType="VARCHAR" />
+        <result column="Occupation" property="occupation" jdbcType="TINYINT" />
+        <result column="TypeOfWork" property="typeOfWork" jdbcType="VARCHAR" />
+        <result column="WorkTime" property="workTime" jdbcType="TINYINT" />
+        <result column="Dust" property="dust" jdbcType="VARCHAR" />
+        <result column="DustGuard" property="dustGuard" jdbcType="TINYINT" />
+        <result column="DustGuard_Desc" property="dustGuard_Desc" jdbcType="VARCHAR" />
+        <result column="Radiogen" property="radiogen" jdbcType="VARCHAR" />
+        <result column="RadiogenGuard" property="radiogenGuard" jdbcType="TINYINT" />
+        <result column="RadiogenGuard_Desc" property="radiogenGuard_Desc" jdbcType="VARCHAR" />
+        <result column="Physical" property="physical" jdbcType="VARCHAR" />
+        <result column="PhysicalGuard" property="physicalGuard" jdbcType="TINYINT" />
+        <result column="PhysicalGuard_Desc" property="physicalGuard_Desc" jdbcType="VARCHAR" />
+        <result column="Chemical" property="chemical" jdbcType="VARCHAR" />
+        <result column="ChemicalGuard" property="chemicalGuard" jdbcType="TINYINT" />
+        <result column="ChemicalGuard_Desc" property="chemicalGuard_Desc" jdbcType="VARCHAR" />
+        <result column="ToxicOther" property="toxicOther" jdbcType="VARCHAR" />
+        <result column="ToxicOtherGuard" property="toxicOtherGuard" jdbcType="TINYINT" />
+        <result column="ToxicOtherGuard_Desc" property="toxicOtherGuard_Desc" jdbcType="VARCHAR" />
+        <result column="Lips" property="lips" jdbcType="TINYINT" />
+        <result column="Dentition" property="dentition" jdbcType="TINYINT" />
+        <result column="Dentition_Desc" property="dentition_Desc" jdbcType="VARCHAR" />
+        <result column="Throat" property="throat" jdbcType="TINYINT" />
+        <result column="LeftVision" property="leftVision" jdbcType="DECIMAL" />
+        <result column="RightVision" property="rightVision" jdbcType="DECIMAL" />
+        <result column="LeftCorrectVision" property="leftCorrectVision" jdbcType="DECIMAL" />
+        <result column="RightCorrectVision" property="rightCorrectVision" jdbcType="DECIMAL" />
+        <result column="Hearing" property="hearing" jdbcType="TINYINT" />
+        <result column="Movement" property="movement" jdbcType="TINYINT" />
+        <result column="Eyeground" property="eyeground" jdbcType="TINYINT" />
+        <result column="Eyeground_Desc" property="eyeground_Desc" jdbcType="VARCHAR" />
+        <result column="Skin" property="skin" jdbcType="TINYINT" />
+        <result column="Skin_Desc" property="skin_Desc" jdbcType="VARCHAR" />
+        <result column="Sclero" property="sclero" jdbcType="TINYINT" />
+        <result column="Sclero_Desc" property="sclero_Desc" jdbcType="VARCHAR" />
+        <result column="Lymph" property="lymph" jdbcType="TINYINT" />
+        <result column="Lymph_Desc" property="lymph_Desc" jdbcType="VARCHAR" />
+        <result column="LungBarrelChest" property="lungBarrelChest" jdbcType="TINYINT" />
+        <result column="LungBreathSounds" property="lungBreathSounds" jdbcType="TINYINT" />
+        <result column="LungBreathSounds_Desc" property="lungBreathSounds_Desc" jdbcType="VARCHAR" />
+        <result column="LungRales" property="lungRales" jdbcType="TINYINT" />
+        <result column="LungRales_Desc" property="lungRales_Desc" jdbcType="VARCHAR" />
+        <result column="HeartRate" property="heartRate" jdbcType="SMALLINT" />
+        <result column="Rhythm" property="rhythm" jdbcType="TINYINT" />
+        <result column="Murmur" property="murmur" jdbcType="TINYINT" />
+        <result column="Murmur_Desc" property="murmur_Desc" jdbcType="VARCHAR" />
+        <result column="Pain" property="pain" jdbcType="TINYINT" />
+        <result column="Pain_Desc" property="pain_Desc" jdbcType="VARCHAR" />
+        <result column="Block" property="block" jdbcType="TINYINT" />
+        <result column="Block_Desc" property="block_Desc" jdbcType="VARCHAR" />
+        <result column="Hepatomegaly" property="hepatomegaly" jdbcType="TINYINT" />
+        <result column="Hepatomegaly_Desc" property="hepatomegaly_Desc" jdbcType="VARCHAR" />
+        <result column="Splenomegaly" property="splenomegaly" jdbcType="TINYINT" />
+        <result column="Splenomegaly_Desc" property="splenomegaly_Desc" jdbcType="VARCHAR" />
+        <result column="MoveSonant" property="moveSonant" jdbcType="TINYINT" />
+        <result column="MoveSonant_Desc" property="moveSonant_Desc" jdbcType="VARCHAR" />
+        <result column="LowLimbEdema" property="lowLimbEdema" jdbcType="TINYINT" />
+        <result column="Arteriopalmus" property="arteriopalmus" jdbcType="TINYINT" />
+        <result column="AnusTactus" property="anusTactus" jdbcType="TINYINT" />
+        <result column="AnusTactus_Desc" property="anusTactus_Desc" jdbcType="VARCHAR" />
+        <result column="Breast" property="breast" jdbcType="VARCHAR" />
+        <result column="Breast_Desc" property="breast_Desc" jdbcType="VARCHAR" />
+        <result column="Pudendum" property="pudendum" jdbcType="TINYINT" />
+        <result column="Pudendum_Desc" property="pudendum_Desc" jdbcType="VARCHAR" />
+        <result column="Vagina" property="vagina" jdbcType="TINYINT" />
+        <result column="Vagina_Desc" property="vagina_Desc" jdbcType="VARCHAR" />
+        <result column="Cervical" property="cervical" jdbcType="TINYINT" />
+        <result column="Cervical_Desc" property="cervical_Desc" jdbcType="VARCHAR" />
+        <result column="Uteri" property="uteri" jdbcType="TINYINT" />
+        <result column="Uteri_Desc" property="uteri_Desc" jdbcType="VARCHAR" />
+        <result column="Enclosure" property="enclosure" jdbcType="TINYINT" />
+        <result column="Enclosure_Desc" property="enclosure_Desc" jdbcType="VARCHAR" />
+        <result column="GynaecologyOther" property="gynaecologyOther" jdbcType="VARCHAR" />
+        <result column="Hemoglobin" property="hemoglobin" jdbcType="SMALLINT" />
+        <result column="Leukocyte" property="leukocyte" jdbcType="DECIMAL" />
+        <result column="Platelet" property="platelet" jdbcType="SMALLINT" />
+        <result column="BloodOther" property="bloodOther" jdbcType="VARCHAR" />
+        <result column="UrineProtein" property="urineProtein" jdbcType="VARCHAR" />
+        <result column="UrineSugar" property="urineSugar" jdbcType="VARCHAR" />
+        <result column="UrineAcetoneBody" property="urineAcetoneBody" jdbcType="VARCHAR" />
+        <result column="UrineOccultBlood" property="urineOccultBlood" jdbcType="VARCHAR" />
+        <result column="UrineOther" property="urineOther" jdbcType="VARCHAR" />
+        <result column="GLU" property="GLU" jdbcType="DECIMAL" />
+        <result column="PGLU" property="PGLU" jdbcType="DECIMAL" />
+        <result column="Cardiogram" property="cardiogram" jdbcType="TINYINT" />
+        <result column="Cardiogram_Desc" property="cardiogram_Desc" jdbcType="VARCHAR" />
+        <result column="UrineMicroAlbumin" property="urineMicroAlbumin" jdbcType="DECIMAL" />
+        <result column="FecalOccultBlood" property="fecalOccultBlood" jdbcType="TINYINT" />
+        <result column="HBA1C" property="HBA1C" jdbcType="DECIMAL" />
+        <result column="HBSAG" property="HBSAG" jdbcType="TINYINT" />
+        <result column="CPT" property="CPT" jdbcType="SMALLINT" />
+        <result column="AST" property="AST" jdbcType="SMALLINT" />
+        <result column="ALB" property="ALB" jdbcType="SMALLINT" />
+        <result column="TBIL" property="TBIL" jdbcType="DECIMAL" />
+        <result column="CBIL" property="CBIL" jdbcType="DECIMAL" />
+        <result column="CR" property="CR" jdbcType="DECIMAL" />
+        <result column="BUN" property="BUN" jdbcType="DECIMAL" />
+        <result column="SerumPotassium" property="serumPotassium" jdbcType="DECIMAL" />
+        <result column="SerumSodium" property="serumSodium" jdbcType="DECIMAL" />
+        <result column="CHOL" property="CHOL" jdbcType="DECIMAL" />
+        <result column="TG" property="TG" jdbcType="DECIMAL" />
+        <result column="LDL_C" property="LDL_C" jdbcType="DECIMAL" />
+        <result column="HDL_C" property="HDL_C" jdbcType="DECIMAL" />
+        <result column="X_RAY" property="x_RAY" jdbcType="TINYINT" />
+        <result column="X_RAY_Desc" property="x_RAY_Desc" jdbcType="VARCHAR" />
+        <result column="B_Ultrasonic" property="b_Ultrasonic" jdbcType="TINYINT" />
+        <result column="B_Ultrasonic_Desc" property="b_Ultrasonic_Desc" jdbcType="VARCHAR" />
+        <result column="CervicalSmear" property="cervicalSmear" jdbcType="TINYINT" />
+        <result column="CervicalSmear_Desc" property="cervicalSmear_Desc" jdbcType="VARCHAR" />
+        <result column="AssistCheckOther" property="assistCheckOther" jdbcType="VARCHAR" />
+        <result column="TCM_PHZ" property="TCM_PHZ" jdbcType="TINYINT" />
+        <result column="TCM_PHZ_Guide" property="TCM_PHZ_Guide" jdbcType="VARCHAR" />
+        <result column="TCM_PHZ_Guide_Desc" property="TCM_PHZ_Guide_Desc" jdbcType="VARCHAR" />
+        <result column="TCM_QXZ" property="TCM_QXZ" jdbcType="TINYINT" />
+        <result column="TCM_QXZ_Guide" property="TCM_QXZ_Guide" jdbcType="VARCHAR" />
+        <result column="TCM_QXZ_Guide_Desc" property="TCM_QXZ_Guide_Desc" jdbcType="VARCHAR" />
+        <result column="TCM_YXZ" property="TCM_YXZ" jdbcType="TINYINT" />
+        <result column="TCM_YXZ_Guide" property="TCM_YXZ_Guide" jdbcType="VARCHAR" />
+        <result column="TCM_YXZ_Guide_Desc" property="TCM_YXZ_Guide_Desc" jdbcType="VARCHAR" />
+        <result column="TCM_YIXZ" property="TCM_YIXZ" jdbcType="TINYINT" />
+        <result column="TCM_YIXZ_Guide" property="TCM_YIXZ_Guide" jdbcType="VARCHAR" />
+        <result column="TCM_YIXZ_Guide_Desc" property="TCM_YIXZ_Guide_Desc" jdbcType="VARCHAR" />
+        <result column="TCM_TSZ" property="TCM_TSZ" jdbcType="TINYINT" />
+        <result column="TCM_TSZ_Guide" property="TCM_TSZ_Guide" jdbcType="VARCHAR" />
+        <result column="TCM_TSZ_Guide_Desc" property="TCM_TSZ_Guide_Desc" jdbcType="VARCHAR" />
+        <result column="TCM_SRZ" property="TCM_SRZ" jdbcType="TINYINT" />
+        <result column="TCM_SRZ_Guide" property="TCM_SRZ_Guide" jdbcType="VARCHAR" />
+        <result column="TCM_SRZ_Guide_Desc" property="TCM_SRZ_Guide_Desc" jdbcType="VARCHAR" />
+        <result column="TCM_XTZ" property="TCM_XTZ" jdbcType="TINYINT" />
+        <result column="TCM_XTZ_Guide" property="TCM_XTZ_Guide" jdbcType="VARCHAR" />
+        <result column="TCM_XTZ_Guide_Desc" property="TCM_XTZ_Guide_Desc" jdbcType="VARCHAR" />
+        <result column="TCM_QYZ" property="TCM_QYZ" jdbcType="TINYINT" />
+        <result column="TCM_QYZ_Guide" property="TCM_QYZ_Guide" jdbcType="VARCHAR" />
+        <result column="TCM_QYZ_Guide_Desc" property="TCM_QYZ_Guide_Desc" jdbcType="VARCHAR" />
+        <result column="TCM_TBZ" property="TCM_TBZ" jdbcType="TINYINT" />
+        <result column="CerebralVessel" property="cerebralVessel" jdbcType="VARCHAR" />
+        <result column="TCM_TBZ_Guide" property="TCM_TBZ_Guide" jdbcType="VARCHAR" />
+        <result column="TCM_TBZ_Guide_Desc" property="TCM_TBZ_Guide_Desc" jdbcType="VARCHAR" />
+        <result column="CerebralVessel_Desc" property="cerebralVessel_Desc" jdbcType="VARCHAR" />
+        <result column="Kidney" property="kidney" jdbcType="VARCHAR" />
+        <result column="Kidney_Desc" property="kidney_Desc" jdbcType="VARCHAR" />
+        <result column="Heart" property="heart" jdbcType="VARCHAR" />
+        <result column="Heart_Desc" property="heart_Desc" jdbcType="VARCHAR" />
+        <result column="BloodPipe" property="bloodPipe" jdbcType="VARCHAR" />
+        <result column="BloodPipe_Desc" property="bloodPipe_Desc" jdbcType="VARCHAR" />
+        <result column="EyePart" property="eyePart" jdbcType="VARCHAR" />
+        <result column="EyePart_Desc" property="eyePart_Desc" jdbcType="VARCHAR" />
+        <result column="NervousSystem" property="nervousSystem" jdbcType="TINYINT" />
+        <result column="NervousSystem_Desc" property="nervousSystem_Desc" jdbcType="VARCHAR" />
+        <result column="OtherSystem" property="otherSystem" jdbcType="TINYINT" />
+        <result column="OtherSystem_Desc" property="otherSystem_Desc" jdbcType="VARCHAR" />
+        <result column="HealthEvaluate" property="healthEvaluate" jdbcType="TINYINT" />
+        <result column="HealthEvaluate_Desc" property="healthEvaluate_Desc" jdbcType="VARCHAR" />
+        <result column="HealthGuide" property="healthGuide" jdbcType="VARCHAR" />
+        <result column="RiskFactor" property="riskFactor" jdbcType="VARCHAR" />
+        <result column="RiskFactor_Target" property="riskFactor_Target" jdbcType="VARCHAR" />
+        <result column="RiskFactor_Vaccine" property="riskFactor_Vaccine" jdbcType="VARCHAR" />
+        <result column="RiskFactor_Other" property="riskFactor_Other" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        HExamID, Symptom, Symptom_Desc, BodyTemperature, PulseRate, RespiratoryRate, LeftSystolic, 
+        LeftDiastolic, RightSystolic, RightDiastolic, Height, Weight, Waist, BMI, AgedHealthEvaluate, 
+        AgedLifeEvaluate, AgedCognition, AgedCognitionScore, AgedFeeling, AgedFeelingScore, 
+        SportFrequency, SportDuration, SportTotalTime, SportWay, EatingHabits, SmokingState, 
+        DailySmoking, SmokingStartAge, SmokingEndAge, DrinkFrequency, DailyDrink, IsAbstinence, 
+        AbstinenceAge, DrinkStartAge, IsTemulenceLastYear, DrinkType, DrinkOther_Desc, Occupation, 
+        TypeOfWork, WorkTime, Dust, DustGuard, DustGuard_Desc, Radiogen, RadiogenGuard, RadiogenGuard_Desc, 
+        Physical, PhysicalGuard, PhysicalGuard_Desc, Chemical, ChemicalGuard, ChemicalGuard_Desc, 
+        ToxicOther, ToxicOtherGuard, ToxicOtherGuard_Desc, Lips, Dentition, Dentition_Desc, 
+        Throat, LeftVision, RightVision, LeftCorrectVision, RightCorrectVision, Hearing, 
+        Movement, Eyeground, Eyeground_Desc, Skin, Skin_Desc, Sclero, Sclero_Desc, Lymph, 
+        Lymph_Desc, LungBarrelChest, LungBreathSounds, LungBreathSounds_Desc, LungRales, 
+        LungRales_Desc, HeartRate, Rhythm, Murmur, Murmur_Desc, Pain, Pain_Desc, Block, Block_Desc, 
+        Hepatomegaly, Hepatomegaly_Desc, Splenomegaly, Splenomegaly_Desc, MoveSonant, MoveSonant_Desc, 
+        LowLimbEdema, Arteriopalmus, AnusTactus, AnusTactus_Desc, Breast, Breast_Desc, Pudendum, 
+        Pudendum_Desc, Vagina, Vagina_Desc, Cervical, Cervical_Desc, Uteri, Uteri_Desc, Enclosure, 
+        Enclosure_Desc, GynaecologyOther, Hemoglobin, Leukocyte, Platelet, BloodOther, UrineProtein, 
+        UrineSugar, UrineAcetoneBody, UrineOccultBlood, UrineOther, GLU, PGLU, Cardiogram, 
+        Cardiogram_Desc, UrineMicroAlbumin, FecalOccultBlood, HBA1C, HBSAG, CPT, AST, ALB, 
+        TBIL, CBIL, CR, BUN, SerumPotassium, SerumSodium, CHOL, TG, LDL_C, HDL_C, X_RAY, 
+        X_RAY_Desc, B_Ultrasonic, B_Ultrasonic_Desc, CervicalSmear, CervicalSmear_Desc, AssistCheckOther, 
+        TCM_PHZ, TCM_PHZ_Guide, TCM_PHZ_Guide_Desc, TCM_QXZ, TCM_QXZ_Guide, TCM_QXZ_Guide_Desc, 
+        TCM_YXZ, TCM_YXZ_Guide, TCM_YXZ_Guide_Desc, TCM_YIXZ, TCM_YIXZ_Guide, TCM_YIXZ_Guide_Desc, 
+        TCM_TSZ, TCM_TSZ_Guide, TCM_TSZ_Guide_Desc, TCM_SRZ, TCM_SRZ_Guide, TCM_SRZ_Guide_Desc, 
+        TCM_XTZ, TCM_XTZ_Guide, TCM_XTZ_Guide_Desc, TCM_QYZ, TCM_QYZ_Guide, TCM_QYZ_Guide_Desc, 
+        TCM_TBZ, CerebralVessel, TCM_TBZ_Guide, TCM_TBZ_Guide_Desc, CerebralVessel_Desc, 
+        Kidney, Kidney_Desc, Heart, Heart_Desc, BloodPipe, BloodPipe_Desc, EyePart, EyePart_Desc, 
+        NervousSystem, NervousSystem_Desc, OtherSystem, OtherSystem_Desc, HealthEvaluate, 
+        HealthEvaluate_Desc, HealthGuide, RiskFactor, RiskFactor_Target, RiskFactor_Vaccine, 
+        RiskFactor_Other
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ph_healthexamdetail
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ph_healthexamdetail
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from ph_healthexamdetail
+        where HExamID = #{HExamID,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetail" >
+        insert into ph_healthexamdetail (HExamID, Symptom, Symptom_Desc, 
+            BodyTemperature, PulseRate, RespiratoryRate, 
+            LeftSystolic, LeftDiastolic, RightSystolic, 
+            RightDiastolic, Height, Weight, 
+            Waist, BMI, AgedHealthEvaluate, 
+            AgedLifeEvaluate, AgedCognition, AgedCognitionScore, 
+            AgedFeeling, AgedFeelingScore, SportFrequency, 
+            SportDuration, SportTotalTime, SportWay, 
+            EatingHabits, SmokingState, DailySmoking, 
+            SmokingStartAge, SmokingEndAge, DrinkFrequency, 
+            DailyDrink, IsAbstinence, AbstinenceAge, 
+            DrinkStartAge, IsTemulenceLastYear, DrinkType, 
+            DrinkOther_Desc, Occupation, TypeOfWork, 
+            WorkTime, Dust, DustGuard, 
+            DustGuard_Desc, Radiogen, RadiogenGuard, 
+            RadiogenGuard_Desc, Physical, PhysicalGuard, 
+            PhysicalGuard_Desc, Chemical, ChemicalGuard, 
+            ChemicalGuard_Desc, ToxicOther, ToxicOtherGuard, 
+            ToxicOtherGuard_Desc, Lips, Dentition, 
+            Dentition_Desc, Throat, LeftVision, 
+            RightVision, LeftCorrectVision, RightCorrectVision, 
+            Hearing, Movement, Eyeground, 
+            Eyeground_Desc, Skin, Skin_Desc, 
+            Sclero, Sclero_Desc, Lymph, 
+            Lymph_Desc, LungBarrelChest, LungBreathSounds, 
+            LungBreathSounds_Desc, LungRales, LungRales_Desc, 
+            HeartRate, Rhythm, Murmur, 
+            Murmur_Desc, Pain, Pain_Desc, 
+            Block, Block_Desc, Hepatomegaly, 
+            Hepatomegaly_Desc, Splenomegaly, Splenomegaly_Desc, 
+            MoveSonant, MoveSonant_Desc, LowLimbEdema, 
+            Arteriopalmus, AnusTactus, AnusTactus_Desc, 
+            Breast, Breast_Desc, Pudendum, 
+            Pudendum_Desc, Vagina, Vagina_Desc, 
+            Cervical, Cervical_Desc, Uteri, 
+            Uteri_Desc, Enclosure, Enclosure_Desc, 
+            GynaecologyOther, Hemoglobin, Leukocyte, 
+            Platelet, BloodOther, UrineProtein, 
+            UrineSugar, UrineAcetoneBody, UrineOccultBlood, 
+            UrineOther, GLU, PGLU, 
+            Cardiogram, Cardiogram_Desc, UrineMicroAlbumin, 
+            FecalOccultBlood, HBA1C, HBSAG, 
+            CPT, AST, ALB, 
+            TBIL, CBIL, CR, BUN, 
+            SerumPotassium, SerumSodium, CHOL, 
+            TG, LDL_C, HDL_C, 
+            X_RAY, X_RAY_Desc, B_Ultrasonic, 
+            B_Ultrasonic_Desc, CervicalSmear, CervicalSmear_Desc, 
+            AssistCheckOther, TCM_PHZ, TCM_PHZ_Guide, 
+            TCM_PHZ_Guide_Desc, TCM_QXZ, TCM_QXZ_Guide, 
+            TCM_QXZ_Guide_Desc, TCM_YXZ, TCM_YXZ_Guide, 
+            TCM_YXZ_Guide_Desc, TCM_YIXZ, TCM_YIXZ_Guide, 
+            TCM_YIXZ_Guide_Desc, TCM_TSZ, TCM_TSZ_Guide, 
+            TCM_TSZ_Guide_Desc, TCM_SRZ, TCM_SRZ_Guide, 
+            TCM_SRZ_Guide_Desc, TCM_XTZ, TCM_XTZ_Guide, 
+            TCM_XTZ_Guide_Desc, TCM_QYZ, TCM_QYZ_Guide, 
+            TCM_QYZ_Guide_Desc, TCM_TBZ, CerebralVessel, 
+            TCM_TBZ_Guide, TCM_TBZ_Guide_Desc, CerebralVessel_Desc, 
+            Kidney, Kidney_Desc, Heart, 
+            Heart_Desc, BloodPipe, BloodPipe_Desc, 
+            EyePart, EyePart_Desc, NervousSystem, 
+            NervousSystem_Desc, OtherSystem, OtherSystem_Desc, 
+            HealthEvaluate, HealthEvaluate_Desc, 
+            HealthGuide, RiskFactor, RiskFactor_Target, 
+            RiskFactor_Vaccine, RiskFactor_Other)
+        values (#{HExamID,jdbcType=BIGINT}, #{symptom,jdbcType=VARCHAR}, #{symptom_Desc,jdbcType=VARCHAR}, 
+            #{bodyTemperature,jdbcType=DECIMAL}, #{pulseRate,jdbcType=SMALLINT}, #{respiratoryRate,jdbcType=SMALLINT}, 
+            #{leftSystolic,jdbcType=SMALLINT}, #{leftDiastolic,jdbcType=SMALLINT}, #{rightSystolic,jdbcType=SMALLINT}, 
+            #{rightDiastolic,jdbcType=SMALLINT}, #{height,jdbcType=DECIMAL}, #{weight,jdbcType=DECIMAL}, 
+            #{waist,jdbcType=DECIMAL}, #{BMI,jdbcType=DECIMAL}, #{agedHealthEvaluate,jdbcType=TINYINT}, 
+            #{agedLifeEvaluate,jdbcType=TINYINT}, #{agedCognition,jdbcType=TINYINT}, #{agedCognitionScore,jdbcType=TINYINT}, 
+            #{agedFeeling,jdbcType=TINYINT}, #{agedFeelingScore,jdbcType=TINYINT}, #{sportFrequency,jdbcType=TINYINT}, 
+            #{sportDuration,jdbcType=SMALLINT}, #{sportTotalTime,jdbcType=TINYINT}, #{sportWay,jdbcType=VARCHAR}, 
+            #{eatingHabits,jdbcType=VARCHAR}, #{smokingState,jdbcType=TINYINT}, #{dailySmoking,jdbcType=SMALLINT}, 
+            #{smokingStartAge,jdbcType=TINYINT}, #{smokingEndAge,jdbcType=TINYINT}, #{drinkFrequency,jdbcType=TINYINT}, 
+            #{dailyDrink,jdbcType=SMALLINT}, #{isAbstinence,jdbcType=TINYINT}, #{abstinenceAge,jdbcType=TINYINT}, 
+            #{drinkStartAge,jdbcType=TINYINT}, #{isTemulenceLastYear,jdbcType=TINYINT}, #{drinkType,jdbcType=VARCHAR}, 
+            #{drinkOther_Desc,jdbcType=VARCHAR}, #{occupation,jdbcType=TINYINT}, #{typeOfWork,jdbcType=VARCHAR}, 
+            #{workTime,jdbcType=TINYINT}, #{dust,jdbcType=VARCHAR}, #{dustGuard,jdbcType=TINYINT}, 
+            #{dustGuard_Desc,jdbcType=VARCHAR}, #{radiogen,jdbcType=VARCHAR}, #{radiogenGuard,jdbcType=TINYINT}, 
+            #{radiogenGuard_Desc,jdbcType=VARCHAR}, #{physical,jdbcType=VARCHAR}, #{physicalGuard,jdbcType=TINYINT}, 
+            #{physicalGuard_Desc,jdbcType=VARCHAR}, #{chemical,jdbcType=VARCHAR}, #{chemicalGuard,jdbcType=TINYINT}, 
+            #{chemicalGuard_Desc,jdbcType=VARCHAR}, #{toxicOther,jdbcType=VARCHAR}, #{toxicOtherGuard,jdbcType=TINYINT}, 
+            #{toxicOtherGuard_Desc,jdbcType=VARCHAR}, #{lips,jdbcType=TINYINT}, #{dentition,jdbcType=TINYINT}, 
+            #{dentition_Desc,jdbcType=VARCHAR}, #{throat,jdbcType=TINYINT}, #{leftVision,jdbcType=DECIMAL}, 
+            #{rightVision,jdbcType=DECIMAL}, #{leftCorrectVision,jdbcType=DECIMAL}, #{rightCorrectVision,jdbcType=DECIMAL}, 
+            #{hearing,jdbcType=TINYINT}, #{movement,jdbcType=TINYINT}, #{eyeground,jdbcType=TINYINT}, 
+            #{eyeground_Desc,jdbcType=VARCHAR}, #{skin,jdbcType=TINYINT}, #{skin_Desc,jdbcType=VARCHAR}, 
+            #{sclero,jdbcType=TINYINT}, #{sclero_Desc,jdbcType=VARCHAR}, #{lymph,jdbcType=TINYINT}, 
+            #{lymph_Desc,jdbcType=VARCHAR}, #{lungBarrelChest,jdbcType=TINYINT}, #{lungBreathSounds,jdbcType=TINYINT}, 
+            #{lungBreathSounds_Desc,jdbcType=VARCHAR}, #{lungRales,jdbcType=TINYINT}, #{lungRales_Desc,jdbcType=VARCHAR}, 
+            #{heartRate,jdbcType=SMALLINT}, #{rhythm,jdbcType=TINYINT}, #{murmur,jdbcType=TINYINT}, 
+            #{murmur_Desc,jdbcType=VARCHAR}, #{pain,jdbcType=TINYINT}, #{pain_Desc,jdbcType=VARCHAR}, 
+            #{block,jdbcType=TINYINT}, #{block_Desc,jdbcType=VARCHAR}, #{hepatomegaly,jdbcType=TINYINT}, 
+            #{hepatomegaly_Desc,jdbcType=VARCHAR}, #{splenomegaly,jdbcType=TINYINT}, #{splenomegaly_Desc,jdbcType=VARCHAR}, 
+            #{moveSonant,jdbcType=TINYINT}, #{moveSonant_Desc,jdbcType=VARCHAR}, #{lowLimbEdema,jdbcType=TINYINT}, 
+            #{arteriopalmus,jdbcType=TINYINT}, #{anusTactus,jdbcType=TINYINT}, #{anusTactus_Desc,jdbcType=VARCHAR}, 
+            #{breast,jdbcType=VARCHAR}, #{breast_Desc,jdbcType=VARCHAR}, #{pudendum,jdbcType=TINYINT}, 
+            #{pudendum_Desc,jdbcType=VARCHAR}, #{vagina,jdbcType=TINYINT}, #{vagina_Desc,jdbcType=VARCHAR}, 
+            #{cervical,jdbcType=TINYINT}, #{cervical_Desc,jdbcType=VARCHAR}, #{uteri,jdbcType=TINYINT}, 
+            #{uteri_Desc,jdbcType=VARCHAR}, #{enclosure,jdbcType=TINYINT}, #{enclosure_Desc,jdbcType=VARCHAR}, 
+            #{gynaecologyOther,jdbcType=VARCHAR}, #{hemoglobin,jdbcType=SMALLINT}, #{leukocyte,jdbcType=DECIMAL}, 
+            #{platelet,jdbcType=SMALLINT}, #{bloodOther,jdbcType=VARCHAR}, #{urineProtein,jdbcType=VARCHAR}, 
+            #{urineSugar,jdbcType=VARCHAR}, #{urineAcetoneBody,jdbcType=VARCHAR}, #{urineOccultBlood,jdbcType=VARCHAR}, 
+            #{urineOther,jdbcType=VARCHAR}, #{GLU,jdbcType=DECIMAL}, #{PGLU,jdbcType=DECIMAL}, 
+            #{cardiogram,jdbcType=TINYINT}, #{cardiogram_Desc,jdbcType=VARCHAR}, #{urineMicroAlbumin,jdbcType=DECIMAL}, 
+            #{fecalOccultBlood,jdbcType=TINYINT}, #{HBA1C,jdbcType=DECIMAL}, #{HBSAG,jdbcType=TINYINT}, 
+            #{CPT,jdbcType=SMALLINT}, #{AST,jdbcType=SMALLINT}, #{ALB,jdbcType=SMALLINT}, 
+            #{TBIL,jdbcType=DECIMAL}, #{CBIL,jdbcType=DECIMAL}, #{CR,jdbcType=DECIMAL}, #{BUN,jdbcType=DECIMAL}, 
+            #{serumPotassium,jdbcType=DECIMAL}, #{serumSodium,jdbcType=SMALLINT}, #{CHOL,jdbcType=DECIMAL}, 
+            #{TG,jdbcType=DECIMAL}, #{LDL_C,jdbcType=DECIMAL}, #{HDL_C,jdbcType=DECIMAL}, 
+            #{x_RAY,jdbcType=TINYINT}, #{x_RAY_Desc,jdbcType=VARCHAR}, #{b_Ultrasonic,jdbcType=TINYINT}, 
+            #{b_Ultrasonic_Desc,jdbcType=VARCHAR}, #{cervicalSmear,jdbcType=TINYINT}, #{cervicalSmear_Desc,jdbcType=VARCHAR}, 
+            #{assistCheckOther,jdbcType=VARCHAR}, #{TCM_PHZ,jdbcType=TINYINT}, #{TCM_PHZ_Guide,jdbcType=VARCHAR}, 
+            #{TCM_PHZ_Guide_Desc,jdbcType=VARCHAR}, #{TCM_QXZ,jdbcType=TINYINT}, #{TCM_QXZ_Guide,jdbcType=VARCHAR}, 
+            #{TCM_QXZ_Guide_Desc,jdbcType=VARCHAR}, #{TCM_YXZ,jdbcType=TINYINT}, #{TCM_YXZ_Guide,jdbcType=VARCHAR}, 
+            #{TCM_YXZ_Guide_Desc,jdbcType=VARCHAR}, #{TCM_YIXZ,jdbcType=TINYINT}, #{TCM_YIXZ_Guide,jdbcType=VARCHAR}, 
+            #{TCM_YIXZ_Guide_Desc,jdbcType=VARCHAR}, #{TCM_TSZ,jdbcType=TINYINT}, #{TCM_TSZ_Guide,jdbcType=VARCHAR}, 
+            #{TCM_TSZ_Guide_Desc,jdbcType=VARCHAR}, #{TCM_SRZ,jdbcType=TINYINT}, #{TCM_SRZ_Guide,jdbcType=VARCHAR}, 
+            #{TCM_SRZ_Guide_Desc,jdbcType=VARCHAR}, #{TCM_XTZ,jdbcType=TINYINT}, #{TCM_XTZ_Guide,jdbcType=VARCHAR}, 
+            #{TCM_XTZ_Guide_Desc,jdbcType=VARCHAR}, #{TCM_QYZ,jdbcType=TINYINT}, #{TCM_QYZ_Guide,jdbcType=VARCHAR}, 
+            #{TCM_QYZ_Guide_Desc,jdbcType=VARCHAR}, #{TCM_TBZ,jdbcType=TINYINT}, #{cerebralVessel,jdbcType=VARCHAR}, 
+            #{TCM_TBZ_Guide,jdbcType=VARCHAR}, #{TCM_TBZ_Guide_Desc,jdbcType=VARCHAR}, #{cerebralVessel_Desc,jdbcType=VARCHAR}, 
+            #{kidney,jdbcType=VARCHAR}, #{kidney_Desc,jdbcType=VARCHAR}, #{heart,jdbcType=VARCHAR}, 
+            #{heart_Desc,jdbcType=VARCHAR}, #{bloodPipe,jdbcType=VARCHAR}, #{bloodPipe_Desc,jdbcType=VARCHAR}, 
+            #{eyePart,jdbcType=VARCHAR}, #{eyePart_Desc,jdbcType=VARCHAR}, #{nervousSystem,jdbcType=TINYINT}, 
+            #{nervousSystem_Desc,jdbcType=VARCHAR}, #{otherSystem,jdbcType=TINYINT}, #{otherSystem_Desc,jdbcType=VARCHAR}, 
+            #{healthEvaluate,jdbcType=TINYINT}, #{healthEvaluate_Desc,jdbcType=VARCHAR}, 
+            #{healthGuide,jdbcType=VARCHAR}, #{riskFactor,jdbcType=VARCHAR}, #{riskFactor_Target,jdbcType=VARCHAR}, 
+            #{riskFactor_Vaccine,jdbcType=VARCHAR}, #{riskFactor_Other,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetail" >
+        insert into ph_healthexamdetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="HExamID != null" >
+                HExamID,
+            </if>
+            <if test="symptom != null" >
+                Symptom,
+            </if>
+            <if test="symptom_Desc != null" >
+                Symptom_Desc,
+            </if>
+            <if test="bodyTemperature != null" >
+                BodyTemperature,
+            </if>
+            <if test="pulseRate != null" >
+                PulseRate,
+            </if>
+            <if test="respiratoryRate != null" >
+                RespiratoryRate,
+            </if>
+            <if test="leftSystolic != null" >
+                LeftSystolic,
+            </if>
+            <if test="leftDiastolic != null" >
+                LeftDiastolic,
+            </if>
+            <if test="rightSystolic != null" >
+                RightSystolic,
+            </if>
+            <if test="rightDiastolic != null" >
+                RightDiastolic,
+            </if>
+            <if test="height != null" >
+                Height,
+            </if>
+            <if test="weight != null" >
+                Weight,
+            </if>
+            <if test="waist != null" >
+                Waist,
+            </if>
+            <if test="BMI != null" >
+                BMI,
+            </if>
+            <if test="agedHealthEvaluate != null" >
+                AgedHealthEvaluate,
+            </if>
+            <if test="agedLifeEvaluate != null" >
+                AgedLifeEvaluate,
+            </if>
+            <if test="agedCognition != null" >
+                AgedCognition,
+            </if>
+            <if test="agedCognitionScore != null" >
+                AgedCognitionScore,
+            </if>
+            <if test="agedFeeling != null" >
+                AgedFeeling,
+            </if>
+            <if test="agedFeelingScore != null" >
+                AgedFeelingScore,
+            </if>
+            <if test="sportFrequency != null" >
+                SportFrequency,
+            </if>
+            <if test="sportDuration != null" >
+                SportDuration,
+            </if>
+            <if test="sportTotalTime != null" >
+                SportTotalTime,
+            </if>
+            <if test="sportWay != null" >
+                SportWay,
+            </if>
+            <if test="eatingHabits != null" >
+                EatingHabits,
+            </if>
+            <if test="smokingState != null" >
+                SmokingState,
+            </if>
+            <if test="dailySmoking != null" >
+                DailySmoking,
+            </if>
+            <if test="smokingStartAge != null" >
+                SmokingStartAge,
+            </if>
+            <if test="smokingEndAge != null" >
+                SmokingEndAge,
+            </if>
+            <if test="drinkFrequency != null" >
+                DrinkFrequency,
+            </if>
+            <if test="dailyDrink != null" >
+                DailyDrink,
+            </if>
+            <if test="isAbstinence != null" >
+                IsAbstinence,
+            </if>
+            <if test="abstinenceAge != null" >
+                AbstinenceAge,
+            </if>
+            <if test="drinkStartAge != null" >
+                DrinkStartAge,
+            </if>
+            <if test="isTemulenceLastYear != null" >
+                IsTemulenceLastYear,
+            </if>
+            <if test="drinkType != null" >
+                DrinkType,
+            </if>
+            <if test="drinkOther_Desc != null" >
+                DrinkOther_Desc,
+            </if>
+            <if test="occupation != null" >
+                Occupation,
+            </if>
+            <if test="typeOfWork != null" >
+                TypeOfWork,
+            </if>
+            <if test="workTime != null" >
+                WorkTime,
+            </if>
+            <if test="dust != null" >
+                Dust,
+            </if>
+            <if test="dustGuard != null" >
+                DustGuard,
+            </if>
+            <if test="dustGuard_Desc != null" >
+                DustGuard_Desc,
+            </if>
+            <if test="radiogen != null" >
+                Radiogen,
+            </if>
+            <if test="radiogenGuard != null" >
+                RadiogenGuard,
+            </if>
+            <if test="radiogenGuard_Desc != null" >
+                RadiogenGuard_Desc,
+            </if>
+            <if test="physical != null" >
+                Physical,
+            </if>
+            <if test="physicalGuard != null" >
+                PhysicalGuard,
+            </if>
+            <if test="physicalGuard_Desc != null" >
+                PhysicalGuard_Desc,
+            </if>
+            <if test="chemical != null" >
+                Chemical,
+            </if>
+            <if test="chemicalGuard != null" >
+                ChemicalGuard,
+            </if>
+            <if test="chemicalGuard_Desc != null" >
+                ChemicalGuard_Desc,
+            </if>
+            <if test="toxicOther != null" >
+                ToxicOther,
+            </if>
+            <if test="toxicOtherGuard != null" >
+                ToxicOtherGuard,
+            </if>
+            <if test="toxicOtherGuard_Desc != null" >
+                ToxicOtherGuard_Desc,
+            </if>
+            <if test="lips != null" >
+                Lips,
+            </if>
+            <if test="dentition != null" >
+                Dentition,
+            </if>
+            <if test="dentition_Desc != null" >
+                Dentition_Desc,
+            </if>
+            <if test="throat != null" >
+                Throat,
+            </if>
+            <if test="leftVision != null" >
+                LeftVision,
+            </if>
+            <if test="rightVision != null" >
+                RightVision,
+            </if>
+            <if test="leftCorrectVision != null" >
+                LeftCorrectVision,
+            </if>
+            <if test="rightCorrectVision != null" >
+                RightCorrectVision,
+            </if>
+            <if test="hearing != null" >
+                Hearing,
+            </if>
+            <if test="movement != null" >
+                Movement,
+            </if>
+            <if test="eyeground != null" >
+                Eyeground,
+            </if>
+            <if test="eyeground_Desc != null" >
+                Eyeground_Desc,
+            </if>
+            <if test="skin != null" >
+                Skin,
+            </if>
+            <if test="skin_Desc != null" >
+                Skin_Desc,
+            </if>
+            <if test="sclero != null" >
+                Sclero,
+            </if>
+            <if test="sclero_Desc != null" >
+                Sclero_Desc,
+            </if>
+            <if test="lymph != null" >
+                Lymph,
+            </if>
+            <if test="lymph_Desc != null" >
+                Lymph_Desc,
+            </if>
+            <if test="lungBarrelChest != null" >
+                LungBarrelChest,
+            </if>
+            <if test="lungBreathSounds != null" >
+                LungBreathSounds,
+            </if>
+            <if test="lungBreathSounds_Desc != null" >
+                LungBreathSounds_Desc,
+            </if>
+            <if test="lungRales != null" >
+                LungRales,
+            </if>
+            <if test="lungRales_Desc != null" >
+                LungRales_Desc,
+            </if>
+            <if test="heartRate != null" >
+                HeartRate,
+            </if>
+            <if test="rhythm != null" >
+                Rhythm,
+            </if>
+            <if test="murmur != null" >
+                Murmur,
+            </if>
+            <if test="murmur_Desc != null" >
+                Murmur_Desc,
+            </if>
+            <if test="pain != null" >
+                Pain,
+            </if>
+            <if test="pain_Desc != null" >
+                Pain_Desc,
+            </if>
+            <if test="block != null" >
+                Block,
+            </if>
+            <if test="block_Desc != null" >
+                Block_Desc,
+            </if>
+            <if test="hepatomegaly != null" >
+                Hepatomegaly,
+            </if>
+            <if test="hepatomegaly_Desc != null" >
+                Hepatomegaly_Desc,
+            </if>
+            <if test="splenomegaly != null" >
+                Splenomegaly,
+            </if>
+            <if test="splenomegaly_Desc != null" >
+                Splenomegaly_Desc,
+            </if>
+            <if test="moveSonant != null" >
+                MoveSonant,
+            </if>
+            <if test="moveSonant_Desc != null" >
+                MoveSonant_Desc,
+            </if>
+            <if test="lowLimbEdema != null" >
+                LowLimbEdema,
+            </if>
+            <if test="arteriopalmus != null" >
+                Arteriopalmus,
+            </if>
+            <if test="anusTactus != null" >
+                AnusTactus,
+            </if>
+            <if test="anusTactus_Desc != null" >
+                AnusTactus_Desc,
+            </if>
+            <if test="breast != null" >
+                Breast,
+            </if>
+            <if test="breast_Desc != null" >
+                Breast_Desc,
+            </if>
+            <if test="pudendum != null" >
+                Pudendum,
+            </if>
+            <if test="pudendum_Desc != null" >
+                Pudendum_Desc,
+            </if>
+            <if test="vagina != null" >
+                Vagina,
+            </if>
+            <if test="vagina_Desc != null" >
+                Vagina_Desc,
+            </if>
+            <if test="cervical != null" >
+                Cervical,
+            </if>
+            <if test="cervical_Desc != null" >
+                Cervical_Desc,
+            </if>
+            <if test="uteri != null" >
+                Uteri,
+            </if>
+            <if test="uteri_Desc != null" >
+                Uteri_Desc,
+            </if>
+            <if test="enclosure != null" >
+                Enclosure,
+            </if>
+            <if test="enclosure_Desc != null" >
+                Enclosure_Desc,
+            </if>
+            <if test="gynaecologyOther != null" >
+                GynaecologyOther,
+            </if>
+            <if test="hemoglobin != null" >
+                Hemoglobin,
+            </if>
+            <if test="leukocyte != null" >
+                Leukocyte,
+            </if>
+            <if test="platelet != null" >
+                Platelet,
+            </if>
+            <if test="bloodOther != null" >
+                BloodOther,
+            </if>
+            <if test="urineProtein != null" >
+                UrineProtein,
+            </if>
+            <if test="urineSugar != null" >
+                UrineSugar,
+            </if>
+            <if test="urineAcetoneBody != null" >
+                UrineAcetoneBody,
+            </if>
+            <if test="urineOccultBlood != null" >
+                UrineOccultBlood,
+            </if>
+            <if test="urineOther != null" >
+                UrineOther,
+            </if>
+            <if test="GLU != null" >
+                GLU,
+            </if>
+            <if test="PGLU != null" >
+                PGLU,
+            </if>
+            <if test="cardiogram != null" >
+                Cardiogram,
+            </if>
+            <if test="cardiogram_Desc != null" >
+                Cardiogram_Desc,
+            </if>
+            <if test="urineMicroAlbumin != null" >
+                UrineMicroAlbumin,
+            </if>
+            <if test="fecalOccultBlood != null" >
+                FecalOccultBlood,
+            </if>
+            <if test="HBA1C != null" >
+                HBA1C,
+            </if>
+            <if test="HBSAG != null" >
+                HBSAG,
+            </if>
+            <if test="CPT != null" >
+                CPT,
+            </if>
+            <if test="AST != null" >
+                AST,
+            </if>
+            <if test="ALB != null" >
+                ALB,
+            </if>
+            <if test="TBIL != null" >
+                TBIL,
+            </if>
+            <if test="CBIL != null" >
+                CBIL,
+            </if>
+            <if test="CR != null" >
+                CR,
+            </if>
+            <if test="BUN != null" >
+                BUN,
+            </if>
+            <if test="serumPotassium != null" >
+                SerumPotassium,
+            </if>
+            <if test="serumSodium != null" >
+                SerumSodium,
+            </if>
+            <if test="CHOL != null" >
+                CHOL,
+            </if>
+            <if test="TG != null" >
+                TG,
+            </if>
+            <if test="LDL_C != null" >
+                LDL_C,
+            </if>
+            <if test="HDL_C != null" >
+                HDL_C,
+            </if>
+            <if test="x_RAY != null" >
+                X_RAY,
+            </if>
+            <if test="x_RAY_Desc != null" >
+                X_RAY_Desc,
+            </if>
+            <if test="b_Ultrasonic != null" >
+                B_Ultrasonic,
+            </if>
+            <if test="b_Ultrasonic_Desc != null" >
+                B_Ultrasonic_Desc,
+            </if>
+            <if test="cervicalSmear != null" >
+                CervicalSmear,
+            </if>
+            <if test="cervicalSmear_Desc != null" >
+                CervicalSmear_Desc,
+            </if>
+            <if test="assistCheckOther != null" >
+                AssistCheckOther,
+            </if>
+            <if test="TCM_PHZ != null" >
+                TCM_PHZ,
+            </if>
+            <if test="TCM_PHZ_Guide != null" >
+                TCM_PHZ_Guide,
+            </if>
+            <if test="TCM_PHZ_Guide_Desc != null" >
+                TCM_PHZ_Guide_Desc,
+            </if>
+            <if test="TCM_QXZ != null" >
+                TCM_QXZ,
+            </if>
+            <if test="TCM_QXZ_Guide != null" >
+                TCM_QXZ_Guide,
+            </if>
+            <if test="TCM_QXZ_Guide_Desc != null" >
+                TCM_QXZ_Guide_Desc,
+            </if>
+            <if test="TCM_YXZ != null" >
+                TCM_YXZ,
+            </if>
+            <if test="TCM_YXZ_Guide != null" >
+                TCM_YXZ_Guide,
+            </if>
+            <if test="TCM_YXZ_Guide_Desc != null" >
+                TCM_YXZ_Guide_Desc,
+            </if>
+            <if test="TCM_YIXZ != null" >
+                TCM_YIXZ,
+            </if>
+            <if test="TCM_YIXZ_Guide != null" >
+                TCM_YIXZ_Guide,
+            </if>
+            <if test="TCM_YIXZ_Guide_Desc != null" >
+                TCM_YIXZ_Guide_Desc,
+            </if>
+            <if test="TCM_TSZ != null" >
+                TCM_TSZ,
+            </if>
+            <if test="TCM_TSZ_Guide != null" >
+                TCM_TSZ_Guide,
+            </if>
+            <if test="TCM_TSZ_Guide_Desc != null" >
+                TCM_TSZ_Guide_Desc,
+            </if>
+            <if test="TCM_SRZ != null" >
+                TCM_SRZ,
+            </if>
+            <if test="TCM_SRZ_Guide != null" >
+                TCM_SRZ_Guide,
+            </if>
+            <if test="TCM_SRZ_Guide_Desc != null" >
+                TCM_SRZ_Guide_Desc,
+            </if>
+            <if test="TCM_XTZ != null" >
+                TCM_XTZ,
+            </if>
+            <if test="TCM_XTZ_Guide != null" >
+                TCM_XTZ_Guide,
+            </if>
+            <if test="TCM_XTZ_Guide_Desc != null" >
+                TCM_XTZ_Guide_Desc,
+            </if>
+            <if test="TCM_QYZ != null" >
+                TCM_QYZ,
+            </if>
+            <if test="TCM_QYZ_Guide != null" >
+                TCM_QYZ_Guide,
+            </if>
+            <if test="TCM_QYZ_Guide_Desc != null" >
+                TCM_QYZ_Guide_Desc,
+            </if>
+            <if test="TCM_TBZ != null" >
+                TCM_TBZ,
+            </if>
+            <if test="cerebralVessel != null" >
+                CerebralVessel,
+            </if>
+            <if test="TCM_TBZ_Guide != null" >
+                TCM_TBZ_Guide,
+            </if>
+            <if test="TCM_TBZ_Guide_Desc != null" >
+                TCM_TBZ_Guide_Desc,
+            </if>
+            <if test="cerebralVessel_Desc != null" >
+                CerebralVessel_Desc,
+            </if>
+            <if test="kidney != null" >
+                Kidney,
+            </if>
+            <if test="kidney_Desc != null" >
+                Kidney_Desc,
+            </if>
+            <if test="heart != null" >
+                Heart,
+            </if>
+            <if test="heart_Desc != null" >
+                Heart_Desc,
+            </if>
+            <if test="bloodPipe != null" >
+                BloodPipe,
+            </if>
+            <if test="bloodPipe_Desc != null" >
+                BloodPipe_Desc,
+            </if>
+            <if test="eyePart != null" >
+                EyePart,
+            </if>
+            <if test="eyePart_Desc != null" >
+                EyePart_Desc,
+            </if>
+            <if test="nervousSystem != null" >
+                NervousSystem,
+            </if>
+            <if test="nervousSystem_Desc != null" >
+                NervousSystem_Desc,
+            </if>
+            <if test="otherSystem != null" >
+                OtherSystem,
+            </if>
+            <if test="otherSystem_Desc != null" >
+                OtherSystem_Desc,
+            </if>
+            <if test="healthEvaluate != null" >
+                HealthEvaluate,
+            </if>
+            <if test="healthEvaluate_Desc != null" >
+                HealthEvaluate_Desc,
+            </if>
+            <if test="healthGuide != null" >
+                HealthGuide,
+            </if>
+            <if test="riskFactor != null" >
+                RiskFactor,
+            </if>
+            <if test="riskFactor_Target != null" >
+                RiskFactor_Target,
+            </if>
+            <if test="riskFactor_Vaccine != null" >
+                RiskFactor_Vaccine,
+            </if>
+            <if test="riskFactor_Other != null" >
+                RiskFactor_Other,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="HExamID != null" >
+                #{HExamID,jdbcType=BIGINT},
+            </if>
+            <if test="symptom != null" >
+                #{symptom,jdbcType=VARCHAR},
+            </if>
+            <if test="symptom_Desc != null" >
+                #{symptom_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="bodyTemperature != null" >
+                #{bodyTemperature,jdbcType=DECIMAL},
+            </if>
+            <if test="pulseRate != null" >
+                #{pulseRate,jdbcType=SMALLINT},
+            </if>
+            <if test="respiratoryRate != null" >
+                #{respiratoryRate,jdbcType=SMALLINT},
+            </if>
+            <if test="leftSystolic != null" >
+                #{leftSystolic,jdbcType=SMALLINT},
+            </if>
+            <if test="leftDiastolic != null" >
+                #{leftDiastolic,jdbcType=SMALLINT},
+            </if>
+            <if test="rightSystolic != null" >
+                #{rightSystolic,jdbcType=SMALLINT},
+            </if>
+            <if test="rightDiastolic != null" >
+                #{rightDiastolic,jdbcType=SMALLINT},
+            </if>
+            <if test="height != null" >
+                #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null" >
+                #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="waist != null" >
+                #{waist,jdbcType=DECIMAL},
+            </if>
+            <if test="BMI != null" >
+                #{BMI,jdbcType=DECIMAL},
+            </if>
+            <if test="agedHealthEvaluate != null" >
+                #{agedHealthEvaluate,jdbcType=TINYINT},
+            </if>
+            <if test="agedLifeEvaluate != null" >
+                #{agedLifeEvaluate,jdbcType=TINYINT},
+            </if>
+            <if test="agedCognition != null" >
+                #{agedCognition,jdbcType=TINYINT},
+            </if>
+            <if test="agedCognitionScore != null" >
+                #{agedCognitionScore,jdbcType=TINYINT},
+            </if>
+            <if test="agedFeeling != null" >
+                #{agedFeeling,jdbcType=TINYINT},
+            </if>
+            <if test="agedFeelingScore != null" >
+                #{agedFeelingScore,jdbcType=TINYINT},
+            </if>
+            <if test="sportFrequency != null" >
+                #{sportFrequency,jdbcType=TINYINT},
+            </if>
+            <if test="sportDuration != null" >
+                #{sportDuration,jdbcType=SMALLINT},
+            </if>
+            <if test="sportTotalTime != null" >
+                #{sportTotalTime,jdbcType=TINYINT},
+            </if>
+            <if test="sportWay != null" >
+                #{sportWay,jdbcType=VARCHAR},
+            </if>
+            <if test="eatingHabits != null" >
+                #{eatingHabits,jdbcType=VARCHAR},
+            </if>
+            <if test="smokingState != null" >
+                #{smokingState,jdbcType=TINYINT},
+            </if>
+            <if test="dailySmoking != null" >
+                #{dailySmoking,jdbcType=SMALLINT},
+            </if>
+            <if test="smokingStartAge != null" >
+                #{smokingStartAge,jdbcType=TINYINT},
+            </if>
+            <if test="smokingEndAge != null" >
+                #{smokingEndAge,jdbcType=TINYINT},
+            </if>
+            <if test="drinkFrequency != null" >
+                #{drinkFrequency,jdbcType=TINYINT},
+            </if>
+            <if test="dailyDrink != null" >
+                #{dailyDrink,jdbcType=SMALLINT},
+            </if>
+            <if test="isAbstinence != null" >
+                #{isAbstinence,jdbcType=TINYINT},
+            </if>
+            <if test="abstinenceAge != null" >
+                #{abstinenceAge,jdbcType=TINYINT},
+            </if>
+            <if test="drinkStartAge != null" >
+                #{drinkStartAge,jdbcType=TINYINT},
+            </if>
+            <if test="isTemulenceLastYear != null" >
+                #{isTemulenceLastYear,jdbcType=TINYINT},
+            </if>
+            <if test="drinkType != null" >
+                #{drinkType,jdbcType=VARCHAR},
+            </if>
+            <if test="drinkOther_Desc != null" >
+                #{drinkOther_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="occupation != null" >
+                #{occupation,jdbcType=TINYINT},
+            </if>
+            <if test="typeOfWork != null" >
+                #{typeOfWork,jdbcType=VARCHAR},
+            </if>
+            <if test="workTime != null" >
+                #{workTime,jdbcType=TINYINT},
+            </if>
+            <if test="dust != null" >
+                #{dust,jdbcType=VARCHAR},
+            </if>
+            <if test="dustGuard != null" >
+                #{dustGuard,jdbcType=TINYINT},
+            </if>
+            <if test="dustGuard_Desc != null" >
+                #{dustGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="radiogen != null" >
+                #{radiogen,jdbcType=VARCHAR},
+            </if>
+            <if test="radiogenGuard != null" >
+                #{radiogenGuard,jdbcType=TINYINT},
+            </if>
+            <if test="radiogenGuard_Desc != null" >
+                #{radiogenGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="physical != null" >
+                #{physical,jdbcType=VARCHAR},
+            </if>
+            <if test="physicalGuard != null" >
+                #{physicalGuard,jdbcType=TINYINT},
+            </if>
+            <if test="physicalGuard_Desc != null" >
+                #{physicalGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="chemical != null" >
+                #{chemical,jdbcType=VARCHAR},
+            </if>
+            <if test="chemicalGuard != null" >
+                #{chemicalGuard,jdbcType=TINYINT},
+            </if>
+            <if test="chemicalGuard_Desc != null" >
+                #{chemicalGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="toxicOther != null" >
+                #{toxicOther,jdbcType=VARCHAR},
+            </if>
+            <if test="toxicOtherGuard != null" >
+                #{toxicOtherGuard,jdbcType=TINYINT},
+            </if>
+            <if test="toxicOtherGuard_Desc != null" >
+                #{toxicOtherGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lips != null" >
+                #{lips,jdbcType=TINYINT},
+            </if>
+            <if test="dentition != null" >
+                #{dentition,jdbcType=TINYINT},
+            </if>
+            <if test="dentition_Desc != null" >
+                #{dentition_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="throat != null" >
+                #{throat,jdbcType=TINYINT},
+            </if>
+            <if test="leftVision != null" >
+                #{leftVision,jdbcType=DECIMAL},
+            </if>
+            <if test="rightVision != null" >
+                #{rightVision,jdbcType=DECIMAL},
+            </if>
+            <if test="leftCorrectVision != null" >
+                #{leftCorrectVision,jdbcType=DECIMAL},
+            </if>
+            <if test="rightCorrectVision != null" >
+                #{rightCorrectVision,jdbcType=DECIMAL},
+            </if>
+            <if test="hearing != null" >
+                #{hearing,jdbcType=TINYINT},
+            </if>
+            <if test="movement != null" >
+                #{movement,jdbcType=TINYINT},
+            </if>
+            <if test="eyeground != null" >
+                #{eyeground,jdbcType=TINYINT},
+            </if>
+            <if test="eyeground_Desc != null" >
+                #{eyeground_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="skin != null" >
+                #{skin,jdbcType=TINYINT},
+            </if>
+            <if test="skin_Desc != null" >
+                #{skin_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="sclero != null" >
+                #{sclero,jdbcType=TINYINT},
+            </if>
+            <if test="sclero_Desc != null" >
+                #{sclero_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lymph != null" >
+                #{lymph,jdbcType=TINYINT},
+            </if>
+            <if test="lymph_Desc != null" >
+                #{lymph_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lungBarrelChest != null" >
+                #{lungBarrelChest,jdbcType=TINYINT},
+            </if>
+            <if test="lungBreathSounds != null" >
+                #{lungBreathSounds,jdbcType=TINYINT},
+            </if>
+            <if test="lungBreathSounds_Desc != null" >
+                #{lungBreathSounds_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lungRales != null" >
+                #{lungRales,jdbcType=TINYINT},
+            </if>
+            <if test="lungRales_Desc != null" >
+                #{lungRales_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="heartRate != null" >
+                #{heartRate,jdbcType=SMALLINT},
+            </if>
+            <if test="rhythm != null" >
+                #{rhythm,jdbcType=TINYINT},
+            </if>
+            <if test="murmur != null" >
+                #{murmur,jdbcType=TINYINT},
+            </if>
+            <if test="murmur_Desc != null" >
+                #{murmur_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="pain != null" >
+                #{pain,jdbcType=TINYINT},
+            </if>
+            <if test="pain_Desc != null" >
+                #{pain_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="block != null" >
+                #{block,jdbcType=TINYINT},
+            </if>
+            <if test="block_Desc != null" >
+                #{block_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="hepatomegaly != null" >
+                #{hepatomegaly,jdbcType=TINYINT},
+            </if>
+            <if test="hepatomegaly_Desc != null" >
+                #{hepatomegaly_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="splenomegaly != null" >
+                #{splenomegaly,jdbcType=TINYINT},
+            </if>
+            <if test="splenomegaly_Desc != null" >
+                #{splenomegaly_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="moveSonant != null" >
+                #{moveSonant,jdbcType=TINYINT},
+            </if>
+            <if test="moveSonant_Desc != null" >
+                #{moveSonant_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lowLimbEdema != null" >
+                #{lowLimbEdema,jdbcType=TINYINT},
+            </if>
+            <if test="arteriopalmus != null" >
+                #{arteriopalmus,jdbcType=TINYINT},
+            </if>
+            <if test="anusTactus != null" >
+                #{anusTactus,jdbcType=TINYINT},
+            </if>
+            <if test="anusTactus_Desc != null" >
+                #{anusTactus_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="breast != null" >
+                #{breast,jdbcType=VARCHAR},
+            </if>
+            <if test="breast_Desc != null" >
+                #{breast_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="pudendum != null" >
+                #{pudendum,jdbcType=TINYINT},
+            </if>
+            <if test="pudendum_Desc != null" >
+                #{pudendum_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="vagina != null" >
+                #{vagina,jdbcType=TINYINT},
+            </if>
+            <if test="vagina_Desc != null" >
+                #{vagina_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="cervical != null" >
+                #{cervical,jdbcType=TINYINT},
+            </if>
+            <if test="cervical_Desc != null" >
+                #{cervical_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="uteri != null" >
+                #{uteri,jdbcType=TINYINT},
+            </if>
+            <if test="uteri_Desc != null" >
+                #{uteri_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="enclosure != null" >
+                #{enclosure,jdbcType=TINYINT},
+            </if>
+            <if test="enclosure_Desc != null" >
+                #{enclosure_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="gynaecologyOther != null" >
+                #{gynaecologyOther,jdbcType=VARCHAR},
+            </if>
+            <if test="hemoglobin != null" >
+                #{hemoglobin,jdbcType=SMALLINT},
+            </if>
+            <if test="leukocyte != null" >
+                #{leukocyte,jdbcType=DECIMAL},
+            </if>
+            <if test="platelet != null" >
+                #{platelet,jdbcType=SMALLINT},
+            </if>
+            <if test="bloodOther != null" >
+                #{bloodOther,jdbcType=VARCHAR},
+            </if>
+            <if test="urineProtein != null" >
+                #{urineProtein,jdbcType=VARCHAR},
+            </if>
+            <if test="urineSugar != null" >
+                #{urineSugar,jdbcType=VARCHAR},
+            </if>
+            <if test="urineAcetoneBody != null" >
+                #{urineAcetoneBody,jdbcType=VARCHAR},
+            </if>
+            <if test="urineOccultBlood != null" >
+                #{urineOccultBlood,jdbcType=VARCHAR},
+            </if>
+            <if test="urineOther != null" >
+                #{urineOther,jdbcType=VARCHAR},
+            </if>
+            <if test="GLU != null" >
+                #{GLU,jdbcType=DECIMAL},
+            </if>
+            <if test="PGLU != null" >
+                #{PGLU,jdbcType=DECIMAL},
+            </if>
+            <if test="cardiogram != null" >
+                #{cardiogram,jdbcType=TINYINT},
+            </if>
+            <if test="cardiogram_Desc != null" >
+                #{cardiogram_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="urineMicroAlbumin != null" >
+                #{urineMicroAlbumin,jdbcType=DECIMAL},
+            </if>
+            <if test="fecalOccultBlood != null" >
+                #{fecalOccultBlood,jdbcType=TINYINT},
+            </if>
+            <if test="HBA1C != null" >
+                #{HBA1C,jdbcType=DECIMAL},
+            </if>
+            <if test="HBSAG != null" >
+                #{HBSAG,jdbcType=TINYINT},
+            </if>
+            <if test="CPT != null" >
+                #{CPT,jdbcType=SMALLINT},
+            </if>
+            <if test="AST != null" >
+                #{AST,jdbcType=SMALLINT},
+            </if>
+            <if test="ALB != null" >
+                #{ALB,jdbcType=SMALLINT},
+            </if>
+            <if test="TBIL != null" >
+                #{TBIL,jdbcType=DECIMAL},
+            </if>
+            <if test="CBIL != null" >
+                #{CBIL,jdbcType=DECIMAL},
+            </if>
+            <if test="CR != null" >
+                #{CR,jdbcType=DECIMAL},
+            </if>
+            <if test="BUN != null" >
+                #{BUN,jdbcType=DECIMAL},
+            </if>
+            <if test="serumPotassium != null" >
+                #{serumPotassium,jdbcType=DECIMAL},
+            </if>
+            <if test="serumSodium != null" >
+                #{serumSodium,jdbcType=SMALLINT},
+            </if>
+            <if test="CHOL != null" >
+                #{CHOL,jdbcType=DECIMAL},
+            </if>
+            <if test="TG != null" >
+                #{TG,jdbcType=DECIMAL},
+            </if>
+            <if test="LDL_C != null" >
+                #{LDL_C,jdbcType=DECIMAL},
+            </if>
+            <if test="HDL_C != null" >
+                #{HDL_C,jdbcType=DECIMAL},
+            </if>
+            <if test="x_RAY != null" >
+                #{x_RAY,jdbcType=TINYINT},
+            </if>
+            <if test="x_RAY_Desc != null" >
+                #{x_RAY_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="b_Ultrasonic != null" >
+                #{b_Ultrasonic,jdbcType=TINYINT},
+            </if>
+            <if test="b_Ultrasonic_Desc != null" >
+                #{b_Ultrasonic_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="cervicalSmear != null" >
+                #{cervicalSmear,jdbcType=TINYINT},
+            </if>
+            <if test="cervicalSmear_Desc != null" >
+                #{cervicalSmear_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="assistCheckOther != null" >
+                #{assistCheckOther,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_PHZ != null" >
+                #{TCM_PHZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_PHZ_Guide != null" >
+                #{TCM_PHZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_PHZ_Guide_Desc != null" >
+                #{TCM_PHZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_QXZ != null" >
+                #{TCM_QXZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_QXZ_Guide != null" >
+                #{TCM_QXZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_QXZ_Guide_Desc != null" >
+                #{TCM_QXZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_YXZ != null" >
+                #{TCM_YXZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_YXZ_Guide != null" >
+                #{TCM_YXZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_YXZ_Guide_Desc != null" >
+                #{TCM_YXZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_YIXZ != null" >
+                #{TCM_YIXZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_YIXZ_Guide != null" >
+                #{TCM_YIXZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_YIXZ_Guide_Desc != null" >
+                #{TCM_YIXZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TSZ != null" >
+                #{TCM_TSZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_TSZ_Guide != null" >
+                #{TCM_TSZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TSZ_Guide_Desc != null" >
+                #{TCM_TSZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_SRZ != null" >
+                #{TCM_SRZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_SRZ_Guide != null" >
+                #{TCM_SRZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_SRZ_Guide_Desc != null" >
+                #{TCM_SRZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_XTZ != null" >
+                #{TCM_XTZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_XTZ_Guide != null" >
+                #{TCM_XTZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_XTZ_Guide_Desc != null" >
+                #{TCM_XTZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_QYZ != null" >
+                #{TCM_QYZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_QYZ_Guide != null" >
+                #{TCM_QYZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_QYZ_Guide_Desc != null" >
+                #{TCM_QYZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TBZ != null" >
+                #{TCM_TBZ,jdbcType=TINYINT},
+            </if>
+            <if test="cerebralVessel != null" >
+                #{cerebralVessel,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TBZ_Guide != null" >
+                #{TCM_TBZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TBZ_Guide_Desc != null" >
+                #{TCM_TBZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="cerebralVessel_Desc != null" >
+                #{cerebralVessel_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="kidney != null" >
+                #{kidney,jdbcType=VARCHAR},
+            </if>
+            <if test="kidney_Desc != null" >
+                #{kidney_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="heart != null" >
+                #{heart,jdbcType=VARCHAR},
+            </if>
+            <if test="heart_Desc != null" >
+                #{heart_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="bloodPipe != null" >
+                #{bloodPipe,jdbcType=VARCHAR},
+            </if>
+            <if test="bloodPipe_Desc != null" >
+                #{bloodPipe_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="eyePart != null" >
+                #{eyePart,jdbcType=VARCHAR},
+            </if>
+            <if test="eyePart_Desc != null" >
+                #{eyePart_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="nervousSystem != null" >
+                #{nervousSystem,jdbcType=TINYINT},
+            </if>
+            <if test="nervousSystem_Desc != null" >
+                #{nervousSystem_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="otherSystem != null" >
+                #{otherSystem,jdbcType=TINYINT},
+            </if>
+            <if test="otherSystem_Desc != null" >
+                #{otherSystem_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="healthEvaluate != null" >
+                #{healthEvaluate,jdbcType=TINYINT},
+            </if>
+            <if test="healthEvaluate_Desc != null" >
+                #{healthEvaluate_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="healthGuide != null" >
+                #{healthGuide,jdbcType=VARCHAR},
+            </if>
+            <if test="riskFactor != null" >
+                #{riskFactor,jdbcType=VARCHAR},
+            </if>
+            <if test="riskFactor_Target != null" >
+                #{riskFactor_Target,jdbcType=VARCHAR},
+            </if>
+            <if test="riskFactor_Vaccine != null" >
+                #{riskFactor_Vaccine,jdbcType=VARCHAR},
+            </if>
+            <if test="riskFactor_Other != null" >
+                #{riskFactor_Other,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailExample" resultType="java.lang.Integer" >
+        select count(*) from ph_healthexamdetail
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ph_healthexamdetail
+        <set >
+            <if test="record.HExamID != null" >
+                HExamID = #{record.HExamID,jdbcType=BIGINT},
+            </if>
+            <if test="record.symptom != null" >
+                Symptom = #{record.symptom,jdbcType=VARCHAR},
+            </if>
+            <if test="record.symptom_Desc != null" >
+                Symptom_Desc = #{record.symptom_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bodyTemperature != null" >
+                BodyTemperature = #{record.bodyTemperature,jdbcType=DECIMAL},
+            </if>
+            <if test="record.pulseRate != null" >
+                PulseRate = #{record.pulseRate,jdbcType=SMALLINT},
+            </if>
+            <if test="record.respiratoryRate != null" >
+                RespiratoryRate = #{record.respiratoryRate,jdbcType=SMALLINT},
+            </if>
+            <if test="record.leftSystolic != null" >
+                LeftSystolic = #{record.leftSystolic,jdbcType=SMALLINT},
+            </if>
+            <if test="record.leftDiastolic != null" >
+                LeftDiastolic = #{record.leftDiastolic,jdbcType=SMALLINT},
+            </if>
+            <if test="record.rightSystolic != null" >
+                RightSystolic = #{record.rightSystolic,jdbcType=SMALLINT},
+            </if>
+            <if test="record.rightDiastolic != null" >
+                RightDiastolic = #{record.rightDiastolic,jdbcType=SMALLINT},
+            </if>
+            <if test="record.height != null" >
+                Height = #{record.height,jdbcType=DECIMAL},
+            </if>
+            <if test="record.weight != null" >
+                Weight = #{record.weight,jdbcType=DECIMAL},
+            </if>
+            <if test="record.waist != null" >
+                Waist = #{record.waist,jdbcType=DECIMAL},
+            </if>
+            <if test="record.BMI != null" >
+                BMI = #{record.BMI,jdbcType=DECIMAL},
+            </if>
+            <if test="record.agedHealthEvaluate != null" >
+                AgedHealthEvaluate = #{record.agedHealthEvaluate,jdbcType=TINYINT},
+            </if>
+            <if test="record.agedLifeEvaluate != null" >
+                AgedLifeEvaluate = #{record.agedLifeEvaluate,jdbcType=TINYINT},
+            </if>
+            <if test="record.agedCognition != null" >
+                AgedCognition = #{record.agedCognition,jdbcType=TINYINT},
+            </if>
+            <if test="record.agedCognitionScore != null" >
+                AgedCognitionScore = #{record.agedCognitionScore,jdbcType=TINYINT},
+            </if>
+            <if test="record.agedFeeling != null" >
+                AgedFeeling = #{record.agedFeeling,jdbcType=TINYINT},
+            </if>
+            <if test="record.agedFeelingScore != null" >
+                AgedFeelingScore = #{record.agedFeelingScore,jdbcType=TINYINT},
+            </if>
+            <if test="record.sportFrequency != null" >
+                SportFrequency = #{record.sportFrequency,jdbcType=TINYINT},
+            </if>
+            <if test="record.sportDuration != null" >
+                SportDuration = #{record.sportDuration,jdbcType=SMALLINT},
+            </if>
+            <if test="record.sportTotalTime != null" >
+                SportTotalTime = #{record.sportTotalTime,jdbcType=TINYINT},
+            </if>
+            <if test="record.sportWay != null" >
+                SportWay = #{record.sportWay,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eatingHabits != null" >
+                EatingHabits = #{record.eatingHabits,jdbcType=VARCHAR},
+            </if>
+            <if test="record.smokingState != null" >
+                SmokingState = #{record.smokingState,jdbcType=TINYINT},
+            </if>
+            <if test="record.dailySmoking != null" >
+                DailySmoking = #{record.dailySmoking,jdbcType=SMALLINT},
+            </if>
+            <if test="record.smokingStartAge != null" >
+                SmokingStartAge = #{record.smokingStartAge,jdbcType=TINYINT},
+            </if>
+            <if test="record.smokingEndAge != null" >
+                SmokingEndAge = #{record.smokingEndAge,jdbcType=TINYINT},
+            </if>
+            <if test="record.drinkFrequency != null" >
+                DrinkFrequency = #{record.drinkFrequency,jdbcType=TINYINT},
+            </if>
+            <if test="record.dailyDrink != null" >
+                DailyDrink = #{record.dailyDrink,jdbcType=SMALLINT},
+            </if>
+            <if test="record.isAbstinence != null" >
+                IsAbstinence = #{record.isAbstinence,jdbcType=TINYINT},
+            </if>
+            <if test="record.abstinenceAge != null" >
+                AbstinenceAge = #{record.abstinenceAge,jdbcType=TINYINT},
+            </if>
+            <if test="record.drinkStartAge != null" >
+                DrinkStartAge = #{record.drinkStartAge,jdbcType=TINYINT},
+            </if>
+            <if test="record.isTemulenceLastYear != null" >
+                IsTemulenceLastYear = #{record.isTemulenceLastYear,jdbcType=TINYINT},
+            </if>
+            <if test="record.drinkType != null" >
+                DrinkType = #{record.drinkType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.drinkOther_Desc != null" >
+                DrinkOther_Desc = #{record.drinkOther_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.occupation != null" >
+                Occupation = #{record.occupation,jdbcType=TINYINT},
+            </if>
+            <if test="record.typeOfWork != null" >
+                TypeOfWork = #{record.typeOfWork,jdbcType=VARCHAR},
+            </if>
+            <if test="record.workTime != null" >
+                WorkTime = #{record.workTime,jdbcType=TINYINT},
+            </if>
+            <if test="record.dust != null" >
+                Dust = #{record.dust,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dustGuard != null" >
+                DustGuard = #{record.dustGuard,jdbcType=TINYINT},
+            </if>
+            <if test="record.dustGuard_Desc != null" >
+                DustGuard_Desc = #{record.dustGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.radiogen != null" >
+                Radiogen = #{record.radiogen,jdbcType=VARCHAR},
+            </if>
+            <if test="record.radiogenGuard != null" >
+                RadiogenGuard = #{record.radiogenGuard,jdbcType=TINYINT},
+            </if>
+            <if test="record.radiogenGuard_Desc != null" >
+                RadiogenGuard_Desc = #{record.radiogenGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.physical != null" >
+                Physical = #{record.physical,jdbcType=VARCHAR},
+            </if>
+            <if test="record.physicalGuard != null" >
+                PhysicalGuard = #{record.physicalGuard,jdbcType=TINYINT},
+            </if>
+            <if test="record.physicalGuard_Desc != null" >
+                PhysicalGuard_Desc = #{record.physicalGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chemical != null" >
+                Chemical = #{record.chemical,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chemicalGuard != null" >
+                ChemicalGuard = #{record.chemicalGuard,jdbcType=TINYINT},
+            </if>
+            <if test="record.chemicalGuard_Desc != null" >
+                ChemicalGuard_Desc = #{record.chemicalGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.toxicOther != null" >
+                ToxicOther = #{record.toxicOther,jdbcType=VARCHAR},
+            </if>
+            <if test="record.toxicOtherGuard != null" >
+                ToxicOtherGuard = #{record.toxicOtherGuard,jdbcType=TINYINT},
+            </if>
+            <if test="record.toxicOtherGuard_Desc != null" >
+                ToxicOtherGuard_Desc = #{record.toxicOtherGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lips != null" >
+                Lips = #{record.lips,jdbcType=TINYINT},
+            </if>
+            <if test="record.dentition != null" >
+                Dentition = #{record.dentition,jdbcType=TINYINT},
+            </if>
+            <if test="record.dentition_Desc != null" >
+                Dentition_Desc = #{record.dentition_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.throat != null" >
+                Throat = #{record.throat,jdbcType=TINYINT},
+            </if>
+            <if test="record.leftVision != null" >
+                LeftVision = #{record.leftVision,jdbcType=DECIMAL},
+            </if>
+            <if test="record.rightVision != null" >
+                RightVision = #{record.rightVision,jdbcType=DECIMAL},
+            </if>
+            <if test="record.leftCorrectVision != null" >
+                LeftCorrectVision = #{record.leftCorrectVision,jdbcType=DECIMAL},
+            </if>
+            <if test="record.rightCorrectVision != null" >
+                RightCorrectVision = #{record.rightCorrectVision,jdbcType=DECIMAL},
+            </if>
+            <if test="record.hearing != null" >
+                Hearing = #{record.hearing,jdbcType=TINYINT},
+            </if>
+            <if test="record.movement != null" >
+                Movement = #{record.movement,jdbcType=TINYINT},
+            </if>
+            <if test="record.eyeground != null" >
+                Eyeground = #{record.eyeground,jdbcType=TINYINT},
+            </if>
+            <if test="record.eyeground_Desc != null" >
+                Eyeground_Desc = #{record.eyeground_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.skin != null" >
+                Skin = #{record.skin,jdbcType=TINYINT},
+            </if>
+            <if test="record.skin_Desc != null" >
+                Skin_Desc = #{record.skin_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sclero != null" >
+                Sclero = #{record.sclero,jdbcType=TINYINT},
+            </if>
+            <if test="record.sclero_Desc != null" >
+                Sclero_Desc = #{record.sclero_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lymph != null" >
+                Lymph = #{record.lymph,jdbcType=TINYINT},
+            </if>
+            <if test="record.lymph_Desc != null" >
+                Lymph_Desc = #{record.lymph_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lungBarrelChest != null" >
+                LungBarrelChest = #{record.lungBarrelChest,jdbcType=TINYINT},
+            </if>
+            <if test="record.lungBreathSounds != null" >
+                LungBreathSounds = #{record.lungBreathSounds,jdbcType=TINYINT},
+            </if>
+            <if test="record.lungBreathSounds_Desc != null" >
+                LungBreathSounds_Desc = #{record.lungBreathSounds_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lungRales != null" >
+                LungRales = #{record.lungRales,jdbcType=TINYINT},
+            </if>
+            <if test="record.lungRales_Desc != null" >
+                LungRales_Desc = #{record.lungRales_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.heartRate != null" >
+                HeartRate = #{record.heartRate,jdbcType=SMALLINT},
+            </if>
+            <if test="record.rhythm != null" >
+                Rhythm = #{record.rhythm,jdbcType=TINYINT},
+            </if>
+            <if test="record.murmur != null" >
+                Murmur = #{record.murmur,jdbcType=TINYINT},
+            </if>
+            <if test="record.murmur_Desc != null" >
+                Murmur_Desc = #{record.murmur_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pain != null" >
+                Pain = #{record.pain,jdbcType=TINYINT},
+            </if>
+            <if test="record.pain_Desc != null" >
+                Pain_Desc = #{record.pain_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.block != null" >
+                Block = #{record.block,jdbcType=TINYINT},
+            </if>
+            <if test="record.block_Desc != null" >
+                Block_Desc = #{record.block_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hepatomegaly != null" >
+                Hepatomegaly = #{record.hepatomegaly,jdbcType=TINYINT},
+            </if>
+            <if test="record.hepatomegaly_Desc != null" >
+                Hepatomegaly_Desc = #{record.hepatomegaly_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.splenomegaly != null" >
+                Splenomegaly = #{record.splenomegaly,jdbcType=TINYINT},
+            </if>
+            <if test="record.splenomegaly_Desc != null" >
+                Splenomegaly_Desc = #{record.splenomegaly_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.moveSonant != null" >
+                MoveSonant = #{record.moveSonant,jdbcType=TINYINT},
+            </if>
+            <if test="record.moveSonant_Desc != null" >
+                MoveSonant_Desc = #{record.moveSonant_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lowLimbEdema != null" >
+                LowLimbEdema = #{record.lowLimbEdema,jdbcType=TINYINT},
+            </if>
+            <if test="record.arteriopalmus != null" >
+                Arteriopalmus = #{record.arteriopalmus,jdbcType=TINYINT},
+            </if>
+            <if test="record.anusTactus != null" >
+                AnusTactus = #{record.anusTactus,jdbcType=TINYINT},
+            </if>
+            <if test="record.anusTactus_Desc != null" >
+                AnusTactus_Desc = #{record.anusTactus_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.breast != null" >
+                Breast = #{record.breast,jdbcType=VARCHAR},
+            </if>
+            <if test="record.breast_Desc != null" >
+                Breast_Desc = #{record.breast_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pudendum != null" >
+                Pudendum = #{record.pudendum,jdbcType=TINYINT},
+            </if>
+            <if test="record.pudendum_Desc != null" >
+                Pudendum_Desc = #{record.pudendum_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.vagina != null" >
+                Vagina = #{record.vagina,jdbcType=TINYINT},
+            </if>
+            <if test="record.vagina_Desc != null" >
+                Vagina_Desc = #{record.vagina_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cervical != null" >
+                Cervical = #{record.cervical,jdbcType=TINYINT},
+            </if>
+            <if test="record.cervical_Desc != null" >
+                Cervical_Desc = #{record.cervical_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.uteri != null" >
+                Uteri = #{record.uteri,jdbcType=TINYINT},
+            </if>
+            <if test="record.uteri_Desc != null" >
+                Uteri_Desc = #{record.uteri_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.enclosure != null" >
+                Enclosure = #{record.enclosure,jdbcType=TINYINT},
+            </if>
+            <if test="record.enclosure_Desc != null" >
+                Enclosure_Desc = #{record.enclosure_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gynaecologyOther != null" >
+                GynaecologyOther = #{record.gynaecologyOther,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hemoglobin != null" >
+                Hemoglobin = #{record.hemoglobin,jdbcType=SMALLINT},
+            </if>
+            <if test="record.leukocyte != null" >
+                Leukocyte = #{record.leukocyte,jdbcType=DECIMAL},
+            </if>
+            <if test="record.platelet != null" >
+                Platelet = #{record.platelet,jdbcType=SMALLINT},
+            </if>
+            <if test="record.bloodOther != null" >
+                BloodOther = #{record.bloodOther,jdbcType=VARCHAR},
+            </if>
+            <if test="record.urineProtein != null" >
+                UrineProtein = #{record.urineProtein,jdbcType=VARCHAR},
+            </if>
+            <if test="record.urineSugar != null" >
+                UrineSugar = #{record.urineSugar,jdbcType=VARCHAR},
+            </if>
+            <if test="record.urineAcetoneBody != null" >
+                UrineAcetoneBody = #{record.urineAcetoneBody,jdbcType=VARCHAR},
+            </if>
+            <if test="record.urineOccultBlood != null" >
+                UrineOccultBlood = #{record.urineOccultBlood,jdbcType=VARCHAR},
+            </if>
+            <if test="record.urineOther != null" >
+                UrineOther = #{record.urineOther,jdbcType=VARCHAR},
+            </if>
+            <if test="record.GLU != null" >
+                GLU = #{record.GLU,jdbcType=DECIMAL},
+            </if>
+            <if test="record.PGLU != null" >
+                PGLU = #{record.PGLU,jdbcType=DECIMAL},
+            </if>
+            <if test="record.cardiogram != null" >
+                Cardiogram = #{record.cardiogram,jdbcType=TINYINT},
+            </if>
+            <if test="record.cardiogram_Desc != null" >
+                Cardiogram_Desc = #{record.cardiogram_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.urineMicroAlbumin != null" >
+                UrineMicroAlbumin = #{record.urineMicroAlbumin,jdbcType=DECIMAL},
+            </if>
+            <if test="record.fecalOccultBlood != null" >
+                FecalOccultBlood = #{record.fecalOccultBlood,jdbcType=TINYINT},
+            </if>
+            <if test="record.HBA1C != null" >
+                HBA1C = #{record.HBA1C,jdbcType=DECIMAL},
+            </if>
+            <if test="record.HBSAG != null" >
+                HBSAG = #{record.HBSAG,jdbcType=TINYINT},
+            </if>
+            <if test="record.CPT != null" >
+                CPT = #{record.CPT,jdbcType=SMALLINT},
+            </if>
+            <if test="record.AST != null" >
+                AST = #{record.AST,jdbcType=SMALLINT},
+            </if>
+            <if test="record.ALB != null" >
+                ALB = #{record.ALB,jdbcType=SMALLINT},
+            </if>
+            <if test="record.TBIL != null" >
+                TBIL = #{record.TBIL,jdbcType=DECIMAL},
+            </if>
+            <if test="record.CBIL != null" >
+                CBIL = #{record.CBIL,jdbcType=DECIMAL},
+            </if>
+            <if test="record.CR != null" >
+                CR = #{record.CR,jdbcType=DECIMAL},
+            </if>
+            <if test="record.BUN != null" >
+                BUN = #{record.BUN,jdbcType=DECIMAL},
+            </if>
+            <if test="record.serumPotassium != null" >
+                SerumPotassium = #{record.serumPotassium,jdbcType=DECIMAL},
+            </if>
+            <if test="record.serumSodium != null" >
+                SerumSodium = #{record.serumSodium,jdbcType=SMALLINT},
+            </if>
+            <if test="record.CHOL != null" >
+                CHOL = #{record.CHOL,jdbcType=DECIMAL},
+            </if>
+            <if test="record.TG != null" >
+                TG = #{record.TG,jdbcType=DECIMAL},
+            </if>
+            <if test="record.LDL_C != null" >
+                LDL_C = #{record.LDL_C,jdbcType=DECIMAL},
+            </if>
+            <if test="record.HDL_C != null" >
+                HDL_C = #{record.HDL_C,jdbcType=DECIMAL},
+            </if>
+            <if test="record.x_RAY != null" >
+                X_RAY = #{record.x_RAY,jdbcType=TINYINT},
+            </if>
+            <if test="record.x_RAY_Desc != null" >
+                X_RAY_Desc = #{record.x_RAY_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.b_Ultrasonic != null" >
+                B_Ultrasonic = #{record.b_Ultrasonic,jdbcType=TINYINT},
+            </if>
+            <if test="record.b_Ultrasonic_Desc != null" >
+                B_Ultrasonic_Desc = #{record.b_Ultrasonic_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cervicalSmear != null" >
+                CervicalSmear = #{record.cervicalSmear,jdbcType=TINYINT},
+            </if>
+            <if test="record.cervicalSmear_Desc != null" >
+                CervicalSmear_Desc = #{record.cervicalSmear_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.assistCheckOther != null" >
+                AssistCheckOther = #{record.assistCheckOther,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_PHZ != null" >
+                TCM_PHZ = #{record.TCM_PHZ,jdbcType=TINYINT},
+            </if>
+            <if test="record.TCM_PHZ_Guide != null" >
+                TCM_PHZ_Guide = #{record.TCM_PHZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_PHZ_Guide_Desc != null" >
+                TCM_PHZ_Guide_Desc = #{record.TCM_PHZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_QXZ != null" >
+                TCM_QXZ = #{record.TCM_QXZ,jdbcType=TINYINT},
+            </if>
+            <if test="record.TCM_QXZ_Guide != null" >
+                TCM_QXZ_Guide = #{record.TCM_QXZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_QXZ_Guide_Desc != null" >
+                TCM_QXZ_Guide_Desc = #{record.TCM_QXZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_YXZ != null" >
+                TCM_YXZ = #{record.TCM_YXZ,jdbcType=TINYINT},
+            </if>
+            <if test="record.TCM_YXZ_Guide != null" >
+                TCM_YXZ_Guide = #{record.TCM_YXZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_YXZ_Guide_Desc != null" >
+                TCM_YXZ_Guide_Desc = #{record.TCM_YXZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_YIXZ != null" >
+                TCM_YIXZ = #{record.TCM_YIXZ,jdbcType=TINYINT},
+            </if>
+            <if test="record.TCM_YIXZ_Guide != null" >
+                TCM_YIXZ_Guide = #{record.TCM_YIXZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_YIXZ_Guide_Desc != null" >
+                TCM_YIXZ_Guide_Desc = #{record.TCM_YIXZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_TSZ != null" >
+                TCM_TSZ = #{record.TCM_TSZ,jdbcType=TINYINT},
+            </if>
+            <if test="record.TCM_TSZ_Guide != null" >
+                TCM_TSZ_Guide = #{record.TCM_TSZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_TSZ_Guide_Desc != null" >
+                TCM_TSZ_Guide_Desc = #{record.TCM_TSZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_SRZ != null" >
+                TCM_SRZ = #{record.TCM_SRZ,jdbcType=TINYINT},
+            </if>
+            <if test="record.TCM_SRZ_Guide != null" >
+                TCM_SRZ_Guide = #{record.TCM_SRZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_SRZ_Guide_Desc != null" >
+                TCM_SRZ_Guide_Desc = #{record.TCM_SRZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_XTZ != null" >
+                TCM_XTZ = #{record.TCM_XTZ,jdbcType=TINYINT},
+            </if>
+            <if test="record.TCM_XTZ_Guide != null" >
+                TCM_XTZ_Guide = #{record.TCM_XTZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_XTZ_Guide_Desc != null" >
+                TCM_XTZ_Guide_Desc = #{record.TCM_XTZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_QYZ != null" >
+                TCM_QYZ = #{record.TCM_QYZ,jdbcType=TINYINT},
+            </if>
+            <if test="record.TCM_QYZ_Guide != null" >
+                TCM_QYZ_Guide = #{record.TCM_QYZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_QYZ_Guide_Desc != null" >
+                TCM_QYZ_Guide_Desc = #{record.TCM_QYZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_TBZ != null" >
+                TCM_TBZ = #{record.TCM_TBZ,jdbcType=TINYINT},
+            </if>
+            <if test="record.cerebralVessel != null" >
+                CerebralVessel = #{record.cerebralVessel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_TBZ_Guide != null" >
+                TCM_TBZ_Guide = #{record.TCM_TBZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.TCM_TBZ_Guide_Desc != null" >
+                TCM_TBZ_Guide_Desc = #{record.TCM_TBZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cerebralVessel_Desc != null" >
+                CerebralVessel_Desc = #{record.cerebralVessel_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.kidney != null" >
+                Kidney = #{record.kidney,jdbcType=VARCHAR},
+            </if>
+            <if test="record.kidney_Desc != null" >
+                Kidney_Desc = #{record.kidney_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.heart != null" >
+                Heart = #{record.heart,jdbcType=VARCHAR},
+            </if>
+            <if test="record.heart_Desc != null" >
+                Heart_Desc = #{record.heart_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bloodPipe != null" >
+                BloodPipe = #{record.bloodPipe,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bloodPipe_Desc != null" >
+                BloodPipe_Desc = #{record.bloodPipe_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eyePart != null" >
+                EyePart = #{record.eyePart,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eyePart_Desc != null" >
+                EyePart_Desc = #{record.eyePart_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nervousSystem != null" >
+                NervousSystem = #{record.nervousSystem,jdbcType=TINYINT},
+            </if>
+            <if test="record.nervousSystem_Desc != null" >
+                NervousSystem_Desc = #{record.nervousSystem_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otherSystem != null" >
+                OtherSystem = #{record.otherSystem,jdbcType=TINYINT},
+            </if>
+            <if test="record.otherSystem_Desc != null" >
+                OtherSystem_Desc = #{record.otherSystem_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.healthEvaluate != null" >
+                HealthEvaluate = #{record.healthEvaluate,jdbcType=TINYINT},
+            </if>
+            <if test="record.healthEvaluate_Desc != null" >
+                HealthEvaluate_Desc = #{record.healthEvaluate_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.healthGuide != null" >
+                HealthGuide = #{record.healthGuide,jdbcType=VARCHAR},
+            </if>
+            <if test="record.riskFactor != null" >
+                RiskFactor = #{record.riskFactor,jdbcType=VARCHAR},
+            </if>
+            <if test="record.riskFactor_Target != null" >
+                RiskFactor_Target = #{record.riskFactor_Target,jdbcType=VARCHAR},
+            </if>
+            <if test="record.riskFactor_Vaccine != null" >
+                RiskFactor_Vaccine = #{record.riskFactor_Vaccine,jdbcType=VARCHAR},
+            </if>
+            <if test="record.riskFactor_Other != null" >
+                RiskFactor_Other = #{record.riskFactor_Other,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ph_healthexamdetail
+        set HExamID = #{record.HExamID,jdbcType=BIGINT},
+            Symptom = #{record.symptom,jdbcType=VARCHAR},
+            Symptom_Desc = #{record.symptom_Desc,jdbcType=VARCHAR},
+            BodyTemperature = #{record.bodyTemperature,jdbcType=DECIMAL},
+            PulseRate = #{record.pulseRate,jdbcType=SMALLINT},
+            RespiratoryRate = #{record.respiratoryRate,jdbcType=SMALLINT},
+            LeftSystolic = #{record.leftSystolic,jdbcType=SMALLINT},
+            LeftDiastolic = #{record.leftDiastolic,jdbcType=SMALLINT},
+            RightSystolic = #{record.rightSystolic,jdbcType=SMALLINT},
+            RightDiastolic = #{record.rightDiastolic,jdbcType=SMALLINT},
+            Height = #{record.height,jdbcType=DECIMAL},
+            Weight = #{record.weight,jdbcType=DECIMAL},
+            Waist = #{record.waist,jdbcType=DECIMAL},
+            BMI = #{record.BMI,jdbcType=DECIMAL},
+            AgedHealthEvaluate = #{record.agedHealthEvaluate,jdbcType=TINYINT},
+            AgedLifeEvaluate = #{record.agedLifeEvaluate,jdbcType=TINYINT},
+            AgedCognition = #{record.agedCognition,jdbcType=TINYINT},
+            AgedCognitionScore = #{record.agedCognitionScore,jdbcType=TINYINT},
+            AgedFeeling = #{record.agedFeeling,jdbcType=TINYINT},
+            AgedFeelingScore = #{record.agedFeelingScore,jdbcType=TINYINT},
+            SportFrequency = #{record.sportFrequency,jdbcType=TINYINT},
+            SportDuration = #{record.sportDuration,jdbcType=SMALLINT},
+            SportTotalTime = #{record.sportTotalTime,jdbcType=TINYINT},
+            SportWay = #{record.sportWay,jdbcType=VARCHAR},
+            EatingHabits = #{record.eatingHabits,jdbcType=VARCHAR},
+            SmokingState = #{record.smokingState,jdbcType=TINYINT},
+            DailySmoking = #{record.dailySmoking,jdbcType=SMALLINT},
+            SmokingStartAge = #{record.smokingStartAge,jdbcType=TINYINT},
+            SmokingEndAge = #{record.smokingEndAge,jdbcType=TINYINT},
+            DrinkFrequency = #{record.drinkFrequency,jdbcType=TINYINT},
+            DailyDrink = #{record.dailyDrink,jdbcType=SMALLINT},
+            IsAbstinence = #{record.isAbstinence,jdbcType=TINYINT},
+            AbstinenceAge = #{record.abstinenceAge,jdbcType=TINYINT},
+            DrinkStartAge = #{record.drinkStartAge,jdbcType=TINYINT},
+            IsTemulenceLastYear = #{record.isTemulenceLastYear,jdbcType=TINYINT},
+            DrinkType = #{record.drinkType,jdbcType=VARCHAR},
+            DrinkOther_Desc = #{record.drinkOther_Desc,jdbcType=VARCHAR},
+            Occupation = #{record.occupation,jdbcType=TINYINT},
+            TypeOfWork = #{record.typeOfWork,jdbcType=VARCHAR},
+            WorkTime = #{record.workTime,jdbcType=TINYINT},
+            Dust = #{record.dust,jdbcType=VARCHAR},
+            DustGuard = #{record.dustGuard,jdbcType=TINYINT},
+            DustGuard_Desc = #{record.dustGuard_Desc,jdbcType=VARCHAR},
+            Radiogen = #{record.radiogen,jdbcType=VARCHAR},
+            RadiogenGuard = #{record.radiogenGuard,jdbcType=TINYINT},
+            RadiogenGuard_Desc = #{record.radiogenGuard_Desc,jdbcType=VARCHAR},
+            Physical = #{record.physical,jdbcType=VARCHAR},
+            PhysicalGuard = #{record.physicalGuard,jdbcType=TINYINT},
+            PhysicalGuard_Desc = #{record.physicalGuard_Desc,jdbcType=VARCHAR},
+            Chemical = #{record.chemical,jdbcType=VARCHAR},
+            ChemicalGuard = #{record.chemicalGuard,jdbcType=TINYINT},
+            ChemicalGuard_Desc = #{record.chemicalGuard_Desc,jdbcType=VARCHAR},
+            ToxicOther = #{record.toxicOther,jdbcType=VARCHAR},
+            ToxicOtherGuard = #{record.toxicOtherGuard,jdbcType=TINYINT},
+            ToxicOtherGuard_Desc = #{record.toxicOtherGuard_Desc,jdbcType=VARCHAR},
+            Lips = #{record.lips,jdbcType=TINYINT},
+            Dentition = #{record.dentition,jdbcType=TINYINT},
+            Dentition_Desc = #{record.dentition_Desc,jdbcType=VARCHAR},
+            Throat = #{record.throat,jdbcType=TINYINT},
+            LeftVision = #{record.leftVision,jdbcType=DECIMAL},
+            RightVision = #{record.rightVision,jdbcType=DECIMAL},
+            LeftCorrectVision = #{record.leftCorrectVision,jdbcType=DECIMAL},
+            RightCorrectVision = #{record.rightCorrectVision,jdbcType=DECIMAL},
+            Hearing = #{record.hearing,jdbcType=TINYINT},
+            Movement = #{record.movement,jdbcType=TINYINT},
+            Eyeground = #{record.eyeground,jdbcType=TINYINT},
+            Eyeground_Desc = #{record.eyeground_Desc,jdbcType=VARCHAR},
+            Skin = #{record.skin,jdbcType=TINYINT},
+            Skin_Desc = #{record.skin_Desc,jdbcType=VARCHAR},
+            Sclero = #{record.sclero,jdbcType=TINYINT},
+            Sclero_Desc = #{record.sclero_Desc,jdbcType=VARCHAR},
+            Lymph = #{record.lymph,jdbcType=TINYINT},
+            Lymph_Desc = #{record.lymph_Desc,jdbcType=VARCHAR},
+            LungBarrelChest = #{record.lungBarrelChest,jdbcType=TINYINT},
+            LungBreathSounds = #{record.lungBreathSounds,jdbcType=TINYINT},
+            LungBreathSounds_Desc = #{record.lungBreathSounds_Desc,jdbcType=VARCHAR},
+            LungRales = #{record.lungRales,jdbcType=TINYINT},
+            LungRales_Desc = #{record.lungRales_Desc,jdbcType=VARCHAR},
+            HeartRate = #{record.heartRate,jdbcType=SMALLINT},
+            Rhythm = #{record.rhythm,jdbcType=TINYINT},
+            Murmur = #{record.murmur,jdbcType=TINYINT},
+            Murmur_Desc = #{record.murmur_Desc,jdbcType=VARCHAR},
+            Pain = #{record.pain,jdbcType=TINYINT},
+            Pain_Desc = #{record.pain_Desc,jdbcType=VARCHAR},
+            Block = #{record.block,jdbcType=TINYINT},
+            Block_Desc = #{record.block_Desc,jdbcType=VARCHAR},
+            Hepatomegaly = #{record.hepatomegaly,jdbcType=TINYINT},
+            Hepatomegaly_Desc = #{record.hepatomegaly_Desc,jdbcType=VARCHAR},
+            Splenomegaly = #{record.splenomegaly,jdbcType=TINYINT},
+            Splenomegaly_Desc = #{record.splenomegaly_Desc,jdbcType=VARCHAR},
+            MoveSonant = #{record.moveSonant,jdbcType=TINYINT},
+            MoveSonant_Desc = #{record.moveSonant_Desc,jdbcType=VARCHAR},
+            LowLimbEdema = #{record.lowLimbEdema,jdbcType=TINYINT},
+            Arteriopalmus = #{record.arteriopalmus,jdbcType=TINYINT},
+            AnusTactus = #{record.anusTactus,jdbcType=TINYINT},
+            AnusTactus_Desc = #{record.anusTactus_Desc,jdbcType=VARCHAR},
+            Breast = #{record.breast,jdbcType=VARCHAR},
+            Breast_Desc = #{record.breast_Desc,jdbcType=VARCHAR},
+            Pudendum = #{record.pudendum,jdbcType=TINYINT},
+            Pudendum_Desc = #{record.pudendum_Desc,jdbcType=VARCHAR},
+            Vagina = #{record.vagina,jdbcType=TINYINT},
+            Vagina_Desc = #{record.vagina_Desc,jdbcType=VARCHAR},
+            Cervical = #{record.cervical,jdbcType=TINYINT},
+            Cervical_Desc = #{record.cervical_Desc,jdbcType=VARCHAR},
+            Uteri = #{record.uteri,jdbcType=TINYINT},
+            Uteri_Desc = #{record.uteri_Desc,jdbcType=VARCHAR},
+            Enclosure = #{record.enclosure,jdbcType=TINYINT},
+            Enclosure_Desc = #{record.enclosure_Desc,jdbcType=VARCHAR},
+            GynaecologyOther = #{record.gynaecologyOther,jdbcType=VARCHAR},
+            Hemoglobin = #{record.hemoglobin,jdbcType=SMALLINT},
+            Leukocyte = #{record.leukocyte,jdbcType=DECIMAL},
+            Platelet = #{record.platelet,jdbcType=SMALLINT},
+            BloodOther = #{record.bloodOther,jdbcType=VARCHAR},
+            UrineProtein = #{record.urineProtein,jdbcType=VARCHAR},
+            UrineSugar = #{record.urineSugar,jdbcType=VARCHAR},
+            UrineAcetoneBody = #{record.urineAcetoneBody,jdbcType=VARCHAR},
+            UrineOccultBlood = #{record.urineOccultBlood,jdbcType=VARCHAR},
+            UrineOther = #{record.urineOther,jdbcType=VARCHAR},
+            GLU = #{record.GLU,jdbcType=DECIMAL},
+            PGLU = #{record.PGLU,jdbcType=DECIMAL},
+            Cardiogram = #{record.cardiogram,jdbcType=TINYINT},
+            Cardiogram_Desc = #{record.cardiogram_Desc,jdbcType=VARCHAR},
+            UrineMicroAlbumin = #{record.urineMicroAlbumin,jdbcType=DECIMAL},
+            FecalOccultBlood = #{record.fecalOccultBlood,jdbcType=TINYINT},
+            HBA1C = #{record.HBA1C,jdbcType=DECIMAL},
+            HBSAG = #{record.HBSAG,jdbcType=TINYINT},
+            CPT = #{record.CPT,jdbcType=SMALLINT},
+            AST = #{record.AST,jdbcType=SMALLINT},
+            ALB = #{record.ALB,jdbcType=SMALLINT},
+            TBIL = #{record.TBIL,jdbcType=DECIMAL},
+            CBIL = #{record.CBIL,jdbcType=DECIMAL},
+            CR = #{record.CR,jdbcType=DECIMAL},
+            BUN = #{record.BUN,jdbcType=DECIMAL},
+            SerumPotassium = #{record.serumPotassium,jdbcType=DECIMAL},
+            SerumSodium = #{record.serumSodium,jdbcType=SMALLINT},
+            CHOL = #{record.CHOL,jdbcType=DECIMAL},
+            TG = #{record.TG,jdbcType=DECIMAL},
+            LDL_C = #{record.LDL_C,jdbcType=DECIMAL},
+            HDL_C = #{record.HDL_C,jdbcType=DECIMAL},
+            X_RAY = #{record.x_RAY,jdbcType=TINYINT},
+            X_RAY_Desc = #{record.x_RAY_Desc,jdbcType=VARCHAR},
+            B_Ultrasonic = #{record.b_Ultrasonic,jdbcType=TINYINT},
+            B_Ultrasonic_Desc = #{record.b_Ultrasonic_Desc,jdbcType=VARCHAR},
+            CervicalSmear = #{record.cervicalSmear,jdbcType=TINYINT},
+            CervicalSmear_Desc = #{record.cervicalSmear_Desc,jdbcType=VARCHAR},
+            AssistCheckOther = #{record.assistCheckOther,jdbcType=VARCHAR},
+            TCM_PHZ = #{record.TCM_PHZ,jdbcType=TINYINT},
+            TCM_PHZ_Guide = #{record.TCM_PHZ_Guide,jdbcType=VARCHAR},
+            TCM_PHZ_Guide_Desc = #{record.TCM_PHZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_QXZ = #{record.TCM_QXZ,jdbcType=TINYINT},
+            TCM_QXZ_Guide = #{record.TCM_QXZ_Guide,jdbcType=VARCHAR},
+            TCM_QXZ_Guide_Desc = #{record.TCM_QXZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_YXZ = #{record.TCM_YXZ,jdbcType=TINYINT},
+            TCM_YXZ_Guide = #{record.TCM_YXZ_Guide,jdbcType=VARCHAR},
+            TCM_YXZ_Guide_Desc = #{record.TCM_YXZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_YIXZ = #{record.TCM_YIXZ,jdbcType=TINYINT},
+            TCM_YIXZ_Guide = #{record.TCM_YIXZ_Guide,jdbcType=VARCHAR},
+            TCM_YIXZ_Guide_Desc = #{record.TCM_YIXZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_TSZ = #{record.TCM_TSZ,jdbcType=TINYINT},
+            TCM_TSZ_Guide = #{record.TCM_TSZ_Guide,jdbcType=VARCHAR},
+            TCM_TSZ_Guide_Desc = #{record.TCM_TSZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_SRZ = #{record.TCM_SRZ,jdbcType=TINYINT},
+            TCM_SRZ_Guide = #{record.TCM_SRZ_Guide,jdbcType=VARCHAR},
+            TCM_SRZ_Guide_Desc = #{record.TCM_SRZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_XTZ = #{record.TCM_XTZ,jdbcType=TINYINT},
+            TCM_XTZ_Guide = #{record.TCM_XTZ_Guide,jdbcType=VARCHAR},
+            TCM_XTZ_Guide_Desc = #{record.TCM_XTZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_QYZ = #{record.TCM_QYZ,jdbcType=TINYINT},
+            TCM_QYZ_Guide = #{record.TCM_QYZ_Guide,jdbcType=VARCHAR},
+            TCM_QYZ_Guide_Desc = #{record.TCM_QYZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_TBZ = #{record.TCM_TBZ,jdbcType=TINYINT},
+            CerebralVessel = #{record.cerebralVessel,jdbcType=VARCHAR},
+            TCM_TBZ_Guide = #{record.TCM_TBZ_Guide,jdbcType=VARCHAR},
+            TCM_TBZ_Guide_Desc = #{record.TCM_TBZ_Guide_Desc,jdbcType=VARCHAR},
+            CerebralVessel_Desc = #{record.cerebralVessel_Desc,jdbcType=VARCHAR},
+            Kidney = #{record.kidney,jdbcType=VARCHAR},
+            Kidney_Desc = #{record.kidney_Desc,jdbcType=VARCHAR},
+            Heart = #{record.heart,jdbcType=VARCHAR},
+            Heart_Desc = #{record.heart_Desc,jdbcType=VARCHAR},
+            BloodPipe = #{record.bloodPipe,jdbcType=VARCHAR},
+            BloodPipe_Desc = #{record.bloodPipe_Desc,jdbcType=VARCHAR},
+            EyePart = #{record.eyePart,jdbcType=VARCHAR},
+            EyePart_Desc = #{record.eyePart_Desc,jdbcType=VARCHAR},
+            NervousSystem = #{record.nervousSystem,jdbcType=TINYINT},
+            NervousSystem_Desc = #{record.nervousSystem_Desc,jdbcType=VARCHAR},
+            OtherSystem = #{record.otherSystem,jdbcType=TINYINT},
+            OtherSystem_Desc = #{record.otherSystem_Desc,jdbcType=VARCHAR},
+            HealthEvaluate = #{record.healthEvaluate,jdbcType=TINYINT},
+            HealthEvaluate_Desc = #{record.healthEvaluate_Desc,jdbcType=VARCHAR},
+            HealthGuide = #{record.healthGuide,jdbcType=VARCHAR},
+            RiskFactor = #{record.riskFactor,jdbcType=VARCHAR},
+            RiskFactor_Target = #{record.riskFactor_Target,jdbcType=VARCHAR},
+            RiskFactor_Vaccine = #{record.riskFactor_Vaccine,jdbcType=VARCHAR},
+            RiskFactor_Other = #{record.riskFactor_Other,jdbcType=VARCHAR}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetail" >
+        update ph_healthexamdetail
+        <set >
+            <if test="symptom != null" >
+                Symptom = #{symptom,jdbcType=VARCHAR},
+            </if>
+            <if test="symptom_Desc != null" >
+                Symptom_Desc = #{symptom_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="bodyTemperature != null" >
+                BodyTemperature = #{bodyTemperature,jdbcType=DECIMAL},
+            </if>
+            <if test="pulseRate != null" >
+                PulseRate = #{pulseRate,jdbcType=SMALLINT},
+            </if>
+            <if test="respiratoryRate != null" >
+                RespiratoryRate = #{respiratoryRate,jdbcType=SMALLINT},
+            </if>
+            <if test="leftSystolic != null" >
+                LeftSystolic = #{leftSystolic,jdbcType=SMALLINT},
+            </if>
+            <if test="leftDiastolic != null" >
+                LeftDiastolic = #{leftDiastolic,jdbcType=SMALLINT},
+            </if>
+            <if test="rightSystolic != null" >
+                RightSystolic = #{rightSystolic,jdbcType=SMALLINT},
+            </if>
+            <if test="rightDiastolic != null" >
+                RightDiastolic = #{rightDiastolic,jdbcType=SMALLINT},
+            </if>
+            <if test="height != null" >
+                Height = #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null" >
+                Weight = #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="waist != null" >
+                Waist = #{waist,jdbcType=DECIMAL},
+            </if>
+            <if test="BMI != null" >
+                BMI = #{BMI,jdbcType=DECIMAL},
+            </if>
+            <if test="agedHealthEvaluate != null" >
+                AgedHealthEvaluate = #{agedHealthEvaluate,jdbcType=TINYINT},
+            </if>
+            <if test="agedLifeEvaluate != null" >
+                AgedLifeEvaluate = #{agedLifeEvaluate,jdbcType=TINYINT},
+            </if>
+            <if test="agedCognition != null" >
+                AgedCognition = #{agedCognition,jdbcType=TINYINT},
+            </if>
+            <if test="agedCognitionScore != null" >
+                AgedCognitionScore = #{agedCognitionScore,jdbcType=TINYINT},
+            </if>
+            <if test="agedFeeling != null" >
+                AgedFeeling = #{agedFeeling,jdbcType=TINYINT},
+            </if>
+            <if test="agedFeelingScore != null" >
+                AgedFeelingScore = #{agedFeelingScore,jdbcType=TINYINT},
+            </if>
+            <if test="sportFrequency != null" >
+                SportFrequency = #{sportFrequency,jdbcType=TINYINT},
+            </if>
+            <if test="sportDuration != null" >
+                SportDuration = #{sportDuration,jdbcType=SMALLINT},
+            </if>
+            <if test="sportTotalTime != null" >
+                SportTotalTime = #{sportTotalTime,jdbcType=TINYINT},
+            </if>
+            <if test="sportWay != null" >
+                SportWay = #{sportWay,jdbcType=VARCHAR},
+            </if>
+            <if test="eatingHabits != null" >
+                EatingHabits = #{eatingHabits,jdbcType=VARCHAR},
+            </if>
+            <if test="smokingState != null" >
+                SmokingState = #{smokingState,jdbcType=TINYINT},
+            </if>
+            <if test="dailySmoking != null" >
+                DailySmoking = #{dailySmoking,jdbcType=SMALLINT},
+            </if>
+            <if test="smokingStartAge != null" >
+                SmokingStartAge = #{smokingStartAge,jdbcType=TINYINT},
+            </if>
+            <if test="smokingEndAge != null" >
+                SmokingEndAge = #{smokingEndAge,jdbcType=TINYINT},
+            </if>
+            <if test="drinkFrequency != null" >
+                DrinkFrequency = #{drinkFrequency,jdbcType=TINYINT},
+            </if>
+            <if test="dailyDrink != null" >
+                DailyDrink = #{dailyDrink,jdbcType=SMALLINT},
+            </if>
+            <if test="isAbstinence != null" >
+                IsAbstinence = #{isAbstinence,jdbcType=TINYINT},
+            </if>
+            <if test="abstinenceAge != null" >
+                AbstinenceAge = #{abstinenceAge,jdbcType=TINYINT},
+            </if>
+            <if test="drinkStartAge != null" >
+                DrinkStartAge = #{drinkStartAge,jdbcType=TINYINT},
+            </if>
+            <if test="isTemulenceLastYear != null" >
+                IsTemulenceLastYear = #{isTemulenceLastYear,jdbcType=TINYINT},
+            </if>
+            <if test="drinkType != null" >
+                DrinkType = #{drinkType,jdbcType=VARCHAR},
+            </if>
+            <if test="drinkOther_Desc != null" >
+                DrinkOther_Desc = #{drinkOther_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="occupation != null" >
+                Occupation = #{occupation,jdbcType=TINYINT},
+            </if>
+            <if test="typeOfWork != null" >
+                TypeOfWork = #{typeOfWork,jdbcType=VARCHAR},
+            </if>
+            <if test="workTime != null" >
+                WorkTime = #{workTime,jdbcType=TINYINT},
+            </if>
+            <if test="dust != null" >
+                Dust = #{dust,jdbcType=VARCHAR},
+            </if>
+            <if test="dustGuard != null" >
+                DustGuard = #{dustGuard,jdbcType=TINYINT},
+            </if>
+            <if test="dustGuard_Desc != null" >
+                DustGuard_Desc = #{dustGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="radiogen != null" >
+                Radiogen = #{radiogen,jdbcType=VARCHAR},
+            </if>
+            <if test="radiogenGuard != null" >
+                RadiogenGuard = #{radiogenGuard,jdbcType=TINYINT},
+            </if>
+            <if test="radiogenGuard_Desc != null" >
+                RadiogenGuard_Desc = #{radiogenGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="physical != null" >
+                Physical = #{physical,jdbcType=VARCHAR},
+            </if>
+            <if test="physicalGuard != null" >
+                PhysicalGuard = #{physicalGuard,jdbcType=TINYINT},
+            </if>
+            <if test="physicalGuard_Desc != null" >
+                PhysicalGuard_Desc = #{physicalGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="chemical != null" >
+                Chemical = #{chemical,jdbcType=VARCHAR},
+            </if>
+            <if test="chemicalGuard != null" >
+                ChemicalGuard = #{chemicalGuard,jdbcType=TINYINT},
+            </if>
+            <if test="chemicalGuard_Desc != null" >
+                ChemicalGuard_Desc = #{chemicalGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="toxicOther != null" >
+                ToxicOther = #{toxicOther,jdbcType=VARCHAR},
+            </if>
+            <if test="toxicOtherGuard != null" >
+                ToxicOtherGuard = #{toxicOtherGuard,jdbcType=TINYINT},
+            </if>
+            <if test="toxicOtherGuard_Desc != null" >
+                ToxicOtherGuard_Desc = #{toxicOtherGuard_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lips != null" >
+                Lips = #{lips,jdbcType=TINYINT},
+            </if>
+            <if test="dentition != null" >
+                Dentition = #{dentition,jdbcType=TINYINT},
+            </if>
+            <if test="dentition_Desc != null" >
+                Dentition_Desc = #{dentition_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="throat != null" >
+                Throat = #{throat,jdbcType=TINYINT},
+            </if>
+            <if test="leftVision != null" >
+                LeftVision = #{leftVision,jdbcType=DECIMAL},
+            </if>
+            <if test="rightVision != null" >
+                RightVision = #{rightVision,jdbcType=DECIMAL},
+            </if>
+            <if test="leftCorrectVision != null" >
+                LeftCorrectVision = #{leftCorrectVision,jdbcType=DECIMAL},
+            </if>
+            <if test="rightCorrectVision != null" >
+                RightCorrectVision = #{rightCorrectVision,jdbcType=DECIMAL},
+            </if>
+            <if test="hearing != null" >
+                Hearing = #{hearing,jdbcType=TINYINT},
+            </if>
+            <if test="movement != null" >
+                Movement = #{movement,jdbcType=TINYINT},
+            </if>
+            <if test="eyeground != null" >
+                Eyeground = #{eyeground,jdbcType=TINYINT},
+            </if>
+            <if test="eyeground_Desc != null" >
+                Eyeground_Desc = #{eyeground_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="skin != null" >
+                Skin = #{skin,jdbcType=TINYINT},
+            </if>
+            <if test="skin_Desc != null" >
+                Skin_Desc = #{skin_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="sclero != null" >
+                Sclero = #{sclero,jdbcType=TINYINT},
+            </if>
+            <if test="sclero_Desc != null" >
+                Sclero_Desc = #{sclero_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lymph != null" >
+                Lymph = #{lymph,jdbcType=TINYINT},
+            </if>
+            <if test="lymph_Desc != null" >
+                Lymph_Desc = #{lymph_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lungBarrelChest != null" >
+                LungBarrelChest = #{lungBarrelChest,jdbcType=TINYINT},
+            </if>
+            <if test="lungBreathSounds != null" >
+                LungBreathSounds = #{lungBreathSounds,jdbcType=TINYINT},
+            </if>
+            <if test="lungBreathSounds_Desc != null" >
+                LungBreathSounds_Desc = #{lungBreathSounds_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lungRales != null" >
+                LungRales = #{lungRales,jdbcType=TINYINT},
+            </if>
+            <if test="lungRales_Desc != null" >
+                LungRales_Desc = #{lungRales_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="heartRate != null" >
+                HeartRate = #{heartRate,jdbcType=SMALLINT},
+            </if>
+            <if test="rhythm != null" >
+                Rhythm = #{rhythm,jdbcType=TINYINT},
+            </if>
+            <if test="murmur != null" >
+                Murmur = #{murmur,jdbcType=TINYINT},
+            </if>
+            <if test="murmur_Desc != null" >
+                Murmur_Desc = #{murmur_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="pain != null" >
+                Pain = #{pain,jdbcType=TINYINT},
+            </if>
+            <if test="pain_Desc != null" >
+                Pain_Desc = #{pain_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="block != null" >
+                Block = #{block,jdbcType=TINYINT},
+            </if>
+            <if test="block_Desc != null" >
+                Block_Desc = #{block_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="hepatomegaly != null" >
+                Hepatomegaly = #{hepatomegaly,jdbcType=TINYINT},
+            </if>
+            <if test="hepatomegaly_Desc != null" >
+                Hepatomegaly_Desc = #{hepatomegaly_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="splenomegaly != null" >
+                Splenomegaly = #{splenomegaly,jdbcType=TINYINT},
+            </if>
+            <if test="splenomegaly_Desc != null" >
+                Splenomegaly_Desc = #{splenomegaly_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="moveSonant != null" >
+                MoveSonant = #{moveSonant,jdbcType=TINYINT},
+            </if>
+            <if test="moveSonant_Desc != null" >
+                MoveSonant_Desc = #{moveSonant_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="lowLimbEdema != null" >
+                LowLimbEdema = #{lowLimbEdema,jdbcType=TINYINT},
+            </if>
+            <if test="arteriopalmus != null" >
+                Arteriopalmus = #{arteriopalmus,jdbcType=TINYINT},
+            </if>
+            <if test="anusTactus != null" >
+                AnusTactus = #{anusTactus,jdbcType=TINYINT},
+            </if>
+            <if test="anusTactus_Desc != null" >
+                AnusTactus_Desc = #{anusTactus_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="breast != null" >
+                Breast = #{breast,jdbcType=VARCHAR},
+            </if>
+            <if test="breast_Desc != null" >
+                Breast_Desc = #{breast_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="pudendum != null" >
+                Pudendum = #{pudendum,jdbcType=TINYINT},
+            </if>
+            <if test="pudendum_Desc != null" >
+                Pudendum_Desc = #{pudendum_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="vagina != null" >
+                Vagina = #{vagina,jdbcType=TINYINT},
+            </if>
+            <if test="vagina_Desc != null" >
+                Vagina_Desc = #{vagina_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="cervical != null" >
+                Cervical = #{cervical,jdbcType=TINYINT},
+            </if>
+            <if test="cervical_Desc != null" >
+                Cervical_Desc = #{cervical_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="uteri != null" >
+                Uteri = #{uteri,jdbcType=TINYINT},
+            </if>
+            <if test="uteri_Desc != null" >
+                Uteri_Desc = #{uteri_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="enclosure != null" >
+                Enclosure = #{enclosure,jdbcType=TINYINT},
+            </if>
+            <if test="enclosure_Desc != null" >
+                Enclosure_Desc = #{enclosure_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="gynaecologyOther != null" >
+                GynaecologyOther = #{gynaecologyOther,jdbcType=VARCHAR},
+            </if>
+            <if test="hemoglobin != null" >
+                Hemoglobin = #{hemoglobin,jdbcType=SMALLINT},
+            </if>
+            <if test="leukocyte != null" >
+                Leukocyte = #{leukocyte,jdbcType=DECIMAL},
+            </if>
+            <if test="platelet != null" >
+                Platelet = #{platelet,jdbcType=SMALLINT},
+            </if>
+            <if test="bloodOther != null" >
+                BloodOther = #{bloodOther,jdbcType=VARCHAR},
+            </if>
+            <if test="urineProtein != null" >
+                UrineProtein = #{urineProtein,jdbcType=VARCHAR},
+            </if>
+            <if test="urineSugar != null" >
+                UrineSugar = #{urineSugar,jdbcType=VARCHAR},
+            </if>
+            <if test="urineAcetoneBody != null" >
+                UrineAcetoneBody = #{urineAcetoneBody,jdbcType=VARCHAR},
+            </if>
+            <if test="urineOccultBlood != null" >
+                UrineOccultBlood = #{urineOccultBlood,jdbcType=VARCHAR},
+            </if>
+            <if test="urineOther != null" >
+                UrineOther = #{urineOther,jdbcType=VARCHAR},
+            </if>
+            <if test="GLU != null" >
+                GLU = #{GLU,jdbcType=DECIMAL},
+            </if>
+            <if test="PGLU != null" >
+                PGLU = #{PGLU,jdbcType=DECIMAL},
+            </if>
+            <if test="cardiogram != null" >
+                Cardiogram = #{cardiogram,jdbcType=TINYINT},
+            </if>
+            <if test="cardiogram_Desc != null" >
+                Cardiogram_Desc = #{cardiogram_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="urineMicroAlbumin != null" >
+                UrineMicroAlbumin = #{urineMicroAlbumin,jdbcType=DECIMAL},
+            </if>
+            <if test="fecalOccultBlood != null" >
+                FecalOccultBlood = #{fecalOccultBlood,jdbcType=TINYINT},
+            </if>
+            <if test="HBA1C != null" >
+                HBA1C = #{HBA1C,jdbcType=DECIMAL},
+            </if>
+            <if test="HBSAG != null" >
+                HBSAG = #{HBSAG,jdbcType=TINYINT},
+            </if>
+            <if test="CPT != null" >
+                CPT = #{CPT,jdbcType=SMALLINT},
+            </if>
+            <if test="AST != null" >
+                AST = #{AST,jdbcType=SMALLINT},
+            </if>
+            <if test="ALB != null" >
+                ALB = #{ALB,jdbcType=SMALLINT},
+            </if>
+            <if test="TBIL != null" >
+                TBIL = #{TBIL,jdbcType=DECIMAL},
+            </if>
+            <if test="CBIL != null" >
+                CBIL = #{CBIL,jdbcType=DECIMAL},
+            </if>
+            <if test="CR != null" >
+                CR = #{CR,jdbcType=DECIMAL},
+            </if>
+            <if test="BUN != null" >
+                BUN = #{BUN,jdbcType=DECIMAL},
+            </if>
+            <if test="serumPotassium != null" >
+                SerumPotassium = #{serumPotassium,jdbcType=DECIMAL},
+            </if>
+            <if test="serumSodium != null" >
+                SerumSodium = #{serumSodium,jdbcType=SMALLINT},
+            </if>
+            <if test="CHOL != null" >
+                CHOL = #{CHOL,jdbcType=DECIMAL},
+            </if>
+            <if test="TG != null" >
+                TG = #{TG,jdbcType=DECIMAL},
+            </if>
+            <if test="LDL_C != null" >
+                LDL_C = #{LDL_C,jdbcType=DECIMAL},
+            </if>
+            <if test="HDL_C != null" >
+                HDL_C = #{HDL_C,jdbcType=DECIMAL},
+            </if>
+            <if test="x_RAY != null" >
+                X_RAY = #{x_RAY,jdbcType=TINYINT},
+            </if>
+            <if test="x_RAY_Desc != null" >
+                X_RAY_Desc = #{x_RAY_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="b_Ultrasonic != null" >
+                B_Ultrasonic = #{b_Ultrasonic,jdbcType=TINYINT},
+            </if>
+            <if test="b_Ultrasonic_Desc != null" >
+                B_Ultrasonic_Desc = #{b_Ultrasonic_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="cervicalSmear != null" >
+                CervicalSmear = #{cervicalSmear,jdbcType=TINYINT},
+            </if>
+            <if test="cervicalSmear_Desc != null" >
+                CervicalSmear_Desc = #{cervicalSmear_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="assistCheckOther != null" >
+                AssistCheckOther = #{assistCheckOther,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_PHZ != null" >
+                TCM_PHZ = #{TCM_PHZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_PHZ_Guide != null" >
+                TCM_PHZ_Guide = #{TCM_PHZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_PHZ_Guide_Desc != null" >
+                TCM_PHZ_Guide_Desc = #{TCM_PHZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_QXZ != null" >
+                TCM_QXZ = #{TCM_QXZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_QXZ_Guide != null" >
+                TCM_QXZ_Guide = #{TCM_QXZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_QXZ_Guide_Desc != null" >
+                TCM_QXZ_Guide_Desc = #{TCM_QXZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_YXZ != null" >
+                TCM_YXZ = #{TCM_YXZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_YXZ_Guide != null" >
+                TCM_YXZ_Guide = #{TCM_YXZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_YXZ_Guide_Desc != null" >
+                TCM_YXZ_Guide_Desc = #{TCM_YXZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_YIXZ != null" >
+                TCM_YIXZ = #{TCM_YIXZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_YIXZ_Guide != null" >
+                TCM_YIXZ_Guide = #{TCM_YIXZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_YIXZ_Guide_Desc != null" >
+                TCM_YIXZ_Guide_Desc = #{TCM_YIXZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TSZ != null" >
+                TCM_TSZ = #{TCM_TSZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_TSZ_Guide != null" >
+                TCM_TSZ_Guide = #{TCM_TSZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TSZ_Guide_Desc != null" >
+                TCM_TSZ_Guide_Desc = #{TCM_TSZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_SRZ != null" >
+                TCM_SRZ = #{TCM_SRZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_SRZ_Guide != null" >
+                TCM_SRZ_Guide = #{TCM_SRZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_SRZ_Guide_Desc != null" >
+                TCM_SRZ_Guide_Desc = #{TCM_SRZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_XTZ != null" >
+                TCM_XTZ = #{TCM_XTZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_XTZ_Guide != null" >
+                TCM_XTZ_Guide = #{TCM_XTZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_XTZ_Guide_Desc != null" >
+                TCM_XTZ_Guide_Desc = #{TCM_XTZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_QYZ != null" >
+                TCM_QYZ = #{TCM_QYZ,jdbcType=TINYINT},
+            </if>
+            <if test="TCM_QYZ_Guide != null" >
+                TCM_QYZ_Guide = #{TCM_QYZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_QYZ_Guide_Desc != null" >
+                TCM_QYZ_Guide_Desc = #{TCM_QYZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TBZ != null" >
+                TCM_TBZ = #{TCM_TBZ,jdbcType=TINYINT},
+            </if>
+            <if test="cerebralVessel != null" >
+                CerebralVessel = #{cerebralVessel,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TBZ_Guide != null" >
+                TCM_TBZ_Guide = #{TCM_TBZ_Guide,jdbcType=VARCHAR},
+            </if>
+            <if test="TCM_TBZ_Guide_Desc != null" >
+                TCM_TBZ_Guide_Desc = #{TCM_TBZ_Guide_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="cerebralVessel_Desc != null" >
+                CerebralVessel_Desc = #{cerebralVessel_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="kidney != null" >
+                Kidney = #{kidney,jdbcType=VARCHAR},
+            </if>
+            <if test="kidney_Desc != null" >
+                Kidney_Desc = #{kidney_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="heart != null" >
+                Heart = #{heart,jdbcType=VARCHAR},
+            </if>
+            <if test="heart_Desc != null" >
+                Heart_Desc = #{heart_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="bloodPipe != null" >
+                BloodPipe = #{bloodPipe,jdbcType=VARCHAR},
+            </if>
+            <if test="bloodPipe_Desc != null" >
+                BloodPipe_Desc = #{bloodPipe_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="eyePart != null" >
+                EyePart = #{eyePart,jdbcType=VARCHAR},
+            </if>
+            <if test="eyePart_Desc != null" >
+                EyePart_Desc = #{eyePart_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="nervousSystem != null" >
+                NervousSystem = #{nervousSystem,jdbcType=TINYINT},
+            </if>
+            <if test="nervousSystem_Desc != null" >
+                NervousSystem_Desc = #{nervousSystem_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="otherSystem != null" >
+                OtherSystem = #{otherSystem,jdbcType=TINYINT},
+            </if>
+            <if test="otherSystem_Desc != null" >
+                OtherSystem_Desc = #{otherSystem_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="healthEvaluate != null" >
+                HealthEvaluate = #{healthEvaluate,jdbcType=TINYINT},
+            </if>
+            <if test="healthEvaluate_Desc != null" >
+                HealthEvaluate_Desc = #{healthEvaluate_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="healthGuide != null" >
+                HealthGuide = #{healthGuide,jdbcType=VARCHAR},
+            </if>
+            <if test="riskFactor != null" >
+                RiskFactor = #{riskFactor,jdbcType=VARCHAR},
+            </if>
+            <if test="riskFactor_Target != null" >
+                RiskFactor_Target = #{riskFactor_Target,jdbcType=VARCHAR},
+            </if>
+            <if test="riskFactor_Vaccine != null" >
+                RiskFactor_Vaccine = #{riskFactor_Vaccine,jdbcType=VARCHAR},
+            </if>
+            <if test="riskFactor_Other != null" >
+                RiskFactor_Other = #{riskFactor_Other,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where HExamID = #{HExamID,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetail" >
+        update ph_healthexamdetail
+        set Symptom = #{symptom,jdbcType=VARCHAR},
+            Symptom_Desc = #{symptom_Desc,jdbcType=VARCHAR},
+            BodyTemperature = #{bodyTemperature,jdbcType=DECIMAL},
+            PulseRate = #{pulseRate,jdbcType=SMALLINT},
+            RespiratoryRate = #{respiratoryRate,jdbcType=SMALLINT},
+            LeftSystolic = #{leftSystolic,jdbcType=SMALLINT},
+            LeftDiastolic = #{leftDiastolic,jdbcType=SMALLINT},
+            RightSystolic = #{rightSystolic,jdbcType=SMALLINT},
+            RightDiastolic = #{rightDiastolic,jdbcType=SMALLINT},
+            Height = #{height,jdbcType=DECIMAL},
+            Weight = #{weight,jdbcType=DECIMAL},
+            Waist = #{waist,jdbcType=DECIMAL},
+            BMI = #{BMI,jdbcType=DECIMAL},
+            AgedHealthEvaluate = #{agedHealthEvaluate,jdbcType=TINYINT},
+            AgedLifeEvaluate = #{agedLifeEvaluate,jdbcType=TINYINT},
+            AgedCognition = #{agedCognition,jdbcType=TINYINT},
+            AgedCognitionScore = #{agedCognitionScore,jdbcType=TINYINT},
+            AgedFeeling = #{agedFeeling,jdbcType=TINYINT},
+            AgedFeelingScore = #{agedFeelingScore,jdbcType=TINYINT},
+            SportFrequency = #{sportFrequency,jdbcType=TINYINT},
+            SportDuration = #{sportDuration,jdbcType=SMALLINT},
+            SportTotalTime = #{sportTotalTime,jdbcType=TINYINT},
+            SportWay = #{sportWay,jdbcType=VARCHAR},
+            EatingHabits = #{eatingHabits,jdbcType=VARCHAR},
+            SmokingState = #{smokingState,jdbcType=TINYINT},
+            DailySmoking = #{dailySmoking,jdbcType=SMALLINT},
+            SmokingStartAge = #{smokingStartAge,jdbcType=TINYINT},
+            SmokingEndAge = #{smokingEndAge,jdbcType=TINYINT},
+            DrinkFrequency = #{drinkFrequency,jdbcType=TINYINT},
+            DailyDrink = #{dailyDrink,jdbcType=SMALLINT},
+            IsAbstinence = #{isAbstinence,jdbcType=TINYINT},
+            AbstinenceAge = #{abstinenceAge,jdbcType=TINYINT},
+            DrinkStartAge = #{drinkStartAge,jdbcType=TINYINT},
+            IsTemulenceLastYear = #{isTemulenceLastYear,jdbcType=TINYINT},
+            DrinkType = #{drinkType,jdbcType=VARCHAR},
+            DrinkOther_Desc = #{drinkOther_Desc,jdbcType=VARCHAR},
+            Occupation = #{occupation,jdbcType=TINYINT},
+            TypeOfWork = #{typeOfWork,jdbcType=VARCHAR},
+            WorkTime = #{workTime,jdbcType=TINYINT},
+            Dust = #{dust,jdbcType=VARCHAR},
+            DustGuard = #{dustGuard,jdbcType=TINYINT},
+            DustGuard_Desc = #{dustGuard_Desc,jdbcType=VARCHAR},
+            Radiogen = #{radiogen,jdbcType=VARCHAR},
+            RadiogenGuard = #{radiogenGuard,jdbcType=TINYINT},
+            RadiogenGuard_Desc = #{radiogenGuard_Desc,jdbcType=VARCHAR},
+            Physical = #{physical,jdbcType=VARCHAR},
+            PhysicalGuard = #{physicalGuard,jdbcType=TINYINT},
+            PhysicalGuard_Desc = #{physicalGuard_Desc,jdbcType=VARCHAR},
+            Chemical = #{chemical,jdbcType=VARCHAR},
+            ChemicalGuard = #{chemicalGuard,jdbcType=TINYINT},
+            ChemicalGuard_Desc = #{chemicalGuard_Desc,jdbcType=VARCHAR},
+            ToxicOther = #{toxicOther,jdbcType=VARCHAR},
+            ToxicOtherGuard = #{toxicOtherGuard,jdbcType=TINYINT},
+            ToxicOtherGuard_Desc = #{toxicOtherGuard_Desc,jdbcType=VARCHAR},
+            Lips = #{lips,jdbcType=TINYINT},
+            Dentition = #{dentition,jdbcType=TINYINT},
+            Dentition_Desc = #{dentition_Desc,jdbcType=VARCHAR},
+            Throat = #{throat,jdbcType=TINYINT},
+            LeftVision = #{leftVision,jdbcType=DECIMAL},
+            RightVision = #{rightVision,jdbcType=DECIMAL},
+            LeftCorrectVision = #{leftCorrectVision,jdbcType=DECIMAL},
+            RightCorrectVision = #{rightCorrectVision,jdbcType=DECIMAL},
+            Hearing = #{hearing,jdbcType=TINYINT},
+            Movement = #{movement,jdbcType=TINYINT},
+            Eyeground = #{eyeground,jdbcType=TINYINT},
+            Eyeground_Desc = #{eyeground_Desc,jdbcType=VARCHAR},
+            Skin = #{skin,jdbcType=TINYINT},
+            Skin_Desc = #{skin_Desc,jdbcType=VARCHAR},
+            Sclero = #{sclero,jdbcType=TINYINT},
+            Sclero_Desc = #{sclero_Desc,jdbcType=VARCHAR},
+            Lymph = #{lymph,jdbcType=TINYINT},
+            Lymph_Desc = #{lymph_Desc,jdbcType=VARCHAR},
+            LungBarrelChest = #{lungBarrelChest,jdbcType=TINYINT},
+            LungBreathSounds = #{lungBreathSounds,jdbcType=TINYINT},
+            LungBreathSounds_Desc = #{lungBreathSounds_Desc,jdbcType=VARCHAR},
+            LungRales = #{lungRales,jdbcType=TINYINT},
+            LungRales_Desc = #{lungRales_Desc,jdbcType=VARCHAR},
+            HeartRate = #{heartRate,jdbcType=SMALLINT},
+            Rhythm = #{rhythm,jdbcType=TINYINT},
+            Murmur = #{murmur,jdbcType=TINYINT},
+            Murmur_Desc = #{murmur_Desc,jdbcType=VARCHAR},
+            Pain = #{pain,jdbcType=TINYINT},
+            Pain_Desc = #{pain_Desc,jdbcType=VARCHAR},
+            Block = #{block,jdbcType=TINYINT},
+            Block_Desc = #{block_Desc,jdbcType=VARCHAR},
+            Hepatomegaly = #{hepatomegaly,jdbcType=TINYINT},
+            Hepatomegaly_Desc = #{hepatomegaly_Desc,jdbcType=VARCHAR},
+            Splenomegaly = #{splenomegaly,jdbcType=TINYINT},
+            Splenomegaly_Desc = #{splenomegaly_Desc,jdbcType=VARCHAR},
+            MoveSonant = #{moveSonant,jdbcType=TINYINT},
+            MoveSonant_Desc = #{moveSonant_Desc,jdbcType=VARCHAR},
+            LowLimbEdema = #{lowLimbEdema,jdbcType=TINYINT},
+            Arteriopalmus = #{arteriopalmus,jdbcType=TINYINT},
+            AnusTactus = #{anusTactus,jdbcType=TINYINT},
+            AnusTactus_Desc = #{anusTactus_Desc,jdbcType=VARCHAR},
+            Breast = #{breast,jdbcType=VARCHAR},
+            Breast_Desc = #{breast_Desc,jdbcType=VARCHAR},
+            Pudendum = #{pudendum,jdbcType=TINYINT},
+            Pudendum_Desc = #{pudendum_Desc,jdbcType=VARCHAR},
+            Vagina = #{vagina,jdbcType=TINYINT},
+            Vagina_Desc = #{vagina_Desc,jdbcType=VARCHAR},
+            Cervical = #{cervical,jdbcType=TINYINT},
+            Cervical_Desc = #{cervical_Desc,jdbcType=VARCHAR},
+            Uteri = #{uteri,jdbcType=TINYINT},
+            Uteri_Desc = #{uteri_Desc,jdbcType=VARCHAR},
+            Enclosure = #{enclosure,jdbcType=TINYINT},
+            Enclosure_Desc = #{enclosure_Desc,jdbcType=VARCHAR},
+            GynaecologyOther = #{gynaecologyOther,jdbcType=VARCHAR},
+            Hemoglobin = #{hemoglobin,jdbcType=SMALLINT},
+            Leukocyte = #{leukocyte,jdbcType=DECIMAL},
+            Platelet = #{platelet,jdbcType=SMALLINT},
+            BloodOther = #{bloodOther,jdbcType=VARCHAR},
+            UrineProtein = #{urineProtein,jdbcType=VARCHAR},
+            UrineSugar = #{urineSugar,jdbcType=VARCHAR},
+            UrineAcetoneBody = #{urineAcetoneBody,jdbcType=VARCHAR},
+            UrineOccultBlood = #{urineOccultBlood,jdbcType=VARCHAR},
+            UrineOther = #{urineOther,jdbcType=VARCHAR},
+            GLU = #{GLU,jdbcType=DECIMAL},
+            PGLU = #{PGLU,jdbcType=DECIMAL},
+            Cardiogram = #{cardiogram,jdbcType=TINYINT},
+            Cardiogram_Desc = #{cardiogram_Desc,jdbcType=VARCHAR},
+            UrineMicroAlbumin = #{urineMicroAlbumin,jdbcType=DECIMAL},
+            FecalOccultBlood = #{fecalOccultBlood,jdbcType=TINYINT},
+            HBA1C = #{HBA1C,jdbcType=DECIMAL},
+            HBSAG = #{HBSAG,jdbcType=TINYINT},
+            CPT = #{CPT,jdbcType=SMALLINT},
+            AST = #{AST,jdbcType=SMALLINT},
+            ALB = #{ALB,jdbcType=SMALLINT},
+            TBIL = #{TBIL,jdbcType=DECIMAL},
+            CBIL = #{CBIL,jdbcType=DECIMAL},
+            CR = #{CR,jdbcType=DECIMAL},
+            BUN = #{BUN,jdbcType=DECIMAL},
+            SerumPotassium = #{serumPotassium,jdbcType=DECIMAL},
+            SerumSodium = #{serumSodium,jdbcType=SMALLINT},
+            CHOL = #{CHOL,jdbcType=DECIMAL},
+            TG = #{TG,jdbcType=DECIMAL},
+            LDL_C = #{LDL_C,jdbcType=DECIMAL},
+            HDL_C = #{HDL_C,jdbcType=DECIMAL},
+            X_RAY = #{x_RAY,jdbcType=TINYINT},
+            X_RAY_Desc = #{x_RAY_Desc,jdbcType=VARCHAR},
+            B_Ultrasonic = #{b_Ultrasonic,jdbcType=TINYINT},
+            B_Ultrasonic_Desc = #{b_Ultrasonic_Desc,jdbcType=VARCHAR},
+            CervicalSmear = #{cervicalSmear,jdbcType=TINYINT},
+            CervicalSmear_Desc = #{cervicalSmear_Desc,jdbcType=VARCHAR},
+            AssistCheckOther = #{assistCheckOther,jdbcType=VARCHAR},
+            TCM_PHZ = #{TCM_PHZ,jdbcType=TINYINT},
+            TCM_PHZ_Guide = #{TCM_PHZ_Guide,jdbcType=VARCHAR},
+            TCM_PHZ_Guide_Desc = #{TCM_PHZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_QXZ = #{TCM_QXZ,jdbcType=TINYINT},
+            TCM_QXZ_Guide = #{TCM_QXZ_Guide,jdbcType=VARCHAR},
+            TCM_QXZ_Guide_Desc = #{TCM_QXZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_YXZ = #{TCM_YXZ,jdbcType=TINYINT},
+            TCM_YXZ_Guide = #{TCM_YXZ_Guide,jdbcType=VARCHAR},
+            TCM_YXZ_Guide_Desc = #{TCM_YXZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_YIXZ = #{TCM_YIXZ,jdbcType=TINYINT},
+            TCM_YIXZ_Guide = #{TCM_YIXZ_Guide,jdbcType=VARCHAR},
+            TCM_YIXZ_Guide_Desc = #{TCM_YIXZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_TSZ = #{TCM_TSZ,jdbcType=TINYINT},
+            TCM_TSZ_Guide = #{TCM_TSZ_Guide,jdbcType=VARCHAR},
+            TCM_TSZ_Guide_Desc = #{TCM_TSZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_SRZ = #{TCM_SRZ,jdbcType=TINYINT},
+            TCM_SRZ_Guide = #{TCM_SRZ_Guide,jdbcType=VARCHAR},
+            TCM_SRZ_Guide_Desc = #{TCM_SRZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_XTZ = #{TCM_XTZ,jdbcType=TINYINT},
+            TCM_XTZ_Guide = #{TCM_XTZ_Guide,jdbcType=VARCHAR},
+            TCM_XTZ_Guide_Desc = #{TCM_XTZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_QYZ = #{TCM_QYZ,jdbcType=TINYINT},
+            TCM_QYZ_Guide = #{TCM_QYZ_Guide,jdbcType=VARCHAR},
+            TCM_QYZ_Guide_Desc = #{TCM_QYZ_Guide_Desc,jdbcType=VARCHAR},
+            TCM_TBZ = #{TCM_TBZ,jdbcType=TINYINT},
+            CerebralVessel = #{cerebralVessel,jdbcType=VARCHAR},
+            TCM_TBZ_Guide = #{TCM_TBZ_Guide,jdbcType=VARCHAR},
+            TCM_TBZ_Guide_Desc = #{TCM_TBZ_Guide_Desc,jdbcType=VARCHAR},
+            CerebralVessel_Desc = #{cerebralVessel_Desc,jdbcType=VARCHAR},
+            Kidney = #{kidney,jdbcType=VARCHAR},
+            Kidney_Desc = #{kidney_Desc,jdbcType=VARCHAR},
+            Heart = #{heart,jdbcType=VARCHAR},
+            Heart_Desc = #{heart_Desc,jdbcType=VARCHAR},
+            BloodPipe = #{bloodPipe,jdbcType=VARCHAR},
+            BloodPipe_Desc = #{bloodPipe_Desc,jdbcType=VARCHAR},
+            EyePart = #{eyePart,jdbcType=VARCHAR},
+            EyePart_Desc = #{eyePart_Desc,jdbcType=VARCHAR},
+            NervousSystem = #{nervousSystem,jdbcType=TINYINT},
+            NervousSystem_Desc = #{nervousSystem_Desc,jdbcType=VARCHAR},
+            OtherSystem = #{otherSystem,jdbcType=TINYINT},
+            OtherSystem_Desc = #{otherSystem_Desc,jdbcType=VARCHAR},
+            HealthEvaluate = #{healthEvaluate,jdbcType=TINYINT},
+            HealthEvaluate_Desc = #{healthEvaluate_Desc,jdbcType=VARCHAR},
+            HealthGuide = #{healthGuide,jdbcType=VARCHAR},
+            RiskFactor = #{riskFactor,jdbcType=VARCHAR},
+            RiskFactor_Target = #{riskFactor_Target,jdbcType=VARCHAR},
+            RiskFactor_Vaccine = #{riskFactor_Vaccine,jdbcType=VARCHAR},
+            RiskFactor_Other = #{riskFactor_Other,jdbcType=VARCHAR}
+        where HExamID = #{HExamID,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from ph_healthexamdetail
+        where HExamID = #{HExamID,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.inspectCore.physical.model.PhHealthexamdetailExample" >
+    	<if test="_parameter != null and _parameter != '' ">
+        delete from ph_healthexamdetail
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+
+</mapper>

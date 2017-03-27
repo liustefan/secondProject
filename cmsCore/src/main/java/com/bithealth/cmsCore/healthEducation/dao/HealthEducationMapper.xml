@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.cmsCore.healthEducation.dao.HealthEducationMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.cmsCore.healthEducation.model.HealthEducation" >
+        <id column="HEducationID" property="heducationid" jdbcType="INTEGER" />
+        <result column="HEducationType" property="heducationtype" jdbcType="TINYINT" />
+        <result column="Title" property="title" jdbcType="VARCHAR" />
+        <result column="SourceWay" property="sourceway" jdbcType="TINYINT" />
+        <result column="SourceID" property="sourceid" jdbcType="INTEGER" />
+        <result column="Content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="OrgID" property="orgid" jdbcType="INTEGER" />
+        <result column="UseRange" property="userange" jdbcType="TINYINT" />
+        <result column="CreateID" property="createid" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateid" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+        <collection property="diseases" column="HEducationID" select="com.bithealth.cmsCore.healthEducation.dao.HealthEducationDiseaseMapper.selectList"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        HEducationID, HEducationType, Title, SourceWay,SourceID, Content, OrgID, UseRange, 
+        CreateID, CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.cmsCore.healthEducation.model.HealthEducationExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_healtheducation
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.cmsCore.healthEducation.model.HealthEducationExample" >
+       SELECT
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from  tb_healtheducation
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        GROUP BY tb_healtheducation.HEducationID
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_healtheducation
+        where HEducationID = #{heducationid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.cmsCore.healthEducation.model.HealthEducation" useGeneratedKeys="true" keyProperty="heducationid" >
+        insert into tb_healtheducation
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="heducationid != null" >
+                HEducationID,
+            </if>
+            <if test="heducationtype != null" >
+                HEducationType,
+            </if>
+            <if test="title != null" >
+                Title,
+            </if>
+            <if test="sourceway != null" >
+                SourceWay,
+            </if>
+            <if test="sourceid != null" >
+                SourceID,
+            </if>
+            <if test="content != null" >
+                Content,
+            </if>
+            <if test="orgid != null" >
+                OrgID,
+            </if>
+            <if test="userange != null" >
+                UseRange,
+            </if>
+            <if test="createid != null" >
+                CreateID,
+            </if>
+            <if test="createtime != null" >
+                CreateTime,
+            </if>
+            <if test="updateid != null" >
+                UpdateID,
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="heducationid != null" >
+                #{heducationid,jdbcType=INTEGER},
+            </if>
+            <if test="heducationtype != null" >
+                #{heducationtype,jdbcType=TINYINT},
+            </if>
+            <if test="title != null" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceway != null" >
+                #{sourceway,jdbcType=TINYINT},
+            </if>
+            <if test="sourceid != null" >
+                #{sourceid,jdbcType=INTEGER},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="userange != null" >
+                #{userange,jdbcType=TINYINT},
+            </if>
+            <if test="createid != null" >
+                #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateid != null" >
+                #{updateid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.cmsCore.healthEducation.model.HealthEducationExample" resultType="java.lang.Integer" >
+        select count(*) from tb_healtheducation
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_healtheducation
+            <set >
+                <if test="record.heducationid != null" >
+                    HEducationID = #{record.heducationid,jdbcType=INTEGER},
+                </if>
+                <if test="record.heducationtype != null" >
+                    HEducationType = #{record.heducationtype,jdbcType=TINYINT},
+                </if>
+                <if test="record.title != null" >
+                    Title = #{record.title,jdbcType=VARCHAR},
+                </if>
+                <if test="record.sourceway != null" >
+                    SourceWay = #{record.sourceway,jdbcType=TINYINT},
+                </if>
+                <if test="record.sourceid != null" >
+                    SourceID = #{record.sourceid,jdbcType=INTEGER},
+                </if>
+                <if test="record.content != null" >
+                    Content = #{record.content,jdbcType=LONGVARCHAR},
+                </if>
+                <if test="record.orgid != null" >
+                    OrgID = #{record.orgid,jdbcType=INTEGER},
+                </if>
+                <if test="record.userange != null" >
+                    UseRange = #{record.userange,jdbcType=TINYINT},
+                </if>
+               
+                <if test="record.createid != null" >
+                    CreateID = #{record.createid,jdbcType=INTEGER},
+                </if>
+                <if test="record.createtime != null" >
+                    CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateid != null" >
+                    UpdateID = #{record.updateid,jdbcType=INTEGER},
+                </if>
+                <if test="record.updatetime != null" >
+                    UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_healtheducation
+            set HEducationID = #{record.heducationid,jdbcType=INTEGER},
+                HEducationType = #{record.heducationtype,jdbcType=TINYINT},
+                Title = #{record.title,jdbcType=VARCHAR},
+                SourceWay = #{record.sourceway,jdbcType=TINYINT},
+                SourceID = #{record.sourceid,jdbcType=INTEGER},
+                Content = #{record.content,jdbcType=LONGVARCHAR},
+                OrgID = #{record.orgid,jdbcType=INTEGER},
+                UseRange = #{record.userange,jdbcType=TINYINT},
+                CreateID = #{record.createid,jdbcType=INTEGER},
+                CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+                UpdateID = #{record.updateid,jdbcType=INTEGER},
+                UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.cmsCore.healthEducation.model.HealthEducation" >
+        update tb_healtheducation
+        <set >
+            <if test="heducationtype != null" >
+                HEducationType = #{heducationtype,jdbcType=TINYINT},
+            </if>
+            <if test="title != null" >
+                Title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceway != null" >
+                SourceWay = #{sourceway,jdbcType=TINYINT},
+            </if>
+            <if test="sourceid != null" >
+                SourceID = #{sourceid,jdbcType=INTEGER},
+            </if>
+            <if test="content != null" >
+                Content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="orgid != null" >
+                OrgID = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="userange != null" >
+                UseRange = #{userange,jdbcType=TINYINT},
+            </if>           
+            <if test="createid != null" >
+                CreateID = #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateid != null" >
+                UpdateID = #{updateid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where HEducationID = #{heducationid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.cmsCore.healthEducation.model.HealthEducation" >
+        update tb_healtheducation
+        set HEducationType = #{heducationtype,jdbcType=TINYINT},
+            Title = #{title,jdbcType=VARCHAR},
+            SourceWay = #{sourceway,jdbcType=TINYINT},
+            SourceID = #{sourceid,jdbcType=INTEGER},
+            Content = #{content,jdbcType=LONGVARCHAR},
+            OrgID = #{orgid,jdbcType=INTEGER},
+            UseRange = #{userange,jdbcType=TINYINT},  
+            CreateID = #{createid,jdbcType=INTEGER},
+            CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateid,jdbcType=INTEGER},
+            UpdateTime = #{updatetime,jdbcType=TIMESTAMP}
+        where HEducationID = #{heducationid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_healtheducation
+        where HEducationID = #{heducationid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.cmsCore.healthEducation.model.HealthEducationExample" >
+        <if test="_parameter != null" >
+            delete from tb_healtheducation
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- 自定义sql -->
+	<select id="selectDiseaseName" parameterType="com.bithealth.cmsCore.healthEducation.model.HealthEducation" resultMap="BaseResultMap" >
+     SELECT tb_managescheme_disease.DiseaseName  FROM `tb_managescheme_disease` LEFT JOIN `tb_healtheducation_disease` ON tb_managescheme_disease.`MSDiseaseID`=tb_healtheducation_disease.`MSDiseaseID`
+	 LEFT JOIN `tb_healtheducation` ON  tb_healtheducation.`HEducationID`=tb_healtheducation_disease.`HEducationID`
+     where tb_healtheducation.HEducationID = #{heducationid,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectHealthEducationPage" resultMap="BaseResultMap" parameterType="com.bithealth.cmsCore.healthEducation.model.HealthEducation" >
+        SELECT a.*, b.DocName FROM tb_healtheducation a 
+        LEFT JOIN odoc b ON a.CreateID = b.Docid 
+        LEFT JOIN tb_healtheducation_disease c ON a.HEducationID = c.HEducationID 
+        <where>
+        	<if test="heducationtype != null and heducationtype > 0" >
+                AND a.HEducationType = #{heducationtype,jdbcType=TINYINT}
+            </if>
+            <if test="MSDiseaseID != null and MSDiseaseID > 0" >
+                AND c.MSDiseaseID = #{MSDiseaseID,jdbcType=TINYINT}
+            </if>
+            <if test="MSDiseaseIDs != null and MSDiseaseIDs != ''" >
+                AND c.MSDiseaseID in (${MSDiseaseIDs})
+            </if>
+            <if test="title != null and title != ''" >
+                AND a.title LIKE CONCAT('%', #{title,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="userange != null" >
+                AND a.UseRange = #{userange,jdbcType=TINYINT}
+            </if>
+            <if test="sourceway != null" >
+                AND a.SourceWay = #{sourceway,jdbcType=TINYINT}
+            </if>
+            <choose>
+            	<when test="roleId eq 6"><!-- 系统管理员 -->
+            		AND a.UseRange = 1
+            	</when>
+            	<when test="roleId eq 1"><!-- 医生管理员 (superOrgIds 包含本组织) -->
+            		AND ((a.OrgID IN (${superOrgIds}) AND a.UseRange = 2) OR (a.UseRange = 1 ) OR (a.OrgID = #{orgid,jdbcType=INTEGER} AND a.UseRange = 2 ))
+            	</when>
+            	<otherwise><!-- 医生账号 (superOrgIds 包含本组织) -->
+            		AND ((a.OrgID IN (${superOrgIds}) AND a.UseRange = 2 ) OR (a.UseRange = 1) OR a.CreateID = #{createid,jdbcType=INTEGER})<!-- 上级组织内 -->
+            	</otherwise>
+            </choose>
+        </where> AND 1=1
+        GROUP BY a.HEducationID ORDER BY a.UpdateTime DESC
+    </select>
+    
+    <select id="selectHealthEducation" resultMap="BaseResultMap" parameterType="map" >
+        select
+        <include refid="Base_Column_List" />
+        from tb_healtheducation 
+        where Title = #{title,jdbcType=VARCHAR} 
+        <if test="id != null">
+        	and HEducationID != #{id,jdbcType=INTEGER} 
+        </if>
+        <choose>
+         	<when test="roleId eq 6"><!-- 系统管理员 -->
+         		AND UseRange = 1
+         	</when>
+         	<when test="roleId eq 1"><!-- 医生管理员 (superOrgIds 包含本组织) -->
+         		AND ((OrgID IN (${superOrgIds}) AND UseRange = 2) OR UseRange = 1)
+         	</when>
+         	<otherwise><!-- 医生账号 (superOrgIds 包含本组织) -->
+         		AND ((OrgID IN (${superOrgIds}) AND UseRange = 2) OR UseRange = 1 OR CreateID = #{createID,jdbcType=INTEGER})<!-- 上级组织内 -->
+         	</otherwise>
+         </choose>
+         limit 1
+    </select>
+
+</mapper>

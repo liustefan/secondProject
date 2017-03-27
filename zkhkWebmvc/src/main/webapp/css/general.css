@@ -1,0 +1,715 @@
+/* 统一的共用样式文件  */
+
+/* 基本标签样式  */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre,fieldset, lengend, button, input, textarea,th, td {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 12px "Microsoft YaHei",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+ol, ul, li {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+
+/* input[type="text"],
+input[type="password"] {
+    height: 17px\0;
+} */
+
+input[type="date"] {
+    border: 1px solid #a9a9a9 !important;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="password"],
+select {
+    padding: 2px;
+}
+
+/* 输入框提示文字颜色 */
+.phcolor {
+	color: #888;
+}
+
+.cursor-p {
+	color: #0000ee;
+    cursor: pointer;
+}
+
+.empty-info {
+	color: #999;
+	font-size: 16px;
+	text-align: center;
+	padding: 15px 0;
+	font-weight: bold;
+}
+
+.border-1-solid {
+	border: 1px solid #ddd;
+	/* margin-bottom: 15px; */
+}
+
+.border-1-solid2 {
+	border: 1px solid #000;
+}
+
+/* 常用样式  */
+/*合并表格边框，设置边框距为零*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/* 表格固宽 */
+.table-fixed {
+    table-layout: fixed;
+}
+
+label {
+    display: inline-block;
+}
+
+/*浮动*/
+.fl { float: left;}
+
+.fr { float: right;}
+
+/*清除浮动*/
+.clearfix {
+    overflow: auto;
+    word-wrap: break-word;
+    /* max-width: 100%; */
+    height: auto;
+    _height: 1%;
+}
+
+.clear-fix {
+    overflow: auto;
+    word-wrap: break-word;
+    /* max-width: 100%; */
+    height: auto;
+    _height: 1%;
+}
+
+/* 禁止出现滚动条 */
+.over-hidden {
+    overflow: hidden;
+}
+
+/* 文本居中 */
+.align-center {
+    text-align: center;
+}
+
+/* 文本居左 */
+.align-left {
+    text-align: left;
+}
+
+/* 文本居右 */
+.align-right {
+    text-align: right;
+}
+
+/*强制换行*/
+.break-word {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/*禁止换行*/
+.keep-all {
+    word-break: keep-all;
+    white-space: nowrap;
+}
+
+/*超出省略号，仅限单行，并且需要设定一个宽度*/
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
+}
+
+/*段落两端对齐*/
+.txt-justify {
+    text-align: justify;
+    text-justify: inter-ideograph;
+}
+
+/*禁止FF等浏览器给textarea增加可拖拽大小的设置*/
+textarea {
+	padding: 3px;
+    resize: none;
+    font-family: "Microsoft YaHei",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+}
+
+/*隐藏*/
+.hide { display: none;}
+
+/* 红色*必填 */
+.red {
+    color: red;
+}
+
+/* 字体灰色 */
+.font-gray {
+	color: #a1a1a1;
+}
+
+.error {
+	color: red;
+}
+
+.img-align {
+    vertical-align: text-bottom;
+}
+
+/* 按钮样式 * /
+/* 淡绿色按钮样式 */
+.btn-inquiry {
+    height: 30px;
+    margin: 0 5px;
+    padding: 0 15px;
+    font: normal 14px "Microsoft YaHei",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+    color: #000;
+    display: inline-block;
+    line-height: normal;
+    text-decoration: none;
+    border: 1px solid #6AD279;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #DAF6D7;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn-inquiry:hover{
+    color: #fff;
+    font-weight: bold;
+    background-color: #64C25A;
+}
+
+/* 给按钮添加查询图标 */
+.ico-search {
+    padding: 5px 10px 5px 30px;
+    background: #DAF6D7 url(../img/u166.png) no-repeat 8px center ;
+}
+
+.ico-search:hover {
+    background: #64C25A url(../img/u170.png) no-repeat 8px center ;
+}
+
+/* 给按钮添加新增图标 */
+.ico-add {
+    padding: 5px 10px 5px 30px;
+    background: #DAF6D7 url(../img/u155.png) no-repeat 8px center ;
+}
+
+.ico-add:hover {
+    background: #64C25A url(../img/u160.png) no-repeat 8px center ;
+}
+
+/* 给按钮添加删除图标 */
+.ico-del {
+    padding: 5px 10px 5px 30px;
+    background: #DAF6D7 url(../img/u185.png) no-repeat 8px center ;
+}
+
+.ico-del:hover {
+    background: #64C25A url(../img/u189.png) no-repeat 8px center ;
+}
+
+/* 批量导入会员图标*/
+.ico-lead {
+    padding: 5px 10px 5px 35px;
+    background: #DAF6D7 url(../img/u309.png) no-repeat 8px center ;
+}
+
+/* 淡灰色按钮*/
+.btn-cancel {
+    height: 30px;
+    margin: 0 5px;
+    padding: 0 15px;
+    font: normal 14px "Microsoft YaHei",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+    color: #000;
+    display: inline-block;
+    line-height: normal;
+    text-decoration: none;
+    border: 1px solid #A9A9A9;
+    border-radius: 3px;
+    -moz-border-radius: 3px;    /* Gecko browsers */
+    -webkit-border-radius: 3px; /* Webkit browsers */
+    background-color: #F1F1F1;
+    cursor: pointer;
+    outline: none;
+}
+
+/* 默认深绿色按钮样式 */
+.btn-normal {
+    height: 30px;
+    padding: 0 15px;
+    margin: 0 5px;
+    font: normal 14px "Microsoft YaHei",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+    color: #FFF;
+    line-height: normal;
+    display: inline-block;
+    border: 0;
+    border-radius: 3px;
+    -moz-border-radius: 3px;    /* Gecko browsers */
+    -webkit-border-radius: 3px; /* Webkit browsers */
+    cursor: pointer;
+    background: #75D07D;
+    background: -moz-linear-gradient(top, #48d660 0%, #61b95f 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#48d660), color-stop(100%,#61b95f));
+    background: -webkit-linear-gradient(top, #48d660 0%,#61b95f 100%);
+    background: -o-linear-gradient(top, #48d660 0%,#61b95f 100%);
+    background: -ms-linear-gradient(top, #48d660 0%,#61b95f 100%);
+    background: linear-gradient(to bottom, #48d660 0%,#61b95f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#48d660', endColorstr='#61b95f',GradientType=0 );
+}
+
+a.btn-normal {
+	line-height: 30px;
+}
+
+/* 标签页切换的tab分页样式 */
+.content-tabs {
+	width: 100%;
+	height: 35px;
+}
+
+.content-tabs li {
+	float: left;
+	width: 120px;
+	height: 35px;
+	line-height: 35px;
+	text-align: center;
+}
+	
+.content-tabs li a {
+   font-size: 13px;
+   color: #333;
+   display: block;
+   border: 1px solid #a1c578;
+   border-bottom: none;
+}
+
+.content-tabs li a.current {
+    border: none;
+    color: #fff;
+    text-decoration: none;
+    background: #75D07D;
+    background: -moz-linear-gradient(top, #48d660 0%, #61b95f 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#48d660), color-stop(100%,#61b95f));
+    background: -webkit-linear-gradient(top, #48d660 0%,#61b95f 100%);
+    background: -o-linear-gradient(top, #48d660 0%,#61b95f 100%);
+    background: -ms-linear-gradient(top, #48d660 0%,#61b95f 100%);
+    background: linear-gradient(to bottom, #48d660 0%,#61b95f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#48d660', endColorstr='#61b95f',GradientType=0 );
+}
+
+/* 统一右侧iframe模块的共用样式如下： */
+/* 右侧iframe框架最外层div样式 */
+.content {
+    width: 100%;
+    padding: 10px 1% 0 1%;
+    margin-top: 0 !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* 标题（无背景的）  */
+.content-title {
+    margin-bottom: 8px;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid;
+    font-size: 16px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* 绿色背景的标题 */
+.page-title {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background: #46b258;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.mess-title {
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #fff;
+    background: #6dbb95;
+}
+
+/* 白色背景的按钮盒子 */
+.box-btn {
+    margin-bottom: 8px;
+}
+/* 封装的搜索盒子样式  */
+.search-box-wrapper {
+    background: #f3f3f3;
+    padding: 5px 10px;
+    margin-bottom: 8px;
+}
+
+ul.search-wrapper {
+    width: 100%;
+    list-style: none;
+    overflow: hidden;
+}
+
+.search-wrapper li {
+    position: relative;
+    float: left;
+    margin: 5px 10px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.search-wrapper li:last-child {
+    float: right;
+}
+
+.search-wrapper li input,
+.search-wrapper li select {
+    margin-left: 8px;
+    padding: 2px 5px;
+}
+
+.search-box-wrapper .icon-group-search {
+    position: absolute;
+    top: 6px;
+    right: 3px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url('../img/u125.png') no-repeat center;
+    cursor: pointer;
+}
+
+.search-wrapper .info-date {
+    width: 90px;
+    background: url("../img/u17.png") no-repeat scroll right center white;
+    background-size: 15px 15px;
+    /* padding-right: 10px; */
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-origin: content-box;
+    border: 1px solid #a9a9a9;
+}
+
+.mar-left {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.mar-right {
+    display: inline-block;
+    margin-right: 6px;
+}
+
+/* 单选 复选 按钮与其后的文字对齐   [label标签里面添加class="radio-inlines"]*/
+.radio-inlines+.radio-inlines {
+    margin-top: 0;
+    margin-left: 10px;
+}
+
+.checkbox-inlines, .radio-inlines {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
+    width: initial !important;
+}
+
+.checkboxs input[type=checkbox], .checkbox-inlines input[type=checkbox], .radios input[type=radio], .radio-inlines input[type=radio] {
+    margin-left: -18px !important;
+    margin-top: 3px !important;
+    margin-top: 0\0 !important;
+    position: absolute;
+}
+
+/* 组织名称查询搜索 */
+.org-search {
+    position: absolute;
+    right: 3px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(../img/u125.png) no-repeat  center;
+}
+
+/* table表格样式 */
+.table-content {
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.table-title {
+    background: #878B83;
+}
+
+.table-title th {
+    font-size: 14px;
+    color: #333;
+    background-color: #bcdee0;
+    padding: 10px 0;
+    white-space: nowrap;
+}
+
+.table-content td {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 12px;
+    border-top: 1px solid #ddd;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.table-content tr:nth-child(even) { background-color: #e0f1f3;}
+
+.table-content tr:nth-child(odd) { background-color: #fff;}
+
+/* 分页样式 */
+.page-box {
+    height: 30px;
+    width: 100%;
+    line-height: 30px;
+    padding: 10px 0;
+}
+
+.page {
+    height: 30px;
+    float: right;
+}
+
+#page-first {
+    color: #ccc;
+	cursor: default;
+}
+
+.page-btn {
+    color: #333;
+    display: inline-block;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    cursor: pointer;
+    padding: 0 9px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: top;
+    white-space: normal;
+    border: 1px solid #d1d1d1;
+    background: #F5F5F5;
+    background: -moz-linear-gradient(top, #f6f6f6 0%, #e5e5e6 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f6f6), color-stop(100%,#e5e5e6));
+    background: -webkit-linear-gradient(top, #f6f6f6 0%,#e5e5e6 100%);
+    background: -o-linear-gradient(top, #f6f6f6 0%,#e5e5e6 100%);
+    background: -ms-linear-gradient(top, #f6f6f6 0%,#e5e5e6 100%);
+    background: linear-gradient(to bottom, #f6f6f6 0%,#e5e5e6 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6', endColorstr='#e5e5e6',GradientType=0 );
+}
+
+#pre,
+#nex {
+    margin: 0 10px;
+    width: 5px;
+}
+
+#pre {
+	cursor: default;
+}
+
+#pre span {
+    width: 5px;
+    height: 24px;
+    display: inline-block;
+    background: url(../img/arrow-l-gray.png) center no-repeat;
+}
+
+#nex span {
+    width: 5px;
+    height: 24px;
+    display: inline-block;
+    background: url(../img/arrow-r.png) center no-repeat;
+}
+
+.page i {
+    font-style: normal;
+}
+
+.page span {
+    height: 26px;
+    line-height: 26px;
+    display: inline-block;
+    color: #333;
+    vertical-align: top;
+}
+
+.page a:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+#page-last,
+.page-total {
+    margin-left: 10px;
+}
+
+select#pageSize,
+select#lines {
+    width: 45px;
+    height: 24px;
+    border: 1px solid #519071;
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    background: #6dbb95;
+    vertical-align: top;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-align: center;
+    color: #fff;
+    margin: 0 5px;
+}
+
+.page-go {
+    width: 35px;
+    height: 22px;
+    color: #333;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border: 1px solid #d1d1d1;
+    box-sizing: content-box;
+    margin: 0 2px 0 5px;
+    text-align: center;
+}
+
+/* layer插件新样式 */
+body .skin1 .layui-layer-title {
+    background-color: #64C25A;
+}
+
+body .skin1 .layui-layer-btn {
+    text-align: center;
+}
+
+body .skin1 .layui-layer-btn0 {
+    height: 28px;
+    margin: 0 5px;
+    padding: 0 15px;
+    font: normal 14px "Microsoft YaHei",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+    color: #000;
+    display: inline-block;
+    line-height: 28px;
+    text-decoration: none;
+    border: 1px solid #6AD279;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #DAF6D7;
+    cursor: pointer;
+    outline: none;
+}
+
+body .skin1 .layui-layer-btn0:hover {
+    color: #fff;
+    font-weight: bold;
+    background-color: #64C25A;
+}
+
+/* 弹框搜索图标(放大镜)样式 */
+.position-r {
+	position: relative;
+	display: inline-block;
+}
+
+.member-search {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(../img/u125.png) no-repeat center;
+    cursor: pointer;
+}
+
+.member-search2 {
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(../img/u125.png) no-repeat center;
+    cursor: pointer;
+}
+
+/* 日历图标 */
+.info-date {
+    width: 90px;
+    background: url("../img/u17.png") no-repeat scroll right center white;
+    background-size: 15px 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-origin: content-box;
+    border: 1px solid #a9a9a9;
+}

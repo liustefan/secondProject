@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.dao.AnswerDao" >
+    <resultMap id="BaseResultMap" type="com.bithealth.questionCore.model.Answer" >
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="TINYINT" />
+        <result column="tag" property="tag" jdbcType="VARCHAR" />
+        <result column="questionName" property="questionName" jdbcType="VARCHAR" />
+        <result column="publisherTime" property="publisherTime" jdbcType="DATE" />
+    </resultMap>
+
+    <select id="selectAnswerPage" resultMap="BaseResultMap" parameterType="map" >
+        SELECT * FROM (
+		SELECT Memberid AS memberId, ouai.AnsNumber AS id, 1 AS `type`, ouai.QustTag AS tag, omfq.`Qustname` AS questionName, ouai.PublisherTime AS publisherTime, ouai.readStatus AS readStatus 
+		FROM ouai JOIN omfq ON ouai.`Qustid` = omfq.`Qustid` WHERE ouai.memberId = #{memberId,jdbcType=INTEGER} and ouai.ansNumber NOT IN (SELECT ansNumber FROM cam1)
+		<choose>
+			<when test="finish">
+				AND ((ouai.QustTag = "T" AND omfq.ansMode = 1) OR ouai.QustTag = "C") 
+			</when>
+			<otherwise>
+				AND ouai.QustTag IN ("F", "B") AND omfq.ansMode = 1				
+			</otherwise>
+		</choose>
+		UNION ALL
+		SELECT Memberid AS memberId, CombAnsid AS id, 2 AS `type`, CombTag AS tag, CombQustName AS questionName, PublisherTime AS publisherTime, readStatus AS readStatus 
+		FROM ocam WHERE memberId = #{memberId,jdbcType=INTEGER} 
+		<choose>
+			<when test="finish">
+				AND CombTag IN ("1", "2")  
+			</when>
+			<otherwise>
+				AND CombTag IN ("0", "3") 
+			</otherwise>
+		</choose>
+		) temp ORDER BY publisherTime DESC
+    </select>
+    
+</mapper>

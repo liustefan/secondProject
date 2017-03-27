@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.dataConversionServer.qiangHua.dao.ThealthExamDrugMapper" >
+  <resultMap id="BaseResultMap" type="com.bithealth.dataConversionServer.qiangHua.bean.ThealthExamDrug" >
+    <id column="EXD_GID" property="exdGid" jdbcType="VARCHAR" />
+    <result column="EX_GID" property="exGid" jdbcType="VARCHAR" />
+    <result column="INDEX" property="index" jdbcType="INTEGER" />
+    <result column="DRUG_NAME" property="drugName" jdbcType="VARCHAR" />
+    <result column="DRUG_FREQ" property="drugFreq" jdbcType="VARCHAR" />
+    <result column="DRUG_DOSE" property="drugDose" jdbcType="VARCHAR" />
+    <result column="DRUG_USAGE" property="drugUsage" jdbcType="VARCHAR" />
+    <result column="DRUG_TIME" property="drugTime" jdbcType="VARCHAR" />
+    <result column="MED_COM" property="medCom" jdbcType="VARCHAR" />
+    <result column="MEDICAL_NO" property="medicalNo" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EXD_GID, EX_GID, [INDEX], DRUG_NAME, DRUG_FREQ, DRUG_DOSE, DRUG_USAGE, DRUG_TIME, MED_COM, 
+    MEDICAL_NO
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_HEALTH_EXAM_DRUG
+    where EXD_GID = #{exdGid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bithealth.dataConversionServer.qiangHua.bean.ThealthExamDrug" >
+    insert into T_HEALTH_EXAM_DRUG (EXD_GID, EX_GID, INDEX, 
+      DRUG_NAME, DRUG_FREQ, DRUG_DOSE, 
+      DRUG_USAGE, DRUG_TIME, MED_COM, 
+      MEDICAL_NO)
+    values (#{exdGid,jdbcType=VARCHAR}, #{exGid,jdbcType=VARCHAR}, #{index,jdbcType=INTEGER}, 
+      #{drugName,jdbcType=VARCHAR}, #{drugFreq,jdbcType=VARCHAR}, #{drugDose,jdbcType=VARCHAR}, 
+      #{drugUsage,jdbcType=VARCHAR}, #{drugTime,jdbcType=VARCHAR}, #{medCom,jdbcType=VARCHAR}, 
+      #{medicalNo,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bithealth.dataConversionServer.qiangHua.bean.ThealthExamDrug" >
+    insert into T_HEALTH_EXAM_DRUG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="exdGid != null" >
+        EXD_GID,
+      </if>
+      <if test="exGid != null" >
+        EX_GID,
+      </if>
+      <if test="index != null" >
+        INDEX,
+      </if>
+      <if test="drugName != null" >
+        DRUG_NAME,
+      </if>
+      <if test="drugFreq != null" >
+        DRUG_FREQ,
+      </if>
+      <if test="drugDose != null" >
+        DRUG_DOSE,
+      </if>
+      <if test="drugUsage != null" >
+        DRUG_USAGE,
+      </if>
+      <if test="drugTime != null" >
+        DRUG_TIME,
+      </if>
+      <if test="medCom != null" >
+        MED_COM,
+      </if>
+      <if test="medicalNo != null" >
+        MEDICAL_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="exdGid != null" >
+        #{exdGid,jdbcType=VARCHAR},
+      </if>
+      <if test="exGid != null" >
+        #{exGid,jdbcType=VARCHAR},
+      </if>
+      <if test="index != null" >
+        #{index,jdbcType=INTEGER},
+      </if>
+      <if test="drugName != null" >
+        #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugFreq != null" >
+        #{drugFreq,jdbcType=VARCHAR},
+      </if>
+      <if test="drugDose != null" >
+        #{drugDose,jdbcType=VARCHAR},
+      </if>
+      <if test="drugUsage != null" >
+        #{drugUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="drugTime != null" >
+        #{drugTime,jdbcType=VARCHAR},
+      </if>
+      <if test="medCom != null" >
+        #{medCom,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalNo != null" >
+        #{medicalNo,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.dataConversionServer.qiangHua.bean.ThealthExamDrug" >
+    update T_HEALTH_EXAM_DRUG
+    <set >
+      <if test="exGid != null" >
+        EX_GID = #{exGid,jdbcType=VARCHAR},
+      </if>
+      <if test="index != null" >
+        INDEX = #{index,jdbcType=INTEGER},
+      </if>
+      <if test="drugName != null" >
+        DRUG_NAME = #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="drugFreq != null" >
+        DRUG_FREQ = #{drugFreq,jdbcType=VARCHAR},
+      </if>
+      <if test="drugDose != null" >
+        DRUG_DOSE = #{drugDose,jdbcType=VARCHAR},
+      </if>
+      <if test="drugUsage != null" >
+        DRUG_USAGE = #{drugUsage,jdbcType=VARCHAR},
+      </if>
+      <if test="drugTime != null" >
+        DRUG_TIME = #{drugTime,jdbcType=VARCHAR},
+      </if>
+      <if test="medCom != null" >
+        MED_COM = #{medCom,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalNo != null" >
+        MEDICAL_NO = #{medicalNo,jdbcType=INTEGER},
+      </if>
+    </set>
+    where EXD_GID = #{exdGid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bithealth.dataConversionServer.qiangHua.bean.ThealthExamDrug" >
+    update T_HEALTH_EXAM_DRUG
+    set EX_GID = #{exGid,jdbcType=VARCHAR},
+      INDEX = #{index,jdbcType=INTEGER},
+      DRUG_NAME = #{drugName,jdbcType=VARCHAR},
+      DRUG_FREQ = #{drugFreq,jdbcType=VARCHAR},
+      DRUG_DOSE = #{drugDose,jdbcType=VARCHAR},
+      DRUG_USAGE = #{drugUsage,jdbcType=VARCHAR},
+      DRUG_TIME = #{drugTime,jdbcType=VARCHAR},
+      MED_COM = #{medCom,jdbcType=VARCHAR},
+      MEDICAL_NO = #{medicalNo,jdbcType=INTEGER}
+    where EXD_GID = #{exdGid,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <select id="queryHealthExamDrug" resultMap="BaseResultMap" parameterType="java.util.List" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from T_HEALTH_EXAM_DRUG
+	    where EX_GID in (
+	    <foreach collection="list" item="item" index="index" open="" separator=","  close="">
+	    #{item.exGid}
+	    </foreach>
+	    )
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>

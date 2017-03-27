@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.dataConversionServer.qiangHua.bean.ThypertensionVisits">
+<Assem name="hypeGid" assembly="refdatapk"/>
+<Assem name="hrGid" assembly="uniqueId"/>
+<Assem name="name" assembly="name"/>
+<Assem name="visDate"  assembly="visitdate"/>
+<Assem name="visDoctor" assembly="visitdrname"/>
+<Assem name="recDate" assembly="createtime"/>
+<Assem name="uploadtime" assembly="updDate"/>
+<Assem name="recUser" assembly="createDrName"/>
+<Assem name="updUser" assembly="updateDrName"/>
+<Assem name="updDate" assembly="updatetime"/>
+<Assem name="visitsEva" assembly="visitclass"/>
+</Assemes>

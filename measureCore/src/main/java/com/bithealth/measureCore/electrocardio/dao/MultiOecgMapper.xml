@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bithealth.measureCore.electrocardio.dao.MultiOecgMapper">
+	<sql id="condition_select_0">
+		CASE
+		    WHEN (e2.AbnName = 'Polycardia') 
+		    THEN '心动过速' 
+		    WHEN (e2.AbnName = 'Bradycardia') 
+		    THEN '心动过缓' 
+		    WHEN (e2.AbnName = 'Arrest') 
+		    THEN '停搏' 
+		    WHEN (e2.AbnName = 'Missed') 
+		    THEN '漏搏' 
+		    WHEN (e2.AbnName = 'Wide') 
+		    THEN '宽搏' 
+		    WHEN (e2.AbnName = 'PVB') 
+		    THEN '室性早搏' 
+		    WHEN (e2.AbnName = 'PAB') 
+		    THEN '房性早搏' 
+		    WHEN (e2.AbnName = 'Insert_PVB') 
+		    THEN '插入性室早搏' 
+		    WHEN (e2.AbnName = 'VT') 
+		    THEN '阵发性心动过速' 
+		    WHEN (e2.AbnName = 'Bigeminy') 
+		    THEN '二联律' 
+		    WHEN (e2.AbnName = 'Trigeminy') 
+		    THEN '三联律' 
+		    WHEN (e2.AbnName = 'Arrhythmia') 
+		    THEN '心律不齐' 
+		    ELSE '未知' 
+		  	END aName,
+		  	e2.abnName,
+		  	e2.abnNum,
+	</sql>
+	
+	<sql id="where_condition_0">
+		FROM
+  			omrr o 
+  			JOIN oecg oe 
+   			ON o.Memberid = oe.Memberid 
+    		AND oe.MeasTime &gt;= o.MeasTime 
+    		AND oe.MeasTime &lt;= o.MeasTermTime 
+			JOIN ecg2 e2 
+  			ON e2.Docentry = oe.Docentry 
+			JOIN omds om 
+  			ON om.eventid = oe.EventId 
+  			WHERE om.EventType = 4 
+			AND o.Memberid = #{memberId} 
+			AND o.id = #{reportNo}
+	</sql>
+	
+	<sql id="where_condition_1">
+		FROM 
+			oecg a 
+			JOIN omds b 
+			ON a.EventId = b.eventid 
+			WHERE b.EventType=4 
+			AND a.DelTag=0
+	</sql>
+	
+	<select id="selectOecgListAndPage" parameterType="java.util.Map" resultType="com.bithealth.measureCore.electrocardio.model.OecgOmemVO">
+		SELECT e.Memberid,e.LogName, e.MemName,e.BirthDate,e.Tel,e.Gender,e.HeadAddress,o.DeviceCode,o.Docentry,o.EventId,o.AverageHeart,o.MeasTime
+			FROM oecg o,omds m, ompb a,odmt b,odgp c,dgp1 d,omem e WHERE o.EventId=m.eventid AND o.Memberid=e.Memberid AND a.MemGrpid=b.MemGrpid 
+			AND c.OdgpId=b.OdgpId AND c.OdgpId=d.OdgpId AND e.Memberid = a.Memberid AND m.EventType='4' AND e.UseTag='T' AND o.deltag=0 
+			<if test="docId != null and docId != ''">
+				AND d.Docid = #{docId} 
+			</if>
+			<if test="criteria != null and criteria != ''">
+				AND (e.logName LIKE #{criteria} OR e.memName LIKE #{criteria} OR e.tel LIKE #{criteria} OR o.deviceCode LIKE #{criteria})
+			</if>
+			<if test="wheAbnTag != null and wheAbnTag != ''">
+    			AND m.WheAbnTag=#{wheAbnTag}
+    		</if>	
+    		GROUP BY o.MeasTime DESC, o.Docentry DESC
+	</select>
+	
+	<select id="selectOecgOmdsList" parameterType="java.util.Map" resultType="com.bithealth.measureCore.electrocardio.model.Oecg">
+		SELECT a.* FROM oecg a join omds b on a.eventId = b.eventid 
+		<where>
+			<if test="memberId != null and memberId != ''">
+				AND a.Memberid=#{memberId}
+			</if>
+			<if test="eventType != null and eventType != ''">
+				AND b.EventType=#{eventType}
+			</if>
+			<if test="delTag != null  and delTag != ''">
+				AND a.DelTag=#{delTag}
+			</if>
+		</where>
+		ORDER BY a.MeasTime DESC, a.Docentry DESC
+	</select>
+	
+	<select id="selectOecgExcTrendChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.electrocardio.model.Ecg2Chart">
+		SELECT 
+			<include refid="condition_select_0" />
+			DATE_FORMAT(oe.MeasTime, '%H:%i') measTimes
+			<include refid="where_condition_0" />
+			;
+	</select>
+	
+	<select id="selectOecgExcTrendChart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.electrocardio.model.Ecg2Chart">
+		SELECT 
+			<include refid="condition_select_0" />
+			DATE_FORMAT(oe.MeasTime, '%H:%i') measTimes FROM oecg oe JOIN ecg2 e2 ON e2.docentry=oe.docentry
+    	 	<where>
+				oe.docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+			</where>
+			;
+	</select>
+	
+	<select id="selectOecgExcBarChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.electrocardio.model.Ecg2Chart">
+		SELECT 
+			<include refid="condition_select_0" />
+			SUM(e2.abnNum) num
+			<include refid="where_condition_0" />
+			GROUP BY aName;
+	</select>
+	
+	<select id="selectOecgExcBarChart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.electrocardio.model.Ecg2Chart">
+		SELECT 
+			<include refid="condition_select_0" />
+			SUM(e2.abnNum) num FROM oecg oe JOIN ecg2 e2 ON e2.docentry=oe.docentry
+    	 	<where>
+				oe.docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+			</where>
+			GROUP BY aName;
+	</select>
+	
+	<select id="selectOmdsByOecg" parameterType="java.util.Map" resultType="com.bithealth.measureCore.common.model.Omds">
+    	SELECT a.* FROM omds a JOIN oecg b ON a.eventid=b.EventId AND a.EventType='4' AND b.DelTag = 0
+    		<if test="memberId != null">
+    			AND b.memberid=#{memberId}
+    		</if>
+    	  	 ORDER BY b.MeasTime DESC
+    </select>
+    
+    <!-- <insert id="insertOecg_docentry">
+    	INSERT INTO oecg_docentry VALUES();
+    </insert> -->
+    
+    <select id="selectMaxDocentry" resultType="java.lang.Long">
+    	SELECT MAX(Docentry) FROM oecg;
+    </select>
+    
+    <insert id="insertOecg" parameterType="com.bithealth.measureCore.electrocardio.model.Oecg">
+    	INSERT INTO oecg(EventId,Memberid,UploadTime,DeviceCode,BluetoothMacAddr,RawECG,DelTag,
+    		StatusTag,fs,TimeLength,MeasTime,addValue) VALUES(#{eventid},#{memberid},#{uploadtime},#{devicecode},
+    		#{bluetoothmacaddr},#{rawecg},#{deltag},#{statustag},#{fs},#{timelength},#{meastime},#{addvalue});
+    </insert>
+    
+    <select id="selectOecgAndPage" parameterType="java.util.Map" resultType="com.bithealth.measureCore.electrocardio.model.Oecg">
+    	SELECT a.* 
+    		<include refid="where_condition_1"/>
+    		<if test="memberId != null">
+    			AND a.Memberid=#{memberId}
+    		</if>
+    		<if test="startTime != null and endTime != null">
+    			AND a.MeasTime between #{startTime} and #{endTime}
+    		</if>
+    		<if test="startTime != null and endTime == null">
+    			AND a.MeasTime &gt;= #{startTime}
+    		</if>
+    		<if test="startTime == null and endTime != null">
+    			AND a.MeasTime &lt;= #{endTime}
+    		</if>
+    	ORDER BY a.MeasTime DESC, a.Docentry DESC
+    </select>
+    
+    <select id="selectOecgCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    	SELECT COUNT(*) 
+    		<include refid="where_condition_1"/>
+    		<if test="memberId != null">
+    			AND a.Memberid=#{memberId}
+    		</if>
+    		<if test="ecgResult != null">
+    			AND a.EcgResult=#{ecgResult}
+    		</if>
+    		<if test="startTime != null and endTime != null">
+    			AND a.MeasTime between #{startTime} and #{endTime}
+    		</if>
+    		<if test="startTime != null and endTime == null">
+    			AND a.MeasTime &gt;= #{startTime}
+    		</if>
+    		<if test="startTime == null and endTime != null">
+    			AND a.MeasTime &lt;= #{endTime}
+    		</if>
+    </select>
+    
+    <select id="selectOecgByRawEcg" parameterType="java.util.Map" resultType="com.bithealth.measureCore.electrocardio.model.Oecg">
+    	SELECT  * FROM oecg WHERE (RawECG=#{rawEcg} or RawECGImg=#{rawEcg}) AND  DeviceCode is null
+    </select>
+    
+    <update id="updateEcgResultOfOecg" parameterType="java.util.Map">
+    	UPDATE oecg SET ECGResult=#{ecgResult} WHERE docentry=#{docentry}
+    </update>
+    
+    <update id="updateStatusTagOfOecg" parameterType="java.util.Map">
+    	UPDATE oecg SET StatusTag=#{statusTag} WHERE docentry=#{docentry}
+    </update>
+
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.push.dao.PushMemberMapper">
+
+    <resultMap id="pushMemberResultMap" type="com.push.model.HkPushMember">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result property="memberId" column="member_id" jdbcType="VARCHAR"/>
+        <result property="channelId" column="channel_id" jdbcType="VARCHAR"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="DATE"/>
+        <result property="lineStatus" column="line_status" jdbcType="INTEGER"/>
+        <result property="roleStatus" column="role_status" jdbcType="INTEGER"/>
+        <result property="loginPlatform" column="login_platform" jdbcType="VARCHAR"/>
+        <result property="thirdPlatform" column="third_platform" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="loginTime" column="login_time" jdbcType="DATE"/>
+    </resultMap>
+    <select id="selectHkPushMemberByMemberId" resultMap="pushMemberResultMap" parameterType="com.push.model.HKPushInfo">
+        select id,member_id,channel_id,line_status,login_platform,user_id from hk_push_member where member_id = #{memberId}
+    </select>
+ 	<update id="updateHkPushMember" parameterType="com.push.model.HKPushInfo">
+         update hk_push_member
+         <set>
+             <if test="channelId != null">
+                 channel_id = #{channelId},
+              </if>
+              <if test="platform != null">
+                 third_platform = #{platform},
+              </if>
+             <if test="loginPlatform != null">
+                  login_platform = #{loginPlatform},
+             </if>
+             <if test="userId != null">
+                  user_id = #{userId},
+             </if>
+             <if test="lineStatus != null">
+                  line_status = #{lineStatus},
+             </if>
+             <if test="loginTime != null">
+                  login_time = now(),
+             </if>
+             
+          </set>
+         where member_id = #{memberId}
+     </update>
+     <insert id="saveHkPushMember" parameterType="com.push.model.HKPushInfo">
+         insert into 
+         	hk_push_member (member_id,
+         					channel_id,
+         					third_platform,
+         					login_platform,
+         					user_id,
+         					line_status,
+         					role_status,
+         					login_time,
+         					create_date
+         					) values(
+         					#{memberId},
+         					#{channelId},
+         					#{platform},
+         					#{loginPlatform},
+         					#{userId},
+         					#{lineStatus},
+         					0,
+         					now(),
+         					now()
+         					)
+     </insert>
+     <resultMap id="memberIdResultMap" type="com.push.model.HKPushInfo">
+        <result property="memberId" column="member_id" jdbcType="VARCHAR"/>
+        <result property="channelId" column="channel_id" jdbcType="VARCHAR"/>
+        <result property="loginPlatform" column="login_platform" jdbcType="VARCHAR"/>
+        <result property="lineStatus" column="line_status" jdbcType="VARCHAR"/>
+     </resultMap>
+     <select id="queryAllMemberId" resultMap="memberIdResultMap">
+        select m.member_id,
+        	   m.login_platform,
+        	   m.line_status,
+        	   m.channel_id
+		  from hk_push_member m 
+		 where m.role_status = 0
+     </select>
+     
+    <select id="queryPushMemberByMemberId" resultMap="pushMemberResultMap" parameterType="java.lang.String">
+        select  a.id,
+        		a.member_id,
+				a.channel_id,
+				a.line_status,
+				a.login_platform,
+				a.user_id ,
+				a.login_time
+		 from   hk_push_member  a
+		where   a.member_id =#{memberId}
+	 order by   a.login_time desc 
+	  limit 1
+    </select>
+    
+    <update id="updateMemberLineStatus" useGeneratedKeys="true" parameterType="java.util.List">
+	    	update  hk_push_member 
+			   set  line_status = 1
+			 where  channel_id in (
+			<foreach collection="tokenList" item="token" index="index" separator="," >
+					#{token}
+			</foreach>
+			)
+	</update>
+     
+</mapper>

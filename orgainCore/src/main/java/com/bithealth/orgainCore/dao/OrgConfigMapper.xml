@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.orgainCore.dao.OrgConfigMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.orgainCore.model.OrgConfig" >
+        <id column="LogID" property="logID" jdbcType="INTEGER" />
+        <result column="OrgID" property="orgID" jdbcType="INTEGER" />
+        <result column="MemMustSetItem" property="memMustSetItem" jdbcType="BIGINT" />
+        <result column="MemId" property="memId" jdbcType="SMALLINT" />
+        <result column="ExperienceNum" property="experienceNum" jdbcType="INTEGER" />
+        <result column="ExperienceDay" property="experienceDay" jdbcType="INTEGER" />
+        <result column="IsDisplayCard" property="isDisplayCard" jdbcType="TINYINT" />
+        <result column="CreateDrID" property="createDrID" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateDrID" property="updateDrID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="IsSharedParentNode" property="sharedParentNode" jdbcType="TINYINT"/>
+        <association property="memberTypeName" column="MemId" select="selectTypeName"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, OrgID, MemMustSetItem, MemId, ExperienceNum, ExperienceDay, IsDisplayCard, 
+        CreateDrID, CreateTime, UpdateDrID, UpdateTime,IsSharedParentNode
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.orgainCore.model.OrgConfigExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from orgs_cfg
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.orgainCore.model.OrgConfigExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from orgs_cfg
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from orgs_cfg
+        where LogID = #{logID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.orgainCore.model.OrgConfig" useGeneratedKeys="true" keyProperty="logID" >
+        insert into orgs_cfg (OrgID, MemMustSetItem, MemId, 
+            ExperienceNum, ExperienceDay, IsDisplayCard, 
+            CreateDrID, CreateTime, UpdateDrID, 
+            UpdateTime,IsSharedParentNode)
+        values (#{orgID,jdbcType=INTEGER}, #{memMustSetItem,jdbcType=BIGINT}, #{memId,jdbcType=SMALLINT}, 
+            #{experienceNum,jdbcType=INTEGER}, #{experienceDay,jdbcType=INTEGER}, #{isDisplayCard,jdbcType=TINYINT}, 
+            #{createDrID,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateDrID,jdbcType=INTEGER}, 
+            #{updateTime,jdbcType=TIMESTAMP},  #{sharedParentNode,jdbcType=TINYINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.orgainCore.model.OrgConfig" useGeneratedKeys="true" keyProperty="logID" >
+        insert into orgs_cfg
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="orgID != null" >
+                OrgID,
+            </if>
+            <if test="memMustSetItem != null" >
+                MemMustSetItem,
+            </if>
+            <if test="memId != null" >
+                MemId,
+            </if>
+            <if test="experienceNum != null" >
+                ExperienceNum,
+            </if>
+            <if test="experienceDay != null" >
+                ExperienceDay,
+            </if>
+            <if test="isDisplayCard != null" >
+                IsDisplayCard,
+            </if>
+            <if test="createDrID != null" >
+                CreateDrID,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateDrID != null" >
+                UpdateDrID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+            <if test="sharedParentNode != null">
+            IsSharedParentNode,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="orgID != null" >
+                #{orgID,jdbcType=INTEGER},
+            </if>
+            <if test="memMustSetItem != null" >
+                #{memMustSetItem,jdbcType=BIGINT},
+            </if>
+            <if test="memId != null" >
+                #{memId,jdbcType=SMALLINT},
+            </if>
+            <if test="experienceNum != null" >
+                #{experienceNum,jdbcType=INTEGER},
+            </if>
+            <if test="experienceDay != null" >
+                #{experienceDay,jdbcType=INTEGER},
+            </if>
+            <if test="isDisplayCard != null" >
+                #{isDisplayCard,jdbcType=TINYINT},
+            </if>
+            <if test="createDrID != null" >
+                #{createDrID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDrID != null" >
+                #{updateDrID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sharedParentNode != null">
+                #{sharedParentNode,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.orgainCore.model.OrgConfigExample" resultType="java.lang.Integer" >
+        select count(*) from orgs_cfg
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update orgs_cfg
+        <set >
+            <if test="record.logID != null" >
+                LogID = #{record.logID,jdbcType=INTEGER},
+            </if>
+            <if test="record.orgID != null" >
+                OrgID = #{record.orgID,jdbcType=INTEGER},
+            </if>
+            <if test="record.memMustSetItem != null" >
+                MemMustSetItem = #{record.memMustSetItem,jdbcType=BIGINT},
+            </if>
+            <if test="record.memId != null" >
+                MemId = #{record.memId,jdbcType=SMALLINT},
+            </if>
+            <if test="record.experienceNum != null" >
+                ExperienceNum = #{record.experienceNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.experienceDay != null" >
+                ExperienceDay = #{record.experienceDay,jdbcType=INTEGER},
+            </if>
+            <if test="record.isDisplayCard != null" >
+                IsDisplayCard = #{record.isDisplayCard,jdbcType=TINYINT},
+            </if>
+            <if test="record.createDrID != null" >
+                CreateDrID = #{record.createDrID,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null" >
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateDrID != null" >
+                UpdateDrID = #{record.updateDrID,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null" >
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.sharedParentNode != null">
+                IsSharedParentNode = #{record.sharedParentNode,jdbcType=TINYINT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update orgs_cfg
+        set LogID = #{record.logID,jdbcType=INTEGER},
+            OrgID = #{record.orgID,jdbcType=INTEGER},
+            MemMustSetItem = #{record.memMustSetItem,jdbcType=BIGINT},
+            MemId = #{record.memId,jdbcType=SMALLINT},
+            ExperienceNum = #{record.experienceNum,jdbcType=INTEGER},
+            ExperienceDay = #{record.experienceDay,jdbcType=INTEGER},
+            IsDisplayCard = #{record.isDisplayCard,jdbcType=TINYINT},
+            CreateDrID = #{record.createDrID,jdbcType=INTEGER},
+            CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            UpdateDrID = #{record.updateDrID,jdbcType=INTEGER},
+            UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+            IsSharedParentNode = #{record.sharedParentNode,jdbcType=TINYINT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.orgainCore.model.OrgConfig" >
+        update orgs_cfg
+        <set >
+            <if test="orgID != null" >
+                OrgID = #{orgID,jdbcType=INTEGER},
+            </if>
+            <if test="memMustSetItem != null" >
+                MemMustSetItem = #{memMustSetItem,jdbcType=BIGINT},
+            </if>
+            <if test="memId != null" >
+                MemId = #{memId,jdbcType=SMALLINT},
+            </if>
+            <if test="experienceNum != null" >
+                ExperienceNum = #{experienceNum,jdbcType=INTEGER},
+            </if>
+            <if test="experienceDay != null" >
+                ExperienceDay = #{experienceDay,jdbcType=INTEGER},
+            </if>
+            <if test="isDisplayCard != null" >
+                IsDisplayCard = #{isDisplayCard,jdbcType=TINYINT},
+            </if>
+            <if test="createDrID != null" >
+                CreateDrID = #{createDrID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDrID != null" >
+                UpdateDrID = #{updateDrID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sharedParentNode != null">
+             IsSharedParentNode = #{sharedParentNode,jdbcType=TINYINT},
+            </if>
+        </set>
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.orgainCore.model.OrgConfig" >
+        update orgs_cfg
+        set OrgID = #{orgID,jdbcType=INTEGER},
+            MemMustSetItem = #{memMustSetItem,jdbcType=BIGINT},
+            MemId = #{memId,jdbcType=SMALLINT},
+            ExperienceNum = #{experienceNum,jdbcType=INTEGER},
+            ExperienceDay = #{experienceDay,jdbcType=INTEGER},
+            IsDisplayCard = #{isDisplayCard,jdbcType=TINYINT},
+            CreateDrID = #{createDrID,jdbcType=INTEGER},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateDrID = #{updateDrID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            IsSharedParentNode = #{sharedParentNode,jdbcType=TINYINT}
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from orgs_cfg
+        where LogID = #{logID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.orgainCore.model.OrgConfigExample" >
+        delete from orgs_cfg
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <!-- ################## -->
+    <select id="selectTypeName" parameterType="java.lang.Short" resultType="java.lang.String">
+     SELECT MemName FROM omes WHERE MemId=#{memId, jdbcType=SMALLINT}
+    </select>
+    <select id="selectByOrg" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    FROM orgs_cfg WHERE OrgID=#{orgID,jdbcType=INTEGER }
+    </select>
+
+</mapper>

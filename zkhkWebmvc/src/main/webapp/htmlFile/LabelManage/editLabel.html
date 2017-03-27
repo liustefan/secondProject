@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>新增/修改会员标签</title>
+	<link rel="stylesheet" href="../../css/general.css">
+	
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<style>
+		.main-box ul li {
+			margin: 25px 8px;
+		}
+		
+		.fix-label {
+			text-align: right;
+			font-size: 14px;
+			width: 15%;
+		}
+		
+		.text-top {
+	        vertical-align: text-top;
+	    } 
+	    
+	    .width-input {
+	    	width: 250px;
+	    }
+	    
+	    .mg-18 {
+	    	margin: 15px 0 15px 18%;
+	    }
+	</style>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">
+   		标签管理——新增标签
+	</div>
+    <form action="" method="POST" id="">
+		<div class="main-box">
+			<ul>
+				<li>
+					<label class="fix-label">使用范围：</label>
+	                <span>全局</span>
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label"><span class="red">*</span>标签分类：</label>
+	                <select name="">
+						<option value="0">请选择</option>
+						<option value="1">会员来源</option>
+						<option value="2">注册方式</option>
+						<option value="3">其他</option>
+					</select>
+					<span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label"><span class="red">*</span>标签内容：</label>
+	                <input class="width-input" type="text" name="" value="">
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label">备注：</label>
+	                <textarea name="" cols="50" rows="4" maxlength="50" class="text-top"></textarea>
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label">更新人：</label>
+	                <span>张三</span>
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label">所属组织：</label>
+	                <span>显示当前创建用户所属组织完整路径</span>
+	                <span class="red"></span>
+				</li>
+				<li>
+					<label class="fix-label">更新日期：</label>
+	                <span>2016-10-18</span>
+	                <span class="red"></span>
+				</li>
+			</ul>
+		</div>
+		<div class="mg-18">
+	        <button class="btn-inquiry" onclick="">保存</button>
+	        <button class="btn-cancel" onclick="javascript: history.go(-1);">返回</button>
+        </div>
+	</form>
+</div>
+</body>
+</html>

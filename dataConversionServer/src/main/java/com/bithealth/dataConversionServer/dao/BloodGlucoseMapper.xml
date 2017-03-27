@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.dataConversionServer.dao.BloodGlucoseMapper" >
+
+    <resultMap id="ResultMap" type="com.bithealth.dataConversionServer.bean.BloodGlucose">
+        <id property="id" column="Docentry" />
+        <result property="eventId" column="EventId" />
+        <result property="memberId" column="Memberid" />
+        <result property="uploadTime" column="UploadTime" />
+        <result property="testTime" column="TestTime" />       
+        <result property="delTag" column="DelTag" />
+        <result property="bsValue" column="BsValue" />     
+        <result property="timePeriod" column="timePeriod" />
+        <result property="analysisResult" column="AnalysisResult" />
+        <result property="bluetoothMacAddr" column="BluetoothMacAddr" />
+        <result property="deviceCode" column="DeviceCode" />
+        <result property="identification" column="IdCard" />
+        <result property="hrGid" column="unique_id" />
+        <result property="prgid" column="prgid" />
+    </resultMap>
+    
+    <sql id="All_Column_List">
+        Docentry,EventId,Memberid,UploadTime,TestTime,DelTag,BsValue
+        ,timePeriod,analysisResult,BluetoothMacAddr,DeviceCode
+    </sql>
+    
+    <sql id="querySql">
+        <if test="id != null and id > 0">
+            and Docentry = #{id}
+        </if>
+        <if test="eventId != null and eventId != ''">
+            and EventId = #{eventId}
+        </if>
+        <if test="memberId != null and memberId != ''">
+            and Memberid = #{memberId}
+        </if>
+        <if test="identification != null and identification != ''">
+            and IdCard = #{identification}
+        </if>
+    </sql>
+    
+    <select id="findBloodGlucoseByParam" resultMap="ResultMap" parameterType="com.bithealth.dataConversionServer.bean.BloodGlucose">
+        select <include refid="All_Column_List"/> from obsr 
+        <where>
+            DelTag = 0
+            <include refid="querySql"/>
+        </where>
+    </select>
+    
+    <select id="findBloodGlucoseList" resultMap="ResultMap" parameterType="com.bithealth.dataConversionServer.bean.SendDataBean">
+        SELECT DISTINCT
+            a.IdCard,
+            a.unique_id,
+            d.prgid,
+            b.*
+        FROM
+            omem a
+        LEFT JOIN obsr b ON a.Memberid = b.Memberid
+        LEFT JOIN d_omem_relation d on d.unique_id = a.unique_id 
+        WHERE 
+        	DATE_FORMAT(b.UploadTime,'%Y-%m-%d') = str_to_date(#{sendTime},'%Y-%m-%d')
+        AND a.source = #{source}
+        AND a.unique_id is not null
+        AND (b.DelTag = 0 or b.DelTag is null)
+        AND d.prgid LIKE CONCAT('${prgid}','%' )
+    </select>
+    
+    
+    <select id="findBloodGlucoseMemsList" resultMap="ResultMap" parameterType="com.bithealth.dataConversionServer.bean.BloodGlucose">
+        SELECT DISTINCT
+		    a.IdCard,
+		    a.unique_id,
+		    b.Docentry
+		FROM
+		    omem a
+		LEFT JOIN obsr b ON a.Memberid = b.Memberid
+		WHERE
+		    b.UploadTime >= #{lastQueryTime}
+		AND b.UploadTime &lt; #{endQueryTime}
+		AND a.source = 1
+		AND a.unique_id is not null
+    </select>
+</mapper>

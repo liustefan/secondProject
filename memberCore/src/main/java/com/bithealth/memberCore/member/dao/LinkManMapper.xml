@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.LinkManMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.LinkMan" >
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <id column="ContactName" property="contactname" jdbcType="VARCHAR" />
+        <result column="ContactMobPhone" property="contactmobphone" jdbcType="VARCHAR" />
+        <result column="Relation" property="relation" jdbcType="VARCHAR" />
+        <result column="MessageTag" property="messagetag" jdbcType="CHAR" />
+        <result column="ReceiveTag" property="receivetag" jdbcType="CHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Memberid, ContactName, ContactMobPhone, Relation, MessageTag, ReceiveTag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.LinkManExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.LinkManExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.LinkManKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from mem1
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and ContactName = #{contactname,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.LinkMan" >
+        insert into mem1 (Memberid, ContactName, ContactMobPhone, 
+            Relation, MessageTag, ReceiveTag
+            )
+        values (#{memberid,jdbcType=INTEGER}, #{contactname,jdbcType=VARCHAR}, #{contactmobphone,jdbcType=VARCHAR}, 
+            #{relation,jdbcType=VARCHAR}, #{messagetag,jdbcType=CHAR}, #{receivetag,jdbcType=CHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.LinkMan" >
+        insert into mem1
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="contactname != null" >
+                ContactName,
+            </if>
+            <if test="contactmobphone != null" >
+                ContactMobPhone,
+            </if>
+            <if test="relation != null" >
+                Relation,
+            </if>
+            <if test="messagetag != null" >
+                MessageTag,
+            </if>
+            <if test="receivetag != null" >
+                ReceiveTag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="contactname != null" >
+                #{contactname,jdbcType=VARCHAR},
+            </if>
+            <if test="contactmobphone != null" >
+                #{contactmobphone,jdbcType=VARCHAR},
+            </if>
+            <if test="relation != null" >
+                #{relation,jdbcType=VARCHAR},
+            </if>
+            <if test="messagetag != null" >
+                #{messagetag,jdbcType=CHAR},
+            </if>
+            <if test="receivetag != null" >
+                #{receivetag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.LinkManExample" resultType="java.lang.Integer" >
+        select count(*) from mem1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update mem1
+        <set >
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.contactname != null" >
+                ContactName = #{record.contactname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.contactmobphone != null" >
+                ContactMobPhone = #{record.contactmobphone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.relation != null" >
+                Relation = #{record.relation,jdbcType=VARCHAR},
+            </if>
+            <if test="record.messagetag != null" >
+                MessageTag = #{record.messagetag,jdbcType=CHAR},
+            </if>
+            <if test="record.receivetag != null" >
+                ReceiveTag = #{record.receivetag,jdbcType=CHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update mem1
+        set Memberid = #{record.memberid,jdbcType=INTEGER},
+            ContactName = #{record.contactname,jdbcType=VARCHAR},
+            ContactMobPhone = #{record.contactmobphone,jdbcType=VARCHAR},
+            Relation = #{record.relation,jdbcType=VARCHAR},
+            MessageTag = #{record.messagetag,jdbcType=CHAR},
+            ReceiveTag = #{record.receivetag,jdbcType=CHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.LinkMan" >
+        update mem1
+        <set >
+            <if test="contactmobphone != null" >
+                ContactMobPhone = #{contactmobphone,jdbcType=VARCHAR},
+            </if>
+            <if test="relation != null" >
+                Relation = #{relation,jdbcType=VARCHAR},
+            </if>
+            <if test="messagetag != null" >
+                MessageTag = #{messagetag,jdbcType=CHAR},
+            </if>
+            <if test="receivetag != null" >
+                ReceiveTag = #{receivetag,jdbcType=CHAR},
+            </if>
+        </set>
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and ContactName = #{contactname,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.LinkMan" >
+        update mem1
+        set ContactMobPhone = #{contactmobphone,jdbcType=VARCHAR},
+            Relation = #{relation,jdbcType=VARCHAR},
+            MessageTag = #{messagetag,jdbcType=CHAR},
+            ReceiveTag = #{receivetag,jdbcType=CHAR}
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and ContactName = #{contactname,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.LinkManKey" >
+        delete from mem1
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and ContactName = #{contactname,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.LinkManExample" >
+        delete from mem1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- ############################ -->
+    
+     <select id="selectByMember" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from mem1
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </select>
+    
+    <insert id="insertBatch" parameterType="java.util.List">
+    insert into mem1 (Memberid, ContactName, ContactMobPhone, 
+            Relation, MessageTag, ReceiveTag
+            )
+        values
+        <foreach collection="list" item="item" separator=",">
+        (#{item.memberid,jdbcType=INTEGER}, #{item.contactname,jdbcType=VARCHAR}, #{item.contactmobphone,jdbcType=VARCHAR}, 
+            #{item.relation,jdbcType=VARCHAR}, #{item.messagetag,jdbcType=CHAR}, #{item.receivetag,jdbcType=CHAR}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

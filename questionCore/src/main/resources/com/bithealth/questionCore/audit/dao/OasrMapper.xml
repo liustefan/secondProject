@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.audit.dao.OasrMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.questionCore.audit.model.Oasr" >
+        <id column="serialNumber" property="serialNumber" jdbcType="BIGINT" />
+        <result column="ReportNo" property="reportNo" jdbcType="INTEGER" />
+        <result column="OptId" property="optId" jdbcType="SMALLINT" />
+        <result column="OptName" property="optName" jdbcType="VARCHAR" />
+        <result column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="DocGrpCode" property="docGrpCode" jdbcType="INTEGER" />
+        <result column="TempCode" property="tempCode" jdbcType="INTEGER" />
+        <result column="MeasTime" property="measTime" jdbcType="TIMESTAMP" />
+        <result column="MeasTermTime" property="measTermTime" jdbcType="TIMESTAMP" />
+        <result column="MeasNum" property="measNum" jdbcType="SMALLINT" />
+        <result column="GrenerTime" property="grenerTime" jdbcType="TIMESTAMP" />
+        <result column="AuditLevel" property="auditLevel" jdbcType="SMALLINT" />
+        <result column="AuditState" property="auditState" jdbcType="CHAR" />
+        <result column="SubmitOther" property="submitOther" jdbcType="CHAR" />
+        <result column="YNTag" property="YNTag" jdbcType="CHAR" />
+        <result column="Docid" property="docid" jdbcType="INTEGER" />
+        <result column="AuditDatetime" property="auditDatetime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        serialNumber, ReportNo, OptId, OptName, Memberid, DocGrpCode, TempCode, MeasTime, 
+        MeasTermTime, MeasNum, GrenerTime, AuditLevel, AuditState, SubmitOther, YNTag, Docid, 
+        AuditDatetime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.audit.model.OasrExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from oasr
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectSingleAnswerAuditByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.audit.model.OasrExample" >
+    	<if test="_parameter != null and _parameter != '' ">
+    	SELECT oasr.*, answer.`AnsNumber` AS `ouai.ansNumber`, omfq.`Qustname` AS `omfq.qustname`, answer.`PublisherTime` AS `ouai.publisherTime`, omem.`MemName` AS `member.memName`, answer.`answerTime` AS `ouai.answerTime` FROM oasr 
+    	JOIN oopt ON oasr.`OptId` = oopt.`OptId` 
+    	JOIN ouai answer ON oasr.`ReportNo` = answer.`AnsNumber`
+    	JOIN omfq ON answer.`Qustid` = omfq.`Qustid`
+		JOIN omem ON oasr.`Memberid` = omem.`Memberid` 
+		LEFT JOIN cam1 ON answer.`AnsNumber` = cam1.`AnsNumber`
+		<include refid="Example_Where_Clause" />
+		GROUP BY oasr.ReportNo ORDER BY oasr.serialNumber DESC
+		</if>
+    </select>
+    
+    <select id="selectComAnswerAuditByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.audit.model.OasrExample" >
+    	<if test="_parameter != null and _parameter != '' ">
+    	SELECT oasr.*, answer.`CombQustid` AS `ocam.combQustid`, ocqt.`CombQustName` AS `ocqt.combQustName`, answer.`PublisherTime` AS `ocam.publisherTime`, omem.`MemName` AS `member.memName`, answer.`answerTime` AS `ocam.answerTime` FROM oasr 
+    	JOIN oopt ON oasr.`OptId` = oopt.`OptId` 
+    	JOIN ocam answer ON oasr.`ReportNo` = answer.`CombAnsid`
+    	JOIN ocqt ON answer.`CombQustid` = ocqt.`CombQustid`
+		JOIN omem ON oasr.`Memberid` = omem.`Memberid` 
+		<include refid="Example_Where_Clause" />
+		GROUP BY oasr.ReportNo ORDER BY oasr.serialNumber DESC
+		</if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from oasr
+        where serialNumber = #{serialNumber,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.questionCore.audit.model.Oasr" >
+        insert into ${tableName}
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="serialNumber != null" >
+                serialNumber,
+            </if>
+            <if test="reportNo != null" >
+                ReportNo,
+            </if>
+            <if test="optId != null" >
+                OptId,
+            </if>
+            <if test="optName != null" >
+                OptName,
+            </if>
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="docGrpCode != null" >
+                DocGrpCode,
+            </if>
+            <if test="tempCode != null" >
+                TempCode,
+            </if>
+            <if test="measTime != null" >
+                MeasTime,
+            </if>
+            <if test="measTermTime != null" >
+                MeasTermTime,
+            </if>
+            <if test="measNum != null" >
+                MeasNum,
+            </if>
+            <if test="grenerTime != null" >
+                GrenerTime,
+            </if>
+            <if test="auditLevel != null" >
+                AuditLevel,
+            </if>
+            <if test="auditState != null" >
+                AuditState,
+            </if>
+            <if test="submitOther != null" >
+                SubmitOther,
+            </if>
+            <if test="YNTag != null" >
+                YNTag,
+            </if>
+            <if test="docid != null" >
+                Docid,
+            </if>
+            <if test="auditDatetime != null" >
+                AuditDatetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="serialNumber != null" >
+                #{serialNumber,jdbcType=BIGINT},
+            </if>
+            <if test="reportNo != null" >
+                #{reportNo,jdbcType=INTEGER},
+            </if>
+            <if test="optId != null" >
+                #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="optName != null" >
+                #{optName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="docGrpCode != null" >
+                #{docGrpCode,jdbcType=INTEGER},
+            </if>
+            <if test="tempCode != null" >
+                #{tempCode,jdbcType=INTEGER},
+            </if>
+            <if test="measTime != null" >
+                #{measTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measTermTime != null" >
+                #{measTermTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measNum != null" >
+                #{measNum,jdbcType=SMALLINT},
+            </if>
+            <if test="grenerTime != null" >
+                #{grenerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditLevel != null" >
+                #{auditLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="auditState != null" >
+                #{auditState,jdbcType=CHAR},
+            </if>
+            <if test="submitOther != null" >
+                #{submitOther,jdbcType=CHAR},
+            </if>
+            <if test="YNTag != null" >
+                #{YNTag,jdbcType=CHAR},
+            </if>
+            <if test="docid != null" >
+                #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="auditDatetime != null" >
+                #{auditDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.questionCore.audit.model.OasrExample" resultType="java.lang.Integer" >
+        select count(*) from oasr
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null and _parameter != '' ">
+            update oasr
+            <set >
+                <if test="record.serialNumber != null" >
+                    serialNumber = #{record.serialNumber,jdbcType=BIGINT},
+                </if>
+                <if test="record.reportNo != null" >
+                    ReportNo = #{record.reportNo,jdbcType=INTEGER},
+                </if>
+                <if test="record.optId != null" >
+                    OptId = #{record.optId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.optName != null" >
+                    OptName = #{record.optName,jdbcType=VARCHAR},
+                </if>
+                <if test="record.memberid != null" >
+                    Memberid = #{record.memberid,jdbcType=INTEGER},
+                </if>
+                <if test="record.docGrpCode != null" >
+                    DocGrpCode = #{record.docGrpCode,jdbcType=INTEGER},
+                </if>
+                <if test="record.tempCode != null" >
+                    TempCode = #{record.tempCode,jdbcType=INTEGER},
+                </if>
+                <if test="record.measTime != null" >
+                    MeasTime = #{record.measTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.measTermTime != null" >
+                    MeasTermTime = #{record.measTermTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.measNum != null" >
+                    MeasNum = #{record.measNum,jdbcType=SMALLINT},
+                </if>
+                <if test="record.grenerTime != null" >
+                    GrenerTime = #{record.grenerTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.auditLevel != null" >
+                    AuditLevel = #{record.auditLevel,jdbcType=SMALLINT},
+                </if>
+                <if test="record.auditState != null" >
+                    AuditState = #{record.auditState,jdbcType=CHAR},
+                </if>
+                <if test="record.submitOther != null" >
+                    SubmitOther = #{record.submitOther,jdbcType=CHAR},
+                </if>
+                <if test="record.YNTag != null" >
+                    YNTag = #{record.YNTag,jdbcType=CHAR},
+                </if>
+                <if test="record.docid != null" >
+                    Docid = #{record.docid,jdbcType=INTEGER},
+                </if>
+                <if test="record.auditDatetime != null" >
+                    AuditDatetime = #{record.auditDatetime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null and _parameter != '' ">
+            update oasr
+            set serialNumber = #{record.serialNumber,jdbcType=BIGINT},
+                ReportNo = #{record.reportNo,jdbcType=INTEGER},
+                OptId = #{record.optId,jdbcType=SMALLINT},
+                OptName = #{record.optName,jdbcType=VARCHAR},
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+                DocGrpCode = #{record.docGrpCode,jdbcType=INTEGER},
+                TempCode = #{record.tempCode,jdbcType=INTEGER},
+                MeasTime = #{record.measTime,jdbcType=TIMESTAMP},
+                MeasTermTime = #{record.measTermTime,jdbcType=TIMESTAMP},
+                MeasNum = #{record.measNum,jdbcType=SMALLINT},
+                GrenerTime = #{record.grenerTime,jdbcType=TIMESTAMP},
+                AuditLevel = #{record.auditLevel,jdbcType=SMALLINT},
+                AuditState = #{record.auditState,jdbcType=CHAR},
+                SubmitOther = #{record.submitOther,jdbcType=CHAR},
+                YNTag = #{record.YNTag,jdbcType=CHAR},
+                Docid = #{record.docid,jdbcType=INTEGER},
+                AuditDatetime = #{record.auditDatetime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.questionCore.audit.model.Oasr" >
+        update oasr
+        <set >
+            <if test="reportNo != null" >
+                ReportNo = #{reportNo,jdbcType=INTEGER},
+            </if>
+            <if test="optId != null" >
+                OptId = #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="optName != null" >
+                OptName = #{optName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberid != null" >
+                Memberid = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="docGrpCode != null" >
+                DocGrpCode = #{docGrpCode,jdbcType=INTEGER},
+            </if>
+            <if test="tempCode != null" >
+                TempCode = #{tempCode,jdbcType=INTEGER},
+            </if>
+            <if test="measTime != null" >
+                MeasTime = #{measTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measTermTime != null" >
+                MeasTermTime = #{measTermTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="measNum != null" >
+                MeasNum = #{measNum,jdbcType=SMALLINT},
+            </if>
+            <if test="grenerTime != null" >
+                GrenerTime = #{grenerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditLevel != null" >
+                AuditLevel = #{auditLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="auditState != null" >
+                AuditState = #{auditState,jdbcType=CHAR},
+            </if>
+            <if test="submitOther != null" >
+                SubmitOther = #{submitOther,jdbcType=CHAR},
+            </if>
+            <if test="YNTag != null" >
+                YNTag = #{YNTag,jdbcType=CHAR},
+            </if>
+            <if test="docid != null" >
+                Docid = #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="auditDatetime != null" >
+                AuditDatetime = #{auditDatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where serialNumber = #{serialNumber,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.questionCore.audit.model.Oasr" >
+        update oasr
+        set ReportNo = #{reportNo,jdbcType=INTEGER},
+            OptId = #{optId,jdbcType=SMALLINT},
+            OptName = #{optName,jdbcType=VARCHAR},
+            Memberid = #{memberid,jdbcType=INTEGER},
+            DocGrpCode = #{docGrpCode,jdbcType=INTEGER},
+            TempCode = #{tempCode,jdbcType=INTEGER},
+            MeasTime = #{measTime,jdbcType=TIMESTAMP},
+            MeasTermTime = #{measTermTime,jdbcType=TIMESTAMP},
+            MeasNum = #{measNum,jdbcType=SMALLINT},
+            GrenerTime = #{grenerTime,jdbcType=TIMESTAMP},
+            AuditLevel = #{auditLevel,jdbcType=SMALLINT},
+            AuditState = #{auditState,jdbcType=CHAR},
+            SubmitOther = #{submitOther,jdbcType=CHAR},
+            YNTag = #{YNTag,jdbcType=CHAR},
+            Docid = #{docid,jdbcType=INTEGER},
+            AuditDatetime = #{auditDatetime,jdbcType=TIMESTAMP}
+        where serialNumber = #{serialNumber,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from oasr
+        where serialNumber = #{serialNumber,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.questionCore.audit.model.OasrExample" >
+        <if test="_parameter != null and _parameter != '' ">
+            delete from oasr
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

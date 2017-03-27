@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.inspectCore.physical.model.PhHealthexamdetail">
+<!-- 会员基本资料信息,通过查询数据库获取 -->
+<Assem name="symptom" assembly="GZhzh"  assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll" />   <!-- 症状 -->
+<Assem name="symptomDesc" assembly="GZzqt"/>   <!-- 其他症状    和字段GZhzh有联系，当为99时，使用此字段-->
+<Assem name="bodytemperature" assembly="GTw"/>   <!-- 体温-->
+<Assem name="respiratoryrate" assembly="GHx"/>   <!-- 呼吸频率-->
+<Assem name="pulserate" assembly="GMb"/>   <!-- 脉率-->
+<Assem name="rightsystolic" assembly="GXyyc1"/>   <!-- 右侧收缩压-->
+<Assem name="rightdiastolic" assembly="GXyyc2"/>   <!-- 右侧舒张压-->
+<Assem name="leftsystolic" assembly="GXyzc1"/>   <!-- 左侧收缩压-->
+<Assem name="leftdiastolic" assembly="GXyzc2"/>   <!-- 左侧舒张压-->
+<Assem name="height" assembly="GSg"/>   <!-- 身高-->
+<Assem name="waist" assembly="GYw"/>   <!-- 腰围-->
+<Assem name="weight" assembly="GTzh"/>   <!-- 体重-->
+<Assem name="bmi" assembly="GTzhzh"/>   <!-- 体重指数(BMI)-->
+<Assem name="agedcognition" assembly="GLnrrz"/>   <!-- 老年人认知 1.阴性；2.阳性-->
+<Assem name="agedfeeling" assembly="GLnrqg"/>   <!-- 老年人情感 1.阴性；2.阳性-->
+<Assem name="agedcognitionscore" assembly="GLnrrzfen"/>   <!-- 老年人认知能力分数-->
+<Assem name="agedfeelingscore" assembly="GLnrqgfen"/>   <!-- 老年人情感能力分数-->
+<Assem name="leftvision" assembly="GZysl"/>   <!-- 左眼视力-->
+<Assem name="rightvision" assembly="GYysl"/>   <!-- 右眼视力-->
+<Assem name="leftcorrectvision" assembly="GZyjz"/>   <!-- 左眼矫正视力-->
+<Assem name="rightcorrectvision" assembly="GYyjz"/>   <!-- 右眼矫正视力-->
+<Assem name="hearing" assembly="GTl"/>   <!-- 听 力 1.听见;2.听不清或无法听见（耳鼻喉科专科就诊）-->
+<Assem name="movement" assembly="GYdgn"/>   <!-- 运动功能 1.可顺利完成;2.无法独立完成其中任何一个动作(上级医院就诊)-->
+<Assem name="skin" assembly="GPfgm"/>   <!-- 皮 肤 1.正常;2.潮红;3.苍白;4.发绀;5.黄染;6.色素沉着;99.其他-->
+<Assem name="lymph" assembly="GLbj"/>   <!--  淋巴结 1.未触及;2.锁骨上;3.腋窝;4.其他;-->
+<Assem name="lymphDesc" assembly="GLbjqt"/>   <!-- 淋巴结其他-->
+<Assem name="lungbarrelchest" assembly="GTzx"/>   <!-- 桶状胸： 1.是;2.否-->
+<Assem name="lungbreathsounds" assembly="GHxy"/>   <!-- 呼吸音： 1.正常;2.异常-->
+<Assem name="lungbreathsoundsDesc" assembly="GHxyyc"/>   <!-- /呼吸音异常  和字段GHxy有关系，当为2时，使用此字段-->
+<Assem name="lungrales" assembly="GLy"/>   <!-- 罗 音： 1.无;2.干罗音;3.湿罗音;4.其他;-->
+<Assem name="lungralesDesc" assembly="GLyyc"/>   <!-- 罗音其他-->
+<Assem name="heartrate" assembly="GXinlv"/>   <!-- 心率-->
+<Assem name="rhythm" assembly="GXinlvci"/>   <!-- 心律： 1.齐;2.不齐;3.绝对不齐;-->
+<Assem name="murmur" assembly="GZayin"/>   <!--  杂音： 1.无;2.有;-->
+<Assem name="murmurDesc" assembly="GZayinyo"/>   <!-- 有杂音  和字段GZayin有关系，当为2时，使用此字段-->
+<Assem name="pain" assembly="GYato"/>   <!-- 压痛： 1.无;2.有-->
+<Assem name="painDesc" assembly="GYatoyo"/>   <!-- 有压痛  和字段GYato有关系，当为2时，使用此字段-->
+<Assem name="block" assembly="GBk"/>   <!--  包块： 1.无;2.有;-->
+<Assem name="blockDesc" assembly="GBkyo"/>   <!-- 有包块  和字段GBk有关系，当为2时，使用此字段-->
+<Assem name="hepatomegaly" assembly="GGanda"/>   <!-- 肝大： 1.无;2.有;-->
+<Assem name="hepatomegalyDesc" assembly="GGandayo"/>   <!-- 有肝大  和字段GGanda有关系，当为2时，使用此字段-->
+<Assem name="splenomegaly" assembly="GPida"/>   <!-- 脾大： 1.无;2.有-->
+<Assem name="splenomegalyDesc" assembly="GPidayo"/>   <!-- 有脾大： 和字段GPida有关系，当为2时，使用此字段-->
+<Assem name="movesonant" assembly="GZhuoyin"/>   <!-- 移动性浊音： 1.无;2.有;-->
+<Assem name="movesonantDesc" assembly="GZhuoyinyo"/>   <!-- 有移动性浊音：  和字段GZhuoyin有关系，当为2时，使用此字段-->
+<Assem name="lowlimbedema" assembly="GXzsz"/>   <!-- 下肢水肿 1.无;2.左侧;3.右侧;4.双侧不对称;5.双侧对称;-->
+<Assem name="anustactus" assembly="GGmzhzh"/>   <!-- 肛门指诊 1.未见异常;2.触痛;3.包块;4.前列腺异常;99.其他;-->
+<Assem name="anustactusDesc" assembly="GGmzhzhyi"/>   <!-- 其他肛门指诊  和字段GGmzhzh有关系，当为99时，使用此字段-->
+
+
+<!-- <Assem name="vaccinatename" assembly="GCtqt"/>   其他查体
+ -->
+
+<Assem name="leukocyte" assembly="wbc"/>   <!-- 血常规-白细胞-->
+<Assem name="hemoglobin" assembly="hb"/>   <!-- 血常规-血红蛋白-->
+<Assem name="platelet" assembly="plt"/>   <!-- 血常规-血小板-->
+<Assem name="bloodother" assembly="GXcgqt"/>   <!-- 血常规-其他-->
+<Assem name="urineprotein" assembly="GNdb"/>   <!-- 尿常规-尿蛋白 -->
+<Assem name="urinesugar" assembly="GNt"/>   <!-- 尿常规-尿糖 -->
+<Assem name="urineacetonebody" assembly="GNtt"/>   <!-- 尿常规-尿酮体 -->
+<Assem name="urineoccultblood" assembly="GNqx"/>   <!-- 尿常规-尿潜血-->
+<Assem name="urineother" assembly="GNcgqt"/>   <!-- 尿常规-其他-->
+<Assem name="urinemicroalbumin" assembly="nwlbdb"/>   <!-- 尿微量白蛋白-->
+<Assem name="fecaloccultblood" assembly="GDbqx"/>   <!-- 大便潜血 1.阴性;2.阳性;-->
+<Assem name="cpt" assembly="alt"/>   <!-- 肝功能-血清谷丙转氨酶-->
+<Assem name="ast" assembly="ast"/>   <!-- 肝功能-血清谷草转氨酶-->
+<Assem name="alb" assembly="alb"/>   <!-- 肝功能-白蛋白-->
+<Assem name="tbil" assembly="tbil"/>   <!-- 肝功能-总胆红素-->
+<Assem name="cbil" assembly="dbil"/>   <!-- 肝功能-结合胆红素-->
+<Assem name="cr" assembly="scr"/>   <!-- 肾功能-血清肌酐-->
+<Assem name="bun" assembly="bun"/>   <!-- 肾功能-血尿素氮-->
+<Assem name="chol" assembly="cho"/>   <!-- 血脂-总胆固醇-->
+<Assem name="tg" assembly="tg"/>   <!-- 血脂-甘油三酯-->
+<Assem name="ldl_c" assembly="ldlc"/>   <!-- 血脂-血清低密度脂蛋白胆固醇-->
+<Assem name="hdl_c" assembly="hdlc"/>   <!-- 血脂-血清高密度脂蛋白胆固醇-->
+<Assem name="glu" assembly="GKfxt"/>   <!-- 空腹血糖-->
+<Assem name="pglu" assembly="GChxt"/>   <!-- 餐后2H血糖-->
+<Assem name="hbsag" assembly="hbsag"/>   <!-- 乙型肝炎表面抗原 1.阴性;2.阳性;-->
+<Assem name="eyeground" assembly="GYand"/>   <!-- 眼 底 1.正常;2.异常;-->
+<Assem name="eyegroundDesc" assembly="GYandyi"/>   <!-- 眼底异常  和字段GYand有关系，当为2时，使用此字段-->
+<Assem name="cardiogram" assembly="GXindt"/>   <!--  心电图 1.正常;2.异常-->
+<Assem name="cardiogramDesc" assembly="GXindtyi"/>   <!-- 心电图异常填写  和字段GXindt有关系，当为2时，使用此字段-->
+<Assem name="xRay" assembly="GXiongp"/>   <!-- 胸部X线片 1.正常;2.异常;-->
+<Assem name="xRayDesc" assembly="GXiongpyc"/>   <!-- 胸部X线片异常  和字段GXiongp有关系，当为2时，使用此字段-->
+<Assem name="bUltrasonic" assembly="GBchao"/>   <!--  B 超 1.正常;2.异常;-->
+<Assem name="bUltrasonicDesc" assembly="GBchaoyi"/>   <!-- /B 超异常  和字段GBchao有关系，当为2时，使用此字段-->
+<Assem name="assistcheckother" assembly="GFuzhuqt"/>   <!-- 辅助检查其他-->
+<Assem name="examdate" assembly="happentime"/>   <!-- 体检日期-->
+<Assem name="responsibledrname" assembly="field2"/>   <!-- 责任医生-->
+<Assem name="sportfrequency" assembly="GDlpl"/>   <!-- 锻炼频率 1.每天;2.每周一次以上;3.偶尔;4.不锻炼;-->
+<Assem name="sportduration" assembly="GMcdlsj"/>   <!-- 每次锻炼时间-->
+<Assem name="sporttotaltime" assembly="GJcdlsj"/>   <!-- 坚持锻炼时间-->
+<Assem name="sportway" assembly="GDlfs"/>   <!-- 锻炼方式-->
+<Assem name="eatinghabits" assembly="GYsxg" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll" />   <!-- 饮食习惯 1.荤素均衡;2.荤食为主;3.素食为主;4.嗜盐;5.嗜油;6.嗜糖;-->
+<Assem name="smokingstate" assembly="GXyzk"/>   <!-- 吸烟状况  1.从不吸烟;2.已戒烟;3.吸烟;-->
+<Assem name="dailysmoking" assembly="GRxyl"/>   <!-- 日吸烟量-->
+<Assem name="smokingstartage" assembly="GKsxynl"/>   <!-- 开始吸烟年龄-->
+<Assem name="smokingendage" assembly="GJynl"/>   <!-- 戒烟年龄-->
+<Assem name="drinkfrequency" assembly="GYjpl"/>   <!-- 饮酒频率 1.从不;2.偶尔;3.经常;4.每天;-->
+<Assem name="dailydrink" assembly="GRyjl"/>   <!-- 日饮酒量-->
+<Assem name="isabstinence" assembly="GSfjj"/>   <!-- 是否戒酒   1.未戒酒;2.已戒酒;-->
+<Assem name="abstinenceage" assembly="GJjnl"/>   <!-- 戒酒年龄-->
+<Assem name="drinkstartage" assembly="GKsyjnl"/>   <!-- 开始饮酒年龄-->
+<Assem name="istemulencelastyear" assembly="GYnnsfyj"/>   <!-- 近一年内是否曾醉酒 1.是;2.否;-->
+<Assem name="drinktype" assembly="GYjzl" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll" />   <!-- 饮酒种类 1.白酒;2.啤酒;3.红酒;4.黄酒;99.其他; -->
+<Assem name="drinkotherDesc" assembly="GYjzlqt"/>   <!-- 其他饮酒种类   和字段GYjzl有关联，当为99时，使用此字段-->
+<Assem name="occupation" assembly="GYwzybl"/>   <!-- 业病危害因素接触史 1.无;2.有;-->
+<Assem name="typeofwork" assembly="GJtzy"/>   <!-- 工种  和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="worktime" assembly="GCysj"/>   <!-- 从业时间  和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="chemical" assembly="GHxp"/>   <!-- 化学物质  和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="chemicalguard" assembly="GHxpfhcs"/>   <!-- 职业病危害因素接触史-化学物质-防护措施 1.无;2.有; 和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="chemicalguardDesc" assembly="GHxpfhcsjt"/>   <!-- 化学物质措施  和字段GHxpfhcs有关联，当为2时，使用此字段-->
+<Assem name="radiogen" assembly="GShexian"/>   <!-- 放射物质  和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="radiogenguard" assembly="GSxfhcs"/>   <!-- 职业病危害因素接触史-放射物质-防护措施 1.无;2.有; 和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="radiogenguardDesc" assembly="GSxfhcsqt"/>   <!-- 放射物质措施 和字段GSxfhcs有关系，当为2时，使用此字段-->
+<Assem name="lips" assembly="GKouchun"/>   <!-- 口唇 1.红润;2.苍白;3.发绀;4.皲裂;5.疱疹;6.其他;-->
+<Assem name="dentition" assembly="GChilei"/>   <!-- 齿列 1.正常;2.缺齿;3.龋齿;4.义齿(假牙);5.其他;  -->
+<Assem name="dentitionDesc" assembly="GYanbu"/>   <!-- 咽部 1.无充血;2.充血;3.淋巴滤泡增生;4.其他;-->
+<Assem name="throat" assembly="GPfqt"/>   <!-- 皮 肤其他-->
+<Assem name="sclero" assembly="GGongmo"/>   <!-- 巩 膜 1.正常;2.黄染;3.充血;99.其他;-->
+<Assem name="scleroDesc" assembly="GGmqt"/>   <!-- 巩 膜其他-->
+<Assem name="arteriopalmus" assembly="GZbdmmd"/>   <!-- 足背动脉搏动 1.未触及;2.触及双侧对称;3.触及左侧弱或消失;4.触及右侧弱或消失;-->
+<Assem name="breast" assembly="GRuxian" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll" />   <!-- 乳 腺 1.未见异常;2.乳房切除;3.异常泌乳;4.乳腺包块;99.其他;-->
+<Assem name="breastDesc" assembly="GRuxianqt"/>   <!-- 其他乳腺  和字段GRuxian有关系，当为99时，使用此字段-->
+<Assem name="pudendum" assembly="GWaiyin"/>   <!-- 外阴 1.未见异常;2.异常;-->
+<Assem name="pudendumDesc" assembly="GWaiyinyc"/>   <!-- 外阴异常  和字段GWaiyin有关系，当为2时，使用此字段-->
+<Assem name="vagina" assembly="GYindao"/>   <!-- 阴道 1.未见异常;2.异常;-->
+<Assem name="vaginaDesc" assembly="GYindaoyc"/>   <!-- 阴道异常  和字段GYindao有关系，当为2时，使用此字段-->
+<Assem name="cervical" assembly="GGongjing"/>   <!-- 宫颈 1.未见异常;2.异常;-->
+<Assem name="cervicalDesc" assembly="GGongjingyc"/>   <!-- 宫颈异常  和字段GGongjing有关系，当为2时，使用此字段-->
+<Assem name="uteri" assembly="GGongti"/>   <!-- 宫体 1.未见异常;2.异常;-->
+<Assem name="uteriDesc" assembly="GGongtiyc"/>   <!-- 宫体异常-->
+<Assem name="enclosure" assembly="GFujian"/>   <!-- 附件 1.未见异常;2.异常;-->
+<Assem name="enclosureDesc" assembly="GFujianyc"/>   <!-- 附件异常-->
+<Assem name="serumpotassium" assembly="GSgnxjnd"/>   <!-- 肾功能-血钾浓度-->
+<Assem name="serumsodium" assembly="GSgnxnnd"/>   <!-- 肾功能-血钠浓度-->
+<Assem name="hba1c" assembly="GThxhdb"/>   <!-- 糖化血红蛋白-->
+<Assem name="cervicalsmear" assembly="GGjtp"/>   <!-- 宫颈涂片 1.正常;2.异常;-->
+<Assem name="cervicalsmearDesc" assembly="GGjtpyc"/>   <!-- 宫颈涂片异常 -->
+<Assem name="tcmPhz" assembly="GPhz"/>   <!-- 平和质 1.是;2.基本是-->
+<Assem name="tcmQxz" assembly="GQxz"/>   <!-- 气虚质 1.是;2.倾向是-->
+<Assem name="tcmYxz" assembly="GYangxz"/>   <!-- 阳虚质 1.是;2.倾向是;-->
+<Assem name="tcmYixz" assembly="GYinxz"/>   <!-- 阴虚质 -->
+<Assem name="tcmTsz" assembly="GTsz"/>   <!-- 痰湿质 -->
+<Assem name="tcmSrz" assembly="GSrz"/>   <!-- 湿热质-->
+<Assem name="tcmXtz" assembly="GXyz"/>   <!-- 血瘀质-->
+<Assem name="tcmQyz" assembly="GQyz"/>   <!-- 气郁质-->
+<Assem name="tcmTbz" assembly="GTbz"/>   <!-- 特秉质 -->
+<Assem name="cerebralvessel" assembly="GNxgjb" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll" />   <!-- 脑血管疾病 1.未发现;2.缺血性卒中;3.脑出血;4.蛛网膜下腔出血;5.短暂性脑缺血发作;99.其他;-->
+<Assem name="cerebralvesselDesc" assembly="GNxgjbqt"/>   <!-- 脑血管疾病 其他-->
+<Assem name="kidney" assembly="GSzjb" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll" />   <!-- 肾脏疾病 1.未发现;2.糖尿病肾病;3.肾功能衰竭;4.急性肾炎;5.慢性肾炎;99.其他;-->
+<Assem name="kidneyDesc" assembly="GSzjbqt"/>   <!-- 肾脏疾病其他-->
+<Assem name="heart" assembly="GXzjb" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll" />   <!-- 心脏疾病 1.未发现;2.心肌梗死;3.心绞痛;4.冠状动脉血运重建;5.充血性心力衰竭;6.心前区疼痛;99.其他;-->
+<Assem name="heartDesc" assembly="GXzjbqt"/>   <!-- 心脏疾病其他-->
+<Assem name="bloodpipe" assembly="GXgjb" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll"/>   <!-- 血管疾病 1.未发现;2.夹层动脉瘤;3.动脉闭塞性疾病;99.其他;-->
+<Assem name="bloodpipeDesc" assembly="GXgjbqt"/>   <!-- 血管疾病其他-->
+<Assem name="eyepart" assembly="GYbjb" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll" />   <!-- 眼部疾病1.未发现;2.视网膜出血或渗出;3.视乳头水肿;4.白内障;99.其他;-->
+<Assem name="eyepartDesc" assembly="GYbjbqt"/>   <!-- 眼部疾病其他-->
+<Assem name="nervoussystem" assembly="GSjxtjb"/>   <!-- 神经系统疾病 1.未发现;2.有;-->
+<Assem name="nervoussystemDesc" assembly="GSjxtjbqt"/>   <!-- 神经系统疾病有时的填写-->
+<Assem name="othersystem" assembly="GQtxtjb"/>   <!-- 其他系统疾病 1.未发现;2.有;-->
+<Assem name="othersystemDesc" assembly="GQtxtjbqt"/>   <!-- 其他系统疾病有时填写-->
+<Assem name="healthevaluate" assembly="GJkpj"/>   <!-- 健康评价 1.体检无异常;2.有异常;-->
+<Assem name="healthevaluateDesc" assembly="GJkpjyc1"/>   <!-- 健康评价异常1  和字段GJkpj有关系，当为2时，使用此字段-->
+
+<!-- <Assem name="vaccinatename" assembly="GJkpjyc2"/>   健康评价异常2  和字段GJkpj有关系，当为2时，使用此字段
+<Assem name="vaccinatename" assembly="GJkpjyc3"/>   健康评价异常3  和字段GJkpj有关系，当为2时，使用此字段
+<Assem name="vaccinatename" assembly="GJkpjyc4"/>   健康评价异常4  和字段GJkpj有关系，当为2时，使用此字段 -->
+
+<Assem name="healthguide" assembly="GJkzd" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll" />   <!-- 健康指导 1.定期随访;2.纳入慢性病管理;3.建议复查;4.建议转诊;-->
+<Assem name="riskfactor" assembly="GWxyskz" assemCls="com.bithealth.dataConversionServer.assemble.PhHealthexamdetailAssem" method="assemReplaceAll"  />   <!-- 危险因素控制 1.戒烟;2.健康饮酒;3.饮食;4.锻炼;97.减体重;98.建议疫苗接种;99.其他;-->
+<Assem name="riskfactorTarget" assembly="GWxystz"/>   <!-- 危险因素控制  目标填写-->
+<Assem name="riskfactorVaccine" assembly="GWsysym"/>   <!-- 危险因素控制建议疫苗接种 填写-->
+<Assem name="riskfactorOther" assembly="GWxysqt"/>   <!-- 危险因素控制其他  填写-->
+<Assem name="agedhealthevaluate" assembly="lnrzkpg"/>   <!-- 老年人健康状态自我评估 1.满意;2.基本满意;3.说不清楚;4.不太满意;5.不满意;-->
+<Assem name="agedlifeevaluate" assembly="lnrzlpg"/>   <!-- 老年人生活自理能力自我评估 1.可自理(0～3分);2.轻度依赖(4～8分);3.中度依赖(9～18分);4.不能自理(≥19分);-->
+
+<Assem name="dust" assembly="fenchen"/>   <!-- 粉尘  和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="dustguard" assembly="fchcs"/>   <!-- 职业病危害因素接触史-粉尘-防护措施  1.无;2.有;  和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="dustguardDesc" assembly="fchY"/>   <!-- 粉尘措施  和字段fchcs有关系，当为2时，使用此字段-->
+
+<Assem name="physical" assembly="wuliyinsu"/>   <!-- 物理因素 和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="physicalguard" assembly="wlcs"/>   <!-- 职业病危害因素接触史-物理因素-防护措施 1.无;2.有; 和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="physicalguardDesc" assembly="wlY"/>   <!-- 物理因素措施  和字段wlcs有关系，当为2时，使用此字段-->
+
+<Assem name="toxicother" assembly="blqita"/>   <!-- 职业病危害因素接触史 其他  和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="toxicotherguard" assembly="blqtcs"/>   <!-- 职业病危害因素接触史-其他-防护措施 1.无;2.有;  和字段GYwzybl有关联，当为3时，使用此字段-->
+<Assem name="toxicotherguardDesc" assembly="qtY"/>   <!-- 职业病危害因素接触史-其他措施  和字段blqtcs有关联，当为2时，使用此字段-->
+
+<!-- <Assem name="vaccinatename" assembly="zcyy"/>   左侧原因
+<Assem name="vaccinatename" assembly="ycyy"/>   右侧原因 -->
+<!-- <Assem name="vaccinatename" assembly="GClque"/>   缺齿
+<Assem name="vaccinatename" assembly="GClqu"/>   龋齿
+<Assem name="vaccinatename" assembly="GClyi"/>   义齿(假牙) -->
+
+</Assemes>

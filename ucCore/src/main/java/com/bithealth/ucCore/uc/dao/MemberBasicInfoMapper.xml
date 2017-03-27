@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.ucCore.uc.dao.MemberBasicInfoMapper" >
+     <resultMap id="BaseResultMap" type="com.bithealth.ucCore.uc.model.MemberBasicInfo" >
+        <id column="LogID" property="logID" jdbcType="INTEGER" />
+        <result column="ServerID" property="serverID" jdbcType="INTEGER" />
+        <result column="MemberID" property="memberID" jdbcType="CHAR" />
+        <result column="MemberName" property="memberName" jdbcType="VARCHAR" />
+        <result column="MemberSex" property="memberSex" jdbcType="TINYINT" />
+        <result column="Birthday" property="birthday" jdbcType="DATE" />
+        <result column="Mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="IDCard" property="IDCard" jdbcType="VARCHAR" />
+        <result column="HeadAddress" property="headAddress" jdbcType="VARCHAR" />
+        <result column="Pwd" property="pwd" jdbcType="VARCHAR" />
+        <result column="SyncTimestamp" property="syncTimestamp" jdbcType="BIGINT" />
+        <result column="VerifyType" property="verifyType" jdbcType="TINYINT" />
+        <result column="IsInfoPerfect" property="isInfoPerfect" jdbcType="TINYINT" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="MemNameCode" property="memNameCode" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, ServerID, MemberID, MemberName, MemberSex, Birthday, Mobile, IDCard, HeadAddress, 
+        Pwd, SyncTimestamp, VerifyType, IsInfoPerfect, CreateTime, UpdateTime, MemNameCode
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.ucCore.uc.model.MemberBasicInfoExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_member
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.ucCore.uc.model.MemberBasicInfoExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_member
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_member
+        where LogID = #{logID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.ucCore.uc.model.MemberBasicInfo" useGeneratedKeys="true" keyProperty="logID" >
+        insert into tb_member (ServerID, MemberID, MemberName, 
+            MemberSex, Birthday, Mobile, 
+            IDCard, HeadAddress, Pwd, 
+            SyncTimestamp, VerifyType, IsInfoPerfect, 
+            CreateTime, UpdateTime, MemNameCode
+            )
+        values (#{serverID,jdbcType=INTEGER}, #{memberID,jdbcType=CHAR}, #{memberName,jdbcType=VARCHAR}, 
+            #{memberSex,jdbcType=TINYINT}, #{birthday,jdbcType=DATE}, #{mobile,jdbcType=VARCHAR}, 
+            #{IDCard,jdbcType=VARCHAR}, #{headAddress,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+            #{syncTimestamp,jdbcType=BIGINT}, #{verifyType,jdbcType=TINYINT}, #{isInfoPerfect,jdbcType=TINYINT}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{memNameCode,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.ucCore.uc.model.MemberBasicInfo" useGeneratedKeys="true" keyProperty="logID" >
+        insert into tb_member
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="serverID != null" >
+                ServerID,
+            </if>
+            <if test="memberID != null" >
+                MemberID,
+            </if>
+            <if test="memberName != null" >
+                MemberName,
+            </if>
+            <if test="memberSex != null" >
+                MemberSex,
+            </if>
+            <if test="birthday != null" >
+                Birthday,
+            </if>
+            <if test="mobile != null" >
+                Mobile,
+            </if>
+            <if test="IDCard != null" >
+                IDCard,
+            </if>
+            <if test="headAddress != null" >
+                HeadAddress,
+            </if>
+            <if test="pwd != null" >
+                Pwd,
+            </if>
+            <if test="syncTimestamp != null" >
+                SyncTimestamp,
+            </if>
+            <if test="verifyType != null" >
+                VerifyType,
+            </if>
+            <if test="isInfoPerfect != null" >
+                IsInfoPerfect,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+            <if test="memNameCode != null" >
+                MemNameCode,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="serverID != null" >
+                #{serverID,jdbcType=INTEGER},
+            </if>
+            <if test="memberID != null" >
+                #{memberID,jdbcType=CHAR},
+            </if>
+            <if test="memberName != null" >
+                #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberSex != null" >
+                #{memberSex,jdbcType=TINYINT},
+            </if>
+            <if test="birthday != null" >
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="mobile != null" >
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="IDCard != null" >
+                #{IDCard,jdbcType=VARCHAR},
+            </if>
+            <if test="headAddress != null" >
+                #{headAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null" >
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="syncTimestamp != null" >
+                #{syncTimestamp,jdbcType=BIGINT},
+            </if>
+            <if test="verifyType != null" >
+                #{verifyType,jdbcType=TINYINT},
+            </if>
+            <if test="isInfoPerfect != null" >
+                #{isInfoPerfect,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="memNameCode != null" >
+                #{memNameCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.ucCore.uc.model.MemberBasicInfoExample" resultType="java.lang.Integer" >
+        select count(*) from tb_member
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update tb_member
+        <set >
+            <if test="record.logID != null" >
+                LogID = #{record.logID,jdbcType=INTEGER},
+            </if>
+            <if test="record.serverID != null" >
+                ServerID = #{record.serverID,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberID != null" >
+                MemberID = #{record.memberID,jdbcType=CHAR},
+            </if>
+            <if test="record.memberName != null" >
+                MemberName = #{record.memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memberSex != null" >
+                MemberSex = #{record.memberSex,jdbcType=TINYINT},
+            </if>
+            <if test="record.birthday != null" >
+                Birthday = #{record.birthday,jdbcType=DATE},
+            </if>
+            <if test="record.mobile != null" >
+                Mobile = #{record.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.IDCard != null" >
+                IDCard = #{record.IDCard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.headAddress != null" >
+                HeadAddress = #{record.headAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pwd != null" >
+                Pwd = #{record.pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.syncTimestamp != null" >
+                SyncTimestamp = #{record.syncTimestamp,jdbcType=BIGINT},
+            </if>
+            <if test="record.verifyType != null" >
+                VerifyType = #{record.verifyType,jdbcType=TINYINT},
+            </if>
+            <if test="record.isInfoPerfect != null" >
+                IsInfoPerfect = #{record.isInfoPerfect,jdbcType=TINYINT},
+            </if>
+            <if test="record.createTime != null" >
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.memNameCode != null" >
+                MemNameCode = #{record.memNameCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update tb_member
+        set LogID = #{record.logID,jdbcType=INTEGER},
+            ServerID = #{record.serverID,jdbcType=INTEGER},
+            MemberID = #{record.memberID,jdbcType=CHAR},
+            MemberName = #{record.memberName,jdbcType=VARCHAR},
+            MemberSex = #{record.memberSex,jdbcType=TINYINT},
+            Birthday = #{record.birthday,jdbcType=DATE},
+            Mobile = #{record.mobile,jdbcType=VARCHAR},
+            IDCard = #{record.IDCard,jdbcType=VARCHAR},
+            HeadAddress = #{record.headAddress,jdbcType=VARCHAR},
+            Pwd = #{record.pwd,jdbcType=VARCHAR},
+            SyncTimestamp = #{record.syncTimestamp,jdbcType=BIGINT},
+            VerifyType = #{record.verifyType,jdbcType=TINYINT},
+            IsInfoPerfect = #{record.isInfoPerfect,jdbcType=TINYINT},
+            CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+            MemNameCode = #{record.memNameCode,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.ucCore.uc.model.MemberBasicInfo" >
+        update tb_member
+        <set >
+            <if test="serverID != null" >
+                ServerID = #{serverID,jdbcType=INTEGER},
+            </if>
+            <if test="memberID != null" >
+                MemberID = #{memberID,jdbcType=CHAR},
+            </if>
+            <if test="memberName != null" >
+                MemberName = #{memberName,jdbcType=VARCHAR},
+            </if>
+            <if test="memberSex != null" >
+                MemberSex = #{memberSex,jdbcType=TINYINT},
+            </if>
+            <if test="birthday != null" >
+                Birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="mobile != null" >
+                Mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="IDCard != null" >
+                IDCard = #{IDCard,jdbcType=VARCHAR},
+            </if>
+            <if test="headAddress != null" >
+                HeadAddress = #{headAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null" >
+                Pwd = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="syncTimestamp != null" >
+                SyncTimestamp = #{syncTimestamp,jdbcType=BIGINT},
+            </if>
+            <if test="verifyType != null" >
+                VerifyType = #{verifyType,jdbcType=TINYINT},
+            </if>
+            <if test="isInfoPerfect != null" >
+                IsInfoPerfect = #{isInfoPerfect,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="memNameCode != null" >
+                MemNameCode = #{memNameCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.ucCore.uc.model.MemberBasicInfo" >
+        update tb_member
+        set ServerID = #{serverID,jdbcType=INTEGER},
+            MemberID = #{memberID,jdbcType=CHAR},
+            MemberName = #{memberName,jdbcType=VARCHAR},
+            MemberSex = #{memberSex,jdbcType=TINYINT},
+            Birthday = #{birthday,jdbcType=DATE},
+            Mobile = #{mobile,jdbcType=VARCHAR},
+            IDCard = #{IDCard,jdbcType=VARCHAR},
+            HeadAddress = #{headAddress,jdbcType=VARCHAR},
+            Pwd = #{pwd,jdbcType=VARCHAR},
+            SyncTimestamp = #{syncTimestamp,jdbcType=BIGINT},
+            VerifyType = #{verifyType,jdbcType=TINYINT},
+            IsInfoPerfect = #{isInfoPerfect,jdbcType=TINYINT},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            MemNameCode = #{memNameCode,jdbcType=VARCHAR}
+        where LogID = #{logID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_member
+        where LogID = #{logID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.ucCore.uc.model.MemberBasicInfoExample" >
+        delete from tb_member
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- 根据会员id查询会员 -->
+    <select id="selectByMemberIDs" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_member where MemberID in(
+        <foreach collection="list" item="item" index="index" separator=",">
+	        #{item}
+        </foreach>
+        )
+    </select> 
+    
+    <!-- 根据参数查询会员 -->
+    <select id="selectMemberBySearchParam" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT a.`MemberID` ,a.`MemberName`,a.`IDCard`,a.`Mobile`,a.`ServerID` ,a.`HeadAddress` FROM tb_member a  
+		LEFT JOIN  memberunifiedlogin b ON a.`MemberID` = b.`MemberID`
+		WHERE (a.`Mobile` = #{param}  OR a.`IDCard` = #{param} OR b.`Account` =#{param}) GROUP BY  a.`MemberID` 
+    </select> 
+    
+    
+    <!-- 根据账号和密码查询会员的基本信息 -->
+   	<select id="selectMemberByAccountAndPwd" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT b.`MemberID`,b.`MemberName`,b.`MemberSex`,b.`HeadAddress`,b.`Mobile`,b.`IDCard`  FROM `MemberUnifiedLogin` a ,`tb_member` b 
+		WHERE a.`MemberID` = b.`MemberID` 
+		AND a.`Account` = #{account}
+		AND b.`Pwd` = #{pwd}
+    </select> 
+    
+    
+   <select id="selectByIdCareOrMemberNameAndTel" parameterType="com.bithealth.ucCore.uc.model.MemberBasicInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_member a 
+        WHERE a.`IDCard` = #{IDCard}
+        <if test=" memberName != '' and memberName != null and mobile != '' and mobile != null " >
+			OR ( a.`MemberName` = #{memberName}  AND a.`Mobile` = #{mobile} )
+        </if>
+    </select>
+    <resultMap type="com.bithealth.ucCore.uc.result.MemberBase" id="memberResultMap">
+       <result column="memberID" property="memberGUID" jdbcType="VARCHAR"/>
+       <result column="MemberName" property="memberName" jdbcType="VARCHAR"/>
+       <result column="MemberSex" property="gender" jdbcType="VARCHAR"/>
+       <result column="IDCard" property="idcard" jdbcType="VARCHAR"/>
+       <result column="Mobile" property="tel" jdbcType="VARCHAR"/>
+       <result column="serverName" property="serverName" jdbcType="VARCHAR"/>
+       <result column="ServerID" property="serverId" jdbcType="INTEGER"/>
+    </resultMap> 
+    
+    <select id="selectMemberByDetail" parameterType="map" resultMap="memberResultMap">
+    SELECT m.memberID,m.`MemberName`,
+    CASE WHEN m.`MemberSex` = 1 THEN '男'
+         WHEN m.MemberSex = 2 THEN '女' 
+         ELSE '未知' END MemberSex,
+    m.`IDCard`,m.`Mobile`,a.`serverName`,m.`ServerID` FROM `tb_member` m LEFT JOIN `app_server` a ON a.`id`=m.`ServerID` 
+    <where>
+    <if test="memberName != null and memberName != ''">
+     AND m.`MemberName`= #{memberName}
+    </if>
+    <if test="idcard != null and idcard != ''">
+    AND  m.`IDCard`= #{idcard}
+    </if>
+    <if test="tel != null and tel != ''">
+    m.`Mobile`=#{tel}
+    </if>
+    </where>
+    </select>
+
+    <select id="selectByAccount" parameterType="string" resultMap="BaseResultMap">
+    SELECT m.* FROM `tb_member` m INNER JOIN `memberunifiedlogin` u ON m.`MemberID`=u.`MemberID` AND u.`Account`=#{_parameter}
+    </select>
+</mapper>

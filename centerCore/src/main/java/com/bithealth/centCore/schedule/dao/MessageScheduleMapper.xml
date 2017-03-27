@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.centCore.schedule.dao.MessageScheduleMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.centCore.schedule.model.MessageSchedule" >
+        <id column="LogID" property="logID" jdbcType="BIGINT" />
+        <result column="MsgType" property="msgType" jdbcType="TINYINT" />
+        <result column="SendType" property="sendType" jdbcType="TINYINT" />
+        <result column="Sender" property="sender" jdbcType="CHAR" />
+        <result column="ReceiveType" property="receiveType" jdbcType="TINYINT" />
+        <result column="Receiver" property="receiver" jdbcType="VARCHAR" />
+        <result column="LastSourceID" property="lastSourceID" jdbcType="BIGINT" />
+        <result column="LastContent" property="lastContent" jdbcType="VARCHAR" />
+        <result column="LastContentNotice" property="lastContentNotice" jdbcType="VARCHAR" />
+        <result column="ScheduleTime" property="scheduleTime" jdbcType="TIMESTAMP" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, MsgType, SendType, Sender, ReceiveType, Receiver, LastSourceID, LastContent, 
+        LastContentNotice, ScheduleTime, CreateTime, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.schedule.model.MessageScheduleExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_messageschedule
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.schedule.model.MessageScheduleExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_messageschedule
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_messageschedule
+        where LogID = #{logID,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.centCore.schedule.model.MessageSchedule" >
+        insert into tb_messageschedule
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="logID != null" >
+                LogID,
+            </if>
+            <if test="msgType != null" >
+                MsgType,
+            </if>
+            <if test="sendType != null" >
+                SendType,
+            </if>
+            <if test="sender != null" >
+                Sender,
+            </if>
+            <if test="receiveType != null" >
+                ReceiveType,
+            </if>
+            <if test="receiver != null" >
+                Receiver,
+            </if>
+            <if test="lastSourceID != null" >
+                LastSourceID,
+            </if>
+            <if test="lastContent != null" >
+                LastContent,
+            </if>
+            <if test="lastContentNotice != null" >
+                LastContentNotice,
+            </if>
+            <if test="scheduleTime != null" >
+                ScheduleTime,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="logID != null" >
+                #{logID,jdbcType=BIGINT},
+            </if>
+            <if test="msgType != null" >
+                #{msgType,jdbcType=TINYINT},
+            </if>
+            <if test="sendType != null" >
+                #{sendType,jdbcType=TINYINT},
+            </if>
+            <if test="sender != null" >
+                #{sender,jdbcType=CHAR},
+            </if>
+            <if test="receiveType != null" >
+                #{receiveType,jdbcType=TINYINT},
+            </if>
+            <if test="receiver != null" >
+                #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="lastSourceID != null" >
+                #{lastSourceID,jdbcType=BIGINT},
+            </if>
+            <if test="lastContent != null" >
+                #{lastContent,jdbcType=VARCHAR},
+            </if>
+            <if test="lastContentNotice != null" >
+                #{lastContentNotice,jdbcType=VARCHAR},
+            </if>
+            <if test="scheduleTime != null" >
+                #{scheduleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.centCore.schedule.model.MessageScheduleExample" resultType="java.lang.Integer" >
+        select count(*) from tb_messageschedule
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_messageschedule
+            <set >
+                <if test="record.logID != null" >
+                    LogID = #{record.logID,jdbcType=BIGINT},
+                </if>
+                <if test="record.msgType != null" >
+                    MsgType = #{record.msgType,jdbcType=TINYINT},
+                </if>
+                <if test="record.sendType != null" >
+                    SendType = #{record.sendType,jdbcType=TINYINT},
+                </if>
+                <if test="record.sender != null" >
+                    Sender = #{record.sender,jdbcType=CHAR},
+                </if>
+                <if test="record.receiveType != null" >
+                    ReceiveType = #{record.receiveType,jdbcType=TINYINT},
+                </if>
+                <if test="record.receiver != null" >
+                    Receiver = #{record.receiver,jdbcType=VARCHAR},
+                </if>
+                <if test="record.lastSourceID != null" >
+                    LastSourceID = #{record.lastSourceID,jdbcType=BIGINT},
+                </if>
+                <if test="record.lastContent != null" >
+                    LastContent = #{record.lastContent,jdbcType=VARCHAR},
+                </if>
+                <if test="record.lastContentNotice != null" >
+                    LastContentNotice = #{record.lastContentNotice,jdbcType=VARCHAR},
+                </if>
+                <if test="record.scheduleTime != null" >
+                    ScheduleTime = #{record.scheduleTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.createTime != null" >
+                    CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateTime != null" >
+                    UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_messageschedule
+            set LogID = #{record.logID,jdbcType=BIGINT},
+                MsgType = #{record.msgType,jdbcType=TINYINT},
+                SendType = #{record.sendType,jdbcType=TINYINT},
+                Sender = #{record.sender,jdbcType=CHAR},
+                ReceiveType = #{record.receiveType,jdbcType=TINYINT},
+                Receiver = #{record.receiver,jdbcType=VARCHAR},
+                LastSourceID = #{record.lastSourceID,jdbcType=BIGINT},
+                LastContent = #{record.lastContent,jdbcType=VARCHAR},
+                LastContentNotice = #{record.lastContentNotice,jdbcType=VARCHAR},
+                ScheduleTime = #{record.scheduleTime,jdbcType=TIMESTAMP},
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.centCore.schedule.model.MessageSchedule" >
+        update tb_messageschedule
+        <set >
+            <if test="msgType != null" >
+                MsgType = #{msgType,jdbcType=TINYINT},
+            </if>
+            <if test="sendType != null" >
+                SendType = #{sendType,jdbcType=TINYINT},
+            </if>
+            <if test="sender != null" >
+                Sender = #{sender,jdbcType=CHAR},
+            </if>
+            <if test="receiveType != null" >
+                ReceiveType = #{receiveType,jdbcType=TINYINT},
+            </if>
+            <if test="receiver != null" >
+                Receiver = #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="lastSourceID != null" >
+                LastSourceID = #{lastSourceID,jdbcType=BIGINT},
+            </if>
+            <if test="lastContent != null" >
+                LastContent = #{lastContent,jdbcType=VARCHAR},
+            </if>
+            <if test="lastContentNotice != null" >
+                LastContentNotice = #{lastContentNotice,jdbcType=VARCHAR},
+            </if>
+            <if test="scheduleTime != null" >
+                ScheduleTime = #{scheduleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LogID = #{logID,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.centCore.schedule.model.MessageSchedule" >
+        update tb_messageschedule
+        set MsgType = #{msgType,jdbcType=TINYINT},
+            SendType = #{sendType,jdbcType=TINYINT},
+            Sender = #{sender,jdbcType=CHAR},
+            ReceiveType = #{receiveType,jdbcType=TINYINT},
+            Receiver = #{receiver,jdbcType=VARCHAR},
+            LastSourceID = #{lastSourceID,jdbcType=BIGINT},
+            LastContent = #{lastContent,jdbcType=VARCHAR},
+            LastContentNotice = #{lastContentNotice,jdbcType=VARCHAR},
+            ScheduleTime = #{scheduleTime,jdbcType=TIMESTAMP},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where LogID = #{logID,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from tb_messageschedule
+        where LogID = #{logID,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.centCore.schedule.model.MessageScheduleExample" >
+        <if test="_parameter != null" >
+            delete from tb_messageschedule
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

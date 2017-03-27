@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.memberLabel.dao.LabelItemMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.memberLabel.model.LabelItem" >
+        <id column="LItemID" property="litemid" jdbcType="INTEGER" />
+        <result column="LClassID" property="lclassid" jdbcType="INTEGER" />
+        <result column="ItemName" property="itemname" jdbcType="VARCHAR" />
+        <result column="Remarks" property="remarks" jdbcType="VARCHAR" />
+        <result column="ItemStatus" property="itemstatus" jdbcType="TINYINT" />
+        <result column="OrgID" property="orgid" jdbcType="INTEGER" />
+        <result column="UseRange" property="userange" jdbcType="TINYINT" />
+        <result column="CreateID" property="createid" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateid" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+        <association property="labelTag" column="LClassID" select="com.bithealth.memberCore.memberLabel.dao.LabelTagMapper.selectByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LItemID, LClassID, ItemName, Remarks, ItemStatus, OrgID, UseRange, CreateID, CreateTime, 
+        UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.memberLabel.model.LabelItemExample" >
+        select 
+        LItemID, tb_label_item.LClassID,  ItemName, Remarks,  ItemStatus, OrgID,  
+        UseRange, tb_label_item.CreateID, tb_label_item.CreateTime,
+        tb_label_item.UpdateID, tb_label_item.UpdateTime,tb_label_class.ClassName 
+        from tb_label_item left join tb_label_class on tb_label_item.LClassID=tb_label_class.LClassID
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectLabelByPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.memberLabel.model.LabelItem" >
+        select LItemID, a.LClassID, ItemName, Remarks, ItemStatus, a.OrgID, UseRange, a.CreateID, a.CreateTime, 
+        a.UpdateID, a.UpdateTime,b.DocName,o.orgName
+        from tb_label_item a
+        LEFT JOIN odoc b ON a.CreateID = b.Docid 
+        left join orgs o on o.OrgID=a.OrgID
+        left JOIN  tb_label_class ON a.LClassID =tb_label_class.LClassID
+          <where>
+        	<if test="lclassid != null and lclassid > 0" >
+                AND a.LClassID = #{lclassid,jdbcType=TINYINT}
+            </if>
+            <if test="itemname != null and itemname != ''" >
+                AND a.ItemName LIKE CONCAT('%', #{itemname,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="userange != null" >
+                AND a.UseRange = #{userange,jdbcType=TINYINT}
+            </if>
+         <if test="itemstatus != null" >
+                <choose>
+		         	<when test="itemstatus  == 3">
+		         		AND a.ItemStatus in (1,3)
+		         	</when>
+		         	<otherwise>
+		         		AND a.ItemStatus = #{itemstatus,jdbcType=TINYINT}
+		         	</otherwise>
+		         </choose>
+            </if>
+
+
+            <choose>
+            	<when test="roleId eq 6"><!-- 系统管理员 -->
+            		AND a.UseRange = 1
+            	</when>
+            	<when test="roleId eq 1"><!-- 医生管理员 (superOrgIds 包含本组织) -->
+            		AND ((a.OrgID IN (${superOrgIds}) AND a.UseRange = 2) OR (a.UseRange = 1 ) OR (a.OrgID = #{orgID,jdbcType=INTEGER} AND a.UseRange = 2 ))
+            	</when>
+            	<otherwise><!-- 医生账号 (superOrgIds 包含本组织) -->
+            		AND ((a.OrgID IN (${superOrgIds}) AND a.UseRange = 2 ) OR (a.UseRange = 1) OR a.CreateID = #{createid,jdbcType=INTEGER})<!-- 上级组织内 -->
+            	</otherwise>
+            </choose>
+        </where> AND 1=1 
+         ORDER BY a.UpdateTime DESC
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_label_item
+        where LItemID = #{litemid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.memberLabel.model.LabelItem" useGeneratedKeys="true" keyProperty="litemid">
+        insert into tb_label_item
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="litemid != null" >
+                LItemID,
+            </if>
+            <if test="lclassid != null" >
+                LClassID,
+            </if>
+            <if test="itemname != null" >
+                ItemName,
+            </if>
+            <if test="remarks != null" >
+                Remarks,
+            </if>
+            <if test="itemstatus != null" >
+                ItemStatus,
+            </if>
+            <if test="orgid != null" >
+                OrgID,
+            </if>
+            <if test="userange != null" >
+                UseRange,
+            </if>
+            <if test="createid != null" >
+                CreateID,
+            </if>
+            <if test="createtime != null" >
+                CreateTime,
+            </if>
+            <if test="updateid != null" >
+                UpdateID,
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="litemid != null" >
+                #{litemid,jdbcType=INTEGER},
+            </if>
+            <if test="lclassid != null" >
+                #{lclassid,jdbcType=INTEGER},
+            </if>
+            <if test="itemname != null" >
+                #{itemname,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null" >
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="itemstatus != null" >
+                #{itemstatus,jdbcType=TINYINT},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="userange != null" >
+                #{userange,jdbcType=TINYINT},
+            </if>
+            <if test="createid != null" >
+                #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateid != null" >
+                #{updateid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.memberLabel.model.LabelItemExample" resultType="java.lang.Integer" >
+        select count(*) from tb_label_item
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_label_item
+            <set >
+                <if test="record.litemid != null" >
+                    LItemID = #{record.litemid,jdbcType=INTEGER},
+                </if>
+                <if test="record.lclassid != null" >
+                    LClassID = #{record.lclassid,jdbcType=INTEGER},
+                </if>
+                <if test="record.itemname != null" >
+                    ItemName = #{record.itemname,jdbcType=VARCHAR},
+                </if>
+                <if test="record.remarks != null" >
+                    Remarks = #{record.remarks,jdbcType=VARCHAR},
+                </if>
+                <if test="record.itemstatus != null" >
+                    ItemStatus = #{record.itemstatus,jdbcType=TINYINT},
+                </if>
+                <if test="record.orgid != null" >
+                    OrgID = #{record.orgid,jdbcType=INTEGER},
+                </if>
+                <if test="record.userange != null" >
+                    UseRange = #{record.userange,jdbcType=TINYINT},
+                </if>
+                <if test="record.createid != null" >
+                    CreateID = #{record.createid,jdbcType=INTEGER},
+                </if>
+                <if test="record.createtime != null" >
+                    CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateid != null" >
+                    UpdateID = #{record.updateid,jdbcType=INTEGER},
+                </if>
+                <if test="record.updatetime != null" >
+                    UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_label_item
+            set LItemID = #{record.litemid,jdbcType=INTEGER},
+                LClassID = #{record.lclassid,jdbcType=INTEGER},
+                ItemName = #{record.itemname,jdbcType=VARCHAR},
+                Remarks = #{record.remarks,jdbcType=VARCHAR},
+                ItemStatus = #{record.itemstatus,jdbcType=TINYINT},
+                OrgID = #{record.orgid,jdbcType=INTEGER},
+                UseRange = #{record.userange,jdbcType=TINYINT},
+                CreateID = #{record.createid,jdbcType=INTEGER},
+                CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+                UpdateID = #{record.updateid,jdbcType=INTEGER},
+                UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.memberLabel.model.LabelItem" >
+        update tb_label_item
+        <set >
+            <if test="lclassid != null" >
+                LClassID = #{lclassid,jdbcType=INTEGER},
+            </if>
+            <if test="itemname != null" >
+                ItemName = #{itemname,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null" >
+                Remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="itemstatus != null" >
+                ItemStatus = #{itemstatus,jdbcType=TINYINT},
+            </if>
+            <if test="orgid != null" >
+                OrgID = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="userange != null" >
+                UseRange = #{userange,jdbcType=TINYINT},
+            </if>
+            <if test="createid != null" >
+                CreateID = #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateid != null" >
+                UpdateID = #{updateid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LItemID = #{litemid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.memberLabel.model.LabelItem" >
+        update tb_label_item
+        set LClassID = #{lclassid,jdbcType=INTEGER},
+            ItemName = #{itemname,jdbcType=VARCHAR},
+            Remarks = #{remarks,jdbcType=VARCHAR},
+           <!--  ItemStatus = #{itemstatus,jdbcType=TINYINT}, -->
+            OrgID = #{orgid,jdbcType=INTEGER},
+            UseRange = #{userange,jdbcType=TINYINT},
+            CreateID = #{createid,jdbcType=INTEGER},
+            CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateid,jdbcType=INTEGER},
+            UpdateTime = #{updatetime,jdbcType=TIMESTAMP}
+        where LItemID = #{litemid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_label_item
+        where LItemID = #{litemid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.memberLabel.model.LabelItemExample" >
+        <if test="_parameter != null" >
+            delete from tb_label_item
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- 自定义SQL -->
+    <update id="updateItemStatus" parameterType="com.bithealth.memberCore.memberLabel.model.LabelItem" >
+        update tb_label_item
+        set ItemStatus = #{itemstatus,jdbcType=TINYINT} where LItemID = #{litemid,jdbcType=INTEGER}
+    </update>
+    
+     <select id="selectSysLabel" parameterType="Integer" resultMap="BaseResultMap">
+       SELECT * FROM tb_label_item LEFT JOIN  `tb_label_class` ON tb_label_class.`LClassID`= tb_label_item.`LClassID` WHERE tb_label_class.`IsSystem`=0 GROUP BY LItemID 
+     </select>
+    
+    <select id="selectDefinedLabel" parameterType="Integer" resultMap="BaseResultMap" >
+      SELECT * FROM tb_label_item LEFT JOIN  `tb_label_class` ON tb_label_class.`LClassID`= tb_label_item.`LClassID` 
+      WHERE tb_label_class.`IsSystem`=0 AND tb_label_item.CreateID = #{createid,jdbcType=INTEGER} GROUP BY LItemID 
+    </select>
+    
+    <select id="selectByDocAndOrgs" resultMap="BaseResultMap" parameterType="map">
+    SELECT DISTINCT t.* FROM(
+			SELECT * FROM tb_label_item WHERE UseRange=1 
+			<if test="orgIds != null and orgIds != ''">
+			UNION ALL
+			SELECT * FROM tb_label_item WHERE UseRange=2 AND OrgID IN (${orgIds})
+			</if>
+			UNION ALL
+			SELECT * FROM tb_label_item WHERE UseRange=3 AND CreateID=#{docId, jdbcType=INTEGER}) t 
+			WHERE t.ItemStatus=2
+    </select>
+    
+    
+    <select id="selectLabelItem" resultMap="BaseResultMap" parameterType="map" >
+        select
+        <include refid="Base_Column_List" />
+        from tb_label_item 
+        where ItemName = #{itemname,jdbcType=VARCHAR} 
+        <if test="id != null">
+        	and LItemID != #{id,jdbcType=INTEGER} 
+        </if>
+        <choose>
+         	<when test="roleId eq 6"><!-- 系统管理员 -->
+         		AND UseRange = 1
+         	</when>
+         	<when test="roleId eq 1"><!-- 医生管理员 (superOrgIds 包含本组织) -->
+         		AND ((OrgID IN (${superOrgIds}) AND UseRange = 2) OR UseRange = 1)
+         	</when>
+         	<otherwise><!-- 医生账号 (superOrgIds 包含本组织) -->
+         		AND ((OrgID IN (${superOrgIds}) AND UseRange = 2) OR UseRange = 1 OR CreateID = #{createID,jdbcType=INTEGER})<!-- 上级组织内 -->
+         	</otherwise>
+         </choose>
+         limit 1
+    </select>
+</mapper>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>查看群建方案</title>
+	<link rel="stylesheet" href="../../css/general.css">
+	<link rel="stylesheet" href="../../js/jquery-ui/themes/overcast/jquery-ui.min.css">
+	<link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui/jquery-ui.js"></script>
+	<script type="text/javascript" src="../../js/dataPacker.js"></script>
+	<script type="text/javascript" src="../../layer/layer-v2.0/layer.js"></script>
+	<script type="text/javascript">
+		var index = layer.getFrameIndex(window.name); //获取窗口索引
+	
+		function chooseProgramme(title){
+			layer.closeAll();
+			layer.open({
+		   	    type: 2,
+		   		skin : 'skin1',
+		   	    title: title,
+		   	    shadeClose: false,
+		   	    shade: 0,
+		   	    area: ['650px', '350px'],
+		   	    content: '', //iframe的url
+		   	}); 
+		}
+	</script>
+</head>
+<body>
+<div class="content">
+	<div class="content-title">
+   		查看群建方案
+	</div>
+    <form action="" method="POST" id="">
+		<div class="search-box-wrapper">
+			<ul class="search-wrapper">
+				<li>
+					<label>管理方案：</label>
+	                <div class="position-r">
+		                <input type="text" readonly>
+		                <i class="member-search" onclick="chooseProgramme('选择管理方案');"></i>
+                 	</div>
+				</li>
+				<li>
+					<label>创建日期：</label> 
+					<input class="info-date" id="startDate" type="text" name="" value='' required="required" readonly /> 
+					<span class="mar-left">至</span> 
+					<input class="info-date" id="endDate" type="text" name="" value='' required="required" readonly />
+				</li>
+				<li>
+					<label>状态：</label>
+	                <select name="">
+						<option value="0">请选择</option>
+						<option value="1">未完成</option>
+						<option value="2">已完成</option>
+					</select>
+				</li>
+				<li>
+					<button type="button" class="btn-inquiry ico-search" onclick="">查询</button>
+					<button type="button" class="btn-inquiry ico-add" onclick="">新增</button>
+				</li>
+			</ul>
+		</div>
+		<div class="table-box">
+			<table class="table-content">
+				<thead class="table-title">
+					<tr>
+						<th>管理方案</th>
+						<th>创建日期</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a href="javascript: void(0);" onclick="">查看生成明细</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="page-box">
+			<jsp:include page="/public/pageFoot.jsp"></jsp:include>
+		</div>
+	</form>
+</div>
+</body>
+</html>

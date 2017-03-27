@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.inspectCore.inspect.model.PhDiabetesdetail">
+
+
+
+<Assem name="dailysmoking" assembly="MXysl"/>   <!-- 日吸烟量 -->
+<Assem name="dailydrink" assembly="MYjsl"/>   <!-- 日饮酒量-->
+<Assem name="sportfrequency" assembly="MYdpl"/>   <!-- 运动频率 -->
+<Assem name="sportduration" assembly="MYdcxsj"/>   <!-- 每次持续时间-->
+<Assem name="idcard" assembly="DSfzh"/>   <!-- 身份证号 -->
+<Assem name="height" assembly="DSg"/>   <!-- 身高-->
+<Assem name="weight" assembly="DTz"/>   <!-- 体重-->
+<Assem name="bmi" assembly="DBmi"/>   <!-- 体质指数-->
+<Assem name="idcard" assembly="DYw"/>   <!-- 腰围 -->
+<Assem name="systolic" assembly="DSsy"/>   <!-- 收缩压-->
+<Assem name="diastolic" assembly="DSzy"/>   <!-- 舒张压 -->
+<Assem name="fpg" assembly="DKfxt"/>   <!-- 空腹血糖-->
+<Assem name="hba1c" assembly="TThxhdb"/>   <!-- 糖化血红蛋白 -->
+
+<Assem name="visitway" assembly="TSffs"/>   <!-- 随访方式 1.门诊 2.家庭 3.电话 99.其他 ok-->
+<Assem name="symptomDesc" assembly="TMqzzqt"/>   <!-- 症状其他-->
+
+<Assem name="drugcompliance" assembly="TFyycx"/>   <!-- 服药依从性 1.规律 2.间断 3.不服药 -->
+<Assem name="drugadversereaction" assembly="TYwfzy"/>   <!-- 药物不良反应 1.无 2.有-->
+<Assem name="drugadversereactionDesc" assembly="TFzyxs"/>   <!-- 副作用详述 -->
+<Assem name="transferorganddept" assembly="TZzyy"/>   <!-- 转诊机构 -->
+<Assem name="transferorganddept" assembly="TZzkb"/>   <!-- 转诊科别 -->
+<Assem name="transferreason" assembly="TZzyuanyin"/>   <!-- 转诊原因-->
+<Assem name="visitclass" assembly="TBcsffl"/>   <!-- 随访评价 1.控制满意 2.控制不满意 3.不良反应 4.并发症-->
+
+
+<Assem name="mainfood" assembly="DShzs"/>   <!-- 主食 本次值-->
+<Assem name="psychologicalrecovery" assembly="DXltz"/>   <!-- 心理调整 1良好 2.一般 3.较差 -->
+<Assem name="name" assembly="DZyxw"/>   <!-- 遵医行为 1.良好 2.一般 3. 较差-->
+<Assem name="arteriopalmus" assembly="DZbdmbd"/>   <!-- 足背动脉搏动 1.触及。 2.未触及-->
+<Assem name="othersign" assembly="DTzqt"/>   <!-- 其他 -->
+<Assem name="checkdate" assembly="DFzjcrq"/>   <!-- 检查日期-->
+<Assem name="rhg" assembly="DDxtfy"/>   <!-- 低血糖反应 1.无 2.偶尔3.频繁-->
+<Assem name="visitdateNext" assembly="GXcsfsj"/>   <!-- 下次随访时间-->
+
+<Assem name="weightNext" assembly="DTz2"/>   <!-- 目标体重 目标值-->
+<Assem name="dailysmokingNext" assembly="MXysl2"/>   <!-- 日吸烟量 目标值 -->
+<Assem name="dailydrinkNext" assembly="MYjsl2"/>   <!-- 日饮酒量  目标值-->
+<Assem name="sportfrequencyNext" assembly="MYdpl2"/>   <!-- 运动频率  目标值-->
+<Assem name="sportdurationNext" assembly="MYdcxsj2"/>   <!-- 运动时长  目标值-->
+<Assem name="mainfoodNext" assembly="DShzs2"/>   <!-- 主食  目标值 -->
+<Assem name="bmiNext" assembly="DBmi2"/>   <!-- 体质指数  目标值-->
+
+
+
+
+</Assemes>

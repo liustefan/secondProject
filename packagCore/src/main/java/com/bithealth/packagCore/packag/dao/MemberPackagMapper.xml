@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.packagCore.packag.dao.MemberPackagMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.packagCore.packag.model.MemberPackag" >
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <id column="LineNum" property="lineNum" jdbcType="SMALLINT" />
+        <result column="PackageCode" property="packageCode" jdbcType="INTEGER" />
+        <result column="Tag" property="tag" jdbcType="CHAR" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="Createid" property="createid" jdbcType="INTEGER" />
+        <result column="CreateName" property="createName" jdbcType="VARCHAR" />
+        <association property="packag" column="PackageCode" javaType="com.bithealth.packagCore.packag.model.Packag" 
+        			 select="com.bithealth.packagCore.packag.dao.PackagMapper.selectByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Memberid, LineNum, PackageCode, Tag, CreateTime, Createid, CreateName
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.MemberPackagExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem5
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.MemberPackagExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem5
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.MemberPackagKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from mem5
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.packagCore.packag.model.MemberPackag" >
+        insert into mem5 (Memberid, LineNum, PackageCode, 
+            Tag, CreateTime, Createid, 
+            CreateName)
+        values (#{memberid,jdbcType=INTEGER}, #{lineNum,jdbcType=SMALLINT}, #{packageCode,jdbcType=INTEGER}, 
+            #{tag,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createid,jdbcType=INTEGER}, 
+            #{createName,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.packagCore.packag.model.MemberPackag" >
+        insert into mem5
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="lineNum != null" >
+                LineNum,
+            </if>
+            <if test="packageCode != null" >
+                PackageCode,
+            </if>
+            <if test="tag != null" >
+                Tag,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="createid != null" >
+                Createid,
+            </if>
+            <if test="createName != null" >
+                CreateName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="lineNum != null" >
+                #{lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="packageCode != null" >
+                #{packageCode,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createid != null" >
+                #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null" >
+                #{createName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.packagCore.packag.model.MemberPackagExample" resultType="java.lang.Integer" >
+        select count(*) from mem5
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update mem5
+        <set >
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.lineNum != null" >
+                LineNum = #{record.lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="record.packageCode != null" >
+                PackageCode = #{record.packageCode,jdbcType=INTEGER},
+            </if>
+            <if test="record.tag != null" >
+                Tag = #{record.tag,jdbcType=CHAR},
+            </if>
+            <if test="record.createTime != null" >
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createid != null" >
+                Createid = #{record.createid,jdbcType=INTEGER},
+            </if>
+            <if test="record.createName != null" >
+                CreateName = #{record.createName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update mem5
+        set Memberid = #{record.memberid,jdbcType=INTEGER},
+            LineNum = #{record.lineNum,jdbcType=SMALLINT},
+            PackageCode = #{record.packageCode,jdbcType=INTEGER},
+            Tag = #{record.tag,jdbcType=CHAR},
+            CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            Createid = #{record.createid,jdbcType=INTEGER},
+            CreateName = #{record.createName,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.packagCore.packag.model.MemberPackag" >
+        update mem5
+        <set >
+            <if test="packageCode != null" >
+                PackageCode = #{packageCode,jdbcType=INTEGER},
+            </if>
+            <if test="tag != null" >
+                Tag = #{tag,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createid != null" >
+                Createid = #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null" >
+                CreateName = #{createName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.packagCore.packag.model.MemberPackag" >
+        update mem5
+        set PackageCode = #{packageCode,jdbcType=INTEGER},
+            Tag = #{tag,jdbcType=CHAR},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            Createid = #{createid,jdbcType=INTEGER},
+            CreateName = #{createName,jdbcType=VARCHAR}
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.packagCore.packag.model.MemberPackagKey" >
+        delete from mem5
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.packagCore.packag.model.MemberPackagExample" >
+        delete from mem5
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- 获取最大的lineNum -->
+    <select id="selectMaxLineNum" resultType="java.lang.Integer" >
+		select max(lineNum) from mem5
+    </select>
+    
+    <!-- 查询套餐的会员订购情况 -->
+    <select id="selectByParam" resultMap="BaseResultMap"  parameterType="java.lang.Integer" >
+		SELECT a.* FROM mem5 a JOIN omem b ON a.Memberid=b.Memberid 
+		WHERE a.PackageCode=#{packageCode} AND a.Tag='T' AND b.UseTag='T'
+    </select>
+    
+
+	<!--调用存储过程  -->
+    <select id="exProc_pro_insOMAS" parameterType="java.util.Map" statementType="CALLABLE">  
+      {call pro_insOMAS(#{createId},#{createName},#{memberId})}
+    </select>  
+
+    <!--调用存储过程  -->
+    <select id="exProc_pro_updOsrs2" parameterType="java.util.Map" statementType="CALLABLE">  
+      {call pro_updOsrs2(#{createId},#{memberId})}
+    </select>  
+
+
+</mapper>

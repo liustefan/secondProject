@@ -1,0 +1,1144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.dataConversionServer.qiangHua.dao.ThealthRecordsMapper" >
+  <resultMap id="BaseResultMap" type="com.bithealth.dataConversionServer.qiangHua.bean.ThealthRecords" >
+    <id column="HR_GID" property="hrGid" jdbcType="VARCHAR" />
+    <result column="DOC_ID" property="docId" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+    <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="IDC_NO" property="idcNo" jdbcType="VARCHAR" />
+    <result column="WORK_UNIT" property="workUnit" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+    <result column="CONTACT_TEL" property="contactTel" jdbcType="VARCHAR" />
+    <result column="RESIDENT_FLAG" property="residentFlag" jdbcType="VARCHAR" />
+    <result column="NATION" property="nation" jdbcType="VARCHAR" />
+    <result column="NATION_DES" property="nationDes" jdbcType="VARCHAR" />
+    <result column="BLOOD_GROUP" property="bloodGroup" jdbcType="VARCHAR" />
+    <result column="RH_TYPE" property="rhType" jdbcType="VARCHAR" />
+    <result column="EDU_LEVEL" property="eduLevel" jdbcType="VARCHAR" />
+    <result column="PROFESSION" property="profession" jdbcType="VARCHAR" />
+    <result column="MAR_STATUS" property="marStatus" jdbcType="VARCHAR" />
+    <result column="PAY_TYPE" property="payType" jdbcType="VARCHAR" />
+    <result column="PAY_TYPE2" property="payType2" jdbcType="VARCHAR" />
+    <result column="PAY_TYPE3" property="payType3" jdbcType="VARCHAR" />
+    <result column="OTH_PAY_TYPE" property="othPayType" jdbcType="VARCHAR" />
+    <result column="DRUG_ALLERGY" property="drugAllergy" jdbcType="VARCHAR" />
+    <result column="DRUG_ALLERGY2" property="drugAllergy2" jdbcType="VARCHAR" />
+    <result column="DRUG_ALLERGY3" property="drugAllergy3" jdbcType="VARCHAR" />
+    <result column="DRUG_ALLERGY4" property="drugAllergy4" jdbcType="VARCHAR" />
+    <result column="OTH_DRUG_ALLERGY" property="othDrugAllergy" jdbcType="VARCHAR" />
+    <result column="EXPOSURE" property="exposure" jdbcType="VARCHAR" />
+    <result column="EXPOSURE2" property="exposure2" jdbcType="VARCHAR" />
+    <result column="EXPOSURE3" property="exposure3" jdbcType="VARCHAR" />
+    <result column="SURGERY_FLAG" property="surgeryFlag" jdbcType="VARCHAR" />
+    <result column="SURGERY" property="surgery" jdbcType="VARCHAR" />
+    <result column="SUR_DATE" property="surDate" jdbcType="TIMESTAMP" />
+    <result column="SURGERY2" property="surgery2" jdbcType="VARCHAR" />
+    <result column="SUR_DATE2" property="surDate2" jdbcType="TIMESTAMP" />
+    <result column="TRAUMA_FLAG" property="traumaFlag" jdbcType="VARCHAR" />
+    <result column="TRAUMA" property="trauma" jdbcType="VARCHAR" />
+    <result column="TRA_DATE" property="traDate" jdbcType="TIMESTAMP" />
+    <result column="TRAUMA2" property="trauma2" jdbcType="VARCHAR" />
+    <result column="TRA_DATE2" property="traDate2" jdbcType="TIMESTAMP" />
+    <result column="TRA_BLOOD_FLAG" property="traBloodFlag" jdbcType="VARCHAR" />
+    <result column="TRA_BLOOD" property="traBlood" jdbcType="VARCHAR" />
+    <result column="TB_DATE" property="tbDate" jdbcType="TIMESTAMP" />
+    <result column="TRA_BLOOD2" property="traBlood2" jdbcType="VARCHAR" />
+    <result column="TB_DATE2" property="tbDate2" jdbcType="TIMESTAMP" />
+    <result column="FH_FATHER" property="fhFather" jdbcType="VARCHAR" />
+    <result column="FH_FATHER2" property="fhFather2" jdbcType="VARCHAR" />
+    <result column="FH_FATHER3" property="fhFather3" jdbcType="VARCHAR" />
+    <result column="FH_FATHER4" property="fhFather4" jdbcType="VARCHAR" />
+    <result column="FH_FATHER5" property="fhFather5" jdbcType="VARCHAR" />
+    <result column="FH_FATHER6" property="fhFather6" jdbcType="VARCHAR" />
+    <result column="FH_FATHER_OTH" property="fhFatherOth" jdbcType="VARCHAR" />
+    <result column="FH_MATHER" property="fhMather" jdbcType="VARCHAR" />
+    <result column="FH_MATHER2" property="fhMather2" jdbcType="VARCHAR" />
+    <result column="FH_MATHER3" property="fhMather3" jdbcType="VARCHAR" />
+    <result column="FH_MATHER4" property="fhMather4" jdbcType="VARCHAR" />
+    <result column="FH_MATHER5" property="fhMather5" jdbcType="VARCHAR" />
+    <result column="FH_MATHER6" property="fhMather6" jdbcType="VARCHAR" />
+    <result column="FH_MATHER_OTH" property="fhMatherOth" jdbcType="VARCHAR" />
+    <result column="FH_BS" property="fhBs" jdbcType="VARCHAR" />
+    <result column="FH_BS2" property="fhBs2" jdbcType="VARCHAR" />
+    <result column="FH_BS3" property="fhBs3" jdbcType="VARCHAR" />
+    <result column="FH_BS4" property="fhBs4" jdbcType="VARCHAR" />
+    <result column="FH_BS5" property="fhBs5" jdbcType="VARCHAR" />
+    <result column="FH_BS6" property="fhBs6" jdbcType="VARCHAR" />
+    <result column="FH_BS_OTH" property="fhBsOth" jdbcType="VARCHAR" />
+    <result column="FH_CHILD" property="fhChild" jdbcType="VARCHAR" />
+    <result column="FH_CHILD2" property="fhChild2" jdbcType="VARCHAR" />
+    <result column="FH_CHILD3" property="fhChild3" jdbcType="VARCHAR" />
+    <result column="FH_CHILD4" property="fhChild4" jdbcType="VARCHAR" />
+    <result column="FH_CHILD5" property="fhChild5" jdbcType="VARCHAR" />
+    <result column="FH_CHILD6" property="fhChild6" jdbcType="VARCHAR" />
+    <result column="FH_CHILD_OTH" property="fhChildOth" jdbcType="VARCHAR" />
+    <result column="GEN_DISEASES_FLAG" property="genDiseasesFlag" jdbcType="VARCHAR" />
+    <result column="GEN_DISEASES" property="genDiseases" jdbcType="VARCHAR" />
+    <result column="DISABILITY" property="disability" jdbcType="VARCHAR" />
+    <result column="DISABILITY2" property="disability2" jdbcType="VARCHAR" />
+    <result column="DISABILITY3" property="disability3" jdbcType="VARCHAR" />
+    <result column="DISABILITY4" property="disability4" jdbcType="VARCHAR" />
+    <result column="DISABILITY5" property="disability5" jdbcType="VARCHAR" />
+    <result column="DISABILITY6" property="disability6" jdbcType="VARCHAR" />
+    <result column="DISABILITY_OTH" property="disabilityOth" jdbcType="VARCHAR" />
+    <result column="KIC_EXHAUST" property="kicExhaust" jdbcType="VARCHAR" />
+    <result column="FUEL" property="fuel" jdbcType="VARCHAR" />
+    <result column="DRI_WATER" property="driWater" jdbcType="VARCHAR" />
+    <result column="TOILET" property="toilet" jdbcType="VARCHAR" />
+    <result column="LIVESTOCK" property="livestock" jdbcType="VARCHAR" />
+    <result column="CRE_ORG" property="creOrg" jdbcType="VARCHAR" />
+    <result column="CRE_USER" property="creUser" jdbcType="VARCHAR" />
+    <result column="CRE_DATE" property="creDate" jdbcType="TIMESTAMP" />
+    <result column="UPD_USER" property="updUser" jdbcType="VARCHAR" />
+    <result column="UPD_DATE" property="updDate" jdbcType="TIMESTAMP" />
+    <result column="DATA_FLAG" property="dataFlag" jdbcType="VARCHAR" />
+    <result column="ARCHIVE_ID" property="archiveId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    HR_GID, DOC_ID, NAME, SEX, BIRTHDAY, IDC_NO, WORK_UNIT, TEL, CONTACT, CONTACT_TEL, 
+    RESIDENT_FLAG, NATION, NATION_DES, BLOOD_GROUP, RH_TYPE, EDU_LEVEL, PROFESSION, MAR_STATUS, 
+    PAY_TYPE, PAY_TYPE2, PAY_TYPE3, OTH_PAY_TYPE, DRUG_ALLERGY, DRUG_ALLERGY2, DRUG_ALLERGY3, 
+    DRUG_ALLERGY4, OTH_DRUG_ALLERGY, EXPOSURE, EXPOSURE2, EXPOSURE3, SURGERY_FLAG, SURGERY, 
+    SUR_DATE, SURGERY2, SUR_DATE2, TRAUMA_FLAG, TRAUMA, TRA_DATE, TRAUMA2, TRA_DATE2, 
+    TRA_BLOOD_FLAG, TRA_BLOOD, TB_DATE, TRA_BLOOD2, TB_DATE2, FH_FATHER, FH_FATHER2, 
+    FH_FATHER3, FH_FATHER4, FH_FATHER5, FH_FATHER6, FH_FATHER_OTH, FH_MATHER, FH_MATHER2, 
+    FH_MATHER3, FH_MATHER4, FH_MATHER5, FH_MATHER6, FH_MATHER_OTH, FH_BS, FH_BS2, FH_BS3, 
+    FH_BS4, FH_BS5, FH_BS6, FH_BS_OTH, FH_CHILD, FH_CHILD2, FH_CHILD3, FH_CHILD4, FH_CHILD5, 
+    FH_CHILD6, FH_CHILD_OTH, GEN_DISEASES_FLAG, GEN_DISEASES, DISABILITY, DISABILITY2, 
+    DISABILITY3, DISABILITY4, DISABILITY5, DISABILITY6, DISABILITY_OTH, KIC_EXHAUST, 
+    FUEL, DRI_WATER, TOILET, LIVESTOCK, CRE_ORG, CRE_USER, CRE_DATE, UPD_USER, UPD_DATE, 
+    DATA_FLAG, ARCHIVE_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from S_HEALTH_RECORDS
+    where HR_GID = #{hrGid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from S_HEALTH_RECORDS
+    where HR_GID = #{hrGid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bithealth.dataConversionServer.qiangHua.bean.ThealthRecords" >
+    insert into S_HEALTH_RECORDS (HR_GID, DOC_ID, NAME, 
+      SEX, BIRTHDAY, IDC_NO, 
+      WORK_UNIT, TEL, CONTACT, 
+      CONTACT_TEL, RESIDENT_FLAG, NATION, 
+      NATION_DES, BLOOD_GROUP, RH_TYPE, 
+      EDU_LEVEL, PROFESSION, MAR_STATUS, 
+      PAY_TYPE, PAY_TYPE2, PAY_TYPE3, 
+      OTH_PAY_TYPE, DRUG_ALLERGY, DRUG_ALLERGY2, 
+      DRUG_ALLERGY3, DRUG_ALLERGY4, OTH_DRUG_ALLERGY, 
+      EXPOSURE, EXPOSURE2, EXPOSURE3, 
+      SURGERY_FLAG, SURGERY, SUR_DATE, 
+      SURGERY2, SUR_DATE2, TRAUMA_FLAG, 
+      TRAUMA, TRA_DATE, TRAUMA2, 
+      TRA_DATE2, TRA_BLOOD_FLAG, TRA_BLOOD, 
+      TB_DATE, TRA_BLOOD2, TB_DATE2, 
+      FH_FATHER, FH_FATHER2, FH_FATHER3, 
+      FH_FATHER4, FH_FATHER5, FH_FATHER6, 
+      FH_FATHER_OTH, FH_MATHER, FH_MATHER2, 
+      FH_MATHER3, FH_MATHER4, FH_MATHER5, 
+      FH_MATHER6, FH_MATHER_OTH, FH_BS, 
+      FH_BS2, FH_BS3, FH_BS4, 
+      FH_BS5, FH_BS6, FH_BS_OTH, 
+      FH_CHILD, FH_CHILD2, FH_CHILD3, 
+      FH_CHILD4, FH_CHILD5, FH_CHILD6, 
+      FH_CHILD_OTH, GEN_DISEASES_FLAG, GEN_DISEASES, 
+      DISABILITY, DISABILITY2, DISABILITY3, 
+      DISABILITY4, DISABILITY5, DISABILITY6, 
+      DISABILITY_OTH, KIC_EXHAUST, FUEL, 
+      DRI_WATER, TOILET, LIVESTOCK, 
+      CRE_ORG, CRE_USER, CRE_DATE, 
+      UPD_USER, UPD_DATE, DATA_FLAG, 
+      ARCHIVE_ID)
+    values (#{hrGid,jdbcType=VARCHAR}, #{docId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{idcNo,jdbcType=VARCHAR}, 
+      #{workUnit,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+      #{contactTel,jdbcType=VARCHAR}, #{residentFlag,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{nationDes,jdbcType=VARCHAR}, #{bloodGroup,jdbcType=VARCHAR}, #{rhType,jdbcType=VARCHAR}, 
+      #{eduLevel,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{marStatus,jdbcType=VARCHAR}, 
+      #{payType,jdbcType=VARCHAR}, #{payType2,jdbcType=VARCHAR}, #{payType3,jdbcType=VARCHAR}, 
+      #{othPayType,jdbcType=VARCHAR}, #{drugAllergy,jdbcType=VARCHAR}, #{drugAllergy2,jdbcType=VARCHAR}, 
+      #{drugAllergy3,jdbcType=VARCHAR}, #{drugAllergy4,jdbcType=VARCHAR}, #{othDrugAllergy,jdbcType=VARCHAR}, 
+      #{exposure,jdbcType=VARCHAR}, #{exposure2,jdbcType=VARCHAR}, #{exposure3,jdbcType=VARCHAR}, 
+      #{surgeryFlag,jdbcType=VARCHAR}, #{surgery,jdbcType=VARCHAR}, #{surDate,jdbcType=TIMESTAMP}, 
+      #{surgery2,jdbcType=VARCHAR}, #{surDate2,jdbcType=TIMESTAMP}, #{traumaFlag,jdbcType=VARCHAR}, 
+      #{trauma,jdbcType=VARCHAR}, #{traDate,jdbcType=TIMESTAMP}, #{trauma2,jdbcType=VARCHAR}, 
+      #{traDate2,jdbcType=TIMESTAMP}, #{traBloodFlag,jdbcType=VARCHAR}, #{traBlood,jdbcType=VARCHAR}, 
+      #{tbDate,jdbcType=TIMESTAMP}, #{traBlood2,jdbcType=VARCHAR}, #{tbDate2,jdbcType=TIMESTAMP}, 
+      #{fhFather,jdbcType=VARCHAR}, #{fhFather2,jdbcType=VARCHAR}, #{fhFather3,jdbcType=VARCHAR}, 
+      #{fhFather4,jdbcType=VARCHAR}, #{fhFather5,jdbcType=VARCHAR}, #{fhFather6,jdbcType=VARCHAR}, 
+      #{fhFatherOth,jdbcType=VARCHAR}, #{fhMather,jdbcType=VARCHAR}, #{fhMather2,jdbcType=VARCHAR}, 
+      #{fhMather3,jdbcType=VARCHAR}, #{fhMather4,jdbcType=VARCHAR}, #{fhMather5,jdbcType=VARCHAR}, 
+      #{fhMather6,jdbcType=VARCHAR}, #{fhMatherOth,jdbcType=VARCHAR}, #{fhBs,jdbcType=VARCHAR}, 
+      #{fhBs2,jdbcType=VARCHAR}, #{fhBs3,jdbcType=VARCHAR}, #{fhBs4,jdbcType=VARCHAR}, 
+      #{fhBs5,jdbcType=VARCHAR}, #{fhBs6,jdbcType=VARCHAR}, #{fhBsOth,jdbcType=VARCHAR}, 
+      #{fhChild,jdbcType=VARCHAR}, #{fhChild2,jdbcType=VARCHAR}, #{fhChild3,jdbcType=VARCHAR}, 
+      #{fhChild4,jdbcType=VARCHAR}, #{fhChild5,jdbcType=VARCHAR}, #{fhChild6,jdbcType=VARCHAR}, 
+      #{fhChildOth,jdbcType=VARCHAR}, #{genDiseasesFlag,jdbcType=VARCHAR}, #{genDiseases,jdbcType=VARCHAR}, 
+      #{disability,jdbcType=VARCHAR}, #{disability2,jdbcType=VARCHAR}, #{disability3,jdbcType=VARCHAR}, 
+      #{disability4,jdbcType=VARCHAR}, #{disability5,jdbcType=VARCHAR}, #{disability6,jdbcType=VARCHAR}, 
+      #{disabilityOth,jdbcType=VARCHAR}, #{kicExhaust,jdbcType=VARCHAR}, #{fuel,jdbcType=VARCHAR}, 
+      #{driWater,jdbcType=VARCHAR}, #{toilet,jdbcType=VARCHAR}, #{livestock,jdbcType=VARCHAR}, 
+      #{creOrg,jdbcType=VARCHAR}, #{creUser,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP}, 
+      #{updUser,jdbcType=VARCHAR}, #{updDate,jdbcType=TIMESTAMP}, #{dataFlag,jdbcType=VARCHAR}, 
+      #{archiveId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bithealth.dataConversionServer.qiangHua.bean.ThealthRecords" >
+    insert into S_HEALTH_RECORDS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hrGid != null" >
+        HR_GID,
+      </if>
+      <if test="docId != null" >
+        DOC_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY,
+      </if>
+      <if test="idcNo != null" >
+        IDC_NO,
+      </if>
+      <if test="workUnit != null" >
+        WORK_UNIT,
+      </if>
+      <if test="tel != null" >
+        TEL,
+      </if>
+      <if test="contact != null" >
+        CONTACT,
+      </if>
+      <if test="contactTel != null" >
+        CONTACT_TEL,
+      </if>
+      <if test="residentFlag != null" >
+        RESIDENT_FLAG,
+      </if>
+      <if test="nation != null" >
+        NATION,
+      </if>
+      <if test="nationDes != null" >
+        NATION_DES,
+      </if>
+      <if test="bloodGroup != null" >
+        BLOOD_GROUP,
+      </if>
+      <if test="rhType != null" >
+        RH_TYPE,
+      </if>
+      <if test="eduLevel != null" >
+        EDU_LEVEL,
+      </if>
+      <if test="profession != null" >
+        PROFESSION,
+      </if>
+      <if test="marStatus != null" >
+        MAR_STATUS,
+      </if>
+      <if test="payType != null" >
+        PAY_TYPE,
+      </if>
+      <if test="payType2 != null" >
+        PAY_TYPE2,
+      </if>
+      <if test="payType3 != null" >
+        PAY_TYPE3,
+      </if>
+      <if test="othPayType != null" >
+        OTH_PAY_TYPE,
+      </if>
+      <if test="drugAllergy != null" >
+        DRUG_ALLERGY,
+      </if>
+      <if test="drugAllergy2 != null" >
+        DRUG_ALLERGY2,
+      </if>
+      <if test="drugAllergy3 != null" >
+        DRUG_ALLERGY3,
+      </if>
+      <if test="drugAllergy4 != null" >
+        DRUG_ALLERGY4,
+      </if>
+      <if test="othDrugAllergy != null" >
+        OTH_DRUG_ALLERGY,
+      </if>
+      <if test="exposure != null" >
+        EXPOSURE,
+      </if>
+      <if test="exposure2 != null" >
+        EXPOSURE2,
+      </if>
+      <if test="exposure3 != null" >
+        EXPOSURE3,
+      </if>
+      <if test="surgeryFlag != null" >
+        SURGERY_FLAG,
+      </if>
+      <if test="surgery != null" >
+        SURGERY,
+      </if>
+      <if test="surDate != null" >
+        SUR_DATE,
+      </if>
+      <if test="surgery2 != null" >
+        SURGERY2,
+      </if>
+      <if test="surDate2 != null" >
+        SUR_DATE2,
+      </if>
+      <if test="traumaFlag != null" >
+        TRAUMA_FLAG,
+      </if>
+      <if test="trauma != null" >
+        TRAUMA,
+      </if>
+      <if test="traDate != null" >
+        TRA_DATE,
+      </if>
+      <if test="trauma2 != null" >
+        TRAUMA2,
+      </if>
+      <if test="traDate2 != null" >
+        TRA_DATE2,
+      </if>
+      <if test="traBloodFlag != null" >
+        TRA_BLOOD_FLAG,
+      </if>
+      <if test="traBlood != null" >
+        TRA_BLOOD,
+      </if>
+      <if test="tbDate != null" >
+        TB_DATE,
+      </if>
+      <if test="traBlood2 != null" >
+        TRA_BLOOD2,
+      </if>
+      <if test="tbDate2 != null" >
+        TB_DATE2,
+      </if>
+      <if test="fhFather != null" >
+        FH_FATHER,
+      </if>
+      <if test="fhFather2 != null" >
+        FH_FATHER2,
+      </if>
+      <if test="fhFather3 != null" >
+        FH_FATHER3,
+      </if>
+      <if test="fhFather4 != null" >
+        FH_FATHER4,
+      </if>
+      <if test="fhFather5 != null" >
+        FH_FATHER5,
+      </if>
+      <if test="fhFather6 != null" >
+        FH_FATHER6,
+      </if>
+      <if test="fhFatherOth != null" >
+        FH_FATHER_OTH,
+      </if>
+      <if test="fhMather != null" >
+        FH_MATHER,
+      </if>
+      <if test="fhMather2 != null" >
+        FH_MATHER2,
+      </if>
+      <if test="fhMather3 != null" >
+        FH_MATHER3,
+      </if>
+      <if test="fhMather4 != null" >
+        FH_MATHER4,
+      </if>
+      <if test="fhMather5 != null" >
+        FH_MATHER5,
+      </if>
+      <if test="fhMather6 != null" >
+        FH_MATHER6,
+      </if>
+      <if test="fhMatherOth != null" >
+        FH_MATHER_OTH,
+      </if>
+      <if test="fhBs != null" >
+        FH_BS,
+      </if>
+      <if test="fhBs2 != null" >
+        FH_BS2,
+      </if>
+      <if test="fhBs3 != null" >
+        FH_BS3,
+      </if>
+      <if test="fhBs4 != null" >
+        FH_BS4,
+      </if>
+      <if test="fhBs5 != null" >
+        FH_BS5,
+      </if>
+      <if test="fhBs6 != null" >
+        FH_BS6,
+      </if>
+      <if test="fhBsOth != null" >
+        FH_BS_OTH,
+      </if>
+      <if test="fhChild != null" >
+        FH_CHILD,
+      </if>
+      <if test="fhChild2 != null" >
+        FH_CHILD2,
+      </if>
+      <if test="fhChild3 != null" >
+        FH_CHILD3,
+      </if>
+      <if test="fhChild4 != null" >
+        FH_CHILD4,
+      </if>
+      <if test="fhChild5 != null" >
+        FH_CHILD5,
+      </if>
+      <if test="fhChild6 != null" >
+        FH_CHILD6,
+      </if>
+      <if test="fhChildOth != null" >
+        FH_CHILD_OTH,
+      </if>
+      <if test="genDiseasesFlag != null" >
+        GEN_DISEASES_FLAG,
+      </if>
+      <if test="genDiseases != null" >
+        GEN_DISEASES,
+      </if>
+      <if test="disability != null" >
+        DISABILITY,
+      </if>
+      <if test="disability2 != null" >
+        DISABILITY2,
+      </if>
+      <if test="disability3 != null" >
+        DISABILITY3,
+      </if>
+      <if test="disability4 != null" >
+        DISABILITY4,
+      </if>
+      <if test="disability5 != null" >
+        DISABILITY5,
+      </if>
+      <if test="disability6 != null" >
+        DISABILITY6,
+      </if>
+      <if test="disabilityOth != null" >
+        DISABILITY_OTH,
+      </if>
+      <if test="kicExhaust != null" >
+        KIC_EXHAUST,
+      </if>
+      <if test="fuel != null" >
+        FUEL,
+      </if>
+      <if test="driWater != null" >
+        DRI_WATER,
+      </if>
+      <if test="toilet != null" >
+        TOILET,
+      </if>
+      <if test="livestock != null" >
+        LIVESTOCK,
+      </if>
+      <if test="creOrg != null" >
+        CRE_ORG,
+      </if>
+      <if test="creUser != null" >
+        CRE_USER,
+      </if>
+      <if test="creDate != null" >
+        CRE_DATE,
+      </if>
+      <if test="updUser != null" >
+        UPD_USER,
+      </if>
+      <if test="updDate != null" >
+        UPD_DATE,
+      </if>
+      <if test="dataFlag != null" >
+        DATA_FLAG,
+      </if>
+      <if test="archiveId != null" >
+        ARCHIVE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hrGid != null" >
+        #{hrGid,jdbcType=VARCHAR},
+      </if>
+      <if test="docId != null" >
+        #{docId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcNo != null" >
+        #{idcNo,jdbcType=VARCHAR},
+      </if>
+      <if test="workUnit != null" >
+        #{workUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactTel != null" >
+        #{contactTel,jdbcType=VARCHAR},
+      </if>
+      <if test="residentFlag != null" >
+        #{residentFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nationDes != null" >
+        #{nationDes,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodGroup != null" >
+        #{bloodGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="rhType != null" >
+        #{rhType,jdbcType=VARCHAR},
+      </if>
+      <if test="eduLevel != null" >
+        #{eduLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="marStatus != null" >
+        #{marStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payType2 != null" >
+        #{payType2,jdbcType=VARCHAR},
+      </if>
+      <if test="payType3 != null" >
+        #{payType3,jdbcType=VARCHAR},
+      </if>
+      <if test="othPayType != null" >
+        #{othPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="drugAllergy != null" >
+        #{drugAllergy,jdbcType=VARCHAR},
+      </if>
+      <if test="drugAllergy2 != null" >
+        #{drugAllergy2,jdbcType=VARCHAR},
+      </if>
+      <if test="drugAllergy3 != null" >
+        #{drugAllergy3,jdbcType=VARCHAR},
+      </if>
+      <if test="drugAllergy4 != null" >
+        #{drugAllergy4,jdbcType=VARCHAR},
+      </if>
+      <if test="othDrugAllergy != null" >
+        #{othDrugAllergy,jdbcType=VARCHAR},
+      </if>
+      <if test="exposure != null" >
+        #{exposure,jdbcType=VARCHAR},
+      </if>
+      <if test="exposure2 != null" >
+        #{exposure2,jdbcType=VARCHAR},
+      </if>
+      <if test="exposure3 != null" >
+        #{exposure3,jdbcType=VARCHAR},
+      </if>
+      <if test="surgeryFlag != null" >
+        #{surgeryFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="surgery != null" >
+        #{surgery,jdbcType=VARCHAR},
+      </if>
+      <if test="surDate != null" >
+        #{surDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surgery2 != null" >
+        #{surgery2,jdbcType=VARCHAR},
+      </if>
+      <if test="surDate2 != null" >
+        #{surDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="traumaFlag != null" >
+        #{traumaFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="trauma != null" >
+        #{trauma,jdbcType=VARCHAR},
+      </if>
+      <if test="traDate != null" >
+        #{traDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trauma2 != null" >
+        #{trauma2,jdbcType=VARCHAR},
+      </if>
+      <if test="traDate2 != null" >
+        #{traDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="traBloodFlag != null" >
+        #{traBloodFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="traBlood != null" >
+        #{traBlood,jdbcType=VARCHAR},
+      </if>
+      <if test="tbDate != null" >
+        #{tbDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="traBlood2 != null" >
+        #{traBlood2,jdbcType=VARCHAR},
+      </if>
+      <if test="tbDate2 != null" >
+        #{tbDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fhFather != null" >
+        #{fhFather,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather2 != null" >
+        #{fhFather2,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather3 != null" >
+        #{fhFather3,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather4 != null" >
+        #{fhFather4,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather5 != null" >
+        #{fhFather5,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather6 != null" >
+        #{fhFather6,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFatherOth != null" >
+        #{fhFatherOth,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather != null" >
+        #{fhMather,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather2 != null" >
+        #{fhMather2,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather3 != null" >
+        #{fhMather3,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather4 != null" >
+        #{fhMather4,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather5 != null" >
+        #{fhMather5,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather6 != null" >
+        #{fhMather6,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMatherOth != null" >
+        #{fhMatherOth,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs != null" >
+        #{fhBs,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs2 != null" >
+        #{fhBs2,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs3 != null" >
+        #{fhBs3,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs4 != null" >
+        #{fhBs4,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs5 != null" >
+        #{fhBs5,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs6 != null" >
+        #{fhBs6,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBsOth != null" >
+        #{fhBsOth,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild != null" >
+        #{fhChild,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild2 != null" >
+        #{fhChild2,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild3 != null" >
+        #{fhChild3,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild4 != null" >
+        #{fhChild4,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild5 != null" >
+        #{fhChild5,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild6 != null" >
+        #{fhChild6,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChildOth != null" >
+        #{fhChildOth,jdbcType=VARCHAR},
+      </if>
+      <if test="genDiseasesFlag != null" >
+        #{genDiseasesFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="genDiseases != null" >
+        #{genDiseases,jdbcType=VARCHAR},
+      </if>
+      <if test="disability != null" >
+        #{disability,jdbcType=VARCHAR},
+      </if>
+      <if test="disability2 != null" >
+        #{disability2,jdbcType=VARCHAR},
+      </if>
+      <if test="disability3 != null" >
+        #{disability3,jdbcType=VARCHAR},
+      </if>
+      <if test="disability4 != null" >
+        #{disability4,jdbcType=VARCHAR},
+      </if>
+      <if test="disability5 != null" >
+        #{disability5,jdbcType=VARCHAR},
+      </if>
+      <if test="disability6 != null" >
+        #{disability6,jdbcType=VARCHAR},
+      </if>
+      <if test="disabilityOth != null" >
+        #{disabilityOth,jdbcType=VARCHAR},
+      </if>
+      <if test="kicExhaust != null" >
+        #{kicExhaust,jdbcType=VARCHAR},
+      </if>
+      <if test="fuel != null" >
+        #{fuel,jdbcType=VARCHAR},
+      </if>
+      <if test="driWater != null" >
+        #{driWater,jdbcType=VARCHAR},
+      </if>
+      <if test="toilet != null" >
+        #{toilet,jdbcType=VARCHAR},
+      </if>
+      <if test="livestock != null" >
+        #{livestock,jdbcType=VARCHAR},
+      </if>
+      <if test="creOrg != null" >
+        #{creOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="creUser != null" >
+        #{creUser,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null" >
+        #{creDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updUser != null" >
+        #{updUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updDate != null" >
+        #{updDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataFlag != null" >
+        #{dataFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveId != null" >
+        #{archiveId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.dataConversionServer.qiangHua.bean.ThealthRecords" >
+    update S_HEALTH_RECORDS
+    <set >
+      <if test="docId != null" >
+        DOC_ID = #{docId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcNo != null" >
+        IDC_NO = #{idcNo,jdbcType=VARCHAR},
+      </if>
+      <if test="workUnit != null" >
+        WORK_UNIT = #{workUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        CONTACT = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactTel != null" >
+        CONTACT_TEL = #{contactTel,jdbcType=VARCHAR},
+      </if>
+      <if test="residentFlag != null" >
+        RESIDENT_FLAG = #{residentFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nationDes != null" >
+        NATION_DES = #{nationDes,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodGroup != null" >
+        BLOOD_GROUP = #{bloodGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="rhType != null" >
+        RH_TYPE = #{rhType,jdbcType=VARCHAR},
+      </if>
+      <if test="eduLevel != null" >
+        EDU_LEVEL = #{eduLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        PROFESSION = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="marStatus != null" >
+        MAR_STATUS = #{marStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payType2 != null" >
+        PAY_TYPE2 = #{payType2,jdbcType=VARCHAR},
+      </if>
+      <if test="payType3 != null" >
+        PAY_TYPE3 = #{payType3,jdbcType=VARCHAR},
+      </if>
+      <if test="othPayType != null" >
+        OTH_PAY_TYPE = #{othPayType,jdbcType=VARCHAR},
+      </if>
+      <if test="drugAllergy != null" >
+        DRUG_ALLERGY = #{drugAllergy,jdbcType=VARCHAR},
+      </if>
+      <if test="drugAllergy2 != null" >
+        DRUG_ALLERGY2 = #{drugAllergy2,jdbcType=VARCHAR},
+      </if>
+      <if test="drugAllergy3 != null" >
+        DRUG_ALLERGY3 = #{drugAllergy3,jdbcType=VARCHAR},
+      </if>
+      <if test="drugAllergy4 != null" >
+        DRUG_ALLERGY4 = #{drugAllergy4,jdbcType=VARCHAR},
+      </if>
+      <if test="othDrugAllergy != null" >
+        OTH_DRUG_ALLERGY = #{othDrugAllergy,jdbcType=VARCHAR},
+      </if>
+      <if test="exposure != null" >
+        EXPOSURE = #{exposure,jdbcType=VARCHAR},
+      </if>
+      <if test="exposure2 != null" >
+        EXPOSURE2 = #{exposure2,jdbcType=VARCHAR},
+      </if>
+      <if test="exposure3 != null" >
+        EXPOSURE3 = #{exposure3,jdbcType=VARCHAR},
+      </if>
+      <if test="surgeryFlag != null" >
+        SURGERY_FLAG = #{surgeryFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="surgery != null" >
+        SURGERY = #{surgery,jdbcType=VARCHAR},
+      </if>
+      <if test="surDate != null" >
+        SUR_DATE = #{surDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="surgery2 != null" >
+        SURGERY2 = #{surgery2,jdbcType=VARCHAR},
+      </if>
+      <if test="surDate2 != null" >
+        SUR_DATE2 = #{surDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="traumaFlag != null" >
+        TRAUMA_FLAG = #{traumaFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="trauma != null" >
+        TRAUMA = #{trauma,jdbcType=VARCHAR},
+      </if>
+      <if test="traDate != null" >
+        TRA_DATE = #{traDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trauma2 != null" >
+        TRAUMA2 = #{trauma2,jdbcType=VARCHAR},
+      </if>
+      <if test="traDate2 != null" >
+        TRA_DATE2 = #{traDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="traBloodFlag != null" >
+        TRA_BLOOD_FLAG = #{traBloodFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="traBlood != null" >
+        TRA_BLOOD = #{traBlood,jdbcType=VARCHAR},
+      </if>
+      <if test="tbDate != null" >
+        TB_DATE = #{tbDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="traBlood2 != null" >
+        TRA_BLOOD2 = #{traBlood2,jdbcType=VARCHAR},
+      </if>
+      <if test="tbDate2 != null" >
+        TB_DATE2 = #{tbDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fhFather != null" >
+        FH_FATHER = #{fhFather,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather2 != null" >
+        FH_FATHER2 = #{fhFather2,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather3 != null" >
+        FH_FATHER3 = #{fhFather3,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather4 != null" >
+        FH_FATHER4 = #{fhFather4,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather5 != null" >
+        FH_FATHER5 = #{fhFather5,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFather6 != null" >
+        FH_FATHER6 = #{fhFather6,jdbcType=VARCHAR},
+      </if>
+      <if test="fhFatherOth != null" >
+        FH_FATHER_OTH = #{fhFatherOth,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather != null" >
+        FH_MATHER = #{fhMather,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather2 != null" >
+        FH_MATHER2 = #{fhMather2,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather3 != null" >
+        FH_MATHER3 = #{fhMather3,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather4 != null" >
+        FH_MATHER4 = #{fhMather4,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather5 != null" >
+        FH_MATHER5 = #{fhMather5,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMather6 != null" >
+        FH_MATHER6 = #{fhMather6,jdbcType=VARCHAR},
+      </if>
+      <if test="fhMatherOth != null" >
+        FH_MATHER_OTH = #{fhMatherOth,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs != null" >
+        FH_BS = #{fhBs,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs2 != null" >
+        FH_BS2 = #{fhBs2,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs3 != null" >
+        FH_BS3 = #{fhBs3,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs4 != null" >
+        FH_BS4 = #{fhBs4,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs5 != null" >
+        FH_BS5 = #{fhBs5,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBs6 != null" >
+        FH_BS6 = #{fhBs6,jdbcType=VARCHAR},
+      </if>
+      <if test="fhBsOth != null" >
+        FH_BS_OTH = #{fhBsOth,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild != null" >
+        FH_CHILD = #{fhChild,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild2 != null" >
+        FH_CHILD2 = #{fhChild2,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild3 != null" >
+        FH_CHILD3 = #{fhChild3,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild4 != null" >
+        FH_CHILD4 = #{fhChild4,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild5 != null" >
+        FH_CHILD5 = #{fhChild5,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChild6 != null" >
+        FH_CHILD6 = #{fhChild6,jdbcType=VARCHAR},
+      </if>
+      <if test="fhChildOth != null" >
+        FH_CHILD_OTH = #{fhChildOth,jdbcType=VARCHAR},
+      </if>
+      <if test="genDiseasesFlag != null" >
+        GEN_DISEASES_FLAG = #{genDiseasesFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="genDiseases != null" >
+        GEN_DISEASES = #{genDiseases,jdbcType=VARCHAR},
+      </if>
+      <if test="disability != null" >
+        DISABILITY = #{disability,jdbcType=VARCHAR},
+      </if>
+      <if test="disability2 != null" >
+        DISABILITY2 = #{disability2,jdbcType=VARCHAR},
+      </if>
+      <if test="disability3 != null" >
+        DISABILITY3 = #{disability3,jdbcType=VARCHAR},
+      </if>
+      <if test="disability4 != null" >
+        DISABILITY4 = #{disability4,jdbcType=VARCHAR},
+      </if>
+      <if test="disability5 != null" >
+        DISABILITY5 = #{disability5,jdbcType=VARCHAR},
+      </if>
+      <if test="disability6 != null" >
+        DISABILITY6 = #{disability6,jdbcType=VARCHAR},
+      </if>
+      <if test="disabilityOth != null" >
+        DISABILITY_OTH = #{disabilityOth,jdbcType=VARCHAR},
+      </if>
+      <if test="kicExhaust != null" >
+        KIC_EXHAUST = #{kicExhaust,jdbcType=VARCHAR},
+      </if>
+      <if test="fuel != null" >
+        FUEL = #{fuel,jdbcType=VARCHAR},
+      </if>
+      <if test="driWater != null" >
+        DRI_WATER = #{driWater,jdbcType=VARCHAR},
+      </if>
+      <if test="toilet != null" >
+        TOILET = #{toilet,jdbcType=VARCHAR},
+      </if>
+      <if test="livestock != null" >
+        LIVESTOCK = #{livestock,jdbcType=VARCHAR},
+      </if>
+      <if test="creOrg != null" >
+        CRE_ORG = #{creOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="creUser != null" >
+        CRE_USER = #{creUser,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null" >
+        CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updUser != null" >
+        UPD_USER = #{updUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updDate != null" >
+        UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataFlag != null" >
+        DATA_FLAG = #{dataFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="archiveId != null" >
+        ARCHIVE_ID = #{archiveId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where HR_GID = #{hrGid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bithealth.dataConversionServer.qiangHua.bean.ThealthRecords" >
+    update S_HEALTH_RECORDS
+    set DOC_ID = #{docId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      BIRTHDAY = #{birthday,jdbcType=TIMESTAMP},
+      IDC_NO = #{idcNo,jdbcType=VARCHAR},
+      WORK_UNIT = #{workUnit,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      CONTACT = #{contact,jdbcType=VARCHAR},
+      CONTACT_TEL = #{contactTel,jdbcType=VARCHAR},
+      RESIDENT_FLAG = #{residentFlag,jdbcType=VARCHAR},
+      NATION = #{nation,jdbcType=VARCHAR},
+      NATION_DES = #{nationDes,jdbcType=VARCHAR},
+      BLOOD_GROUP = #{bloodGroup,jdbcType=VARCHAR},
+      RH_TYPE = #{rhType,jdbcType=VARCHAR},
+      EDU_LEVEL = #{eduLevel,jdbcType=VARCHAR},
+      PROFESSION = #{profession,jdbcType=VARCHAR},
+      MAR_STATUS = #{marStatus,jdbcType=VARCHAR},
+      PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      PAY_TYPE2 = #{payType2,jdbcType=VARCHAR},
+      PAY_TYPE3 = #{payType3,jdbcType=VARCHAR},
+      OTH_PAY_TYPE = #{othPayType,jdbcType=VARCHAR},
+      DRUG_ALLERGY = #{drugAllergy,jdbcType=VARCHAR},
+      DRUG_ALLERGY2 = #{drugAllergy2,jdbcType=VARCHAR},
+      DRUG_ALLERGY3 = #{drugAllergy3,jdbcType=VARCHAR},
+      DRUG_ALLERGY4 = #{drugAllergy4,jdbcType=VARCHAR},
+      OTH_DRUG_ALLERGY = #{othDrugAllergy,jdbcType=VARCHAR},
+      EXPOSURE = #{exposure,jdbcType=VARCHAR},
+      EXPOSURE2 = #{exposure2,jdbcType=VARCHAR},
+      EXPOSURE3 = #{exposure3,jdbcType=VARCHAR},
+      SURGERY_FLAG = #{surgeryFlag,jdbcType=VARCHAR},
+      SURGERY = #{surgery,jdbcType=VARCHAR},
+      SUR_DATE = #{surDate,jdbcType=TIMESTAMP},
+      SURGERY2 = #{surgery2,jdbcType=VARCHAR},
+      SUR_DATE2 = #{surDate2,jdbcType=TIMESTAMP},
+      TRAUMA_FLAG = #{traumaFlag,jdbcType=VARCHAR},
+      TRAUMA = #{trauma,jdbcType=VARCHAR},
+      TRA_DATE = #{traDate,jdbcType=TIMESTAMP},
+      TRAUMA2 = #{trauma2,jdbcType=VARCHAR},
+      TRA_DATE2 = #{traDate2,jdbcType=TIMESTAMP},
+      TRA_BLOOD_FLAG = #{traBloodFlag,jdbcType=VARCHAR},
+      TRA_BLOOD = #{traBlood,jdbcType=VARCHAR},
+      TB_DATE = #{tbDate,jdbcType=TIMESTAMP},
+      TRA_BLOOD2 = #{traBlood2,jdbcType=VARCHAR},
+      TB_DATE2 = #{tbDate2,jdbcType=TIMESTAMP},
+      FH_FATHER = #{fhFather,jdbcType=VARCHAR},
+      FH_FATHER2 = #{fhFather2,jdbcType=VARCHAR},
+      FH_FATHER3 = #{fhFather3,jdbcType=VARCHAR},
+      FH_FATHER4 = #{fhFather4,jdbcType=VARCHAR},
+      FH_FATHER5 = #{fhFather5,jdbcType=VARCHAR},
+      FH_FATHER6 = #{fhFather6,jdbcType=VARCHAR},
+      FH_FATHER_OTH = #{fhFatherOth,jdbcType=VARCHAR},
+      FH_MATHER = #{fhMather,jdbcType=VARCHAR},
+      FH_MATHER2 = #{fhMather2,jdbcType=VARCHAR},
+      FH_MATHER3 = #{fhMather3,jdbcType=VARCHAR},
+      FH_MATHER4 = #{fhMather4,jdbcType=VARCHAR},
+      FH_MATHER5 = #{fhMather5,jdbcType=VARCHAR},
+      FH_MATHER6 = #{fhMather6,jdbcType=VARCHAR},
+      FH_MATHER_OTH = #{fhMatherOth,jdbcType=VARCHAR},
+      FH_BS = #{fhBs,jdbcType=VARCHAR},
+      FH_BS2 = #{fhBs2,jdbcType=VARCHAR},
+      FH_BS3 = #{fhBs3,jdbcType=VARCHAR},
+      FH_BS4 = #{fhBs4,jdbcType=VARCHAR},
+      FH_BS5 = #{fhBs5,jdbcType=VARCHAR},
+      FH_BS6 = #{fhBs6,jdbcType=VARCHAR},
+      FH_BS_OTH = #{fhBsOth,jdbcType=VARCHAR},
+      FH_CHILD = #{fhChild,jdbcType=VARCHAR},
+      FH_CHILD2 = #{fhChild2,jdbcType=VARCHAR},
+      FH_CHILD3 = #{fhChild3,jdbcType=VARCHAR},
+      FH_CHILD4 = #{fhChild4,jdbcType=VARCHAR},
+      FH_CHILD5 = #{fhChild5,jdbcType=VARCHAR},
+      FH_CHILD6 = #{fhChild6,jdbcType=VARCHAR},
+      FH_CHILD_OTH = #{fhChildOth,jdbcType=VARCHAR},
+      GEN_DISEASES_FLAG = #{genDiseasesFlag,jdbcType=VARCHAR},
+      GEN_DISEASES = #{genDiseases,jdbcType=VARCHAR},
+      DISABILITY = #{disability,jdbcType=VARCHAR},
+      DISABILITY2 = #{disability2,jdbcType=VARCHAR},
+      DISABILITY3 = #{disability3,jdbcType=VARCHAR},
+      DISABILITY4 = #{disability4,jdbcType=VARCHAR},
+      DISABILITY5 = #{disability5,jdbcType=VARCHAR},
+      DISABILITY6 = #{disability6,jdbcType=VARCHAR},
+      DISABILITY_OTH = #{disabilityOth,jdbcType=VARCHAR},
+      KIC_EXHAUST = #{kicExhaust,jdbcType=VARCHAR},
+      FUEL = #{fuel,jdbcType=VARCHAR},
+      DRI_WATER = #{driWater,jdbcType=VARCHAR},
+      TOILET = #{toilet,jdbcType=VARCHAR},
+      LIVESTOCK = #{livestock,jdbcType=VARCHAR},
+      CRE_ORG = #{creOrg,jdbcType=VARCHAR},
+      CRE_USER = #{creUser,jdbcType=VARCHAR},
+      CRE_DATE = #{creDate,jdbcType=TIMESTAMP},
+      UPD_USER = #{updUser,jdbcType=VARCHAR},
+      UPD_DATE = #{updDate,jdbcType=TIMESTAMP},
+      DATA_FLAG = #{dataFlag,jdbcType=VARCHAR},
+      ARCHIVE_ID = #{archiveId,jdbcType=INTEGER}
+    where HR_GID = #{hrGid,jdbcType=VARCHAR}
+  </update>
+</mapper>

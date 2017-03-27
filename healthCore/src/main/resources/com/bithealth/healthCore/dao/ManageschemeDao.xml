@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.healthCore.dao.ManageschemeDao" >
+    <parameterMap type="map" id="parameterMapP">  
+    	<parameter property="iDocId" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="vMemName" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vTel" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vIdCard" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="iMemGrpid" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="idisease_id" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iMemId" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="vLItemID_list" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="iCurrentPageIndex" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iPageSize" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iCount" jdbcType="INTEGER" mode="OUT"/>
+	</parameterMap> 
+	<parameterMap type="map" id="parameterMapG">  
+    	<parameter property="iDocId" jdbcType="INTEGER" mode="IN"/>
+    	<parameter property="iMSDesignID" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="vMemName" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vTel" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vIdCard" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="iMemGrpid" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="idisease_id" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iMemId" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="vLItemID_list" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="iCurrentPageIndex" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iPageSize" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iCount" jdbcType="INTEGER" mode="OUT"/>
+		<parameter property="i_trueOrfalse" jdbcType="BOOLEAN" mode="IN"/>
+	</parameterMap> 
+	<parameterMap type="map" id="parameterMapExecTask">  
+    	<parameter property="iMSDesignID" jdbcType="INTEGER" mode="IN"/>
+    	<parameter property="iDocID" jdbcType="INTEGER" mode="IN"/>
+	</parameterMap> 
+	<select id="exProcMschemeGetMemberByDocId" parameterMap="parameterMapP" statementType="CALLABLE" resultType="map">  
+		<![CDATA[  
+		    {call proc_mscheme_getMemberByDocId (?,?,?,?,?,?,?,?,?,?,?)}  
+		]]>  
+	</select> 
+	<select id="exProcMschemeGetoraddMemberByDocId" parameterMap="parameterMapG" statementType="CALLABLE" resultType="map">  
+		<![CDATA[  
+		    {call proc_mscheme_getoraddMemberByDocId (?,?,?,?,?,?,?,?,?,?,?,?,?)}  
+		]]>  
+	</select> 
+	<select id="exProcMschemeAddMemberByDocId" parameterMap="parameterMapG" statementType="CALLABLE">  
+		<![CDATA[  
+		    {call proc_mscheme_getoraddMemberByDocId (?,?,?,?,?,?,?,?,?,?,?,?,?)}  
+		]]>  
+	</select> 
+	<select id="exProcMschemeAddExecTaskByMSDesignID" parameterMap="parameterMapExecTask" statementType="CALLABLE">  
+		<![CDATA[  
+		    {call proc_mscheme_addExecTaskByMSDesignID (?,?)}  
+		]]>  
+	</select> 
+</mapper>

@@ -1,0 +1,26 @@
+#find {
+	width: 325px;
+	height: 21px;
+	border: 1px solid #ccc;
+	font-family: "Microsoft YaHei";
+	font-size: 12px;
+	padding-left: 2px;
+}
+
+#select1 {
+	position: relative;
+	left: -25px;
+	top: 0;
+	top: 6px\0;
+	background: #fff;
+	height: 22px;
+	border: none;
+	cursor: pointer;
+	outline: none;
+}
+
+#select1 img {
+	vertical-align: top;
+	height: 18px;
+	width: 18px;
+}

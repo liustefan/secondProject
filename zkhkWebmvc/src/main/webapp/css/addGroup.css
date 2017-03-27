@@ -1,0 +1,187 @@
+/*
+* 新增分组样式
+*/
+
+html, body, div, input {
+	margin: 0;
+	padding: 0;
+}
+
+.content-ends
+{
+	/* margin-top: 10px; */
+}
+
+.content-slice
+{
+	margin-top: 15px;
+
+}
+
+.content-slice input[type='text']
+{
+	padding: 2px 5px;
+	width: 200px;
+
+}
+.margin-lt
+{
+	margin-left: 12px;
+}
+.content-box
+{
+	padding-left: 30px;
+}
+.fr-margin
+{
+	height: 60px;
+	line-height: 60px;
+	margin-right: 20px;
+}
+
+.group-explain {
+	margin-top: 25px;
+}
+
+.group-explain1 {
+	margin-top: 15px;
+}
+
+.group-explain1 label {
+	display: inline-block;
+	width: 100px;
+}
+
+.group-explain textarea
+{
+	padding: 3px 5px;
+}
+
+.explain-content
+{
+	vertical-align:text-top;
+	width: 250px;
+	height: 90px;
+}
+
+.margin-big
+ {
+ 	margin-left: 28px;
+ }
+ 
+ .margin-middle
+ {
+ 	margin-left: 16px;
+ }
+ 
+ .margin-small
+ {
+ 	margin-left: 10px;
+ 	width:157px;
+ 	height:23px;
+ }
+
+.change-color
+{
+	color: red;
+}
+
+label.error {
+	font-size: 12px;
+	padding: 0 5px;
+	color: red;
+}
+
+.explain-margin
+{
+	margin-left: 5px;
+}
+
+.explain-margin1 {
+	margin-left: 9px;
+}
+
+.explain-margin2 {
+	margin-left: 15px;
+}
+
+.btn-normal, .btn-cancel {
+	margin: 0;
+	height: 26px;
+	padding: 0 30px;
+}
+
+.right li {
+	display: inline-block;
+	margin-right: 8px;
+	width: 75px;
+	height: 18px;
+	float: left;
+}
+
+.right li input {
+	float: left;
+	margin: 4px 2px 0 0 ! important;
+}
+
+.fix-width {
+	width: 255px;
+	border: 1px solid #ccc;
+	padding: 2px 0 2px 8px;
+}
+
+.content-slice label {
+	display: inline-block;
+	width: 115px;
+}
+
+.content-slice1 label {
+	display: inline-block;
+	margin-top: 15px;
+	width: 78px;
+}
+
+#addDoctor .content-slice label {
+	display: inline-block;
+	width: 100px;
+}
+
+#set-authority .content-slice label {
+	display: inline-block;
+	width: 65px;
+}
+
+#edit-memberGroup .content-slice label {
+	display: inline-block;
+	width: 75px;
+}
+
+.align-radiu {
+	float: left;
+	margin: 4px 2px 0 0 ! important;
+}
+
+.span-center {
+  display: inline-block;
+  float: left;
+  margin-right: 6px;
+}
+
+.padding-t {padding-top: 5px;}
+
+.padding-left {
+	display: inline-block;
+	padding-left: 7px;
+}
+
+label.error {width: initial !important;}
+
+.padding-r {padding-right: 5px;}
+
+.mar_8 {margin-left: 8px;}
+
+.content-slice .label-width {
+	width: 20px !important;
+}
+
+#experience-input , #experienceNum-input { width: 180px !important;}

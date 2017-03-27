@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.push.dao.PushMsgMapper">
+
+	<resultMap type="com.push.model.HkPushMessenger" id="pushMsgResultMap">
+        <id property="id" column="id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createDate" column="create_date"/>
+        <result property="messenger" column="messenger"/>
+        <!-- <result property="messengerStatus" column="messenger_status"/> -->
+        <result property="updateBy" column="update_by"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="msgId" column="msg_id"/>
+        <result property="sender" column="sender"/>
+    </resultMap>
+    
+    <resultMap type="com.push.model.HKPushInfo" id="pushInfoResultMap">
+        <id property="id" column="id"/>
+        <result property="memberId" column="member_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="channelId" column="channel_id"/>
+        <result property="platform" column="login_platform"/>
+        <result property="msgId" column="msg_id"/>
+        <result property="data" column="messenger"/>
+        <result property="sender" column="sender"/>
+        <result property="msgType" column="msg_type"/>
+        <result property="deviceType" column="login_platform"/>
+        <result property="description" column="description"/>
+    </resultMap>
+    
+    
+    <resultMap type="com.push.model.HKDeplayPushBean" id="delayPushResultMap">
+        <result property="memberId" column="member_id"/>
+        <result property="msgId" column="msg_id"/>
+        <result property="sendTime" column="send_time"/>
+    </resultMap>
+    
+    
+	<select id="selectHKPushInfoByMemberId" resultMap="pushInfoResultMap" parameterType="java.lang.String">
+	     select b.id,
+	       		a.member_id,
+	       		c.user_id,
+	       		c.channel_id,
+	       		c.login_platform,
+	       		b.msg_id,
+	       		b.title,
+	       		b.messenger,
+	       		b.sender,
+	       		b.msg_type,
+	       		b.description
+		   from hk_push_member_msg a,
+				hk_push_messenger b,
+				hk_push_member c
+		  where a.msg_id = b.msg_id 
+			and a.member_id = c.member_id 
+			and a.messenger_status > 0 
+			and a.member_id = #{memberId}
+			and (b.send_time/1000  BETWEEN  UNIX_TIMESTAMP(DATE_ADD(NOW(), INTERVAL -3 DAY))  AND UNIX_TIMESTAMP(NOW()) )
+<![CDATA[   and  b.cache_status < 10 ]]>
+    </select>
+    <update id="updateHkPushMemberMsgStatus" parameterType="com.push.model.HKPushInfo">
+        update hk_push_member_msg set messenger_status = #{messengerStatus} where msg_id = #{msgId} and member_id = #{memberId}  
+    </update>
+    <insert id="saveMessenger" parameterType="com.push.model.HKPushInfo">
+        insert into hk_push_messenger(
+			messenger,
+			msg_id,
+			sender,
+			msg_type,
+			title,
+			description,
+			create_by,
+			send_time,
+			create_date
+		)
+		VALUES(
+			#{data},
+			#{msgId},
+			#{sender},
+			#{msgType},
+			#{title},
+			#{description},
+			#{sender},
+			#{sendTime},
+			now()
+		)   
+    </insert>
+    
+    <insert id="saveMsgMemberBatch" useGeneratedKeys="true" parameterType="java.util.List">
+		insert into hk_push_member_msg(
+			member_id,
+			messenger_status,
+			msg_id,
+			create_date
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator="," >
+		(
+			#{item.memberId},
+			#{item.messengerStatus},
+			#{item.msgId},
+			now()
+		)
+		</foreach>
+	</insert>
+	
+	<insert id="saveMsgMember" useGeneratedKeys="true" parameterType="com.push.model.HKPushInfo">
+		insert into hk_push_member_msg(
+			member_id,
+			messenger_status,
+			msg_id,
+			create_date
+		)
+		values
+		(
+			#{memberId},
+			#{messengerStatus},
+			#{msgId},
+			now()
+		)
+	</insert>
+	
+	<select id="queryDeplayMsg" resultMap="delayPushResultMap" parameterType="java.lang.Long">
+	   select a.send_time,
+			  b.msg_id,
+			  b.member_id
+		 from hk_push_messenger a,
+			  hk_push_member_msg b,
+			  hk_push_member c
+		where a.msg_id = b.msg_id 
+<![CDATA[ and (a.send_time/1000  BETWEEN  UNIX_TIMESTAMP(DATE_ADD(NOW(), INTERVAL -3 DAY))  AND UNIX_TIMESTAMP(NOW()) )   
+		  and a.cache_status <5 ]]>
+		  and b.messenger_status = 1 
+		  and b.`member_id` = c.`member_id`
+		  and c.`line_status` =  0
+		  ORDER BY a.send_time DESC LIMIT 10000
+
+    </select>
+	
+	<select id="queryPushInfoByMsgId" resultMap="pushInfoResultMap" parameterType="java.lang.String">
+	     select b.id,
+	       		a.member_id,
+	       		c.user_id,
+	       		c.channel_id,
+	       		c.login_platform,
+	       		b.msg_id,
+	       		b.title,
+	       		b.messenger,
+	       		b.sender,
+	       		b.msg_type,
+	       		b.description
+		   from hk_push_member_msg a,
+				hk_push_messenger b,
+				hk_push_member c
+		  where a.msg_id = b.msg_id 
+			and a.member_id = c.member_id 
+			and a.messenger_status > 0 
+			and b.msg_id = #{msgId}
+    </select>
+	
+    <update id="updateCacheStatusByMsgId" useGeneratedKeys="true" parameterType="java.lang.String">
+	    	update hk_push_messenger a
+			   set a.cache_status =  a.cache_status+1
+			 where a.msg_id =#{msgId}
+	</update>
+	
+    
+</mapper>

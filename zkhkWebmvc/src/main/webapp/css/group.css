@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+body{
+	margin: 0;
+    padding: 0;
+   	font: 12px "微软雅黑",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+}
+
+#content {
+	margin-top: 20px;
+	float: right;
+	width: 100%;
+	padding: 1%;
+	padding-top: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#content_title {
+	font-size: 16px;
+	line-height: 35px;
+	text-align: left;
+	height: 48px;
+	font-weight: bold;
+}
+
+#content_table {
+	border:1px solid #ddd;
+}
+
+#v {
+	float: left;
+	margin-top: 100px;
+}
+
+.v input {
+	background-color: #7E7D6D;
+	width: 300px;
+	height: 30px;
+	border: 2px solid #E1D7C8;
+	border-radius: 5px;
+	color: #C4DCEB;
+	font-size: 20px;
+}
+
+.v {
+	margin:5px 0;
+}
+
+.clear {
+	overflow: hidden;
+	zoom: 1;
+}
+
+.v0 {
+	float: left;
+	margin-right: 10px;
+	height: 30px;
+	line-height: 30px;
+	width: 150px;
+	text-align: center;
+	border: 2px solid #C8B9AE;
+	border-radius: 5px;
+	color: #F2E6D2;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: "华文彩云","行书";
+}
+
+.vl {
+	width: 100%;
+} 
+
+.vl th {
+	font-size: 14px;
+	color: #333;
+	background-color: #bcdee0;
+	padding: 10px 0;
+}
+
+.vl tr:nth-child(odd) {
+	background-color: #e0f1f3;
+}
+
+.vl tr:nth-child(even) {
+	background-color: #fdfefc;
+}
+
+.vl td {
+	text-align: center;
+	padding: 10px 0;
+	font: 12px "Microsoft YaHei",Arial,"宋体",Helvetica,Verdana,sans-serif;
+	border-top: 1px solid #ddd;
+}
+
+.vl .select { 
+	background-color: #7E7D6D;
+	width: 300px;
+	height: 30px;
+	border: 2px solid #E1D7C8;
+	border-radius: 5px;
+	color: #FFF;
+	font-size: 20px;
+} 
+
+.tips { 
+	font-size: 12px; 
+	color: #676767;
+}

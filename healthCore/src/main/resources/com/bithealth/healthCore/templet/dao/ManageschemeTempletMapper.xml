@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.healthCore.templet.dao.ManageschemeTempletMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.healthCore.templet.model.ManageschemeTemplet" >
+        <id column="MSTempletID" property="MSTempletID" jdbcType="INTEGER" />
+        <result column="SchemeTitle" property="schemeTitle" jdbcType="VARCHAR" />
+        <result column="ManageGoal" property="manageGoal" jdbcType="VARCHAR" />
+        <result column="BenchmarkTime" property="benchmarkTime" jdbcType="TINYINT" />
+        <result column="SrvLimitValue" property="srvLimitValue" jdbcType="TINYINT" />
+        <result column="SrvLimitType" property="srvLimitType" jdbcType="TINYINT" />
+        <result column="IsCharge" property="isCharge" jdbcType="TINYINT" />
+        <result column="Price" property="price" jdbcType="DECIMAL" />
+        <result column="FileName" property="fileName" jdbcType="VARCHAR" />
+        <result column="FilePath" property="filePath" jdbcType="VARCHAR" />
+        <result column="Introduction" property="introduction" jdbcType="VARCHAR" />
+        <result column="UsedNumber" property="usedNumber" jdbcType="INTEGER" />
+        <result column="TempletStatus" property="templetStatus" jdbcType="TINYINT" />
+        <result column="OrgID" property="orgID" jdbcType="INTEGER" />
+        <result column="UseRange" property="useRange" jdbcType="TINYINT" />
+        <result column="CreateID" property="createID" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <association column="MSTempletID" property="diseases" select="com.bithealth.healthCore.templet.dao.ManageschemeTempletDiseaseMapper.selectList"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        MSTempletID, SchemeTitle, ManageGoal, BenchmarkTime, SrvLimitValue, SrvLimitType, 
+        IsCharge, Price, FileName, FilePath, Introduction, UsedNumber, TempletStatus, OrgID, 
+        UseRange, CreateID, CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_templet
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_templet
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_managescheme_templet
+        where MSTempletID = #{MSTempletID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTemplet" useGeneratedKeys="true" keyProperty="MSTempletID" >
+        insert into tb_managescheme_templet
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="schemeTitle != null" >
+                SchemeTitle,
+            </if>
+            <if test="manageGoal != null" >
+                ManageGoal,
+            </if>
+            <if test="benchmarkTime != null" >
+                BenchmarkTime,
+            </if>
+            <if test="srvLimitValue != null" >
+                SrvLimitValue,
+            </if>
+            <if test="srvLimitType != null" >
+                SrvLimitType,
+            </if>
+            <if test="isCharge != null" >
+                IsCharge,
+            </if>
+            <if test="price != null" >
+                Price,
+            </if>
+            <if test="fileName != null" >
+                FileName,
+            </if>
+            <if test="filePath != null" >
+                FilePath,
+            </if>
+            <if test="introduction != null" >
+                Introduction,
+            </if>
+            <if test="usedNumber != null" >
+                UsedNumber,
+            </if>
+            <if test="templetStatus != null" >
+                TempletStatus,
+            </if>
+            <if test="orgID != null" >
+                OrgID,
+            </if>
+            <if test="useRange != null" >
+                UseRange,
+            </if>
+            <if test="createID != null" >
+                CreateID,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateID != null" >
+                UpdateID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="schemeTitle != null" >
+                #{schemeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="manageGoal != null" >
+                #{manageGoal,jdbcType=VARCHAR},
+            </if>
+            <if test="benchmarkTime != null" >
+                #{benchmarkTime,jdbcType=TINYINT},
+            </if>
+            <if test="srvLimitValue != null" >
+                #{srvLimitValue,jdbcType=TINYINT},
+            </if>
+            <if test="srvLimitType != null" >
+                #{srvLimitType,jdbcType=TINYINT},
+            </if>
+            <if test="isCharge != null" >
+                #{isCharge,jdbcType=TINYINT},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="fileName != null" >
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null" >
+                #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null" >
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="usedNumber != null" >
+                #{usedNumber,jdbcType=INTEGER},
+            </if>
+            <if test="templetStatus != null" >
+                #{templetStatus,jdbcType=TINYINT},
+            </if>
+            <if test="orgID != null" >
+                #{orgID,jdbcType=INTEGER},
+            </if>
+            <if test="useRange != null" >
+                #{useRange,jdbcType=TINYINT},
+            </if>
+            <if test="createID != null" >
+                #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletExample" resultType="java.lang.Integer" >
+        select count(*) from tb_managescheme_templet
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_templet
+            <set >
+                <if test="record.MSTempletID != null" >
+                    MSTempletID = #{record.MSTempletID,jdbcType=INTEGER},
+                </if>
+                <if test="record.schemeTitle != null" >
+                    SchemeTitle = #{record.schemeTitle,jdbcType=VARCHAR},
+                </if>
+                <if test="record.manageGoal != null" >
+                    ManageGoal = #{record.manageGoal,jdbcType=VARCHAR},
+                </if>
+                <if test="record.benchmarkTime != null" >
+                    BenchmarkTime = #{record.benchmarkTime,jdbcType=TINYINT},
+                </if>
+                <if test="record.srvLimitValue != null" >
+                    SrvLimitValue = #{record.srvLimitValue,jdbcType=TINYINT},
+                </if>
+                <if test="record.srvLimitType != null" >
+                    SrvLimitType = #{record.srvLimitType,jdbcType=TINYINT},
+                </if>
+                <if test="record.isCharge != null" >
+                    IsCharge = #{record.isCharge,jdbcType=TINYINT},
+                </if>
+                <if test="record.price != null" >
+                    Price = #{record.price,jdbcType=DECIMAL},
+                </if>
+                <if test="record.fileName != null" >
+                    FileName = #{record.fileName,jdbcType=VARCHAR},
+                </if>
+                <if test="record.filePath != null" >
+                    FilePath = #{record.filePath,jdbcType=VARCHAR},
+                </if>
+                <if test="record.introduction != null" >
+                    Introduction = #{record.introduction,jdbcType=VARCHAR},
+                </if>
+                <if test="record.usedNumber != null" >
+                    UsedNumber = #{record.usedNumber,jdbcType=INTEGER},
+                </if>
+                <if test="record.templetStatus != null" >
+                    TempletStatus = #{record.templetStatus,jdbcType=TINYINT},
+                </if>
+                <if test="record.orgID != null" >
+                    OrgID = #{record.orgID,jdbcType=INTEGER},
+                </if>
+                <if test="record.useRange != null" >
+                    UseRange = #{record.useRange,jdbcType=TINYINT},
+                </if>
+                <if test="record.createID != null" >
+                    CreateID = #{record.createID,jdbcType=INTEGER},
+                </if>
+                <if test="record.createTime != null" >
+                    CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateID != null" >
+                    UpdateID = #{record.updateID,jdbcType=INTEGER},
+                </if>
+                <if test="record.updateTime != null" >
+                    UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_templet
+            set MSTempletID = #{record.MSTempletID,jdbcType=INTEGER},
+                SchemeTitle = #{record.schemeTitle,jdbcType=VARCHAR},
+                ManageGoal = #{record.manageGoal,jdbcType=VARCHAR},
+                BenchmarkTime = #{record.benchmarkTime,jdbcType=TINYINT},
+                SrvLimitValue = #{record.srvLimitValue,jdbcType=TINYINT},
+                SrvLimitType = #{record.srvLimitType,jdbcType=TINYINT},
+                IsCharge = #{record.isCharge,jdbcType=TINYINT},
+                Price = #{record.price,jdbcType=DECIMAL},
+                FileName = #{record.fileName,jdbcType=VARCHAR},
+                FilePath = #{record.filePath,jdbcType=VARCHAR},
+                Introduction = #{record.introduction,jdbcType=VARCHAR},
+                UsedNumber = #{record.usedNumber,jdbcType=INTEGER},
+                TempletStatus = #{record.templetStatus,jdbcType=TINYINT},
+                OrgID = #{record.orgID,jdbcType=INTEGER},
+                UseRange = #{record.useRange,jdbcType=TINYINT},
+                CreateID = #{record.createID,jdbcType=INTEGER},
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                UpdateID = #{record.updateID,jdbcType=INTEGER},
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTemplet" >
+        update tb_managescheme_templet
+        <set >
+            <if test="schemeTitle != null" >
+                SchemeTitle = #{schemeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="manageGoal != null" >
+                ManageGoal = #{manageGoal,jdbcType=VARCHAR},
+            </if>
+            <if test="benchmarkTime != null" >
+                BenchmarkTime = #{benchmarkTime,jdbcType=TINYINT},
+            </if>
+            <if test="srvLimitValue != null" >
+                SrvLimitValue = #{srvLimitValue,jdbcType=TINYINT},
+            </if>
+            <if test="srvLimitType != null" >
+                SrvLimitType = #{srvLimitType,jdbcType=TINYINT},
+            </if>
+            <if test="isCharge != null" >
+                IsCharge = #{isCharge,jdbcType=TINYINT},
+            </if>
+            <if test="price != null" >
+                Price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="fileName != null" >
+                FileName = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null" >
+                FilePath = #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null" >
+                Introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="usedNumber != null" >
+                UsedNumber = #{usedNumber,jdbcType=INTEGER},
+            </if>
+            <if test="templetStatus != null" >
+                TempletStatus = #{templetStatus,jdbcType=TINYINT},
+            </if>
+            <if test="orgID != null" >
+                OrgID = #{orgID,jdbcType=INTEGER},
+            </if>
+            <if test="useRange != null" >
+                UseRange = #{useRange,jdbcType=TINYINT},
+            </if>
+            <if test="createID != null" >
+                CreateID = #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                UpdateID = #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where MSTempletID = #{MSTempletID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTemplet" >
+        update tb_managescheme_templet
+        set SchemeTitle = #{schemeTitle,jdbcType=VARCHAR},
+            ManageGoal = #{manageGoal,jdbcType=VARCHAR},
+            BenchmarkTime = #{benchmarkTime,jdbcType=TINYINT},
+            SrvLimitValue = #{srvLimitValue,jdbcType=TINYINT},
+            SrvLimitType = #{srvLimitType,jdbcType=TINYINT},
+            IsCharge = #{isCharge,jdbcType=TINYINT},
+            Price = #{price,jdbcType=DECIMAL},
+            FileName = #{fileName,jdbcType=VARCHAR},
+            FilePath = #{filePath,jdbcType=VARCHAR},
+            Introduction = #{introduction,jdbcType=VARCHAR},
+            UsedNumber = #{usedNumber,jdbcType=INTEGER},
+            TempletStatus = #{templetStatus,jdbcType=TINYINT},
+            OrgID = #{orgID,jdbcType=INTEGER},
+            UseRange = #{useRange,jdbcType=TINYINT},
+            CreateID = #{createID,jdbcType=INTEGER},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where MSTempletID = #{MSTempletID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_managescheme_templet
+        where MSTempletID = #{MSTempletID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTempletExample" >
+        <if test="_parameter != null and _parameter != ''" >
+            delete from tb_managescheme_templet
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+	<select id="selectTempletPage" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.templet.model.ManageschemeTemplet" >
+        SELECT a.*, b.DocName AS updateName FROM tb_managescheme_templet a 
+        LEFT JOIN odoc b ON a.UpdateID = b.Docid 
+        LEFT JOIN tb_managescheme_templet_disease c ON a.MSTempletID = c.MSTempletID 
+        <where>
+        	<if test="schemeTitle != null and schemeTitle != ''" >
+                AND a.SchemeTitle LIKE CONCAT('%', #{schemeTitle,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="MSDiseaseID != null and MSDiseaseID > 0" >
+                AND c.MSDiseaseID = #{MSDiseaseID,jdbcType=TINYINT}
+            </if>
+            <if test="MSDiseaseIDs != null and MSDiseaseIDs != ''" >
+                AND c.MSDiseaseID in (${MSDiseaseIDs})
+            </if>
+            <if test="updateTimeS != null" >
+                AND a.UpdateTime <![CDATA[>=]]> #{updateTimeS,jdbcType=TIMESTAMP}
+            </if>
+             <if test="updateTimeE != null" >
+                AND a.UpdateTime <![CDATA[<]]> DATE_ADD(#{updateTimeE,jdbcType=TIMESTAMP}, INTERVAL 1 DAY)
+            </if>
+            <if test="useRange != null" >
+                AND a.UseRange = #{useRange,jdbcType=TINYINT}
+            </if>
+            <if test="templetStatus != null" >
+                AND a.TempletStatus = #{templetStatus,jdbcType=TINYINT}
+            </if>
+            <choose>
+            	<when test="roleId eq 6"><!-- 系统管理员 -->
+            		AND a.UseRange = 1
+            	</when>
+            	<when test="roleId eq 1"><!-- 医生管理员 (superOrgIds 包含本组织) -->
+            		AND ((a.OrgID IN (${superOrgIds}) AND a.UseRange = 2 AND a.TempletStatus <![CDATA[<>]]> 1) OR (a.UseRange = 1 AND a.TempletStatus <![CDATA[<>]]> 1) OR (a.OrgID = #{orgID,jdbcType=INTEGER} AND a.UseRange = 2 ))
+            	</when>
+            	<otherwise><!-- 医生账号 (superOrgIds 包含本组织) -->
+            		AND ((a.OrgID IN (${superOrgIds}) AND a.UseRange = 2 AND a.TempletStatus <![CDATA[<>]]> 1) OR (a.UseRange = 1 AND a.TempletStatus <![CDATA[<>]]> 1) OR a.CreateID = #{createID,jdbcType=INTEGER})<!-- 上级组织内 -->
+            	</otherwise>
+            </choose>
+        </where> AND 1=1 
+        GROUP BY a.MSTempletID ORDER BY a.UsedNumber DESC, a.UpdateTime DESC
+    </select>
+    
+    <update id="updateUsedNumber" parameterType="java.lang.Integer" >
+        update tb_managescheme_templet
+        set UsedNumber = UsedNumber+1 
+        where MSTempletID = #{id,jdbcType=INTEGER}
+    </update>
+    
+    <select id="selectTemplet" resultMap="BaseResultMap" parameterType="map" >
+        select
+        <include refid="Base_Column_List" />
+        from tb_managescheme_templet 
+        where SchemeTitle = #{schemeTitle,jdbcType=VARCHAR} 
+        <if test="id != null">
+        	and MSTempletID != #{id,jdbcType=INTEGER} 
+        </if>
+        <choose>
+         	<when test="roleId eq 6"><!-- 系统管理员 -->
+         		AND UseRange = 1
+         	</when>
+         	<when test="roleId eq 1"><!-- 医生管理员 (superOrgIds 包含本组织) -->
+         		AND ((OrgID IN (${superOrgIds}) AND UseRange = 2) OR UseRange = 1)
+         	</when>
+         	<otherwise><!-- 医生账号 (superOrgIds 包含本组织) -->
+         		AND ((OrgID IN (${superOrgIds}) AND UseRange = 2) OR UseRange = 1 OR CreateID = #{createID,jdbcType=INTEGER})<!-- 上级组织内 -->
+         	</otherwise>
+         </choose>
+         limit 1
+    </select>
+</mapper>

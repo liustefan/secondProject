@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.inspectCore.inspect.dao.PhDiabetesdetailMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.inspectCore.inspect.model.PhDiabetesdetail" >
+        <id column="DiabetesID" property="diabetesID" jdbcType="BIGINT" />
+        <result column="VisitWay" property="visitWay" jdbcType="TINYINT" />
+        <result column="Symptom" property="symptom" jdbcType="VARCHAR" />
+        <result column="Symptom_Desc" property="symptom_Desc" jdbcType="VARCHAR" />
+        <result column="Systolic" property="systolic" jdbcType="SMALLINT" />
+        <result column="Diastolic" property="diastolic" jdbcType="SMALLINT" />
+        <result column="Height" property="height" jdbcType="DECIMAL" />
+        <result column="Weight" property="weight" jdbcType="DECIMAL" />
+        <result column="Weight_Next" property="weight_Next" jdbcType="DECIMAL" />
+        <result column="BMI" property="BMI" jdbcType="DECIMAL" />
+        <result column="BMI_Next" property="BMI_Next" jdbcType="DECIMAL" />
+        <result column="Arteriopalmus" property="arteriopalmus" jdbcType="TINYINT" />
+        <result column="OtherSign" property="otherSign" jdbcType="VARCHAR" />
+        <result column="DailySmoking" property="dailySmoking" jdbcType="SMALLINT" />
+        <result column="DailySmoking_Next" property="dailySmoking_Next" jdbcType="SMALLINT" />
+        <result column="DailyDrink" property="dailyDrink" jdbcType="DECIMAL" />
+        <result column="DailyDrink_Next" property="dailyDrink_Next" jdbcType="DECIMAL" />
+        <result column="SportFrequency" property="sportFrequency" jdbcType="VARCHAR" />
+        <result column="SportFrequency_Next" property="sportFrequency_Next" jdbcType="VARCHAR" />
+        <result column="SportDuration" property="sportDuration" jdbcType="SMALLINT" />
+        <result column="SportDuration_Next" property="sportDuration_Next" jdbcType="SMALLINT" />
+        <result column="MainFood" property="mainFood" jdbcType="SMALLINT" />
+        <result column="MainFood_Next" property="mainFood_Next" jdbcType="SMALLINT" />
+        <result column="PsychologicalRecovery" property="psychologicalRecovery" jdbcType="TINYINT" />
+        <result column="ComplianceBehavior" property="complianceBehavior" jdbcType="TINYINT" />
+        <result column="FPG" property="FPG" jdbcType="DECIMAL" />
+        <result column="PGLU" property="PGLU" jdbcType="DECIMAL" />
+        <result column="HBA1C" property="HBA1C" jdbcType="DECIMAL" />
+        <result column="CheckDate" property="checkDate" jdbcType="TIMESTAMP" />
+        <result column="CheckResult" property="checkResult" jdbcType="VARCHAR" />
+        <result column="DrugCompliance" property="drugCompliance" jdbcType="TINYINT" />
+        <result column="DrugAdverseReaction" property="drugAdverseReaction" jdbcType="TINYINT" />
+        <result column="DrugAdverseReaction_Desc" property="drugAdverseReaction_Desc" jdbcType="VARCHAR" />
+        <result column="RHG" property="RHG" jdbcType="TINYINT" />
+        <result column="TransferReason" property="transferReason" jdbcType="VARCHAR" />
+        <result column="TransferOrgAndDept" property="transferOrgAndDept" jdbcType="VARCHAR" />
+        <result column="VisitDate_Next" property="visitDate_Next" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        DiabetesID, VisitWay, Symptom, Symptom_Desc, Systolic, Diastolic, Height, Weight, 
+        Weight_Next, BMI, BMI_Next, Arteriopalmus, OtherSign, DailySmoking, DailySmoking_Next, 
+        DailyDrink, DailyDrink_Next, SportFrequency, SportFrequency_Next, SportDuration, 
+        SportDuration_Next, MainFood, MainFood_Next, PsychologicalRecovery, ComplianceBehavior, 
+        FPG, PGLU, HBA1C, CheckDate, CheckResult, DrugCompliance, DrugAdverseReaction, DrugAdverseReaction_Desc, 
+        RHG, TransferReason, TransferOrgAndDept, VisitDate_Next
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.inspectCore.inspect.model.PhDiabetesdetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ph_diabetesdetail
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.inspectCore.inspect.model.PhDiabetesdetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ph_diabetesdetail
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from ph_diabetesdetail
+        where DiabetesID = #{diabetesID,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.inspectCore.inspect.model.PhDiabetesdetail" >
+        insert into ph_diabetesdetail (DiabetesID, VisitWay, Symptom, 
+            Symptom_Desc, Systolic, Diastolic, 
+            Height, Weight, Weight_Next, 
+            BMI, BMI_Next, Arteriopalmus, 
+            OtherSign, DailySmoking, DailySmoking_Next, 
+            DailyDrink, DailyDrink_Next, SportFrequency, 
+            SportFrequency_Next, SportDuration, 
+            SportDuration_Next, MainFood, MainFood_Next, 
+            PsychologicalRecovery, ComplianceBehavior, 
+            FPG, PGLU, HBA1C, 
+            CheckDate, CheckResult, DrugCompliance, 
+            DrugAdverseReaction, DrugAdverseReaction_Desc, 
+            RHG, TransferReason, TransferOrgAndDept, 
+            VisitDate_Next)
+        values (#{diabetesID,jdbcType=BIGINT}, #{visitWay,jdbcType=TINYINT}, #{symptom,jdbcType=VARCHAR}, 
+            #{symptom_Desc,jdbcType=VARCHAR}, #{systolic,jdbcType=SMALLINT}, #{diastolic,jdbcType=SMALLINT}, 
+            #{height,jdbcType=DECIMAL}, #{weight,jdbcType=DECIMAL}, #{weight_Next,jdbcType=DECIMAL}, 
+            #{BMI,jdbcType=DECIMAL}, #{BMI_Next,jdbcType=DECIMAL}, #{arteriopalmus,jdbcType=TINYINT}, 
+            #{otherSign,jdbcType=VARCHAR}, #{dailySmoking,jdbcType=SMALLINT}, #{dailySmoking_Next,jdbcType=SMALLINT}, 
+            #{dailyDrink,jdbcType=SMALLINT}, #{dailyDrink_Next,jdbcType=SMALLINT}, #{sportFrequency,jdbcType=VARCHAR}, 
+            #{sportFrequency_Next,jdbcType=VARCHAR}, #{sportDuration,jdbcType=SMALLINT}, 
+            #{sportDuration_Next,jdbcType=SMALLINT}, #{mainFood,jdbcType=SMALLINT}, #{mainFood_Next,jdbcType=SMALLINT}, 
+            #{psychologicalRecovery,jdbcType=TINYINT}, #{complianceBehavior,jdbcType=TINYINT}, 
+            #{FPG,jdbcType=DECIMAL}, #{PGLU,jdbcType=DECIMAL}, #{HBA1C,jdbcType=DECIMAL}, 
+            #{checkDate,jdbcType=TIMESTAMP}, #{checkResult,jdbcType=VARCHAR}, #{drugCompliance,jdbcType=TINYINT}, 
+            #{drugAdverseReaction,jdbcType=TINYINT}, #{drugAdverseReaction_Desc,jdbcType=VARCHAR}, 
+            #{RHG,jdbcType=TINYINT}, #{transferReason,jdbcType=VARCHAR}, #{transferOrgAndDept,jdbcType=VARCHAR}, 
+            #{visitDate_Next,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.inspectCore.inspect.model.PhDiabetesdetail" >
+        insert into ph_diabetesdetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="diabetesID != null" >
+                DiabetesID,
+            </if>
+            <if test="visitWay != null" >
+                VisitWay,
+            </if>
+            <if test="symptom != null" >
+                Symptom,
+            </if>
+            <if test="symptom_Desc != null" >
+                Symptom_Desc,
+            </if>
+            <if test="systolic != null" >
+                Systolic,
+            </if>
+            <if test="diastolic != null" >
+                Diastolic,
+            </if>
+            <if test="height != null" >
+                Height,
+            </if>
+            <if test="weight != null" >
+                Weight,
+            </if>
+            <if test="weight_Next != null" >
+                Weight_Next,
+            </if>
+            <if test="BMI != null" >
+                BMI,
+            </if>
+            <if test="BMI_Next != null" >
+                BMI_Next,
+            </if>
+            <if test="arteriopalmus != null" >
+                Arteriopalmus,
+            </if>
+            <if test="otherSign != null" >
+                OtherSign,
+            </if>
+            <if test="dailySmoking != null" >
+                DailySmoking,
+            </if>
+            <if test="dailySmoking_Next != null" >
+                DailySmoking_Next,
+            </if>
+            <if test="dailyDrink != null" >
+                DailyDrink,
+            </if>
+            <if test="dailyDrink_Next != null" >
+                DailyDrink_Next,
+            </if>
+            <if test="sportFrequency != null" >
+                SportFrequency,
+            </if>
+            <if test="sportFrequency_Next != null" >
+                SportFrequency_Next,
+            </if>
+            <if test="sportDuration != null" >
+                SportDuration,
+            </if>
+            <if test="sportDuration_Next != null" >
+                SportDuration_Next,
+            </if>
+            <if test="mainFood != null" >
+                MainFood,
+            </if>
+            <if test="mainFood_Next != null" >
+                MainFood_Next,
+            </if>
+            <if test="psychologicalRecovery != null" >
+                PsychologicalRecovery,
+            </if>
+            <if test="complianceBehavior != null" >
+                ComplianceBehavior,
+            </if>
+            <if test="FPG != null" >
+                FPG,
+            </if>
+            <if test="PGLU != null" >
+                PGLU,
+            </if>
+            <if test="HBA1C != null" >
+                HBA1C,
+            </if>
+            <if test="checkDate != null" >
+                CheckDate,
+            </if>
+            <if test="checkResult != null" >
+                CheckResult,
+            </if>
+            <if test="drugCompliance != null" >
+                DrugCompliance,
+            </if>
+            <if test="drugAdverseReaction != null" >
+                DrugAdverseReaction,
+            </if>
+            <if test="drugAdverseReaction_Desc != null" >
+                DrugAdverseReaction_Desc,
+            </if>
+            <if test="RHG != null" >
+                RHG,
+            </if>
+            <if test="transferReason != null" >
+                TransferReason,
+            </if>
+            <if test="transferOrgAndDept != null" >
+                TransferOrgAndDept,
+            </if>
+            <if test="visitDate_Next != null" >
+                VisitDate_Next,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="diabetesID != null" >
+                #{diabetesID,jdbcType=BIGINT},
+            </if>
+            <if test="visitWay != null" >
+                #{visitWay,jdbcType=TINYINT},
+            </if>
+            <if test="symptom != null" >
+                #{symptom,jdbcType=VARCHAR},
+            </if>
+            <if test="symptom_Desc != null" >
+                #{symptom_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="systolic != null" >
+                #{systolic,jdbcType=SMALLINT},
+            </if>
+            <if test="diastolic != null" >
+                #{diastolic,jdbcType=SMALLINT},
+            </if>
+            <if test="height != null" >
+                #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null" >
+                #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="weight_Next != null" >
+                #{weight_Next,jdbcType=DECIMAL},
+            </if>
+            <if test="BMI != null" >
+                #{BMI,jdbcType=DECIMAL},
+            </if>
+            <if test="BMI_Next != null" >
+                #{BMI_Next,jdbcType=DECIMAL},
+            </if>
+            <if test="arteriopalmus != null" >
+                #{arteriopalmus,jdbcType=TINYINT},
+            </if>
+            <if test="otherSign != null" >
+                #{otherSign,jdbcType=VARCHAR},
+            </if>
+            <if test="dailySmoking != null" >
+                #{dailySmoking,jdbcType=SMALLINT},
+            </if>
+            <if test="dailySmoking_Next != null" >
+                #{dailySmoking_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="dailyDrink != null" >
+                #{dailyDrink,jdbcType=SMALLINT},
+            </if>
+            <if test="dailyDrink_Next != null" >
+                #{dailyDrink_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="sportFrequency != null" >
+                #{sportFrequency,jdbcType=VARCHAR},
+            </if>
+            <if test="sportFrequency_Next != null" >
+                #{sportFrequency_Next,jdbcType=VARCHAR},
+            </if>
+            <if test="sportDuration != null" >
+                #{sportDuration,jdbcType=SMALLINT},
+            </if>
+            <if test="sportDuration_Next != null" >
+                #{sportDuration_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="mainFood != null" >
+                #{mainFood,jdbcType=SMALLINT},
+            </if>
+            <if test="mainFood_Next != null" >
+                #{mainFood_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="psychologicalRecovery != null" >
+                #{psychologicalRecovery,jdbcType=TINYINT},
+            </if>
+            <if test="complianceBehavior != null" >
+                #{complianceBehavior,jdbcType=TINYINT},
+            </if>
+            <if test="FPG != null" >
+                #{FPG,jdbcType=DECIMAL},
+            </if>
+            <if test="PGLU != null" >
+                #{PGLU,jdbcType=DECIMAL},
+            </if>
+            <if test="HBA1C != null" >
+                #{HBA1C,jdbcType=DECIMAL},
+            </if>
+            <if test="checkDate != null" >
+                #{checkDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checkResult != null" >
+                #{checkResult,jdbcType=VARCHAR},
+            </if>
+            <if test="drugCompliance != null" >
+                #{drugCompliance,jdbcType=TINYINT},
+            </if>
+            <if test="drugAdverseReaction != null" >
+                #{drugAdverseReaction,jdbcType=TINYINT},
+            </if>
+            <if test="drugAdverseReaction_Desc != null" >
+                #{drugAdverseReaction_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="RHG != null" >
+                #{RHG,jdbcType=TINYINT},
+            </if>
+            <if test="transferReason != null" >
+                #{transferReason,jdbcType=VARCHAR},
+            </if>
+            <if test="transferOrgAndDept != null" >
+                #{transferOrgAndDept,jdbcType=VARCHAR},
+            </if>
+            <if test="visitDate_Next != null" >
+                #{visitDate_Next,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.inspectCore.inspect.model.PhDiabetesdetailExample" resultType="java.lang.Integer" >
+        select count(*) from ph_diabetesdetail
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ph_diabetesdetail
+        <set >
+            <if test="record.diabetesID != null" >
+                DiabetesID = #{record.diabetesID,jdbcType=BIGINT},
+            </if>
+            <if test="record.visitWay != null" >
+                VisitWay = #{record.visitWay,jdbcType=TINYINT},
+            </if>
+            <if test="record.symptom != null" >
+                Symptom = #{record.symptom,jdbcType=VARCHAR},
+            </if>
+            <if test="record.symptom_Desc != null" >
+                Symptom_Desc = #{record.symptom_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.systolic != null" >
+                Systolic = #{record.systolic,jdbcType=SMALLINT},
+            </if>
+            <if test="record.diastolic != null" >
+                Diastolic = #{record.diastolic,jdbcType=SMALLINT},
+            </if>
+            <if test="record.height != null" >
+                Height = #{record.height,jdbcType=DECIMAL},
+            </if>
+            <if test="record.weight != null" >
+                Weight = #{record.weight,jdbcType=DECIMAL},
+            </if>
+            <if test="record.weight_Next != null" >
+                Weight_Next = #{record.weight_Next,jdbcType=DECIMAL},
+            </if>
+            <if test="record.BMI != null" >
+                BMI = #{record.BMI,jdbcType=DECIMAL},
+            </if>
+            <if test="record.BMI_Next != null" >
+                BMI_Next = #{record.BMI_Next,jdbcType=DECIMAL},
+            </if>
+            <if test="record.arteriopalmus != null" >
+                Arteriopalmus = #{record.arteriopalmus,jdbcType=TINYINT},
+            </if>
+            <if test="record.otherSign != null" >
+                OtherSign = #{record.otherSign,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dailySmoking != null" >
+                DailySmoking = #{record.dailySmoking,jdbcType=SMALLINT},
+            </if>
+            <if test="record.dailySmoking_Next != null" >
+                DailySmoking_Next = #{record.dailySmoking_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="record.dailyDrink != null" >
+                DailyDrink = #{record.dailyDrink,jdbcType=SMALLINT},
+            </if>
+            <if test="record.dailyDrink_Next != null" >
+                DailyDrink_Next = #{record.dailyDrink_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="record.sportFrequency != null" >
+                SportFrequency = #{record.sportFrequency,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sportFrequency_Next != null" >
+                SportFrequency_Next = #{record.sportFrequency_Next,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sportDuration != null" >
+                SportDuration = #{record.sportDuration,jdbcType=SMALLINT},
+            </if>
+            <if test="record.sportDuration_Next != null" >
+                SportDuration_Next = #{record.sportDuration_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="record.mainFood != null" >
+                MainFood = #{record.mainFood,jdbcType=SMALLINT},
+            </if>
+            <if test="record.mainFood_Next != null" >
+                MainFood_Next = #{record.mainFood_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="record.psychologicalRecovery != null" >
+                PsychologicalRecovery = #{record.psychologicalRecovery,jdbcType=TINYINT},
+            </if>
+            <if test="record.complianceBehavior != null" >
+                ComplianceBehavior = #{record.complianceBehavior,jdbcType=TINYINT},
+            </if>
+            <if test="record.FPG != null" >
+                FPG = #{record.FPG,jdbcType=DECIMAL},
+            </if>
+            <if test="record.PGLU != null" >
+                PGLU = #{record.PGLU,jdbcType=DECIMAL},
+            </if>
+            <if test="record.HBA1C != null" >
+                HBA1C = #{record.HBA1C,jdbcType=DECIMAL},
+            </if>
+            <if test="record.checkDate != null" >
+                CheckDate = #{record.checkDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.checkResult != null" >
+                CheckResult = #{record.checkResult,jdbcType=VARCHAR},
+            </if>
+            <if test="record.drugCompliance != null" >
+                DrugCompliance = #{record.drugCompliance,jdbcType=TINYINT},
+            </if>
+            <if test="record.drugAdverseReaction != null" >
+                DrugAdverseReaction = #{record.drugAdverseReaction,jdbcType=TINYINT},
+            </if>
+            <if test="record.drugAdverseReaction_Desc != null" >
+                DrugAdverseReaction_Desc = #{record.drugAdverseReaction_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.RHG != null" >
+                RHG = #{record.RHG,jdbcType=TINYINT},
+            </if>
+            <if test="record.transferReason != null" >
+                TransferReason = #{record.transferReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.transferOrgAndDept != null" >
+                TransferOrgAndDept = #{record.transferOrgAndDept,jdbcType=VARCHAR},
+            </if>
+            <if test="record.visitDate_Next != null" >
+                VisitDate_Next = #{record.visitDate_Next,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ph_diabetesdetail
+        set DiabetesID = #{record.diabetesID,jdbcType=BIGINT},
+            VisitWay = #{record.visitWay,jdbcType=TINYINT},
+            Symptom = #{record.symptom,jdbcType=VARCHAR},
+            Symptom_Desc = #{record.symptom_Desc,jdbcType=VARCHAR},
+            Systolic = #{record.systolic,jdbcType=SMALLINT},
+            Diastolic = #{record.diastolic,jdbcType=SMALLINT},
+            Height = #{record.height,jdbcType=DECIMAL},
+            Weight = #{record.weight,jdbcType=DECIMAL},
+            Weight_Next = #{record.weight_Next,jdbcType=DECIMAL},
+            BMI = #{record.BMI,jdbcType=DECIMAL},
+            BMI_Next = #{record.BMI_Next,jdbcType=DECIMAL},
+            Arteriopalmus = #{record.arteriopalmus,jdbcType=TINYINT},
+            OtherSign = #{record.otherSign,jdbcType=VARCHAR},
+            DailySmoking = #{record.dailySmoking,jdbcType=SMALLINT},
+            DailySmoking_Next = #{record.dailySmoking_Next,jdbcType=SMALLINT},
+            DailyDrink = #{record.dailyDrink,jdbcType=SMALLINT},
+            DailyDrink_Next = #{record.dailyDrink_Next,jdbcType=SMALLINT},
+            SportFrequency = #{record.sportFrequency,jdbcType=VARCHAR},
+            SportFrequency_Next = #{record.sportFrequency_Next,jdbcType=VARCHAR},
+            SportDuration = #{record.sportDuration,jdbcType=SMALLINT},
+            SportDuration_Next = #{record.sportDuration_Next,jdbcType=SMALLINT},
+            MainFood = #{record.mainFood,jdbcType=SMALLINT},
+            MainFood_Next = #{record.mainFood_Next,jdbcType=SMALLINT},
+            PsychologicalRecovery = #{record.psychologicalRecovery,jdbcType=TINYINT},
+            ComplianceBehavior = #{record.complianceBehavior,jdbcType=TINYINT},
+            FPG = #{record.FPG,jdbcType=DECIMAL},
+            PGLU = #{record.PGLU,jdbcType=DECIMAL},
+            HBA1C = #{record.HBA1C,jdbcType=DECIMAL},
+            CheckDate = #{record.checkDate,jdbcType=TIMESTAMP},
+            CheckResult = #{record.checkResult,jdbcType=VARCHAR},
+            DrugCompliance = #{record.drugCompliance,jdbcType=TINYINT},
+            DrugAdverseReaction = #{record.drugAdverseReaction,jdbcType=TINYINT},
+            DrugAdverseReaction_Desc = #{record.drugAdverseReaction_Desc,jdbcType=VARCHAR},
+            RHG = #{record.RHG,jdbcType=TINYINT},
+            TransferReason = #{record.transferReason,jdbcType=VARCHAR},
+            TransferOrgAndDept = #{record.transferOrgAndDept,jdbcType=VARCHAR},
+            VisitDate_Next = #{record.visitDate_Next,jdbcType=TIMESTAMP}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.inspectCore.inspect.model.PhDiabetesdetail" >
+        update ph_diabetesdetail
+        <set >
+            <if test="visitWay != null" >
+                VisitWay = #{visitWay,jdbcType=TINYINT},
+            </if>
+            <if test="symptom != null" >
+                Symptom = #{symptom,jdbcType=VARCHAR},
+            </if>
+            <if test="symptom_Desc != null" >
+                Symptom_Desc = #{symptom_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="systolic != null" >
+                Systolic = #{systolic,jdbcType=SMALLINT},
+            </if>
+            <if test="diastolic != null" >
+                Diastolic = #{diastolic,jdbcType=SMALLINT},
+            </if>
+            <if test="height != null" >
+                Height = #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null" >
+                Weight = #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="weight_Next != null" >
+                Weight_Next = #{weight_Next,jdbcType=DECIMAL},
+            </if>
+            <if test="BMI != null" >
+                BMI = #{BMI,jdbcType=DECIMAL},
+            </if>
+            <if test="BMI_Next != null" >
+                BMI_Next = #{BMI_Next,jdbcType=DECIMAL},
+            </if>
+            <if test="arteriopalmus != null" >
+                Arteriopalmus = #{arteriopalmus,jdbcType=TINYINT},
+            </if>
+            <if test="otherSign != null" >
+                OtherSign = #{otherSign,jdbcType=VARCHAR},
+            </if>
+            <if test="dailySmoking != null" >
+                DailySmoking = #{dailySmoking,jdbcType=SMALLINT},
+            </if>
+            <if test="dailySmoking_Next != null" >
+                DailySmoking_Next = #{dailySmoking_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="dailyDrink != null" >
+                DailyDrink = #{dailyDrink,jdbcType=SMALLINT},
+            </if>
+            <if test="dailyDrink_Next != null" >
+                DailyDrink_Next = #{dailyDrink_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="sportFrequency != null" >
+                SportFrequency = #{sportFrequency,jdbcType=VARCHAR},
+            </if>
+            <if test="sportFrequency_Next != null" >
+                SportFrequency_Next = #{sportFrequency_Next,jdbcType=VARCHAR},
+            </if>
+            <if test="sportDuration != null" >
+                SportDuration = #{sportDuration,jdbcType=SMALLINT},
+            </if>
+            <if test="sportDuration_Next != null" >
+                SportDuration_Next = #{sportDuration_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="mainFood != null" >
+                MainFood = #{mainFood,jdbcType=SMALLINT},
+            </if>
+            <if test="mainFood_Next != null" >
+                MainFood_Next = #{mainFood_Next,jdbcType=SMALLINT},
+            </if>
+            <if test="psychologicalRecovery != null" >
+                PsychologicalRecovery = #{psychologicalRecovery,jdbcType=TINYINT},
+            </if>
+            <if test="complianceBehavior != null" >
+                ComplianceBehavior = #{complianceBehavior,jdbcType=TINYINT},
+            </if>
+            <if test="FPG != null" >
+                FPG = #{FPG,jdbcType=DECIMAL},
+            </if>
+            <if test="PGLU != null" >
+                PGLU = #{PGLU,jdbcType=DECIMAL},
+            </if>
+            <if test="HBA1C != null" >
+                HBA1C = #{HBA1C,jdbcType=DECIMAL},
+            </if>
+            <if test="checkDate != null" >
+                CheckDate = #{checkDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="checkResult != null" >
+                CheckResult = #{checkResult,jdbcType=VARCHAR},
+            </if>
+            <if test="drugCompliance != null" >
+                DrugCompliance = #{drugCompliance,jdbcType=TINYINT},
+            </if>
+            <if test="drugAdverseReaction != null" >
+                DrugAdverseReaction = #{drugAdverseReaction,jdbcType=TINYINT},
+            </if>
+            <if test="drugAdverseReaction_Desc != null" >
+                DrugAdverseReaction_Desc = #{drugAdverseReaction_Desc,jdbcType=VARCHAR},
+            </if>
+            <if test="RHG != null" >
+                RHG = #{RHG,jdbcType=TINYINT},
+            </if>
+            <if test="transferReason != null" >
+                TransferReason = #{transferReason,jdbcType=VARCHAR},
+            </if>
+            <if test="transferOrgAndDept != null" >
+                TransferOrgAndDept = #{transferOrgAndDept,jdbcType=VARCHAR},
+            </if>
+            <if test="visitDate_Next != null" >
+                VisitDate_Next = #{visitDate_Next,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where DiabetesID = #{diabetesID,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.inspectCore.inspect.model.PhDiabetesdetail" >
+        update ph_diabetesdetail
+        set VisitWay = #{visitWay,jdbcType=TINYINT},
+            Symptom = #{symptom,jdbcType=VARCHAR},
+            Symptom_Desc = #{symptom_Desc,jdbcType=VARCHAR},
+            Systolic = #{systolic,jdbcType=SMALLINT},
+            Diastolic = #{diastolic,jdbcType=SMALLINT},
+            Height = #{height,jdbcType=DECIMAL},
+            Weight = #{weight,jdbcType=DECIMAL},
+            Weight_Next = #{weight_Next,jdbcType=DECIMAL},
+            BMI = #{BMI,jdbcType=DECIMAL},
+            BMI_Next = #{BMI_Next,jdbcType=DECIMAL},
+            Arteriopalmus = #{arteriopalmus,jdbcType=TINYINT},
+            OtherSign = #{otherSign,jdbcType=VARCHAR},
+            DailySmoking = #{dailySmoking,jdbcType=SMALLINT},
+            DailySmoking_Next = #{dailySmoking_Next,jdbcType=SMALLINT},
+            DailyDrink = #{dailyDrink,jdbcType=SMALLINT},
+            DailyDrink_Next = #{dailyDrink_Next,jdbcType=SMALLINT},
+            SportFrequency = #{sportFrequency,jdbcType=VARCHAR},
+            SportFrequency_Next = #{sportFrequency_Next,jdbcType=VARCHAR},
+            SportDuration = #{sportDuration,jdbcType=SMALLINT},
+            SportDuration_Next = #{sportDuration_Next,jdbcType=SMALLINT},
+            MainFood = #{mainFood,jdbcType=SMALLINT},
+            MainFood_Next = #{mainFood_Next,jdbcType=SMALLINT},
+            PsychologicalRecovery = #{psychologicalRecovery,jdbcType=TINYINT},
+            ComplianceBehavior = #{complianceBehavior,jdbcType=TINYINT},
+            FPG = #{FPG,jdbcType=DECIMAL},
+            PGLU = #{PGLU,jdbcType=DECIMAL},
+            HBA1C = #{HBA1C,jdbcType=DECIMAL},
+            CheckDate = #{checkDate,jdbcType=TIMESTAMP},
+            CheckResult = #{checkResult,jdbcType=VARCHAR},
+            DrugCompliance = #{drugCompliance,jdbcType=TINYINT},
+            DrugAdverseReaction = #{drugAdverseReaction,jdbcType=TINYINT},
+            DrugAdverseReaction_Desc = #{drugAdverseReaction_Desc,jdbcType=VARCHAR},
+            RHG = #{RHG,jdbcType=TINYINT},
+            TransferReason = #{transferReason,jdbcType=VARCHAR},
+            TransferOrgAndDept = #{transferOrgAndDept,jdbcType=VARCHAR},
+            VisitDate_Next = #{visitDate_Next,jdbcType=TIMESTAMP}
+        where DiabetesID = #{diabetesID,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from ph_diabetesdetail
+        where DiabetesID = #{diabetesID,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.inspectCore.inspect.model.PhDiabetesdetailExample" >
+    	<if test="_parameter != null and _parameter != '' ">
+        delete from ph_diabetesdetail
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+
+</mapper>

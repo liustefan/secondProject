@@ -1,0 +1,782 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.MemberMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.Member" >
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="LogName" property="logname" jdbcType="VARCHAR" />
+        <result column="OrgId" property="orgid" jdbcType="INTEGER" />
+        <result column="MemId" property="memid" jdbcType="SMALLINT" />
+        <result column="MemName" property="memname" jdbcType="VARCHAR" />
+        <result column="MemNameCode" property="memNameCode" jdbcType="VARCHAR" />
+        <result column="Gender" property="gender" jdbcType="CHAR" />
+        <result column="BirthDate" property="birthdate" jdbcType="DATE" />
+        <result column="Tel" property="tel" jdbcType="VARCHAR" />
+        <result column="Email" property="email" jdbcType="VARCHAR" />
+        <result column="IdCard" property="idcard" jdbcType="VARCHAR" />
+        <result column="NativeAddr" property="nativeaddr" jdbcType="VARCHAR" />
+        <result column="Address" property="address" jdbcType="VARCHAR" />
+        <result column="MarryStatus" property="marrystatus" jdbcType="CHAR" />
+        <result column="EducationStatus" property="educationstatus" jdbcType="CHAR" />
+        <result column="Occupation" property="occupation" jdbcType="VARCHAR" />
+        <result column="Docid" property="docid" jdbcType="INTEGER" />
+        <result column="DocName" property="docname" jdbcType="VARCHAR" />
+        <result column="UseTag" property="usetag" jdbcType="CHAR" />
+        <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="headImg" property="headimg" jdbcType="LONGVARBINARY" />
+        <result column="HeadAddress" property="headaddress" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="CHAR" />
+        <result column="source" property="source" jdbcType="INTEGER" />
+        <result column="unique_id" property="uniqueId" jdbcType="VARCHAR" />
+        <result column="memberGUID" property="memberGUID" jdbcType="VARCHAR"/>
+        <result column="VerifyType" property="verifyType" jdbcType="TINYINT" />
+        <result column="IsInfoPerfect" property="isInfoPerfect" jdbcType="TINYINT" />
+        <association property="org" column="OrgId" select="selectOrgById"/>
+        <association property="memberType" column="MemId" select="com.bithealth.memberCore.member.dao.MemberTypeMapper.selectByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Memberid, LogName, OrgId, MemId, MemName, Gender, BirthDate, Tel, Email, IdCard, 
+        NativeAddr, Address, MarryStatus, EducationStatus, Occupation, Docid, DocName, UseTag, 
+        CreateTime, headImg, HeadAddress, `status`, source, unique_id,memberGUID,MemNameCode, 
+        VerifyType, IsInfoPerfect
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemberExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemberExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from omem
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.Member" useGeneratedKeys="true" keyProperty="memberid">
+        insert into omem (Memberid, LogName, OrgId, 
+            MemId, MemName, Gender, 
+            BirthDate, Tel, Email, 
+            IdCard, NativeAddr, Address, 
+            MarryStatus, EducationStatus, Occupation, 
+            Docid, DocName, UseTag, 
+            CreateTime, headImg, HeadAddress, 
+            `status`, source, unique_id,memberGUID,MemNameCode, VerifyType, IsInfoPerfect
+            )
+        values (#{memberid,jdbcType=INTEGER}, #{logname,jdbcType=VARCHAR}, #{orgid,jdbcType=INTEGER}, 
+            #{memid,jdbcType=SMALLINT}, #{memname,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
+            #{birthdate,jdbcType=DATE}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+            #{idcard,jdbcType=VARCHAR}, #{nativeaddr,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+            #{marrystatus,jdbcType=CHAR}, #{educationstatus,jdbcType=CHAR}, #{occupation,jdbcType=VARCHAR}, 
+            #{docid,jdbcType=INTEGER}, #{docname,jdbcType=VARCHAR}, #{usetag,jdbcType=CHAR}, 
+            #{createtime,jdbcType=TIMESTAMP},#{headimg,jdbcType=LONGVARBINARY}, #{headaddress,jdbcType=VARCHAR}, 
+            #{status,jdbcType=CHAR}, #{source,jdbcType=INTEGER}, #{uniqueId,jdbcType=VARCHAR},#{memberGUID, jdbcType=VARCHAR},
+            #{memNameCode, jdbcType=VARCHAR, #{verifyType,jdbcType=TINYINT}, #{isInfoPerfect,jdbcType=TINYINT}}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.Member" useGeneratedKeys="true" keyProperty="memberid">
+        insert into omem
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="logname != null" >
+                LogName,
+            </if>
+            <if test="orgid != null" >
+                OrgId,
+            </if>
+            <if test="memid != null" >
+                MemId,
+            </if>
+            <if test="memname != null" >
+                MemName,
+            </if>
+            <if test="gender != null" >
+                Gender,
+            </if>
+            <if test="birthdate != null" >
+                BirthDate,
+            </if>
+            <if test="tel != null" >
+                Tel,
+            </if>
+            <if test="email != null" >
+                Email,
+            </if>
+            <if test="idcard != null" >
+                IdCard,
+            </if>
+            <if test="nativeaddr != null" >
+                NativeAddr,
+            </if>
+            <if test="address != null" >
+                Address,
+            </if>
+            <if test="marrystatus != null" >
+                MarryStatus,
+            </if>
+            <if test="educationstatus != null" >
+                EducationStatus,
+            </if>
+            <if test="occupation != null" >
+                Occupation,
+            </if>
+            <if test="docid != null" >
+                Docid,
+            </if>
+            <if test="docname != null" >
+                DocName,
+            </if>
+            <if test="usetag != null" >
+                UseTag,
+            </if>
+            <if test="createtime != null" >
+                CreateTime,
+            </if>
+            <if test="headimg != null" >
+                headImg,
+            </if>
+            <if test="headaddress != null" >
+                HeadAddress,
+            </if>
+            <if test="status != null" >
+                `status`,
+            </if>
+            <if test="source != null" >
+                source,
+            </if>
+            <if test="uniqueId != null" >
+                unique_id,
+            </if>
+            <if test="memberGUID != null">
+                memberGUID,
+            </if>
+            <if test="memNameCode != null">
+               MemNameCode,
+            </if>
+            <if test="verifyType != null" >
+                VerifyType,
+            </if>
+            <if test="isInfoPerfect != null" >
+                IsInfoPerfect,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="logname != null" >
+                #{logname,jdbcType=VARCHAR},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="memid != null" >
+                #{memid,jdbcType=SMALLINT},
+            </if>
+            <if test="memname != null" >
+                #{memname,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null" >
+                #{gender,jdbcType=CHAR},
+            </if>
+            <if test="birthdate != null" >
+                #{birthdate,jdbcType=DATE},
+            </if>
+            <if test="tel != null" >
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null" >
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="nativeaddr != null" >
+                #{nativeaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="marrystatus != null" >
+                #{marrystatus,jdbcType=CHAR},
+            </if>
+            <if test="educationstatus != null" >
+                #{educationstatus,jdbcType=CHAR},
+            </if>
+            <if test="occupation != null" >
+                #{occupation,jdbcType=VARCHAR},
+            </if>
+            <if test="docid != null" >
+                #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="docname != null" >
+                #{docname,jdbcType=VARCHAR},
+            </if>
+            <if test="usetag != null" >
+                #{usetag,jdbcType=CHAR},
+            </if>
+             <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="headimg != null" >
+                #{headimg,jdbcType=LONGVARBINARY},
+            </if>
+            <if test="headaddress != null" >
+                #{headaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="source != null" >
+                #{source,jdbcType=INTEGER},
+            </if>
+            <if test="uniqueId != null" >
+                #{uniqueId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberGUID != null">
+                #{memberGUID, jdbcType=VARCHAR},
+            </if>
+            <if test="memNameCode != null">
+               #{memNameCode, jdbcType=VARCHAR},
+            </if>
+            <if test="verifyType != null" >
+                #{verifyType,jdbcType=TINYINT},
+            </if>
+            <if test="isInfoPerfect != null" >
+                #{isInfoPerfect,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.MemberExample" resultType="java.lang.Integer" >
+        select count(*) from omem
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update omem
+        <set >
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.logname != null" >
+                LogName = #{record.logname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orgid != null" >
+                OrgId = #{record.orgid,jdbcType=INTEGER},
+            </if>
+            <if test="record.memid != null" >
+                MemId = #{record.memid,jdbcType=SMALLINT},
+            </if>
+            <if test="record.memname != null" >
+                MemName = #{record.memname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gender != null" >
+                Gender = #{record.gender,jdbcType=CHAR},
+            </if>
+            <if test="record.birthdate != null" >
+                BirthDate = #{record.birthdate,jdbcType=DATE},
+            </if>
+            <if test="record.tel != null" >
+                Tel = #{record.tel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null" >
+                Email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.idcard != null" >
+                IdCard = #{record.idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nativeaddr != null" >
+                NativeAddr = #{record.nativeaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.address != null" >
+                Address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.marrystatus != null" >
+                MarryStatus = #{record.marrystatus,jdbcType=CHAR},
+            </if>
+            <if test="record.educationstatus != null" >
+                EducationStatus = #{record.educationstatus,jdbcType=CHAR},
+            </if>
+            <if test="record.occupation != null" >
+                Occupation = #{record.occupation,jdbcType=VARCHAR},
+            </if>
+            <if test="record.docid != null" >
+                Docid = #{record.docid,jdbcType=INTEGER},
+            </if>
+            <if test="record.docname != null" >
+                DocName = #{record.docname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.usetag != null" >
+                UseTag = #{record.usetag,jdbcType=CHAR},
+            </if>
+            <if test="record.createtime != null" >
+                CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.headimg != null" >
+                headImg = #{record.headimg,jdbcType=LONGVARBINARY},
+            </if>
+            <if test="record.headaddress != null" >
+                HeadAddress = #{record.headaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null" >
+                `status` = #{record.status,jdbcType=CHAR},
+            </if>
+            <if test="record.source != null" >
+                source = #{record.source,jdbcType=INTEGER},
+            </if>
+            <if test="record.uniqueId != null" >
+                unique_id = #{record.uniqueId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.memberGUID != null">
+                memberGUID = #{record.memberGUID, jdbcType=VARCHAR},
+            </if>
+            <if test="record.memNameCode != null">
+                MemNameCode = #{record.memNameCode, jdbcType=VARCHAR},
+            </if>
+            <if test="record.verifyType != null" >
+                VerifyType = #{record.verifyType,jdbcType=TINYINT},
+            </if>
+            <if test="record.isInfoPerfect != null" >
+                IsInfoPerfect = #{record.isInfoPerfect,jdbcType=TINYINT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update omem
+        set Memberid = #{record.memberid,jdbcType=INTEGER},
+            LogName = #{record.logname,jdbcType=VARCHAR},
+            OrgId = #{record.orgid,jdbcType=INTEGER},
+            MemId = #{record.memid,jdbcType=SMALLINT},
+            MemName = #{record.memname,jdbcType=VARCHAR},
+            Gender = #{record.gender,jdbcType=CHAR},
+            BirthDate = #{record.birthdate,jdbcType=DATE},
+            Tel = #{record.tel,jdbcType=VARCHAR},
+            Email = #{record.email,jdbcType=VARCHAR},
+            IdCard = #{record.idcard,jdbcType=VARCHAR},
+            NativeAddr = #{record.nativeaddr,jdbcType=VARCHAR},
+            Address = #{record.address,jdbcType=VARCHAR},
+            MarryStatus = #{record.marrystatus,jdbcType=CHAR},
+            EducationStatus = #{record.educationstatus,jdbcType=CHAR},
+            Occupation = #{record.occupation,jdbcType=VARCHAR},
+            Docid = #{record.docid,jdbcType=INTEGER},
+            DocName = #{record.docname,jdbcType=VARCHAR},
+            UseTag = #{record.usetag,jdbcType=CHAR},
+            CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+            headImg = #{record.headimg,jdbcType=LONGVARBINARY},
+            HeadAddress = #{record.headaddress,jdbcType=VARCHAR},
+            `status` = #{record.status,jdbcType=CHAR},
+            source = #{record.source,jdbcType=INTEGER},
+            unique_id = #{record.uniqueId,jdbcType=VARCHAR},
+            memberGUID = #{record.memberGUID, jdbcType=VARCHAR},
+            MemNameCode = #{record.memNameCode, jdbcType=VARCHAR,
+            VerifyType = #{record.verifyType,jdbcType=TINYINT},
+            IsInfoPerfect = #{record.isInfoPerfect,jdbcType=TINYINT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.Member" >
+        update omem
+        <set >
+            <if test="logname != null" >
+                LogName = #{logname,jdbcType=VARCHAR},
+            </if>
+            <if test="orgid != null" >
+                OrgId = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="memid != null" >
+                MemId = #{memid,jdbcType=SMALLINT},
+            </if>
+            <if test="memname != null" >
+                MemName = #{memname,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null" >
+                Gender = #{gender,jdbcType=CHAR},
+            </if>
+            <if test="birthdate != null" >
+                BirthDate = #{birthdate,jdbcType=DATE},
+            </if>
+            <if test="tel != null" >
+                Tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                Email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null" >
+                IdCard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="nativeaddr != null" >
+                NativeAddr = #{nativeaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                Address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="marrystatus != null" >
+                MarryStatus = #{marrystatus,jdbcType=CHAR},
+            </if>
+            <if test="educationstatus != null" >
+                EducationStatus = #{educationstatus,jdbcType=CHAR},
+            </if>
+            <if test="occupation != null" >
+                Occupation = #{occupation,jdbcType=VARCHAR},
+            </if>
+            <if test="docid != null" >
+                Docid = #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="docname != null" >
+                DocName = #{docname,jdbcType=VARCHAR},
+            </if>
+            <if test="usetag != null" >
+                UseTag = #{usetag,jdbcType=CHAR},
+            </if>
+            <if test="createtime != null" >
+                CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="headimg != null" >
+                headImg = #{headimg,jdbcType=LONGVARBINARY},
+            </if>
+            <if test="headaddress != null" >
+                HeadAddress = #{headaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                `status` = #{status,jdbcType=CHAR},
+            </if>
+            <if test="source != null" >
+                source = #{source,jdbcType=INTEGER},
+            </if>
+            <if test="uniqueId != null" >
+                unique_id = #{uniqueId,jdbcType=VARCHAR},
+            </if>
+            <if test="memberGUID != null">
+                memberGUID = #{memberGUID, jdbcType=VARCHAR},
+            </if>
+            <if test="memNameCode != null">
+                MemNameCode = #{memNameCode, jdbcType=VARCHAR},
+            </if>
+             <if test="verifyType != null" >
+                VerifyType = #{verifyType,jdbcType=TINYINT},
+            </if>
+            <if test="isInfoPerfect != null" >
+                IsInfoPerfect = #{isInfoPerfect,jdbcType=TINYINT},
+            </if>
+        </set>
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.Member" >
+        update omem
+        set LogName = #{logname,jdbcType=VARCHAR},
+            OrgId = #{orgid,jdbcType=INTEGER},
+            MemId = #{memid,jdbcType=SMALLINT},
+            MemName = #{memname,jdbcType=VARCHAR},
+            Gender = #{gender,jdbcType=CHAR},
+            BirthDate = #{birthdate,jdbcType=DATE},
+            Tel = #{tel,jdbcType=VARCHAR},
+            Email = #{email,jdbcType=VARCHAR},
+            IdCard = #{idcard,jdbcType=VARCHAR},
+            NativeAddr = #{nativeaddr,jdbcType=VARCHAR},
+            Address = #{address,jdbcType=VARCHAR},
+            MarryStatus = #{marrystatus,jdbcType=CHAR},
+            EducationStatus = #{educationstatus,jdbcType=CHAR},
+            Occupation = #{occupation,jdbcType=VARCHAR},
+            Docid = #{docid,jdbcType=INTEGER},
+            DocName = #{docname,jdbcType=VARCHAR},
+            UseTag = #{usetag,jdbcType=CHAR},
+            CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            headImg = #{headimg,jdbcType=LONGVARBINARY},
+            HeadAddress = #{headaddress,jdbcType=VARCHAR},
+            `status` = #{status,jdbcType=CHAR},
+            source = #{source,jdbcType=INTEGER},
+            unique_id = #{uniqueId,jdbcType=VARCHAR},
+            memberGUID = #{memberGUID, jdbcType=VARCHAR},
+            MemNameCode = #{memNameCode, jdbcType=VARCHAR},
+            VerifyType = #{verifyType,jdbcType=TINYINT},
+            IsInfoPerfect = #{isInfoPerfect,jdbcType=TINYINT}
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from omem
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.MemberExample" >
+        delete from omem
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- 自定义SQL########################## -->
+    <resultMap type="com.bithealth.memberCore.member.model.MemberExt" id="BaseResultExtMap" extends="BaseResultMap">
+        <association property="memSession" column="Memberid" select="com.bithealth.memberCore.member.dao.MemSessionMapper.selectByPrimaryKey"/>
+	    <association property="physical" column="Memberid" select="com.bithealth.memberCore.member.dao.PhysicalExaminationMapper.selectByPrimaryKey"/>
+	    <association property="vitalIndex" column="Memberid" select="com.bithealth.memberCore.member.dao.VitalIndexMapper.selectByPrimaryKey"/>
+	    <association property="relation" column="unique_id" select="com.bithealth.memberCore.member.dao.MemRelationMapper.selectByPrimaryKey"/>
+	    <association property="habit" column="Memberid" select="com.bithealth.memberCore.member.dao.HabitMapper.selectByPrimaryKey"/>
+	    <association property="importLog" column="memberGUID" select="com.bithealth.memberCore.member.dao.MemImportLogMapper.selectByMemberGUID"/>
+	    <collection property="memberGroupList" column="Memberid" select="com.bithealth.memberCore.group.dao.MemberGroupMapper.selectMemGroupByMemId"/>
+	    <collection property="diseasesHistoryList" column="Memberid" select="com.bithealth.memberCore.member.dao.DiseasesHistoryMapper.selectByMember"/>
+	    <collection property="familyHistoryList" column="Memberid" select="com.bithealth.memberCore.member.dao.FamilyHistoryMapper.selectByMember"/>
+	    <collection property="linkmanList" column="Memberid" select="com.bithealth.memberCore.member.dao.LinkManMapper.selectByMember"/>
+	    <collection property="accountList" column="Memberid" select="com.bithealth.memberCore.member.dao.MemAccountMapper.selectByMember"/>
+	    <collection property="memScoreList" column="Memberid" select="com.bithealth.memberCore.member.dao.MemScoreMapper.selectByMember"/>
+    </resultMap>
+    
+    <resultMap type="com.bithealth.memberCore.member.vo.MemberVo" id="memberVoResultMap">
+    <id column="Memberid" property="memberId" jdbcType="INTEGER"/>
+    <result column="MemName" property="memName" jdbcType="VARCHAR"/>
+    <result column="Gender" property="gender" jdbcType="VARCHAR"/>
+    <result column="BirthDate" property="birthDay" jdbcType="DATE"/>
+    <result column="Tel" property="tel" jdbcType="VARCHAR"/>
+    <result column="status" property="status" jdbcType="VARCHAR"/>
+    <result column="DiseaseName_List" property="diseaseNames" jdbcType="VARCHAR"/>
+    <result column="MemGrpName_List" property="memGrpNames" jdbcType="VARCHAR"/>
+    <result column="MemGrpID_List" property="memGrpIDs" jdbcType="VARCHAR"/>
+    <result column="MemberTypeName" property="memDesc" jdbcType="VARCHAR"/>
+    <result column="last_UploadTime" property="lastTestTime" jdbcType="TIMESTAMP"/>
+    <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="IdCard" property="idcard" jdbcType="VARCHAR"/>
+    <result column="unique_id" property="uniqueId" jdbcType="VARCHAR"/>
+    <result column="MSDesignID" property="designID" jdbcType="INTEGER"/>
+    <result column="ExecStatus" property="execStatus" jdbcType="INTEGER"/>
+    <result column="SchemeTitle" property="schemeTitle" jdbcType="VARCHAR"/>
+    <result column="unique_id" property="uniqueId" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <select id="selectMemberExtById" resultMap="BaseResultExtMap" parameterType="java.lang.Integer">
+     select 
+        <include refid="Base_Column_List" />
+        from omem
+        where Memberid = #{memberid,jdbcType=INTEGER}
+    </select>
+    <select id="selectMemberExtByExample" resultMap="BaseResultExtMap" parameterType="com.bithealth.memberCore.member.model.MemberExample">
+    select 
+        <include refid="Base_Column_List" />from omem
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    
+    <select id="selectByUniqueId" resultMap="BaseResultMap" parameterType="java.lang.String">
+     select 
+        <include refid="Base_Column_List" />
+        from omem
+        where unique_id = #{uniqueId,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="selectByMemGrp" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT o.* FROM omem o INNER JOIN ompb b ON o.`Memberid`=b.`Memberid` AND b.`MemGrpid`=#{memgrpid,jdbcType=INTEGER}
+    </select>
+    
+    <resultMap type="com.bithealth.memberCore.member.model.Org" id="orgResultMap">
+       <id column="OrgId" property="orgId" jdbcType="INTEGER"/>
+       <result column="OrgName" property="orgName" jdbcType="VARCHAR"/>
+       <result column="orgCode" property="orgCode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectOrgById" parameterType="java.lang.Integer" resultMap="orgResultMap">
+    SELECT OrgId, OrgName,orgCode FROM orgs WHERE OrgId=#{orgId,jdbcType=INTEGER}
+    </select>
+    
+    <update id="updateUseTagByUUID" parameterType="com.bithealth.memberCore.member.model.Member">
+    UPDATE omem set UseTag=#{usetag,jdbcType=CHAR} WHERE memberGUID = #{memberGUID, jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 调用存储过程 -->
+    <select id="exeProMyMembers" statementType="CALLABLE" resultMap="memberVoResultMap" parameterType="com.bithealth.memberCore.member.model.SearchCondition">
+    {call proc_getMyMemListByDocId(
+    #{docId, mode=IN, jdbcType=INTEGER},
+    #{memGrpId, mode=IN, jdbcType=INTEGER},
+    #{memName, mode=IN, jdbcType=VARCHAR},
+    #{memNameCode, mode=IN, jdbcType=VARCHAR},
+    #{gender, mode=IN, jdbcType=VARCHAR},
+    #{tel, mode=IN, jdbcType=VARCHAR},
+    #{idcard, mode=IN, jdbcType=VARCHAR},
+    #{birthDayStart, mode=IN, jdbcType=VARCHAR},
+    #{birthDayEnd, mode=IN, jdbcType=VARCHAR},
+    #{diseaseId, mode=IN, jdbcType=INTEGER},
+    #{execStatus, mode=IN, jdbcType=INTEGER},
+    #{labelItemIds, mode=IN, jdbcType=VARCHAR},
+    #{page.pageNo, mode=IN, jdbcType=INTEGER}-1,
+    #{page.pageSize, mode=IN, jdbcType=INTEGER},
+    #{iCount, mode=OUT, jdbcType=INTEGER}
+    )}
+    </select>
+    
+    <select id="exeProOtherMembers" statementType="CALLABLE" resultMap="memberVoResultMap" parameterType="com.bithealth.memberCore.member.model.SearchCondition">
+    {call proc_getOtherMemListByDocId(
+    #{docId, mode=IN, jdbcType=INTEGER},
+    #{memGrpId, mode=IN, jdbcType=INTEGER},
+    #{memName, mode=IN, jdbcType=VARCHAR},
+    #{memNameCode, mode=IN, jdbcType=VARCHAR},
+    #{gender, mode=IN, jdbcType=VARCHAR},
+    #{tel, mode=IN, jdbcType=VARCHAR},
+    #{idcard, mode=IN, jdbcType=VARCHAR},
+    #{birthDayStart, mode=IN, jdbcType=VARCHAR},
+    #{birthDayEnd, mode=IN, jdbcType=VARCHAR},
+    #{address, mode=IN, jdbcType=VARCHAR},
+    #{diseaseName, mode=IN, jdbcType=VARCHAR},
+    #{memType, mode=IN, jdbcType=VARCHAR},
+    #{qustid, mode=IN, jdbcType=INTEGER},
+    #{combQustid, mode=IN, jdbcType=INTEGER},
+    #{page.pageNo, mode=IN, jdbcType=INTEGER}-1,
+    #{page.pageSize, mode=IN, jdbcType=INTEGER},
+    #{iCount, mode=OUT, jdbcType=INTEGER}
+    )}
+    </select>
+    <select id="exeProAllMembers" statementType="CALLABLE" resultMap="memberVoResultMap" parameterType="com.bithealth.memberCore.member.model.SearchCondition">
+    {call proc_getAllMemListByDocId(
+    #{docId, mode=IN, jdbcType=INTEGER},
+    #{memGrpId, mode=IN, jdbcType=INTEGER},
+    #{memName, mode=IN, jdbcType=VARCHAR},
+    #{memNameCode, mode=IN, jdbcType=VARCHAR},
+    #{gender, mode=IN, jdbcType=VARCHAR},
+    #{tel, mode=IN, jdbcType=VARCHAR},
+    #{idcard, mode=IN, jdbcType=VARCHAR},
+    #{birthDayStart, mode=IN, jdbcType=VARCHAR},
+    #{birthDayEnd, mode=IN, jdbcType=VARCHAR},
+    #{address, mode=IN, jdbcType=VARCHAR},
+    #{diseaseName, mode=IN, jdbcType=VARCHAR},
+    #{memType, mode=IN, jdbcType=VARCHAR},
+    #{qustid, mode=IN, jdbcType=INTEGER},
+    #{combQustid, mode=IN, jdbcType=INTEGER},
+    #{page.pageNo, mode=IN, jdbcType=INTEGER}-1,
+    #{page.pageSize, mode=IN, jdbcType=INTEGER},
+    #{iCount, mode=OUT, jdbcType=INTEGER}
+    )}
+    </select>
+    
+    <!-- 出错会员列表 -->
+    <select id="selectErrorMemberList" resultType="java.util.Map" parameterType="map">
+     SELECT o.Memberid memberid,o.`Email` email,o.`Gender` gender,o.`BirthDate` birthday, o.`IdCard` idcard, o.`Tel` tel ,o.`MemName` memname,o.`memberGUID` memberGUID,l.`Reason` reason,o.`CreateTime` createTime 
+     FROM omem o INNER JOIN omem_importlog l ON o.memberGUID=l.memberGUID AND o.`UseTag`=l.`UseTag`AND o.`UseTag`='E' 
+     <if test="member.usetag != null and member.usetag != ''">
+	     AND o.UseTag =#{member.usetag, jdbcType=CHAR}
+	 </if>
+     <if test="member.memname != null and member.memname != ''">
+	     AND o.memName LIKE CONCAT('%',TRIM(#{member.memname,jdbcType=VARCHAR}), '%')
+	 </if>
+	 <if test="member.idcard != null and member.idcard != ''">
+	     AND o.IdCard LIKE CONCAT('%',TRIM(#{member.idcard,jdbcType=VARCHAR}), '%')
+	 </if>
+	 <if test="member.tel != null and member.tel != ''">
+	     AND o.Tel LIKE CONCAT('%',TRIM(#{member.tel,jdbcType=VARCHAR}), '%')
+	 </if>
+	 <if test="member.docid != null">
+	     AND o.Docid =#{member.docid,jdbcType=INTEGER}
+	 </if>
+     ORDER BY o.`CreateTime` DESC
+     LIMIT #{page.offset, jdbcType=INTEGER}, #{page.pageSize, jdbcType=INTEGER}
+    </select>
+    
+     <select id="countErrorMemberList" resultType="java.lang.Integer" parameterType="com.bithealth.memberCore.member.model.Member">
+     SELECT COUNT(*)  
+     FROM omem o INNER JOIN omem_importlog l ON o.memberGUID=l.memberGUID AND o.`UseTag`=l.`UseTag` 
+      <if test="usetag != null and usetag != ''">
+        AND o.`UseTag`=#{usetag, jdbcType=CHAR}
+      </if>
+      <if test="memname != null and memname != ''">
+	     AND o.memname LIKE CONCAT('%',TRIM(#{memname,jdbcType=VARCHAR}), '%')
+	  </if>
+	  <if test="idcard != null and idcard != ''">
+	     AND o.IdCard LIKE CONCAT('%',TRIM(#{idcard,jdbcType=VARCHAR}), '%')
+	  </if>
+	   <if test="tel != null and tel != ''">
+	     AND o.Tel LIKE CONCAT('%',TRIM(#{tel,jdbcType=VARCHAR}), '%')
+	  </if>
+	  <if test="docid != null">
+	     AND o.Docid =#{docid,jdbcType=INTEGER}
+	  </if>
+    </select>
+    
+</mapper>

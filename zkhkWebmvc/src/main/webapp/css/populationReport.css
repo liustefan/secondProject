@@ -1,0 +1,252 @@
+ /*
+* populationReport.jsp 样式
+*/
+
+body {
+	min-width: 900px;
+}
+
+.loadBox {
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    display: none;
+    z-index: 999;
+}
+
+.loading {
+	width: 60px;
+	height: 64px;
+	background:  url("../img/load1.gif") no-repeat center;
+}
+
+.menu-title {
+	font-size: 13px;
+	padding: 5px 10px;
+	background: #009C45;
+}
+
+.menuContent {
+	display: none; 
+	position: absolute;
+	border: 1px solid #ccc;
+}
+
+.input-center {
+	float: left;
+	margin: 9px 3px 0 0 !important;
+	margin-top: 7px\0 !important;
+}
+
+.span-center {
+    display: inline-block;
+    float: left;
+    margin-right: 6px;
+} 
+
+.disable-change #memberGroupName , .disable-change .ico-search {
+	cursor: not-allowed;
+}
+
+/*
+组织名称查询 
+.outer-box {
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: #EFF1F0;
+	overflow: hidden;
+	clear: both;
+}
+
+.text-edit {
+	width: 100%;
+	display: inline-block;
+	position: relative;
+	line-height: 30px;
+}
+
+.input-height {
+	height: 20px;
+}
+
+.margin-lf {
+	margin-left: 15px;
+}
+
+.f-r {
+	display: inline-block;
+	float: right;
+	margin-top: 10px !important ;
+}
+
+.fl {
+	float: left;
+}
+
+.btn-inquiry {
+	margin: 0 5px;
+	padding: 0 15px;
+	height: 30px;
+	border: 1px solid #6AD279;
+	border-radius: 3px;
+	background-color: #DAF6D7;
+	cursor: pointer;
+	font-family: "Microsoft YaHei", "SimSun";
+	font-weight: normal;
+	color: black;
+}
+
+.ico-search {
+	width: 20px;
+	height: 20px;
+	position: relative;
+	right: 25px;
+	top: 5px;
+	display: inline-block;
+	background:  url(../img/u125.png) no-repeat  center ;
+}
+
+.label_but {
+	padding: 3px 15px;
+	margin-right: 15px;
+	font-size: 13px;
+	line-height: 18px;
+	float: none;
+	color: #404040;
+	border: 1px solid #9a9a9a;
+	border-radius: 3px;
+	font-family: "Microsoft YaHei", "SimSun";
+	cursor: pointer;
+}
+
+.menu-title {
+	font-size: 13px;
+	padding: 5px 10px;
+	background: #009C45;
+}
+
+table样式 
+.font-change:hover { 
+	color: #fff;
+	font-weight: bold;
+}
+
+.btn-inquiry:hover {
+	background-color: #64C25A;
+}
+
+.tabel_content {
+	width: 100%;
+	border: 1px solid  #ddd;
+	border-collapse: collapse;
+}
+
+.table_content_title {
+	background: #878B83;
+}
+
+.tabel_content tr:nth-child(even) { background-color: #e0f1f3;}
+
+.tabel_content tr:nth-child(odd) { background-color: #fff;}
+
+.tabel_content td {
+	padding: 10px 0;
+	text-align: center;
+	font-size: 12px;
+	border-top: 1px #ddd solid;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.table_content_title th {
+	font-size: 14px;
+	color: #333;
+	background-color: #bcdee0;
+	padding: 10px 0;
+	white-space: nowrap;
+}
+
+#barBox {
+    width: 100%;
+}
+
+.loadBox {
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    display: none;
+    z-index: 999;
+}
+
+.loading {
+	width: 60px;
+	height: 64px;
+	background:  url("../img/load1.gif") no-repeat center;
+}
+
+#datalist .empty-info {
+	color: #999;
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+	height: 100px;
+}
+
+
+.pageTitle {
+    background: #46b258;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+	font-size: 14px;
+	padding-left: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.mar-left {
+	display: inline-block;
+	margin-left: 15px;
+}
+
+.mar-right { margin-right:8px; }
+
+.select-adjust {
+	padding: 3px 5px;
+	width: 100px;
+	height: 25px;
+}
+
+.check {
+	margin: 10px 5px 0;
+	float: left;
+}
+
+.arrange li {
+	display: inline-block;
+	float: left;
+	height: 30px;
+	margin-top: 10px;
+}
+
+.arrange li input { vertical-align:middle; }
+
+.bg-img {
+	width: 105px;
+	background: url("../img/u17.png") no-repeat scroll right center white;
+    background-size: 15px 15px;
+    padding-right: 10px;
+    background-origin: content-box;
+    border: 1px inset;
+}*/

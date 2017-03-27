@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd  
+    http://www.springframework.org/schema/mvc  
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/cache   
+    http://www.springframework.org/schema/cache/spring-cache.xsd
+    http://www.springframework.org/schema/task 
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	
+	<!-- 引入配置文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="${initialSize}"></property>
+		<!-- 连接池最大数量 -->
+		<property name="maxActive" value="${maxActive}"></property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${maxIdle}"></property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="${minIdle}"></property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="${maxWait}"></property>
+		<!-- 失效检查线程运行时间间隔，要小于MySQL的'wait_timeout'时间-->
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"></property>
+		<!-- 检查连接是否有效 -->
+		<property name="testWhileIdle" value="true"></property>
+		<!-- 检查连接有效性的SQL语句 -->
+		<property name="validationQuery" value="${validationQuery}"></property>
+	</bean>
+
+	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描mapping.xml文件 -->
+		<property name="mapperLocations" value="classpath:com/push/mapper/*.xml"></property>
+	</bean>
+
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.push.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+        	<tx:method name="select*" read-only="true"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="execute*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+ 
+    <aop:config>
+        <aop:pointcut id="txPointcut" expression="execution(* com.push.service..*.*(..))"/>
+        <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+    </aop:config>
+    
+    <!-- 缓存配置 -->
+    
+    <!-- <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" >
+         <property name="configLocation" value="classpath:ehcache.xml" />
+         <property name="shared" value="true"></property>
+    </bean>
+    <cache:annotation-driven cache-manager="cacheManager" />
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+    	<property name="cacheManager"  ref="cacheManagerFactory"/>
+    </bean> -->
+    
+    <context:component-scan base-package="com.push.thread" /> 
+    <context:component-scan base-package="com.push.service" /> 
+    <task:scheduled-tasks>   
+        <task:scheduled ref="handleInactiveTokenJob" method="handleInactiveToken" cron="0 10 0 * * ?"/>   
+	</task:scheduled-tasks> 
+	
+	 <task:scheduled-tasks>   
+        <task:scheduled ref="delayPushTask" method="getDelayPushMsg" cron="0 0/5 * * * ?"/>   
+	</task:scheduled-tasks> 
+	
+	<!-- 异步线程池 -->  
+	<bean id="taskExecutor" 
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">  
+	    <!-- 核心线程数 -->  
+	    <property name="corePoolSize" value="5" />  
+	    <!-- 最大线程数 -->  
+	    <property name="maxPoolSize" value="10" />  
+	    <!-- 队列最大长度 >=mainExecutor.maxSize -->  
+	    <property name="queueCapacity" value="2500" />  
+	    <!-- 线程池维护线程所允许的空闲时间 -->  
+	    <property name="keepAliveSeconds" value="300" />  
+	    <!-- 线程池对拒绝任务(无线程可用)的处理策略 -->  
+	    <property name="rejectedExecutionHandler">  
+	        <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />  
+	    </property>  
+	</bean>
+
+
+</beans>

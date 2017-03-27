@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.dao.MemberDao" >
+	<resultMap type="com.bithealth.memberCore.member.vo.MemberVo" id="BaseResultMap">
+	    <id column="Memberid" property="memberId" jdbcType="INTEGER"/>
+	    <result column="MemName" property="memName" jdbcType="VARCHAR"/>
+	    <result column="Gender" property="gender" jdbcType="VARCHAR"/>
+	    <result column="BirthDate" property="birthDay" jdbcType="DATE"/>
+	    <result column="Tel" property="tel" jdbcType="VARCHAR"/>
+	    <result column="status" property="status" jdbcType="VARCHAR"/>
+	    <result column="DiseaseName_List" property="diseaseNames" jdbcType="VARCHAR"/>
+	    <result column="MemGrpName_List" property="memGrpNames" jdbcType="VARCHAR"/>
+	    <result column="MemGrpID_List" property="memGrpIDs" jdbcType="VARCHAR"/>
+	    <result column="MemDesc" property="memDesc" jdbcType="VARCHAR"/>
+	    <result column="last_UploadTime" property="lastTestTime" jdbcType="TIMESTAMP"/>
+	    <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+	    <result column="IdCard" property="idcard" jdbcType="VARCHAR"/>
+	    <result column="unique_id" property="uniqueId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <parameterMap type="map" id="parameterMap">  
+		<parameter property="iDocId" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iMemGrpid" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="vMemName" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vMemNameCode" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="cGender" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vTel" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vIdCard" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="dSBirthDate" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="dEBirthDate" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vAddress" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vDiseaseName" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="iMemId" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iQustid" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iCombQustid" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="dSCreateTime" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="dECreateTime" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="iCurrentPageIndex" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iPageSize" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iCount" jdbcType="INTEGER" mode="OUT"/>
+	</parameterMap> 
+    <parameterMap type="map" id="parameter">  
+		<parameter property="iDocId" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="vMemName" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="cGender" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vTel" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vIdCard" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="dSBirthDate" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="dEBirthDate" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="vDiseaseName" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="iMemId" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iQustid" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iCombQustid" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iCurrentPageIndex" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iPageSize" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="iCount" jdbcType="INTEGER" mode="OUT"/>
+	</parameterMap>
+	<select id="exProcGetMyMemListByDocId" parameterMap="parameter" statementType="CALLABLE" resultMap="BaseResultMap">  
+		<![CDATA[  
+		    {call proc_questionnare_getMemberByDocId (?,?,?,?,?,?,?,?,?,?,?,?,?,?)}  
+		]]>  
+	</select> 
+</mapper>

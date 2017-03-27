@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.FamilyHistoryMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.FamilyHistory" >
+        <id column="LogID" property="logID" jdbcType="BIGINT" />
+        <result column="Relation" property="relation" jdbcType="TINYINT" />
+        <result column="MemberID" property="memberID" jdbcType="INTEGER" />
+        <result column="DiseaseID" property="diseaseID" jdbcType="INTEGER" />
+        <result column="DiseaseName" property="diseaseName" jdbcType="VARCHAR" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, Relation, MemberID, DiseaseID, DiseaseName, CreateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.FamilyHistoryExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem4
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.FamilyHistoryExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem4
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from mem4
+        where LogID = #{logID,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.FamilyHistory" useGeneratedKeys="true" keyProperty="logID" >
+        insert into mem4 (Relation, MemberID, DiseaseID, 
+            DiseaseName, CreateTime)
+        values (#{relation,jdbcType=TINYINT}, #{memberID,jdbcType=INTEGER}, #{diseaseID,jdbcType=INTEGER}, 
+            #{diseaseName,jdbcType=VARCHAR}, NOW())
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.FamilyHistory" useGeneratedKeys="true" keyProperty="logID" >
+        insert into mem4
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="relation != null" >
+                Relation,
+            </if>
+            <if test="memberID != null" >
+                MemberID,
+            </if>
+            <if test="diseaseID != null" >
+                DiseaseID,
+            </if>
+            <if test="diseaseName != null" >
+                DiseaseName,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="relation != null" >
+                #{relation,jdbcType=TINYINT},
+            </if>
+            <if test="memberID != null" >
+                #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="diseaseID != null" >
+                #{diseaseID,jdbcType=INTEGER},
+            </if>
+            <if test="diseaseName != null" >
+                #{diseaseName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.FamilyHistoryExample" resultType="java.lang.Integer" >
+        select count(*) from mem4
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update mem4
+        <set >
+            <if test="record.logID != null" >
+                LogID = #{record.logID,jdbcType=BIGINT},
+            </if>
+            <if test="record.relation != null" >
+                Relation = #{record.relation,jdbcType=TINYINT},
+            </if>
+            <if test="record.memberID != null" >
+                MemberID = #{record.memberID,jdbcType=INTEGER},
+            </if>
+            <if test="record.diseaseID != null" >
+                DiseaseID = #{record.diseaseID,jdbcType=INTEGER},
+            </if>
+            <if test="record.diseaseName != null" >
+                DiseaseName = #{record.diseaseName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update mem4
+        set LogID = #{record.logID,jdbcType=BIGINT},
+            Relation = #{record.relation,jdbcType=TINYINT},
+            MemberID = #{record.memberID,jdbcType=INTEGER},
+            DiseaseID = #{record.diseaseID,jdbcType=INTEGER},
+            DiseaseName = #{record.diseaseName,jdbcType=VARCHAR},
+            CreateTime = #{record.createTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.FamilyHistory" >
+        update mem4
+        <set >
+            <if test="relation != null" >
+                Relation = #{relation,jdbcType=TINYINT},
+            </if>
+            <if test="memberID != null" >
+                MemberID = #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="diseaseID != null" >
+                DiseaseID = #{diseaseID,jdbcType=INTEGER},
+            </if>
+            <if test="diseaseName != null" >
+                DiseaseName = #{diseaseName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LogID = #{logID,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.FamilyHistory" >
+        update mem4
+        set Relation = #{relation,jdbcType=TINYINT},
+            MemberID = #{memberID,jdbcType=INTEGER},
+            DiseaseID = #{diseaseID,jdbcType=INTEGER},
+            DiseaseName = #{diseaseName,jdbcType=VARCHAR},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP}
+        where LogID = #{logID,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from mem4
+        where LogID = #{logID,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.FamilyHistoryExample" >
+        delete from mem4
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- ################### -->
+    <select id="selectByMember" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+     select
+        <include refid="Base_Column_List" />
+        from mem4 where MemberID = #{memberid,jdbcType=INTEGER}
+    </select>
+    
+    <insert id="insetBatch" parameterType="java.util.List">
+     insert into mem4 (Relation, MemberID, DiseaseID, 
+            DiseaseName, CreateTime)
+        values 
+        <foreach collection="list" item="item" separator=",">
+            (#{item.relation,jdbcType=TINYINT}, #{item.memberID,jdbcType=INTEGER}, #{item.diseaseID,jdbcType=INTEGER}, 
+            #{item.diseaseName,jdbcType=VARCHAR}, NOW())
+         </foreach>
+    </insert>
+
+</mapper>

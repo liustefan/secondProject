@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.reportCore.template.dao.OptionMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.reportCore.template.model.Option" >
+        <id column="OptId" property="optId" jdbcType="SMALLINT" />
+        <id column="FunId" property="funId" jdbcType="SMALLINT" />
+        <result column="OptName" property="optName" jdbcType="VARCHAR" />
+        <result column="OptDes" property="optDes" jdbcType="VARCHAR" />
+        <result column="CHLevel" property="CHLevel" jdbcType="SMALLINT" />
+        <result column="Tag" property="tag" jdbcType="CHAR" />
+        <result column="orgid" property="orgid" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        OptId, FunId, OptName, OptDes, CHLevel, Tag, orgid
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.OptionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from oopt
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.OptionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from oopt
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.OptionKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from oopt
+        where OptId = #{optId,jdbcType=SMALLINT}
+          and FunId = #{funId,jdbcType=SMALLINT}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.reportCore.template.model.Option" >
+        insert into oopt
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="optId != null" >
+                OptId,
+            </if>
+            <if test="funId != null" >
+                FunId,
+            </if>
+            <if test="optName != null" >
+                OptName,
+            </if>
+            <if test="optDes != null" >
+                OptDes,
+            </if>
+            <if test="CHLevel != null" >
+                CHLevel,
+            </if>
+            <if test="tag != null" >
+                Tag,
+            </if>
+            <if test="orgid != null" >
+                orgid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="optId != null" >
+                #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="funId != null" >
+                #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="optName != null" >
+                #{optName,jdbcType=VARCHAR},
+            </if>
+            <if test="optDes != null" >
+                #{optDes,jdbcType=VARCHAR},
+            </if>
+            <if test="CHLevel != null" >
+                #{CHLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=CHAR},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.reportCore.template.model.OptionExample" resultType="java.lang.Integer" >
+        select count(*) from oopt
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update oopt
+            <set >
+                <if test="record.optId != null" >
+                    OptId = #{record.optId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.funId != null" >
+                    FunId = #{record.funId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.optName != null" >
+                    OptName = #{record.optName,jdbcType=VARCHAR},
+                </if>
+                <if test="record.optDes != null" >
+                    OptDes = #{record.optDes,jdbcType=VARCHAR},
+                </if>
+                <if test="record.CHLevel != null" >
+                    CHLevel = #{record.CHLevel,jdbcType=SMALLINT},
+                </if>
+                <if test="record.tag != null" >
+                    Tag = #{record.tag,jdbcType=CHAR},
+                </if>
+                <if test="record.orgid != null" >
+                    orgid = #{record.orgid,jdbcType=INTEGER},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update oopt
+            set OptId = #{record.optId,jdbcType=SMALLINT},
+                FunId = #{record.funId,jdbcType=SMALLINT},
+                OptName = #{record.optName,jdbcType=VARCHAR},
+                OptDes = #{record.optDes,jdbcType=VARCHAR},
+                CHLevel = #{record.CHLevel,jdbcType=SMALLINT},
+                Tag = #{record.tag,jdbcType=CHAR},
+                orgid = #{record.orgid,jdbcType=INTEGER}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.reportCore.template.model.Option" >
+        update oopt
+        <set >
+            <if test="optName != null" >
+                OptName = #{optName,jdbcType=VARCHAR},
+            </if>
+            <if test="optDes != null" >
+                OptDes = #{optDes,jdbcType=VARCHAR},
+            </if>
+            <if test="CHLevel != null" >
+                CHLevel = #{CHLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="tag != null" >
+                Tag = #{tag,jdbcType=CHAR},
+            </if>
+            <if test="orgid != null" >
+                orgid = #{orgid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where OptId = #{optId,jdbcType=SMALLINT}
+          and FunId = #{funId,jdbcType=SMALLINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.reportCore.template.model.Option" >
+        update oopt
+        set OptName = #{optName,jdbcType=VARCHAR},
+            OptDes = #{optDes,jdbcType=VARCHAR},
+            CHLevel = #{CHLevel,jdbcType=SMALLINT},
+            Tag = #{tag,jdbcType=CHAR},
+            orgid = #{orgid,jdbcType=INTEGER}
+        where OptId = #{optId,jdbcType=SMALLINT}
+          and FunId = #{funId,jdbcType=SMALLINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.reportCore.template.model.OptionKey" >
+        delete from oopt
+        where OptId = #{optId,jdbcType=SMALLINT}
+          and FunId = #{funId,jdbcType=SMALLINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.reportCore.template.model.OptionExample" >
+        <if test="_parameter != null" >
+            delete from oopt
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

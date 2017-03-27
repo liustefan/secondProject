@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.doctorCore.docGroup.dao.DocToGroupMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.doctorCore.docGroup.model.DocToGroup" >
+        <id column="OdgpId" property="odgpid" jdbcType="INTEGER" />
+        <id column="Docid" property="docid" jdbcType="INTEGER" />
+        <result column="OrgId" property="orgid" jdbcType="INTEGER" />
+        <result column="AuditLevel" property="auditlevel" jdbcType="SMALLINT" />
+        <association column="Docid" property="doctor" select="com.bithealth.doctorCore.doctor.dao.DoctorMapper.selectByPrimaryKey"/>
+        <association property="doctorGroup" column="OdgpId" select="com.bithealth.doctorCore.docGroup.dao.DoctorGroupMapper.selectByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        OdgpId, Docid, OrgId, AuditLevel
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroupExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from dgp1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroupExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from dgp1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroupKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from dgp1
+        where OdgpId = #{odgpid,jdbcType=INTEGER}
+          and Docid = #{docid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroup" >
+        insert into dgp1 (OdgpId, Docid, OrgId, 
+            AuditLevel)
+        values (#{odgpid,jdbcType=INTEGER}, #{docid,jdbcType=INTEGER}, #{orgid,jdbcType=INTEGER}, 
+            #{auditlevel,jdbcType=SMALLINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroup" >
+        insert into dgp1
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="odgpid != null" >
+                OdgpId,
+            </if>
+            <if test="docid != null" >
+                Docid,
+            </if>
+            <if test="orgid != null" >
+                OrgId,
+            </if>
+            <if test="auditlevel != null" >
+                AuditLevel,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="odgpid != null" >
+                #{odgpid,jdbcType=INTEGER},
+            </if>
+            <if test="docid != null" >
+                #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="auditlevel != null" >
+                #{auditlevel,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroupExample" resultType="java.lang.Integer" >
+        select count(*) from dgp1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update dgp1
+        <set >
+            <if test="record.odgpid != null" >
+                OdgpId = #{record.odgpid,jdbcType=INTEGER},
+            </if>
+            <if test="record.docid != null" >
+                Docid = #{record.docid,jdbcType=INTEGER},
+            </if>
+            <if test="record.orgid != null" >
+                OrgId = #{record.orgid,jdbcType=INTEGER},
+            </if>
+            <if test="record.auditlevel != null" >
+                AuditLevel = #{record.auditlevel,jdbcType=SMALLINT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update dgp1
+        set OdgpId = #{record.odgpid,jdbcType=INTEGER},
+            Docid = #{record.docid,jdbcType=INTEGER},
+            OrgId = #{record.orgid,jdbcType=INTEGER},
+            AuditLevel = #{record.auditlevel,jdbcType=SMALLINT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroup" >
+        update dgp1
+        <set >
+            <if test="orgid != null" >
+                OrgId = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="auditlevel != null" >
+                AuditLevel = #{auditlevel,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where OdgpId = #{odgpid,jdbcType=INTEGER}
+          and Docid = #{docid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroup" >
+        update dgp1
+        set OrgId = #{orgid,jdbcType=INTEGER},
+            AuditLevel = #{auditlevel,jdbcType=SMALLINT}
+        where OdgpId = #{odgpid,jdbcType=INTEGER}
+          and Docid = #{docid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroupKey" >
+        delete from dgp1
+        where OdgpId = #{odgpid,jdbcType=INTEGER}
+          and Docid = #{docid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.doctorCore.docGroup.model.DocToGroupExample" >
+        delete from dgp1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!--  #################################自定义############### -->
+    <select id="selectDoctorByGrpId" parameterType="java.lang.Integer" resultMap="com.bithealth.doctorCore.doctor.dao.DoctorMapper.BaseResultMap">
+     SELECT o.* FROM odoc o INNER JOIN dgp1 d ON o.`Docid` = d.`Docid` AND d.`OdgpId`=#{odgpid,jdbcType=INTEGER}
+    </select>
+    
+    <insert id="insertBatch" parameterType="java.util.List" >
+        insert into dgp1 (OdgpId, Docid, OrgId, AuditLevel)
+        values 
+        <foreach collection="list" separator="," item="item">
+        (#{item.odgpid,jdbcType=INTEGER}, #{item.docid,jdbcType=INTEGER}, #{item.orgid, jdbcType=INTEGER}, 
+            #{item.auditlevel,jdbcType=SMALLINT})
+       </foreach>
+    </insert>
+    
+    <select id="selectByDocIdAndFunId" parameterType="map" resultMap="BaseResultMap">
+    SELECT d.* FROM dgp1 d INNER JOIN odgp o ON o.`OdgpId`=d.`OdgpId` AND d.`Docid`=#{docId, jdbcType=INTEGER}
+    <if test="funIds != null and funIds.size() > 0">
+    AND o.`FunId` IN 
+    <foreach collection="funIds" item="item" open="(" close=")" separator=",">
+    #{item, jdbcType=INTEGER}
+    </foreach>
+    </if>
+     <if test="optId != null">
+     AND o.OptId=#{optId, jdbcType=INTEGER}
+    </if>
+     
+    </select>
+    
+    <select id="selectByOptAndLevel" parameterType="map" resultMap="BaseResultMap">
+    SELECT * FROM dgp1 d LEFT JOIN odgp o ON d.`OdgpId`=o.`OdgpId` WHERE o.`OptId`=#{optId, jdbcType=INTEGER} AND 
+    d.`Docid`=#{docId, jdbcType=INTEGER} AND d.`AuditLevel`=#{auditLevel, jdbcType=INTEGER} AND d.`OrgId`=#{orgId, jdbcType=INTEGER}
+    </select>
+
+</mapper>

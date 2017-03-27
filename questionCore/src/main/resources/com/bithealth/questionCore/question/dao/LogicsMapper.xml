@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.question.dao.LogicsMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.questionCore.question.model.Logics" >
+        <id column="questId" property="questId" jdbcType="INTEGER" />
+        <id column="problemId" property="problemId" jdbcType="INTEGER" />
+        <id column="answerId" property="answerId" jdbcType="INTEGER" />
+        <result column="problemIds" property="problemIdsStr" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        questId, problemId, answerId, problemIds
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.LogicsExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from logics
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.LogicsExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from logics
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.LogicsKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from logics
+        where questId = #{questId,jdbcType=INTEGER}
+          and problemId = #{problemId,jdbcType=INTEGER}
+          and answerId = #{answerId,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.questionCore.question.model.Logics" >
+        insert into logics
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="questId != null" >
+                questId,
+            </if>
+            <if test="problemId != null" >
+                problemId,
+            </if>
+            <if test="answerId != null" >
+                answerId,
+            </if>
+            <if test="problemIdsStr != null" >
+                problemIds,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="questId != null" >
+                #{questId,jdbcType=INTEGER},
+            </if>
+            <if test="problemId != null" >
+                #{problemId,jdbcType=INTEGER},
+            </if>
+            <if test="answerId != null" >
+                #{answerId,jdbcType=INTEGER},
+            </if>
+            <if test="problemIdsStr != null" >
+                #{problemIdsStr,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.questionCore.question.model.LogicsExample" resultType="java.lang.Integer" >
+        select count(*) from logics
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update logics
+        <set >
+            <if test="record.questId != null" >
+                questId = #{record.questId,jdbcType=INTEGER},
+            </if>
+            <if test="record.problemId != null" >
+                problemId = #{record.problemId,jdbcType=INTEGER},
+            </if>
+            <if test="record.answerId != null" >
+                answerId = #{record.answerId,jdbcType=INTEGER},
+            </if>
+            <if test="record.problemIdsStr != null" >
+                problemIds = #{record.problemIdsStr,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update logics
+        set questId = #{record.questId,jdbcType=INTEGER},
+            problemId = #{record.problemId,jdbcType=INTEGER},
+            answerId = #{record.answerId,jdbcType=INTEGER},
+            problemIds = #{record.problemIdsStr,jdbcType=VARCHAR}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.questionCore.question.model.Logics" >
+        update logics
+        <set >
+            <if test="problemIdsStr != null" >
+                problemIds = #{problemIdsStr,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where questId = #{questId,jdbcType=INTEGER}
+          and problemId = #{problemId,jdbcType=INTEGER}
+          and answerId = #{answerId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.questionCore.question.model.Logics" >
+        update logics
+        set problemIds = #{problemIdsStr,jdbcType=VARCHAR}
+        where questId = #{questId,jdbcType=INTEGER}
+          and problemId = #{problemId,jdbcType=INTEGER}
+          and answerId = #{answerId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.questionCore.question.model.LogicsKey" >
+        delete from logics
+        where questId = #{questId,jdbcType=INTEGER}
+          and problemId = #{problemId,jdbcType=INTEGER}
+          and answerId = #{answerId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.questionCore.question.model.LogicsExample" >
+        <if test="_parameter != null and _parameter != '' ">
+        delete from logics
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+
+</mapper>

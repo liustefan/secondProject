@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.centCore.sms.dao.SmsSendDetailMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.centCore.sms.model.SmsSendDetail" >
+        <id column="SSDetailID" property="SSDetailID" jdbcType="INTEGER" />
+        <result column="SSendID" property="SSendID" jdbcType="INTEGER" />
+        <result column="MemberID" property="memberID" jdbcType="CHAR" />
+        <result column="RecvNumber" property="recvNumber" jdbcType="VARCHAR" />
+        <result column="SendTime" property="sendTime" jdbcType="TIMESTAMP" />
+        <result column="SendStatus" property="sendStatus" jdbcType="TINYINT" />
+        <result column="RecvTime" property="recvTime" jdbcType="TIMESTAMP" />
+        <result column="FailReason" property="failReason" jdbcType="VARCHAR" />
+        <result column="FailCount" property="failCount" jdbcType="INTEGER" />
+        <result column="CreateID" property="createID" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <!--额外增加的参数  -->
+        <result column="OrgID" property="orgID" jdbcType="INTEGER" />
+        <result column="SmsType" property="smsType" jdbcType="TINYINT" />
+        <result column="Priority" property="priority" jdbcType="TINYINT" />
+        <result column="ContentType" property="contentType" jdbcType="TINYINT" />
+        <result column="Content" property="content" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <resultMap id="SmsStatisticResultMap" type="com.bithealth.centCore.sms.model.SmsStatistic" >
+        <result column="OrgID" property="orgID" jdbcType="INTEGER" />
+        <result column="contentType" property="contentType" jdbcType="INTEGER" />
+        <result column="total" property="total" jdbcType="INTEGER" />
+        <result column="success" property="success" jdbcType="INTEGER" />
+        <result column="fail" property="fail" jdbcType="INTEGER" />
+    </resultMap>
+    
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        SSDetailID, SSendID, MemberID, RecvNumber, SendTime, SendStatus, RecvTime, FailReason, 
+        FailCount, CreateID, CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.sms.model.SmsSendDetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_sms_send_detail
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.sms.model.SmsSendDetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_sms_send_detail
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_sms_send_detail
+        where SSDetailID = #{SSDetailID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.centCore.sms.model.SmsSendDetail" >
+        insert into tb_sms_send_detail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="SSDetailID != null" >
+                SSDetailID,
+            </if>
+            <if test="SSendID != null" >
+                SSendID,
+            </if>
+            <if test="memberID != null" >
+                MemberID,
+            </if>
+            <if test="recvNumber != null" >
+                RecvNumber,
+            </if>
+            <if test="sendTime != null" >
+                SendTime,
+            </if>
+            <if test="sendStatus != null" >
+                SendStatus,
+            </if>
+            <if test="recvTime != null" >
+                RecvTime,
+            </if>
+            <if test="failReason != null" >
+                FailReason,
+            </if>
+            <if test="failCount != null" >
+                FailCount,
+            </if>
+            <if test="createID != null" >
+                CreateID,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateID != null" >
+                UpdateID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="SSDetailID != null" >
+                #{SSDetailID,jdbcType=INTEGER},
+            </if>
+            <if test="SSendID != null" >
+                #{SSendID,jdbcType=INTEGER},
+            </if>
+            <if test="memberID != null" >
+                #{memberID,jdbcType=CHAR},
+            </if>
+            <if test="recvNumber != null" >
+                #{recvNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null" >
+                #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendStatus != null" >
+                #{sendStatus,jdbcType=TINYINT},
+            </if>
+            <if test="recvTime != null" >
+                #{recvTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="failReason != null" >
+                #{failReason,jdbcType=VARCHAR},
+            </if>
+            <if test="failCount != null" >
+                #{failCount,jdbcType=INTEGER},
+            </if>
+            <if test="createID != null" >
+                #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.centCore.sms.model.SmsSendDetailExample" resultType="java.lang.Integer" >
+        select count(*) from tb_sms_send_detail
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_sms_send_detail
+            <set >
+                <if test="record.SSDetailID != null" >
+                    SSDetailID = #{record.SSDetailID,jdbcType=INTEGER},
+                </if>
+                <if test="record.SSendID != null" >
+                    SSendID = #{record.SSendID,jdbcType=INTEGER},
+                </if>
+                <if test="record.memberID != null" >
+                    MemberID = #{record.memberID,jdbcType=CHAR},
+                </if>
+                <if test="record.recvNumber != null" >
+                    RecvNumber = #{record.recvNumber,jdbcType=VARCHAR},
+                </if>
+                <if test="record.sendTime != null" >
+                    SendTime = #{record.sendTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.sendStatus != null" >
+                    SendStatus = #{record.sendStatus,jdbcType=TINYINT},
+                </if>
+                <if test="record.recvTime != null" >
+                    RecvTime = #{record.recvTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.failReason != null" >
+                    FailReason = #{record.failReason,jdbcType=VARCHAR},
+                </if>
+                <if test="record.failCount != null" >
+                    FailCount = #{record.failCount,jdbcType=INTEGER},
+                </if>
+                <if test="record.createID != null" >
+                    CreateID = #{record.createID,jdbcType=INTEGER},
+                </if>
+                <if test="record.createTime != null" >
+                    CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateID != null" >
+                    UpdateID = #{record.updateID,jdbcType=INTEGER},
+                </if>
+                <if test="record.updateTime != null" >
+                    UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update tb_sms_send_detail
+            set SSDetailID = #{record.SSDetailID,jdbcType=INTEGER},
+                SSendID = #{record.SSendID,jdbcType=INTEGER},
+                MemberID = #{record.memberID,jdbcType=CHAR},
+                RecvNumber = #{record.recvNumber,jdbcType=VARCHAR},
+                SendTime = #{record.sendTime,jdbcType=TIMESTAMP},
+                SendStatus = #{record.sendStatus,jdbcType=TINYINT},
+                RecvTime = #{record.recvTime,jdbcType=TIMESTAMP},
+                FailReason = #{record.failReason,jdbcType=VARCHAR},
+                FailCount = #{record.failCount,jdbcType=INTEGER},
+                CreateID = #{record.createID,jdbcType=INTEGER},
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                UpdateID = #{record.updateID,jdbcType=INTEGER},
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.centCore.sms.model.SmsSendDetail" >
+        update tb_sms_send_detail
+        <set >
+            <if test="SSendID != null" >
+                SSendID = #{SSendID,jdbcType=INTEGER},
+            </if>
+            <if test="memberID != null" >
+                MemberID = #{memberID,jdbcType=CHAR},
+            </if>
+            <if test="recvNumber != null" >
+                RecvNumber = #{recvNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null" >
+                SendTime = #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendStatus != null" >
+                SendStatus = #{sendStatus,jdbcType=TINYINT},
+            </if>
+            <if test="recvTime != null" >
+                RecvTime = #{recvTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="failReason != null" >
+                FailReason = #{failReason,jdbcType=VARCHAR},
+            </if>
+            <if test="failCount != null" >
+                FailCount = #{failCount,jdbcType=INTEGER},
+            </if>
+            <if test="createID != null" >
+                CreateID = #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                UpdateID = #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where SSDetailID = #{SSDetailID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.centCore.sms.model.SmsSendDetail" >
+        update tb_sms_send_detail
+        set SSendID = #{SSendID,jdbcType=INTEGER},
+            MemberID = #{memberID,jdbcType=CHAR},
+            RecvNumber = #{recvNumber,jdbcType=VARCHAR},
+            SendTime = #{sendTime,jdbcType=TIMESTAMP},
+            SendStatus = #{sendStatus,jdbcType=TINYINT},
+            RecvTime = #{recvTime,jdbcType=TIMESTAMP},
+            FailReason = #{failReason,jdbcType=VARCHAR},
+            FailCount = #{failCount,jdbcType=INTEGER},
+            CreateID = #{createID,jdbcType=INTEGER},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where SSDetailID = #{SSDetailID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_sms_send_detail
+        where SSDetailID = #{SSDetailID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.centCore.sms.model.SmsSendDetailExample" >
+        <if test="_parameter != null" >
+            delete from tb_sms_send_detail
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    
+    
+    <!-- 批量插入 -->
+    <insert id="insertByBatch" parameterType="java.util.List">
+        insert into tb_sms_send_detail (SSendID,RecvNumber, SendTime, SendStatus, CreateID, CreateTime) values 
+        <foreach collection="list" item="item" index="index" separator=",">
+	        (#{item.SSendID}, #{item.recvNumber}, #{item.sendTime}, #{item.sendStatus}, #{item.createID}, #{item.createTime})
+        </foreach>
+    </insert>
+    
+    <select id="selectSmsByParams" resultMap="BaseResultMap" parameterType="com.bithealth.centCore.sms.model.SmsSearchParams" >
+    
+    	SELECT a.*,b.`OrgID`,b.`SmsType`,b.`Priority`,b.`ContentType`,b.Content 
+    	 FROM  `tb_sms_send_detail` a ,  `tb_sms_send` b  
+		 WHERE a.`SSendID` = b.`SSendID` 
+		<if test="orgIDs!=null and orgIDs!= '' " >
+            AND  b.`OrgID` IN (${orgIDs})
+        </if>
+		<if test="smsType!=null and smsType!= 0 " >
+            AND  b.`SmsType` =  #{smsType} 
+        </if>
+        <if test="recvNumber!=null and recvNumber!=''" >
+           and  a.RecvNumber like CONCAT('${recvNumber}','%' )  
+        </if>
+        <if test="sendStatus!=null and sendStatus!= 0 " >
+           AND a.`SendStatus` = #{sendStatus}
+        </if>
+        <if test="startTime!=null and startTime!=''" >
+           AND a.`SendTime` <![CDATA[>=]]> #{startTime} 
+        </if>
+        <if test="endTime!=null and endTime!=''" >
+           AND a.`SendTime` <![CDATA[<=]]>  #{endTime}
+        </if>    
+        ORDER BY  a.SendTime  desc 
+    </select>
+
+	<!--调用存储过程  -->
+    <select id="exProc_proc_smssend_getStatisticByOrgID" parameterType="java.util.Map" resultMap="SmsStatisticResultMap" statementType="CALLABLE">  
+      {CALL `proc_smssend_getStatisticByOrgID`(#{serverId},#{orgIdListStr},#{startTime},#{endTime},#{smsType},#{recvNumber})}
+    </select>  
+
+	<!-- 根据参数查询组织的发送短信的总数量 -->
+    <select id="selectSmsSumByParam" parameterType="java.util.Map" resultType="java.lang.Integer" >
+		 SELECT COUNT(a.`SSDetailID`)  FROM `tb_sms_send_detail` a JOIN `tb_sms_send` b ON a.`SSendID` = b.`SSendID` 
+		  WHERE b.`OrgID` = #{orgId}
+		    AND a.`SendStatus` <![CDATA[<>]]> 1
+		   <if test="queryDate !=null and queryDate!= '' " >
+            AND DATEDIFF(a.`SendTime`,#{queryDate}) = 0
+           </if>
+    </select>
+
+	<!--查询手机号的短信发送总数量  -->
+    <select id="selectPhoneSmsSum" parameterType="java.util.Map" resultType="java.lang.Integer" >
+			SELECT COUNT(a.`SSDetailID`)  FROM `tb_sms_send_detail` a 
+			WHERE a.`RecvNumber` = #{recvNumbers} 
+			AND a.`SendStatus` <![CDATA[<>]]> 1
+			AND a.`SendStatus` <![CDATA[<>]]> 4
+		   <if test="queryDate !=null and queryDate!= '' " >
+            AND DATEDIFF(a.`SendTime`,#{queryDate}) = 0
+           </if>
+    </select>
+    
+    <!--查询手机号的短信每天的重复数量  -->
+    <select id="selectPhoneSmsRepeatSum" parameterType="java.util.Map" resultType="java.util.Map" >
+			SELECT COUNT(a.`SSDetailID`)  FROM `tb_sms_send_detail` a ,`tb_sms_send` b  , `tb_sms_cfg` c 
+			WHERE a.`RecvNumber` = #{recvNumbers} 
+			AND a.`SendStatus` <![CDATA[<>]]> 1
+			AND a.`SendStatus` <![CDATA[<>]]> 4
+			AND b.`ServerID` = c.`ServerID` 
+			AND b.`OrgID` = c.`OrgID`
+			AND a.`SSendID` = b.`SSendID`
+			AND b.`Content` = #{content}
+		   <if test="queryDate !=null and queryDate!= '' " >
+            AND DATEDIFF(a.`SendTime`,#{queryDate}) = 0
+           </if>
+           AND c.`TestSMSTempletNo` = #{templetNo}
+    </select>
+
+
+</mapper>

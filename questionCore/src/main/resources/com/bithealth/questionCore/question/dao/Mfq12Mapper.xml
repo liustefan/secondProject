@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.question.dao.Mfq12Mapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.questionCore.question.model.Mfq12" >
+        <id column="Qustid" property="qustid" jdbcType="INTEGER" />
+        <id column="Problemid" property="problemid" jdbcType="INTEGER" />
+        <id column="Ansid" property="ansid" jdbcType="SMALLINT" />
+        <id column="LineNum" property="lineNum" jdbcType="SMALLINT" />
+        <result column="MinNum" property="minNum" jdbcType="INTEGER" />
+        <result column="MaxNum" property="maxNum" jdbcType="INTEGER" />
+        <result column="Score" property="score" jdbcType="DOUBLE" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Qustid, Problemid, Ansid, LineNum, MinNum, MaxNum, Score
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.Mfq12Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mfq12
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.Mfq12Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mfq12
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.Mfq12Key" >
+        select 
+        <include refid="Base_Column_List" />
+        from mfq12
+        where Qustid = #{qustid,jdbcType=INTEGER}
+          and Problemid = #{problemid,jdbcType=INTEGER}
+          and Ansid = #{ansid,jdbcType=SMALLINT}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.questionCore.question.model.Mfq12" >
+        insert into mfq12
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="qustid != null" >
+                Qustid,
+            </if>
+            <if test="problemid != null" >
+                Problemid,
+            </if>
+            <if test="ansid != null" >
+                Ansid,
+            </if>
+            <if test="lineNum != null" >
+                LineNum,
+            </if>
+            <if test="minNum != null" >
+                MinNum,
+            </if>
+            <if test="maxNum != null" >
+                MaxNum,
+            </if>
+            <if test="score != null" >
+                Score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="qustid != null" >
+                #{qustid,jdbcType=INTEGER},
+            </if>
+            <if test="problemid != null" >
+                #{problemid,jdbcType=INTEGER},
+            </if>
+            <if test="ansid != null" >
+                #{ansid,jdbcType=SMALLINT},
+            </if>
+            <if test="lineNum != null" >
+                #{lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="minNum != null" >
+                #{minNum,jdbcType=INTEGER},
+            </if>
+            <if test="maxNum != null" >
+                #{maxNum,jdbcType=INTEGER},
+            </if>
+            <if test="score != null" >
+                #{score,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.questionCore.question.model.Mfq12Example" resultType="java.lang.Integer" >
+        select count(*) from mfq12
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update mfq12
+        <set >
+            <if test="record.qustid != null" >
+                Qustid = #{record.qustid,jdbcType=INTEGER},
+            </if>
+            <if test="record.problemid != null" >
+                Problemid = #{record.problemid,jdbcType=INTEGER},
+            </if>
+            <if test="record.ansid != null" >
+                Ansid = #{record.ansid,jdbcType=SMALLINT},
+            </if>
+            <if test="record.lineNum != null" >
+                LineNum = #{record.lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="record.minNum != null" >
+                MinNum = #{record.minNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.maxNum != null" >
+                MaxNum = #{record.maxNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.score != null" >
+                Score = #{record.score,jdbcType=DOUBLE},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update mfq12
+        set Qustid = #{record.qustid,jdbcType=INTEGER},
+            Problemid = #{record.problemid,jdbcType=INTEGER},
+            Ansid = #{record.ansid,jdbcType=SMALLINT},
+            LineNum = #{record.lineNum,jdbcType=SMALLINT},
+            MinNum = #{record.minNum,jdbcType=INTEGER},
+            MaxNum = #{record.maxNum,jdbcType=INTEGER},
+            Score = #{record.score,jdbcType=DOUBLE}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.questionCore.question.model.Mfq12" >
+        update mfq12
+        <set >
+            <if test="minNum != null" >
+                MinNum = #{minNum,jdbcType=INTEGER},
+            </if>
+            <if test="maxNum != null" >
+                MaxNum = #{maxNum,jdbcType=INTEGER},
+            </if>
+            <if test="score != null" >
+                Score = #{score,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where Qustid = #{qustid,jdbcType=INTEGER}
+          and Problemid = #{problemid,jdbcType=INTEGER}
+          and Ansid = #{ansid,jdbcType=SMALLINT}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.questionCore.question.model.Mfq12" >
+        update mfq12
+        set MinNum = #{minNum,jdbcType=INTEGER},
+            MaxNum = #{maxNum,jdbcType=INTEGER},
+            Score = #{score,jdbcType=DOUBLE}
+        where Qustid = #{qustid,jdbcType=INTEGER}
+          and Problemid = #{problemid,jdbcType=INTEGER}
+          and Ansid = #{ansid,jdbcType=SMALLINT}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.questionCore.question.model.Mfq12Key" >
+        delete from mfq12
+        where Qustid = #{qustid,jdbcType=INTEGER}
+          and Problemid = #{problemid,jdbcType=INTEGER}
+          and Ansid = #{ansid,jdbcType=SMALLINT}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.questionCore.question.model.Mfq12Example" >
+        <if test="_parameter != null and _parameter != '' ">
+        delete from mfq12
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+
+</mapper>

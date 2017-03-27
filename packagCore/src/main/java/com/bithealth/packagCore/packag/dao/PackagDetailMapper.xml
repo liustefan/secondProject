@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.packagCore.packag.dao.PackagDetailMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.packagCore.packag.model.PackagDetail" >
+        <id column="PackageCode" property="packageCode" jdbcType="INTEGER" />
+        <id column="SumRepTempCode" property="sumRepTempCode" jdbcType="INTEGER" />
+        <result column="NumTimes" property="numTimes" jdbcType="SMALLINT" />
+        <result column="NumDay" property="numDay" jdbcType="SMALLINT" />
+        <result column="CalcType" property="calcType" jdbcType="CHAR" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="Createid" property="createid" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        PackageCode, SumRepTempCode, NumTimes, NumDay, CalcType, CreateTime, Createid
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.PackagDetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from psp1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.PackagDetailExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from psp1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.PackagDetailKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from psp1
+        where PackageCode = #{packageCode,jdbcType=INTEGER}
+          and SumRepTempCode = #{sumRepTempCode,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.packagCore.packag.model.PackagDetail" >
+        insert into psp1 (PackageCode, SumRepTempCode, NumTimes, 
+            NumDay, CalcType, CreateTime, 
+            Createid)
+        values (#{packageCode,jdbcType=INTEGER}, #{sumRepTempCode,jdbcType=INTEGER}, #{numTimes,jdbcType=SMALLINT}, 
+            #{numDay,jdbcType=SMALLINT}, #{calcType,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{createid,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.packagCore.packag.model.PackagDetail" >
+        insert into psp1
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="packageCode != null" >
+                PackageCode,
+            </if>
+            <if test="sumRepTempCode != null" >
+                SumRepTempCode,
+            </if>
+            <if test="numTimes != null" >
+                NumTimes,
+            </if>
+            <if test="numDay != null" >
+                NumDay,
+            </if>
+            <if test="calcType != null" >
+                CalcType,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="createid != null" >
+                Createid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="packageCode != null" >
+                #{packageCode,jdbcType=INTEGER},
+            </if>
+            <if test="sumRepTempCode != null" >
+                #{sumRepTempCode,jdbcType=INTEGER},
+            </if>
+            <if test="numTimes != null" >
+                #{numTimes,jdbcType=SMALLINT},
+            </if>
+            <if test="numDay != null" >
+                #{numDay,jdbcType=SMALLINT},
+            </if>
+            <if test="calcType != null" >
+                #{calcType,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createid != null" >
+                #{createid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.packagCore.packag.model.PackagDetailExample" resultType="java.lang.Integer" >
+        select count(*) from psp1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update psp1
+        <set >
+            <if test="record.packageCode != null" >
+                PackageCode = #{record.packageCode,jdbcType=INTEGER},
+            </if>
+            <if test="record.sumRepTempCode != null" >
+                SumRepTempCode = #{record.sumRepTempCode,jdbcType=INTEGER},
+            </if>
+            <if test="record.numTimes != null" >
+                NumTimes = #{record.numTimes,jdbcType=SMALLINT},
+            </if>
+            <if test="record.numDay != null" >
+                NumDay = #{record.numDay,jdbcType=SMALLINT},
+            </if>
+            <if test="record.calcType != null" >
+                CalcType = #{record.calcType,jdbcType=CHAR},
+            </if>
+            <if test="record.createTime != null" >
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createid != null" >
+                Createid = #{record.createid,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update psp1
+        set PackageCode = #{record.packageCode,jdbcType=INTEGER},
+            SumRepTempCode = #{record.sumRepTempCode,jdbcType=INTEGER},
+            NumTimes = #{record.numTimes,jdbcType=SMALLINT},
+            NumDay = #{record.numDay,jdbcType=SMALLINT},
+            CalcType = #{record.calcType,jdbcType=CHAR},
+            CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            Createid = #{record.createid,jdbcType=INTEGER}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.packagCore.packag.model.PackagDetail" >
+        update psp1
+        <set >
+            <if test="numTimes != null" >
+                NumTimes = #{numTimes,jdbcType=SMALLINT},
+            </if>
+            <if test="numDay != null" >
+                NumDay = #{numDay,jdbcType=SMALLINT},
+            </if>
+            <if test="calcType != null" >
+                CalcType = #{calcType,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createid != null" >
+                Createid = #{createid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where PackageCode = #{packageCode,jdbcType=INTEGER}
+          and SumRepTempCode = #{sumRepTempCode,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.packagCore.packag.model.PackagDetail" >
+        update psp1
+        set NumTimes = #{numTimes,jdbcType=SMALLINT},
+            NumDay = #{numDay,jdbcType=SMALLINT},
+            CalcType = #{calcType,jdbcType=CHAR},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            Createid = #{createid,jdbcType=INTEGER}
+        where PackageCode = #{packageCode,jdbcType=INTEGER}
+          and SumRepTempCode = #{sumRepTempCode,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.packagCore.packag.model.PackagDetailKey" >
+        delete from psp1
+        where PackageCode = #{packageCode,jdbcType=INTEGER}
+          and SumRepTempCode = #{sumRepTempCode,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.packagCore.packag.model.PackagDetailExample" >
+        delete from psp1
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+
+	<!-- 批量插入 -->
+    <insert id="insertByBatch" parameterType="java.util.List" >
+        insert into psp1 (PackageCode, SumRepTempCode, NumTimes, 
+            NumDay, CalcType, CreateTime, 
+            Createid) values 
+        <foreach collection="list" item="item" index="index" separator=",">
+	        (#{item.packageCode,jdbcType=INTEGER}, #{item.sumRepTempCode,jdbcType=INTEGER}, #{item.numTimes,jdbcType=SMALLINT}, 
+	         #{item.numDay,jdbcType=SMALLINT}, #{item.calcType,jdbcType=CHAR},now(), 
+	         #{item.createid,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,701 @@
+/*
+ * 问卷公用样式
+*/
+
+body , div , ol , ul , li {
+	margin: 0;
+	padding: 0;
+}
+
+#content_title {
+	margin-bottom: 5px;
+	height: 40px; 
+	line-height: 40px;
+	border-bottom: 1px solid;
+}
+
+.btn-add {
+	float: right;
+	background-color: #64C25A;
+	color: #fff;
+	font-weight: bold;
+	margin: 0 5px;
+	padding: 0 15px;
+	height: 30px;
+	border: 1px solid #6AD279;
+	border-radius: 3px;
+	font-family: "Microsoft YaHei", "SimSun";
+	text-decoration: none;
+	cursor: pointer;
+	outline: none;
+}
+
+.clearfix {
+	overflow: auto; 
+	_height: 1%
+}
+
+/*
+ * 删除提示框
+*/
+body .delete-dialog .aui_n,body .delete-dialog .aui_nw,body .delete-dialog .aui_ne
+{
+	background: #bcdee0;
+}
+
+body .delete-dialog .aui_w,body .delete-dialog .aui_e {
+	background-color: none;
+}
+
+body .delete-dialog .aui_title {
+	color: #000; 
+	font-weight: normal;
+}
+
+body .delete-dialog .aui_close {
+	background-position: inherit;
+	background-image: url("../img/u67.png");
+}
+
+.ngdialog-close:before {
+	content: ' ' !important;
+	background-position: inherit;
+	background-image: url("../img/u67.png")!important;
+	display: block;
+	height: 20px!important;
+	width: 20px!important;
+}
+
+.ngdialog-close {
+	/* background-position:inherit; background-image:url("../img/u67.png"); */
+}
+
+body .delete-dialog button.aui_state_highlight {
+	color: #000; 
+	border: 1px solid #50b750; 
+	background: #daf6d7;
+	text-shadow: inherit;
+}
+
+body .delete-dialog .aui_buttons {
+	text-align: center;
+}
+
+body .delete-dialog .aui_buttons button {
+	padding: 5px 20px;
+}
+
+.search-box {
+	position: absolute;
+	width: 325px; 
+	top: 0 !important; 
+	right: 90px;
+}
+
+.top-tool {
+	position: relative; 
+	margin: 5px 0; 
+	font-size: 13px;
+}
+
+.top-tool ul li select {
+	width: 100px;
+}
+
+.top-tool ul li {
+	float: left; 
+	margin-right: 10px; 
+	margin-top: 0.5em;
+}
+
+#content_title_input.search-content {
+	position: absolute;
+	top: 0; 
+}
+
+#content_title_img_2.search-icon {
+	z-index: 9999; 
+	position: absolute; 
+	top: 0.3em; 
+	right: 1em;
+}
+
+#content_title_img_2.search-icon img {
+	width: 18px;
+	height: 18px;
+}
+
+#tabel_content td a ,#tabel_content td span{
+	display: inline-block;
+	width: 50px;
+}
+
+/*
+ * create question
+*/
+.row {
+	margin: 10px 30px;
+}
+
+.form-label {
+	-webkit-user-select: none; /* for Chrome 文本不可复制 */
+	width: 75px; 
+	display: inline-block; 
+	text-align: right; 
+	vertical-align: top;
+	margin-right: 15px;
+}
+
+.form-control-radio {
+	margin-right: 40px; 
+	display: inline-block;
+	-webkit-user-select: none; /* for Chrome 文本不可复制 */
+}
+
+.top-wrapper .form-control-radio {
+	width: 18%;
+}
+
+.top-wrapper .left-wrapper {
+	display: inline-block;
+	width: 20%;
+	/* float: left; */
+	vertical-align: top;
+	margin-right: 0;
+	margin-top: 0;
+}
+.top-wrapper .right-wrapper {
+	display: inline-block;
+	width: 76%;
+	/* float: left; */
+	vertical-align: top;
+}
+
+.mg-left {
+	/* padding-left:3%; */
+}
+
+.form-control-radio input {
+	margin-right: 10px;
+}
+
+.form-control-checkbox {
+	margin: 0 5px;
+	-webkit-user-select: none; /* for Chrome 文本不可复制 */
+}
+
+.form-control {
+	width: 300px; 
+	padding: 3px 8px;
+}
+.form-control-question {
+	width: 75%; 
+	padding: 3px 8px;
+}
+
+.form-control-select {
+	padding: 3px 8px;
+	vertical-align: top;
+}
+
+.btn-box {
+	height: 50px; 
+	line-height: 50px;
+}
+
+.btn {
+	margin-right: 30px;  
+	background: #fff;
+	border: 1px solid #CCCCCC; 
+	border-radius: 3px; 
+	cursor: pointer;
+	outline: none;
+	font-family: 'Microsoft YaHei', Verdana, sans-serif;
+  	font-size: 12px;
+  	font-weight: normal;
+}
+
+.btn-green {
+	padding: 3px 15px;
+	color: #333333;
+	border: 1px solid #50b750; 
+	background: #daf6d7;
+}
+
+.btn-cancel {
+	padding: 3px 15px;
+	color: #333333;
+	border: 1px solid #999; 
+	background: #DDD;
+}
+
+.btn-cancel { 
+	margin-left: 15px; 
+	padding: 6px 8px; 
+	cursor: pointer; 
+	display: inline-block; 
+	text-align: center; 
+	line-height: 1; 
+	*padding: 4px 10px; 
+	*height: 2em; 
+	letter-spacing: 2px; 
+	font-family: Tahoma, Arial/9!important; 
+	width: auto; 
+	overflow: visible; 
+	*width: 1; 
+	color: #333; 
+	border: 1px solid #999; 
+	border-radius: 5px; 
+	background: #DDD; 
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#DDDDDD'); 
+	background: linear-gradient(top, #FFF, #DDD); 
+	background: -moz-linear-gradient(top, #FFF, #DDD); 
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF), to(#DDD)); 
+	text-shadow: 0px 1px 1px rgba(255, 255, 255, 1); 
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .7),  0 -1px 0 rgba(0, 0, 0, .09); 
+	-moz-transition:-moz-box-shadow linear .2s; 
+	-webkit-transition: -webkit-box-shadow linear .2s; 
+	transition: box-shadow linear .2s; 
+}
+
+.btn-green:hover {
+	background: #64C25A;
+}
+
+.btn-next {
+	padding: 3px 15px;
+	background: #61b95f; 
+	color: #fff;
+}
+
+.btn-next:hover {
+	font-weight: bold;
+}
+
+.btn-back {
+	/* width:100px; height:30px; line-height:28px; */
+	padding: 3px 15px;
+	color: #333333;
+	border: 1px solid #50b750; 
+	background: #daf6d7;
+}
+
+.btn-back:hover {
+	font-weight: bold;
+}
+
+.btn-setting {
+	width: 100px; 
+	height: 30px; 
+	line-height: 28px;
+	margin-top: 15px; 
+	background: #61b95f; 
+	color: #fff;
+}
+
+.btn-setting:disabled {
+	color: #D2D2D2;
+	background: #fff;
+}
+
+
+.btn-add-question {
+	height: 30px; 
+	line-height: 30px; 
+	padding-left: 25px;
+	font-size: 1.1em; 
+	border: 0; 
+	color: #333333;
+	background: url("../img/u33.png") no-repeat left center;
+}
+
+.btn-add-answer {
+	width: 120px; 
+	height: 30px; 
+	line-height: 30px; 
+	padding-left: 15px;
+	font-size: 1.1em; 
+	border: 0; 
+	color: #333333;
+	background: url("../img/u33.png") no-repeat left center;
+	display: none;
+}
+
+.btn-delete-question {
+	height: 30px; 
+	line-height: 30px; 
+	padding-left: 25px;
+	margin-top: 25px;
+	font-size: 1em; 
+	border: 0; 
+	color: #333333;
+	background: url("../img/u256.png") no-repeat left center;
+}
+
+.btn-delete-answer {
+	height: 30px; 
+	line-height: 30px; 
+	padding-left: 25px;
+	margin-left: 15px;
+	font-size: 1em; 
+	border: 0; 
+	color: #333333;
+	background: url("../img/u256.png") no-repeat left center;
+}
+
+.btn-up {
+	width: 102px; 
+	height: 27px;
+	border: 0;
+	margin-top: 15px; 
+	background: url("../img/move_up.png") no-repeat center center;
+}
+
+.btn-add-logic {
+	width: 22px;
+	height: 22px;
+	border: 0;
+	margin: 0 8px;
+	background: url("../img/u33.png") no-repeat center center;
+}
+
+.btn-delete-logic {
+	width: 22px;
+	height: 22px;
+	border: 0;
+	margin: 0 8px;
+	background: url("../img/u67.png") no-repeat center center;
+}
+
+.btn-delete1 {
+	width: 22px;
+	height: 22px;
+	border: 0;
+	margin: 0 8px;
+	background: url("../img/u256.png") no-repeat center center;
+}
+
+.btn-add-logic-question {
+	width: 20px;
+	height: 20px;
+	border: 0;
+	margin: 0 8px;
+	background: url("../img/u1374.png") no-repeat center center;
+}
+
+.btn-delete-logic-question {
+	width: 20px;
+	height: 20px;
+	border: 0;
+	margin: 0 8px;
+	background: url("../img/u1399.png") no-repeat center center;
+}
+
+/* .logic-set .logic:first-of-type input.btn-delete-logic {
+	display: none;
+}
+
+.logic-set .logic:last-of-type .btn-delete-logic,
+.logic-set .logic:last-of-type .btn-add-logic {
+	display: inline-block;
+} */
+
+
+/* .logic-question-wrapper li:first-of-type input.btn-delete-logic-question {
+	display: none;
+}
+
+.logic-question-wrapper li:last-of-type .btn-delete-logic-question,
+.logic-question-wrapper li:last-of-type .btn-add-logic-question {
+	display: inline-block;
+} */
+
+
+
+#tab3-page .question-box:first-child .btn-up {
+	background: url("../img/move_up_disable.png") no-repeat center center;
+}
+
+.btn-down {
+	width: 102px; 
+	height: 27px;
+	border: 0;
+	margin-top: 15px; 
+	background: url("../img/move_down.png") no-repeat center center;
+}
+
+#tab3-page .question-box:last-child .btn-down {
+	background: url("../img/move_down_disable.png") no-repeat center center;
+}
+
+.top-wrapper {
+	padding: 10px 30px;
+}
+
+.txt-score {
+	display: inline-block; 
+	text-align: center; 
+	width: 50px;
+}
+
+.txt-question {
+	width: 200px;
+    padding: 3px 8px;
+    display: inline-block;
+    margin-left: 17px;
+}
+
+.result-wrapper {
+	padding: 0 30px;
+}
+
+.result-wrapper table {
+	width: 700px; 
+	text-align: center;
+	font-size: 13px;
+}
+
+.result-wrapper table tr {
+	height:40px; 
+	line-height:40px;
+}
+
+.txt-result-content {
+	width: 80%; 
+	padding: 5px 8px;
+}
+
+.question-box {
+	border: 1px solid;
+}
+
+.question-box:hover {
+	box-shadow: 6px 6px 4px #888888;
+}
+
+.question-box:hover .btn-add-answer{
+	display: inherit;
+}
+
+.question-box input[type=text] {
+	outline: none;
+	border: 0px;
+    background-color: #F2F2F2;
+} 
+
+.question-box:hover input[type=text] {
+	border: 1px solid rgb(204, 204, 204);
+    background-color: #fff;
+}
+
+.question-left,.question-right,.question-number {
+	float: left;
+}
+
+.question-left {
+	width: 80%; 
+	background-color: #F2F2F2;
+	padding: 10px;
+	border-right: 1px solid;
+}
+
+.question-right {
+	width: 15%; 
+	text-align: center;
+}
+
+.question-number {
+	width: 8%;
+}
+
+.question-body {
+	width: 80%;
+    overflow: hidden;
+}
+
+.answer-list {
+	margin-left: 25px;
+}
+
+.answer-list ol li {
+	margin: 8px 0;
+}
+
+/* .answer-list ol li .btn-delete-answer {
+	display: none;
+}
+
+.question-box:hover .answer-list ol li:last-of-type .btn-delete-answer {
+	display: initial;
+}
+ */
+.form-label-sm-1 {
+	width: 25px;
+	margin: 0 1em;
+}
+
+.question-check-box {
+	margin: 0 15px;
+    outline: none;
+    border: none;
+}
+
+.f-right {
+	float: right;
+}
+
+.f-left {
+	float: left;
+}
+
+.hide {
+	display: none;	
+}
+
+.show {
+	display: inline-block; 
+}
+
+.popup1 {
+	margin-top: 25px;
+}
+
+.logic-question-wrapper {
+	display: inline-block;
+	list-style: none;
+}
+
+.logic-question-wrapper li {
+	margin-bottom: 5px;
+}
+
+.logic-question-wrapper li strong {
+	margin-left: -16px;
+}
+
+.btn-add-result {
+	width: 80px; 
+	height: 30px; 
+	line-height: 30px; 
+	padding-left: 15px;
+	margin-left: 1.5em;
+	font-size: 1em; 
+	border: 0; 
+	color: #333333;
+	background: url("../img/u33.png") no-repeat left center;
+}
+
+.btn-delete-result {
+	width: 80px; 
+	height: 30px; 
+	line-height: 30px;
+	font-size: 1em;
+	border: 0; 
+	color: #333333;
+	background: url("../img/u256.png") no-repeat left center;
+}
+
+.btn-box .disable {
+	border: 1px solid #999;
+	background: #E7E7E7;
+	color: #999;
+}
+
+.btn-box .disable:hover {
+	font-weight: normal;
+}
+
+.btn-list {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.pop-title {
+	height: 29px;
+	line-height: 29px;
+	border-bottom: 1px solid;
+	background-color: #BCDEE0;
+	border-top-right-radius: 5px;
+    border-top-left-radius: 5px;    
+  	padding-left: 15px;  	
+  	font-family: 'Microsoft YaHei', Arial,Verdana, sans-serif;
+  	font-size: 12px;
+  	font-weight: normal;
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+	font-family: 'Microsoft YaHei', Arial,Verdana, sans-serif;
+  	font-size: 12px;
+  	font-weight: normal;
+	padding: 0 0 1em 0;
+	/* width: 400px; */
+}
+/* #tb-result tbody tr:last-of-type .btn-delete-result {
+	display: inline-block;
+}
+
+#tb-result tbody tr:first-of-type input.btn-delete-result {
+	display: none;
+} */
+.ol {
+	display: inline-block;
+	width: 300px;
+	margin-left: 20px;
+	font-family: 'Arial Normal', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    color: #333333;
+    text-align: left;
+    line-height: normal;
+}
+
+.ol li {
+	margin: 8px 0;
+}
+
+.ol li span {
+	display: inline-block;
+	width: 200px;
+}
+
+.no-result {
+	border: 1px solid;
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+    font-size: 1.5em;
+    color: #ccc;
+    margin: 3px 0;
+}
+
+body .aui_content {
+	font-family: 'Microsoft YaHei', Arial, Verdana, sans-serif;
+    font-size: 12px;
+}
+
+/* 单选 复选 按钮与其后的文字对齐   [label标签里面添加class="radio-inlines"]*/
+.radio-inlines+.radio-inlines {
+    margin-top: 0;
+    margin-left: 10px;
+}
+
+.checkbox-inlines, .radio-inlines {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    /* vertical-align: middle; */
+    cursor: pointer;
+    width: initial !important;
+}
+
+.checkboxs input[type=checkbox], .checkbox-inlines input[type=checkbox], .radios input[type=radio], .radio-inlines input[type=radio] {
+    margin-left: -18px !important;
+    margin-top: 3px !important;
+    margin-top: -2px\0 !important;
+    position: absolute;
+    outline: none;
+    border: none;
+}

@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.measureCore.electrocardio.dao.OecgMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.measureCore.electrocardio.model.Oecg" >
+        <id column="Docentry" property="docentry" jdbcType="BIGINT" />
+        <result column="EventId" property="eventid" jdbcType="BIGINT" />
+        <result column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="UploadTime" property="uploadtime" jdbcType="TIMESTAMP" />
+        <result column="TimeLength" property="timelength" jdbcType="INTEGER" />
+        <result column="EcgTime" property="ecgtime" jdbcType="TIMESTAMP" />
+        <result column="MeasTime" property="meastime" jdbcType="TIMESTAMP" />
+        <result column="ImageNum" property="imagenum" jdbcType="SMALLINT" />
+        <result column="HeartNum" property="heartnum" jdbcType="INTEGER" />
+        <result column="SlowestBeat" property="slowestbeat" jdbcType="SMALLINT" />
+        <result column="SlowestTime" property="slowesttime" jdbcType="INTEGER" />
+        <result column="FastestBeat" property="fastestbeat" jdbcType="SMALLINT" />
+        <result column="FastestTime" property="fastesttime" jdbcType="INTEGER" />
+        <result column="AverageHeart" property="averageheart" jdbcType="INTEGER" />
+        <result column="SDNN" property="sdnn" jdbcType="DECIMAL" />
+        <result column="PNN50" property="pnn50" jdbcType="DECIMAL" />
+        <result column="HRVI" property="hrvi" jdbcType="DECIMAL" />
+        <result column="RMSSD" property="rmssd" jdbcType="DECIMAL" />
+        <result column="TP" property="tp" jdbcType="DECIMAL" />
+        <result column="VLF" property="vlf" jdbcType="DECIMAL" />
+        <result column="LF" property="lf" jdbcType="DECIMAL" />
+        <result column="HF" property="hf" jdbcType="DECIMAL" />
+        <result column="LF_HF" property="lfHf" jdbcType="DECIMAL" />
+        <result column="SD1" property="sd1" jdbcType="DECIMAL" />
+        <result column="SD2" property="sd2" jdbcType="DECIMAL" />
+        <result column="ICount" property="icount" jdbcType="SMALLINT" />
+        <result column="Fs" property="fs" jdbcType="SMALLINT" />
+        <result column="SDNNLevel" property="sdnnlevel" jdbcType="SMALLINT" />
+        <result column="PNN50Level" property="pnn50level" jdbcType="SMALLINT" />
+        <result column="HRVILevel" property="hrvilevel" jdbcType="SMALLINT" />
+        <result column="RMSSDLevel" property="rmssdlevel" jdbcType="SMALLINT" />
+        <result column="TPLevel" property="tplevel" jdbcType="SMALLINT" />
+        <result column="VLFLevel" property="vlflevel" jdbcType="SMALLINT" />
+        <result column="LFLevel" property="lflevel" jdbcType="SMALLINT" />
+        <result column="HFLevel" property="hflevel" jdbcType="SMALLINT" />
+        <result column="LHRLevel" property="lhrlevel" jdbcType="SMALLINT" />
+        <result column="HRLevel" property="hrlevel" jdbcType="SMALLINT" />
+        <result column="AddValue" property="addvalue" jdbcType="SMALLINT" />
+        <result column="DeviceCode" property="devicecode" jdbcType="VARCHAR" />
+        <result column="BluetoothMacAddr" property="bluetoothmacaddr" jdbcType="VARCHAR" />
+        <result column="RawECGImg" property="rawecgimg" jdbcType="VARCHAR" />
+        <result column="FreqPSD" property="freqpsd" jdbcType="VARCHAR" />
+        <result column="RRInterval" property="rrinterval" jdbcType="VARCHAR" />
+        <result column="RawECG" property="rawecg" jdbcType="VARCHAR" />
+        <result column="DelTag" property="deltag" jdbcType="CHAR" />
+        <result column="ECGResult" property="ecgresult" jdbcType="SMALLINT" />
+        <result column="StatusTag" property="statustag" jdbcType="SMALLINT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Docentry, EventId, Memberid, UploadTime, TimeLength, EcgTime, MeasTime, ImageNum, 
+        HeartNum, SlowestBeat, SlowestTime, FastestBeat, FastestTime, AverageHeart, SDNN, 
+        PNN50, HRVI, RMSSD, TP, VLF, LF, HF, LF_HF, SD1, SD2, ICount, Fs, SDNNLevel, PNN50Level, 
+        HRVILevel, RMSSDLevel, TPLevel, VLFLevel, LFLevel, HFLevel, LHRLevel, HRLevel, AddValue, 
+        DeviceCode, BluetoothMacAddr, RawECGImg, FreqPSD, RRInterval, RawECG, DelTag, ECGResult, 
+        StatusTag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.electrocardio.model.OecgExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from oecg
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.measureCore.electrocardio.model.OecgExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from oecg
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from oecg
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.measureCore.electrocardio.model.Oecg" >
+        insert into oecg (EventId, Memberid, 
+            UploadTime, TimeLength, EcgTime, 
+            MeasTime, ImageNum, HeartNum, 
+            SlowestBeat, SlowestTime, FastestBeat, 
+            FastestTime, AverageHeart, SDNN, 
+            PNN50, HRVI, RMSSD, 
+            TP, VLF, LF, HF, 
+            LF_HF, SD1, SD2, ICount, 
+            Fs, SDNNLevel, PNN50Level, 
+            HRVILevel, RMSSDLevel, TPLevel, 
+            VLFLevel, LFLevel, HFLevel, 
+            LHRLevel, HRLevel, AddValue, 
+            DeviceCode, BluetoothMacAddr, RawECGImg, 
+            FreqPSD, RRInterval, RawECG, 
+            DelTag, ECGResult, StatusTag
+            )
+        values (#{eventid,jdbcType=BIGINT}, #{memberid,jdbcType=INTEGER}, 
+            #{uploadtime,jdbcType=TIMESTAMP}, #{timelength,jdbcType=INTEGER}, #{ecgtime,jdbcType=TIMESTAMP}, 
+            #{meastime,jdbcType=TIMESTAMP}, #{imagenum,jdbcType=SMALLINT}, #{heartnum,jdbcType=INTEGER}, 
+            #{slowestbeat,jdbcType=SMALLINT}, #{slowesttime,jdbcType=INTEGER}, #{fastestbeat,jdbcType=SMALLINT}, 
+            #{fastesttime,jdbcType=INTEGER}, #{averageheart,jdbcType=INTEGER}, #{sdnn,jdbcType=DECIMAL}, 
+            #{pnn50,jdbcType=DECIMAL}, #{hrvi,jdbcType=DECIMAL}, #{rmssd,jdbcType=DECIMAL}, 
+            #{tp,jdbcType=DECIMAL}, #{vlf,jdbcType=DECIMAL}, #{lf,jdbcType=DECIMAL}, #{hf,jdbcType=DECIMAL}, 
+            #{lfHf,jdbcType=DECIMAL}, #{sd1,jdbcType=DECIMAL}, #{sd2,jdbcType=DECIMAL}, #{icount,jdbcType=SMALLINT}, 
+            #{fs,jdbcType=SMALLINT}, #{sdnnlevel,jdbcType=SMALLINT}, #{pnn50level,jdbcType=SMALLINT}, 
+            #{hrvilevel,jdbcType=SMALLINT}, #{rmssdlevel,jdbcType=SMALLINT}, #{tplevel,jdbcType=SMALLINT}, 
+            #{vlflevel,jdbcType=SMALLINT}, #{lflevel,jdbcType=SMALLINT}, #{hflevel,jdbcType=SMALLINT}, 
+            #{lhrlevel,jdbcType=SMALLINT}, #{hrlevel,jdbcType=SMALLINT}, #{addvalue,jdbcType=SMALLINT}, 
+            #{devicecode,jdbcType=VARCHAR}, #{bluetoothmacaddr,jdbcType=VARCHAR}, #{rawecgimg,jdbcType=VARCHAR}, 
+            #{freqpsd,jdbcType=VARCHAR}, #{rrinterval,jdbcType=VARCHAR}, #{rawecg,jdbcType=VARCHAR}, 
+            #{deltag,jdbcType=CHAR}, #{ecgresult,jdbcType=SMALLINT}, #{statustag,jdbcType=SMALLINT}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.measureCore.electrocardio.model.Oecg" >
+        insert into oecg
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                Docentry,
+            </if>
+            <if test="eventid != null" >
+                EventId,
+            </if>
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime,
+            </if>
+            <if test="timelength != null" >
+                TimeLength,
+            </if>
+            <if test="ecgtime != null" >
+                EcgTime,
+            </if>
+            <if test="meastime != null" >
+                MeasTime,
+            </if>
+            <if test="imagenum != null" >
+                ImageNum,
+            </if>
+            <if test="heartnum != null" >
+                HeartNum,
+            </if>
+            <if test="slowestbeat != null" >
+                SlowestBeat,
+            </if>
+            <if test="slowesttime != null" >
+                SlowestTime,
+            </if>
+            <if test="fastestbeat != null" >
+                FastestBeat,
+            </if>
+            <if test="fastesttime != null" >
+                FastestTime,
+            </if>
+            <if test="averageheart != null" >
+                AverageHeart,
+            </if>
+            <if test="sdnn != null" >
+                SDNN,
+            </if>
+            <if test="pnn50 != null" >
+                PNN50,
+            </if>
+            <if test="hrvi != null" >
+                HRVI,
+            </if>
+            <if test="rmssd != null" >
+                RMSSD,
+            </if>
+            <if test="tp != null" >
+                TP,
+            </if>
+            <if test="vlf != null" >
+                VLF,
+            </if>
+            <if test="lf != null" >
+                LF,
+            </if>
+            <if test="hf != null" >
+                HF,
+            </if>
+            <if test="lfHf != null" >
+                LF_HF,
+            </if>
+            <if test="sd1 != null" >
+                SD1,
+            </if>
+            <if test="sd2 != null" >
+                SD2,
+            </if>
+            <if test="icount != null" >
+                ICount,
+            </if>
+            <if test="fs != null" >
+                Fs,
+            </if>
+            <if test="sdnnlevel != null" >
+                SDNNLevel,
+            </if>
+            <if test="pnn50level != null" >
+                PNN50Level,
+            </if>
+            <if test="hrvilevel != null" >
+                HRVILevel,
+            </if>
+            <if test="rmssdlevel != null" >
+                RMSSDLevel,
+            </if>
+            <if test="tplevel != null" >
+                TPLevel,
+            </if>
+            <if test="vlflevel != null" >
+                VLFLevel,
+            </if>
+            <if test="lflevel != null" >
+                LFLevel,
+            </if>
+            <if test="hflevel != null" >
+                HFLevel,
+            </if>
+            <if test="lhrlevel != null" >
+                LHRLevel,
+            </if>
+            <if test="hrlevel != null" >
+                HRLevel,
+            </if>
+            <if test="addvalue != null" >
+                AddValue,
+            </if>
+            <if test="devicecode != null" >
+                DeviceCode,
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                BluetoothMacAddr,
+            </if>
+            <if test="rawecgimg != null" >
+                RawECGImg,
+            </if>
+            <if test="freqpsd != null" >
+                FreqPSD,
+            </if>
+            <if test="rrinterval != null" >
+                RRInterval,
+            </if>
+            <if test="rawecg != null" >
+                RawECG,
+            </if>
+            <if test="deltag != null" >
+                DelTag,
+            </if>
+            <if test="ecgresult != null" >
+                ECGResult,
+            </if>
+            <if test="statustag != null" >
+                StatusTag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="docentry != null" >
+                #{docentry,jdbcType=BIGINT},
+            </if>
+            <if test="eventid != null" >
+                #{eventid,jdbcType=BIGINT},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timelength != null" >
+                #{timelength,jdbcType=INTEGER},
+            </if>
+            <if test="ecgtime != null" >
+                #{ecgtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="meastime != null" >
+                #{meastime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="imagenum != null" >
+                #{imagenum,jdbcType=SMALLINT},
+            </if>
+            <if test="heartnum != null" >
+                #{heartnum,jdbcType=INTEGER},
+            </if>
+            <if test="slowestbeat != null" >
+                #{slowestbeat,jdbcType=SMALLINT},
+            </if>
+            <if test="slowesttime != null" >
+                #{slowesttime,jdbcType=INTEGER},
+            </if>
+            <if test="fastestbeat != null" >
+                #{fastestbeat,jdbcType=SMALLINT},
+            </if>
+            <if test="fastesttime != null" >
+                #{fastesttime,jdbcType=INTEGER},
+            </if>
+            <if test="averageheart != null" >
+                #{averageheart,jdbcType=INTEGER},
+            </if>
+            <if test="sdnn != null" >
+                #{sdnn,jdbcType=DECIMAL},
+            </if>
+            <if test="pnn50 != null" >
+                #{pnn50,jdbcType=DECIMAL},
+            </if>
+            <if test="hrvi != null" >
+                #{hrvi,jdbcType=DECIMAL},
+            </if>
+            <if test="rmssd != null" >
+                #{rmssd,jdbcType=DECIMAL},
+            </if>
+            <if test="tp != null" >
+                #{tp,jdbcType=DECIMAL},
+            </if>
+            <if test="vlf != null" >
+                #{vlf,jdbcType=DECIMAL},
+            </if>
+            <if test="lf != null" >
+                #{lf,jdbcType=DECIMAL},
+            </if>
+            <if test="hf != null" >
+                #{hf,jdbcType=DECIMAL},
+            </if>
+            <if test="lfHf != null" >
+                #{lfHf,jdbcType=DECIMAL},
+            </if>
+            <if test="sd1 != null" >
+                #{sd1,jdbcType=DECIMAL},
+            </if>
+            <if test="sd2 != null" >
+                #{sd2,jdbcType=DECIMAL},
+            </if>
+            <if test="icount != null" >
+                #{icount,jdbcType=SMALLINT},
+            </if>
+            <if test="fs != null" >
+                #{fs,jdbcType=SMALLINT},
+            </if>
+            <if test="sdnnlevel != null" >
+                #{sdnnlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="pnn50level != null" >
+                #{pnn50level,jdbcType=SMALLINT},
+            </if>
+            <if test="hrvilevel != null" >
+                #{hrvilevel,jdbcType=SMALLINT},
+            </if>
+            <if test="rmssdlevel != null" >
+                #{rmssdlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="tplevel != null" >
+                #{tplevel,jdbcType=SMALLINT},
+            </if>
+            <if test="vlflevel != null" >
+                #{vlflevel,jdbcType=SMALLINT},
+            </if>
+            <if test="lflevel != null" >
+                #{lflevel,jdbcType=SMALLINT},
+            </if>
+            <if test="hflevel != null" >
+                #{hflevel,jdbcType=SMALLINT},
+            </if>
+            <if test="lhrlevel != null" >
+                #{lhrlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="hrlevel != null" >
+                #{hrlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="addvalue != null" >
+                #{addvalue,jdbcType=SMALLINT},
+            </if>
+            <if test="devicecode != null" >
+                #{devicecode,jdbcType=VARCHAR},
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                #{bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="rawecgimg != null" >
+                #{rawecgimg,jdbcType=VARCHAR},
+            </if>
+            <if test="freqpsd != null" >
+                #{freqpsd,jdbcType=VARCHAR},
+            </if>
+            <if test="rrinterval != null" >
+                #{rrinterval,jdbcType=VARCHAR},
+            </if>
+            <if test="rawecg != null" >
+                #{rawecg,jdbcType=VARCHAR},
+            </if>
+            <if test="deltag != null" >
+                #{deltag,jdbcType=CHAR},
+            </if>
+            <if test="ecgresult != null" >
+                #{ecgresult,jdbcType=SMALLINT},
+            </if>
+            <if test="statustag != null" >
+                #{statustag,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.measureCore.electrocardio.model.OecgExample" resultType="java.lang.Integer" >
+        select count(*) from oecg
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update oecg
+        <set >
+            <if test="record.docentry != null" >
+                Docentry = #{record.docentry,jdbcType=BIGINT},
+            </if>
+            <if test="record.eventid != null" >
+                EventId = #{record.eventid,jdbcType=BIGINT},
+            </if>
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.uploadtime != null" >
+                UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.timelength != null" >
+                TimeLength = #{record.timelength,jdbcType=INTEGER},
+            </if>
+            <if test="record.ecgtime != null" >
+                EcgTime = #{record.ecgtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.meastime != null" >
+                MeasTime = #{record.meastime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.imagenum != null" >
+                ImageNum = #{record.imagenum,jdbcType=SMALLINT},
+            </if>
+            <if test="record.heartnum != null" >
+                HeartNum = #{record.heartnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.slowestbeat != null" >
+                SlowestBeat = #{record.slowestbeat,jdbcType=SMALLINT},
+            </if>
+            <if test="record.slowesttime != null" >
+                SlowestTime = #{record.slowesttime,jdbcType=INTEGER},
+            </if>
+            <if test="record.fastestbeat != null" >
+                FastestBeat = #{record.fastestbeat,jdbcType=SMALLINT},
+            </if>
+            <if test="record.fastesttime != null" >
+                FastestTime = #{record.fastesttime,jdbcType=INTEGER},
+            </if>
+            <if test="record.averageheart != null" >
+                AverageHeart = #{record.averageheart,jdbcType=INTEGER},
+            </if>
+            <if test="record.sdnn != null" >
+                SDNN = #{record.sdnn,jdbcType=DECIMAL},
+            </if>
+            <if test="record.pnn50 != null" >
+                PNN50 = #{record.pnn50,jdbcType=DECIMAL},
+            </if>
+            <if test="record.hrvi != null" >
+                HRVI = #{record.hrvi,jdbcType=DECIMAL},
+            </if>
+            <if test="record.rmssd != null" >
+                RMSSD = #{record.rmssd,jdbcType=DECIMAL},
+            </if>
+            <if test="record.tp != null" >
+                TP = #{record.tp,jdbcType=DECIMAL},
+            </if>
+            <if test="record.vlf != null" >
+                VLF = #{record.vlf,jdbcType=DECIMAL},
+            </if>
+            <if test="record.lf != null" >
+                LF = #{record.lf,jdbcType=DECIMAL},
+            </if>
+            <if test="record.hf != null" >
+                HF = #{record.hf,jdbcType=DECIMAL},
+            </if>
+            <if test="record.lfHf != null" >
+                LF_HF = #{record.lfHf,jdbcType=DECIMAL},
+            </if>
+            <if test="record.sd1 != null" >
+                SD1 = #{record.sd1,jdbcType=DECIMAL},
+            </if>
+            <if test="record.sd2 != null" >
+                SD2 = #{record.sd2,jdbcType=DECIMAL},
+            </if>
+            <if test="record.icount != null" >
+                ICount = #{record.icount,jdbcType=SMALLINT},
+            </if>
+            <if test="record.fs != null" >
+                Fs = #{record.fs,jdbcType=SMALLINT},
+            </if>
+            <if test="record.sdnnlevel != null" >
+                SDNNLevel = #{record.sdnnlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.pnn50level != null" >
+                PNN50Level = #{record.pnn50level,jdbcType=SMALLINT},
+            </if>
+            <if test="record.hrvilevel != null" >
+                HRVILevel = #{record.hrvilevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.rmssdlevel != null" >
+                RMSSDLevel = #{record.rmssdlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.tplevel != null" >
+                TPLevel = #{record.tplevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.vlflevel != null" >
+                VLFLevel = #{record.vlflevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.lflevel != null" >
+                LFLevel = #{record.lflevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.hflevel != null" >
+                HFLevel = #{record.hflevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.lhrlevel != null" >
+                LHRLevel = #{record.lhrlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.hrlevel != null" >
+                HRLevel = #{record.hrlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.addvalue != null" >
+                AddValue = #{record.addvalue,jdbcType=SMALLINT},
+            </if>
+            <if test="record.devicecode != null" >
+                DeviceCode = #{record.devicecode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.bluetoothmacaddr != null" >
+                BluetoothMacAddr = #{record.bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rawecgimg != null" >
+                RawECGImg = #{record.rawecgimg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.freqpsd != null" >
+                FreqPSD = #{record.freqpsd,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rrinterval != null" >
+                RRInterval = #{record.rrinterval,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rawecg != null" >
+                RawECG = #{record.rawecg,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deltag != null" >
+                DelTag = #{record.deltag,jdbcType=CHAR},
+            </if>
+            <if test="record.ecgresult != null" >
+                ECGResult = #{record.ecgresult,jdbcType=SMALLINT},
+            </if>
+            <if test="record.statustag != null" >
+                StatusTag = #{record.statustag,jdbcType=SMALLINT},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update oecg
+        set <!-- Docentry = #{record.docentry,jdbcType=BIGINT}, -->
+            EventId = #{record.eventid,jdbcType=BIGINT},
+            Memberid = #{record.memberid,jdbcType=INTEGER},
+            UploadTime = #{record.uploadtime,jdbcType=TIMESTAMP},
+            TimeLength = #{record.timelength,jdbcType=INTEGER},
+            EcgTime = #{record.ecgtime,jdbcType=TIMESTAMP},
+            MeasTime = #{record.meastime,jdbcType=TIMESTAMP},
+            ImageNum = #{record.imagenum,jdbcType=SMALLINT},
+            HeartNum = #{record.heartnum,jdbcType=INTEGER},
+            SlowestBeat = #{record.slowestbeat,jdbcType=SMALLINT},
+            SlowestTime = #{record.slowesttime,jdbcType=INTEGER},
+            FastestBeat = #{record.fastestbeat,jdbcType=SMALLINT},
+            FastestTime = #{record.fastesttime,jdbcType=INTEGER},
+            AverageHeart = #{record.averageheart,jdbcType=INTEGER},
+            SDNN = #{record.sdnn,jdbcType=DECIMAL},
+            PNN50 = #{record.pnn50,jdbcType=DECIMAL},
+            HRVI = #{record.hrvi,jdbcType=DECIMAL},
+            RMSSD = #{record.rmssd,jdbcType=DECIMAL},
+            TP = #{record.tp,jdbcType=DECIMAL},
+            VLF = #{record.vlf,jdbcType=DECIMAL},
+            LF = #{record.lf,jdbcType=DECIMAL},
+            HF = #{record.hf,jdbcType=DECIMAL},
+            LF_HF = #{record.lfHf,jdbcType=DECIMAL},
+            SD1 = #{record.sd1,jdbcType=DECIMAL},
+            SD2 = #{record.sd2,jdbcType=DECIMAL},
+            ICount = #{record.icount,jdbcType=SMALLINT},
+            Fs = #{record.fs,jdbcType=SMALLINT},
+            SDNNLevel = #{record.sdnnlevel,jdbcType=SMALLINT},
+            PNN50Level = #{record.pnn50level,jdbcType=SMALLINT},
+            HRVILevel = #{record.hrvilevel,jdbcType=SMALLINT},
+            RMSSDLevel = #{record.rmssdlevel,jdbcType=SMALLINT},
+            TPLevel = #{record.tplevel,jdbcType=SMALLINT},
+            VLFLevel = #{record.vlflevel,jdbcType=SMALLINT},
+            LFLevel = #{record.lflevel,jdbcType=SMALLINT},
+            HFLevel = #{record.hflevel,jdbcType=SMALLINT},
+            LHRLevel = #{record.lhrlevel,jdbcType=SMALLINT},
+            HRLevel = #{record.hrlevel,jdbcType=SMALLINT},
+            AddValue = #{record.addvalue,jdbcType=SMALLINT},
+            DeviceCode = #{record.devicecode,jdbcType=VARCHAR},
+            BluetoothMacAddr = #{record.bluetoothmacaddr,jdbcType=VARCHAR},
+            RawECGImg = #{record.rawecgimg,jdbcType=VARCHAR},
+            FreqPSD = #{record.freqpsd,jdbcType=VARCHAR},
+            RRInterval = #{record.rrinterval,jdbcType=VARCHAR},
+            RawECG = #{record.rawecg,jdbcType=VARCHAR},
+            DelTag = #{record.deltag,jdbcType=CHAR},
+            ECGResult = #{record.ecgresult,jdbcType=SMALLINT},
+            StatusTag = #{record.statustag,jdbcType=SMALLINT}
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.measureCore.electrocardio.model.Oecg" >
+        update oecg
+        <set >
+            <if test="eventid != null" >
+                EventId = #{eventid,jdbcType=BIGINT},
+            </if>
+            <if test="memberid != null" >
+                Memberid = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="uploadtime != null" >
+                UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timelength != null" >
+                TimeLength = #{timelength,jdbcType=INTEGER},
+            </if>
+            <if test="ecgtime != null" >
+                EcgTime = #{ecgtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="meastime != null" >
+                MeasTime = #{meastime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="imagenum != null" >
+                ImageNum = #{imagenum,jdbcType=SMALLINT},
+            </if>
+            <if test="heartnum != null" >
+                HeartNum = #{heartnum,jdbcType=INTEGER},
+            </if>
+            <if test="slowestbeat != null" >
+                SlowestBeat = #{slowestbeat,jdbcType=SMALLINT},
+            </if>
+            <if test="slowesttime != null" >
+                SlowestTime = #{slowesttime,jdbcType=INTEGER},
+            </if>
+            <if test="fastestbeat != null" >
+                FastestBeat = #{fastestbeat,jdbcType=SMALLINT},
+            </if>
+            <if test="fastesttime != null" >
+                FastestTime = #{fastesttime,jdbcType=INTEGER},
+            </if>
+            <if test="averageheart != null" >
+                AverageHeart = #{averageheart,jdbcType=INTEGER},
+            </if>
+            <if test="sdnn != null" >
+                SDNN = #{sdnn,jdbcType=DECIMAL},
+            </if>
+            <if test="pnn50 != null" >
+                PNN50 = #{pnn50,jdbcType=DECIMAL},
+            </if>
+            <if test="hrvi != null" >
+                HRVI = #{hrvi,jdbcType=DECIMAL},
+            </if>
+            <if test="rmssd != null" >
+                RMSSD = #{rmssd,jdbcType=DECIMAL},
+            </if>
+            <if test="tp != null" >
+                TP = #{tp,jdbcType=DECIMAL},
+            </if>
+            <if test="vlf != null" >
+                VLF = #{vlf,jdbcType=DECIMAL},
+            </if>
+            <if test="lf != null" >
+                LF = #{lf,jdbcType=DECIMAL},
+            </if>
+            <if test="hf != null" >
+                HF = #{hf,jdbcType=DECIMAL},
+            </if>
+            <if test="lfHf != null" >
+                LF_HF = #{lfHf,jdbcType=DECIMAL},
+            </if>
+            <if test="sd1 != null" >
+                SD1 = #{sd1,jdbcType=DECIMAL},
+            </if>
+            <if test="sd2 != null" >
+                SD2 = #{sd2,jdbcType=DECIMAL},
+            </if>
+            <if test="icount != null" >
+                ICount = #{icount,jdbcType=SMALLINT},
+            </if>
+            <if test="fs != null" >
+                Fs = #{fs,jdbcType=SMALLINT},
+            </if>
+            <if test="sdnnlevel != null" >
+                SDNNLevel = #{sdnnlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="pnn50level != null" >
+                PNN50Level = #{pnn50level,jdbcType=SMALLINT},
+            </if>
+            <if test="hrvilevel != null" >
+                HRVILevel = #{hrvilevel,jdbcType=SMALLINT},
+            </if>
+            <if test="rmssdlevel != null" >
+                RMSSDLevel = #{rmssdlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="tplevel != null" >
+                TPLevel = #{tplevel,jdbcType=SMALLINT},
+            </if>
+            <if test="vlflevel != null" >
+                VLFLevel = #{vlflevel,jdbcType=SMALLINT},
+            </if>
+            <if test="lflevel != null" >
+                LFLevel = #{lflevel,jdbcType=SMALLINT},
+            </if>
+            <if test="hflevel != null" >
+                HFLevel = #{hflevel,jdbcType=SMALLINT},
+            </if>
+            <if test="lhrlevel != null" >
+                LHRLevel = #{lhrlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="hrlevel != null" >
+                HRLevel = #{hrlevel,jdbcType=SMALLINT},
+            </if>
+            <if test="addvalue != null" >
+                AddValue = #{addvalue,jdbcType=SMALLINT},
+            </if>
+            <if test="devicecode != null" >
+                DeviceCode = #{devicecode,jdbcType=VARCHAR},
+            </if>
+            <if test="bluetoothmacaddr != null" >
+                BluetoothMacAddr = #{bluetoothmacaddr,jdbcType=VARCHAR},
+            </if>
+            <if test="rawecgimg != null" >
+                RawECGImg = #{rawecgimg,jdbcType=VARCHAR},
+            </if>
+            <if test="freqpsd != null" >
+                FreqPSD = #{freqpsd,jdbcType=VARCHAR},
+            </if>
+            <if test="rrinterval != null" >
+                RRInterval = #{rrinterval,jdbcType=VARCHAR},
+            </if>
+            <if test="rawecg != null" >
+                RawECG = #{rawecg,jdbcType=VARCHAR},
+            </if>
+            <if test="deltag != null" >
+                DelTag = #{deltag,jdbcType=CHAR},
+            </if>
+            <if test="ecgresult != null" >
+                ECGResult = #{ecgresult,jdbcType=SMALLINT},
+            </if>
+            <if test="statustag != null" >
+                StatusTag = #{statustag,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.measureCore.electrocardio.model.Oecg" >
+        update oecg
+        set EventId = #{eventid,jdbcType=BIGINT},
+            Memberid = #{memberid,jdbcType=INTEGER},
+            UploadTime = #{uploadtime,jdbcType=TIMESTAMP},
+            TimeLength = #{timelength,jdbcType=INTEGER},
+            EcgTime = #{ecgtime,jdbcType=TIMESTAMP},
+            MeasTime = #{meastime,jdbcType=TIMESTAMP},
+            ImageNum = #{imagenum,jdbcType=SMALLINT},
+            HeartNum = #{heartnum,jdbcType=INTEGER},
+            SlowestBeat = #{slowestbeat,jdbcType=SMALLINT},
+            SlowestTime = #{slowesttime,jdbcType=INTEGER},
+            FastestBeat = #{fastestbeat,jdbcType=SMALLINT},
+            FastestTime = #{fastesttime,jdbcType=INTEGER},
+            AverageHeart = #{averageheart,jdbcType=INTEGER},
+            SDNN = #{sdnn,jdbcType=DECIMAL},
+            PNN50 = #{pnn50,jdbcType=DECIMAL},
+            HRVI = #{hrvi,jdbcType=DECIMAL},
+            RMSSD = #{rmssd,jdbcType=DECIMAL},
+            TP = #{tp,jdbcType=DECIMAL},
+            VLF = #{vlf,jdbcType=DECIMAL},
+            LF = #{lf,jdbcType=DECIMAL},
+            HF = #{hf,jdbcType=DECIMAL},
+            LF_HF = #{lfHf,jdbcType=DECIMAL},
+            SD1 = #{sd1,jdbcType=DECIMAL},
+            SD2 = #{sd2,jdbcType=DECIMAL},
+            ICount = #{icount,jdbcType=SMALLINT},
+            Fs = #{fs,jdbcType=SMALLINT},
+            SDNNLevel = #{sdnnlevel,jdbcType=SMALLINT},
+            PNN50Level = #{pnn50level,jdbcType=SMALLINT},
+            HRVILevel = #{hrvilevel,jdbcType=SMALLINT},
+            RMSSDLevel = #{rmssdlevel,jdbcType=SMALLINT},
+            TPLevel = #{tplevel,jdbcType=SMALLINT},
+            VLFLevel = #{vlflevel,jdbcType=SMALLINT},
+            LFLevel = #{lflevel,jdbcType=SMALLINT},
+            HFLevel = #{hflevel,jdbcType=SMALLINT},
+            LHRLevel = #{lhrlevel,jdbcType=SMALLINT},
+            HRLevel = #{hrlevel,jdbcType=SMALLINT},
+            AddValue = #{addvalue,jdbcType=SMALLINT},
+            DeviceCode = #{devicecode,jdbcType=VARCHAR},
+            BluetoothMacAddr = #{bluetoothmacaddr,jdbcType=VARCHAR},
+            RawECGImg = #{rawecgimg,jdbcType=VARCHAR},
+            FreqPSD = #{freqpsd,jdbcType=VARCHAR},
+            RRInterval = #{rrinterval,jdbcType=VARCHAR},
+            RawECG = #{rawecg,jdbcType=VARCHAR},
+            DelTag = #{deltag,jdbcType=CHAR},
+            ECGResult = #{ecgresult,jdbcType=SMALLINT},
+            StatusTag = #{statustag,jdbcType=SMALLINT}
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from oecg
+        where Docentry = #{docentry,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.measureCore.electrocardio.model.OecgExample" >
+        delete from oecg
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

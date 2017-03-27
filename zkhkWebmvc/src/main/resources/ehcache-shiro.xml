@@ -1,0 +1,38 @@
+<ehcache updateCheck="false" name="shiroCache">
+ 
+    <diskStore path="Java.io.tmpdir/shiro-ehcache"/>
+    <defaultCache
+            maxElementsInMemory="10000"
+            eternal="false"
+            timeToIdleSeconds="300"
+            timeToLiveSeconds="1200"
+            overflowToDisk="false"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            />
+            
+      <cache name="shiro-activeSessionCache"
+
+       maxElementsInMemory="10000"
+
+       eternal="false"
+
+       timeToLiveSeconds="36000"
+
+       timeToIdleSeconds="36000"
+
+       diskPersistent="false"
+
+       overflowToDisk="false"
+
+       diskExpiryThreadIntervalSeconds="600">
+
+
+
+   </cache>
+
+   <!-- Add more cache entries as desired, for example,
+
+        Realm authc/authz caching: -->       
+            
+</ehcache>

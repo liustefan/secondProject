@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="zkhkWebmvc">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="zkhkSDK-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/zkhkSDK/zkhkSDK">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="platform-common-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/platform-common/platform-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="doctorCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/doctorCore/doctorCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="orgainCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/orgCore/orgCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="memberCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/memberCore/memberCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="agentCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/agentCore/agentCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="fileCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/fileCore/fileCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="measureCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/measureCore/measureCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="msgCenterCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/msgCenterCore/msgCenterCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="chatCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/chatCore/chatCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="packagCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/packagCore/packagCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="printCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/printCore/printCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="questionCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/questionCore/questionCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="careCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/careCore/careCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="inspectCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/inspectCore/inspectCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="statistiCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/statistiCore/statistiCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="cmsCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/cmsCore/cmsCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="reportCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/reportCore/reportCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="healthCore-3.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/healthCore/healthCore">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="zkhkWebmvc"/>
+        <property name="java-output-path" value="/zkhkWebmvc/target/classes"/>
+    </wb-module>
+</project-modules>

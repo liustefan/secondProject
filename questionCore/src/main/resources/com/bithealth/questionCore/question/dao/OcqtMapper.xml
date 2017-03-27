@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.question.dao.OcqtMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.questionCore.question.model.Ocqt" >
+        <id column="CombQustid" property="combQustid" jdbcType="INTEGER" />
+        <result column="CombQustName" property="combQustName" jdbcType="VARCHAR" />
+        <result column="CombQustCode" property="combQustCode" jdbcType="INTEGER" />
+        <result column="CombDesc" property="combDesc" jdbcType="VARCHAR" />
+        <result column="ChTag" property="chTag" jdbcType="CHAR" />
+        <result column="QustTag" property="qustTag" jdbcType="CHAR" />
+        <result column="CreateDate" property="createDate" jdbcType="DATE" />
+        <result column="Createid" property="createid" jdbcType="INTEGER" />
+        <result column="CreateName" property="createName" jdbcType="VARCHAR" />
+        <result column="orgId" property="orgId" jdbcType="INTEGER" />
+        <result column="qustVer" property="qustVer" jdbcType="VARCHAR" />
+        <result column="optId" property="optId" jdbcType="SMALLINT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                                <when test="criterion.listOr">
+                                	and 
+                                	<foreach collection="criterion.conditions" item="item" open="(" close=")" separator="or" >
+                                        ${item} #{criterion.value}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        CombQustid, CombQustName, CombQustCode, CombDesc, ChTag, QustTag, CreateDate, Createid, 
+        CreateName, orgId, qustVer, optId
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.OcqtExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ocqt
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.OcqtExample" >
+        SELECT ocqt.*, b.optName AS optName, COUNT(1) AS singleAnswerTotal
+        FROM ocqt 
+        JOIN oopt b ON ocqt.OptId = b.OptId 
+        JOIN cqt1 ON ocqt.CombQustid = cqt1.CombQustid 
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+      	GROUP BY CombQustid
+        ORDER BY CombQustid DESC
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from ocqt
+        where CombQustid = #{combQustid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.questionCore.question.model.Ocqt" useGeneratedKeys="true" keyProperty="combQustid" >
+        insert into ocqt
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="combQustName != null" >
+                CombQustName,
+            </if>
+            <if test="combQustCode != null" >
+                CombQustCode,
+            </if>
+            <if test="combDesc != null" >
+                CombDesc,
+            </if>
+            <if test="chTag != null" >
+                ChTag,
+            </if>
+            <if test="qustTag != null" >
+                QustTag,
+            </if>
+            <if test="createDate != null" >
+                CreateDate,
+            </if>
+            <if test="createid != null" >
+                Createid,
+            </if>
+            <if test="createName != null" >
+                CreateName,
+            </if>
+            <if test="orgId != null" >
+                orgId,
+            </if>
+            <if test="qustVer != null" >
+                qustVer,
+            </if>
+            <if test="optId != null" >
+                optId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="combQustName != null" >
+                #{combQustName,jdbcType=VARCHAR},
+            </if>
+            <if test="combQustCode != null" >
+                #{combQustCode,jdbcType=INTEGER},
+            </if>
+            <if test="combDesc != null" >
+                #{combDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="chTag != null" >
+                #{chTag,jdbcType=CHAR},
+            </if>
+            <if test="qustTag != null" >
+                #{qustTag,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=DATE},
+            </if>
+            <if test="createid != null" >
+                #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null" >
+                #{createName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="qustVer != null" >
+                #{qustVer,jdbcType=VARCHAR},
+            </if>
+            <if test="optId != null" >
+                #{optId,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.questionCore.question.model.OcqtExample" resultType="java.lang.Integer" >
+        select count(*) from ocqt
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ocqt
+        <set >
+            <if test="record.combQustid != null" >
+                CombQustid = #{record.combQustid,jdbcType=INTEGER},
+            </if>
+            <if test="record.combQustName != null" >
+                CombQustName = #{record.combQustName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.combQustCode != null" >
+                CombQustCode = #{record.combQustCode,jdbcType=INTEGER},
+            </if>
+            <if test="record.combDesc != null" >
+                CombDesc = #{record.combDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.chTag != null" >
+                ChTag = #{record.chTag,jdbcType=CHAR},
+            </if>
+            <if test="record.qustTag != null" >
+                QustTag = #{record.qustTag,jdbcType=CHAR},
+            </if>
+            <if test="record.createDate != null" >
+                CreateDate = #{record.createDate,jdbcType=DATE},
+            </if>
+            <if test="record.createid != null" >
+                Createid = #{record.createid,jdbcType=INTEGER},
+            </if>
+            <if test="record.createName != null" >
+                CreateName = #{record.createName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orgId != null" >
+                orgId = #{record.orgId,jdbcType=INTEGER},
+            </if>
+            <if test="record.qustVer != null" >
+                qustVer = #{record.qustVer,jdbcType=VARCHAR},
+            </if>
+            <if test="record.optId != null" >
+                optId = #{record.optId,jdbcType=SMALLINT},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update ocqt
+        set CombQustid = #{record.combQustid,jdbcType=INTEGER},
+            CombQustName = #{record.combQustName,jdbcType=VARCHAR},
+            CombQustCode = #{record.combQustCode,jdbcType=INTEGER},
+            CombDesc = #{record.combDesc,jdbcType=VARCHAR},
+            ChTag = #{record.chTag,jdbcType=CHAR},
+            QustTag = #{record.qustTag,jdbcType=CHAR},
+<!--             CreateDate = #{record.createDate,jdbcType=DATE}, -->
+<!--             Createid = #{record.createid,jdbcType=INTEGER}, -->
+<!--             CreateName = #{record.createName,jdbcType=VARCHAR}, -->
+<!--             orgId = #{record.orgId,jdbcType=INTEGER}, -->
+            qustVer = #{record.qustVer,jdbcType=VARCHAR},
+            optId = #{record.optId,jdbcType=SMALLINT}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.questionCore.question.model.Ocqt" >
+        update ocqt
+        <set >
+            <if test="combQustName != null" >
+                CombQustName = #{combQustName,jdbcType=VARCHAR},
+            </if>
+            <if test="combQustCode != null" >
+                CombQustCode = #{combQustCode,jdbcType=INTEGER},
+            </if>
+            <if test="combDesc != null" >
+                CombDesc = #{combDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="chTag != null" >
+                ChTag = #{chTag,jdbcType=CHAR},
+            </if>
+            <if test="qustTag != null" >
+                QustTag = #{qustTag,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null" >
+                CreateDate = #{createDate,jdbcType=DATE},
+            </if>
+            <if test="createid != null" >
+                Createid = #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null" >
+                CreateName = #{createName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null" >
+                orgId = #{orgId,jdbcType=INTEGER},
+            </if>
+            <if test="qustVer != null" >
+                qustVer = #{qustVer,jdbcType=VARCHAR},
+            </if>
+            <if test="optId != null" >
+                optId = #{optId,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where CombQustid = #{combQustid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.questionCore.question.model.Ocqt" >
+        update ocqt
+        set CombQustName = #{combQustName,jdbcType=VARCHAR},
+            CombQustCode = #{combQustCode,jdbcType=INTEGER},
+            CombDesc = #{combDesc,jdbcType=VARCHAR},
+            ChTag = #{chTag,jdbcType=CHAR},
+            QustTag = #{qustTag,jdbcType=CHAR},
+<!--             CreateDate = #{createDate,jdbcType=DATE}, -->
+<!--             Createid = #{createid,jdbcType=INTEGER}, -->
+<!--             CreateName = #{createName,jdbcType=VARCHAR}, -->
+<!--             orgId = #{orgId,jdbcType=INTEGER}, -->
+            qustVer = #{qustVer,jdbcType=VARCHAR},
+            optId = #{optId,jdbcType=SMALLINT}
+        where CombQustid = #{combQustid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from ocqt
+        where CombQustid = #{combQustid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.questionCore.question.model.OcqtExample" >
+        <if test="_parameter != null and _parameter != '' ">
+        delete from ocqt
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+    
+    <!-- 扩展功能  -->
+	<select id="selectComQuestionMaxQustCode" resultType="java.lang.Integer">
+		<![CDATA[
+		SELECT CombQustCode+1 AS QustCode FROM `ocqt` WHERE orgId = #{orgId,jdbcType=INTEGER} AND qustTag <> #{qustTag,jdbcType=CHAR} ORDER BY qustcode DESC LIMIT 1;
+		]]> 
+	</select>
+	
+	<select id="selectComQuestionMaxQustVerByName" resultType="java.lang.String">
+		SELECT qustVer+1 FROM `ocqt` WHERE orgId = #{orgId,jdbcType=INTEGER} AND combQustName = #{combQustName,jdbcType=VARCHAR} AND qustTag = #{qustTag,jdbcType=CHAR} ORDER BY QustVer DESC LIMIT 1;
+	</select>
+
+</mapper>

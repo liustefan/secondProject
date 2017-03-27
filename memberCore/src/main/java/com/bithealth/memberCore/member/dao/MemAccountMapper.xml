@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.MemAccountMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.MemAccount" >
+        <id column="LogID" property="logid" jdbcType="INTEGER" />
+        <result column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <result column="Account" property="account" jdbcType="VARCHAR" />
+        <result column="AccountType" property="accounttype" jdbcType="TINYINT" />
+        <result column="Status" property="status" jdbcType="TINYINT" />
+        <result column="CreateDrID" property="createdrid" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="UpdateDrID" property="updatedrid" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+        <association column="Memberid" property="member" select="com.bithealth.memberCore.member.dao.MemberMapper.selectByPrimaryKey"/>
+        <association property="memberSession" column="Memberid" select="com.bithealth.memberCore.member.dao.MemSessionMapper.selectByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, Memberid, Account, AccountType, Status, CreateDrID, CreateTime, UpdateDrID, 
+        UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemAccountExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem_account
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemAccountExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem_account
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from omem_account
+        where LogID = #{logid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.MemAccount" >
+        insert into omem_account (LogID, Memberid, Account, 
+            AccountType, Status, CreateDrID, 
+            CreateTime, UpdateDrID, UpdateTime
+            )
+        values (#{logid,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, 
+            #{accounttype,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{createdrid,jdbcType=INTEGER}, 
+            #{createtime,jdbcType=TIMESTAMP}, #{updatedrid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.MemAccount" >
+        insert into omem_account
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="logid != null" >
+                LogID,
+            </if>
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="account != null" >
+                Account,
+            </if>
+            <if test="accounttype != null" >
+                AccountType,
+            </if>
+            <if test="status != null" >
+                Status,
+            </if>
+            <if test="createdrid != null" >
+                CreateDrID,
+            </if>
+            <if test="createtime != null" >
+                CreateTime,
+            </if>
+            <if test="updatedrid != null" >
+                UpdateDrID,
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="logid != null" >
+                #{logid,jdbcType=INTEGER},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="account != null" >
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="accounttype != null" >
+                #{accounttype,jdbcType=TINYINT},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createdrid != null" >
+                #{createdrid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedrid != null" >
+                #{updatedrid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.MemAccountExample" resultType="java.lang.Integer" >
+        select count(*) from omem_account
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update omem_account
+        <set >
+            <if test="record.logid != null" >
+                LogID = #{record.logid,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.account != null" >
+                Account = #{record.account,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accounttype != null" >
+                AccountType = #{record.accounttype,jdbcType=TINYINT},
+            </if>
+            <if test="record.status != null" >
+                Status = #{record.status,jdbcType=TINYINT},
+            </if>
+            <if test="record.createdrid != null" >
+                CreateDrID = #{record.createdrid,jdbcType=INTEGER},
+            </if>
+            <if test="record.createtime != null" >
+                CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updatedrid != null" >
+                UpdateDrID = #{record.updatedrid,jdbcType=INTEGER},
+            </if>
+            <if test="record.updatetime != null" >
+                UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update omem_account
+        set LogID = #{record.logid,jdbcType=INTEGER},
+            Memberid = #{record.memberid,jdbcType=INTEGER},
+            Account = #{record.account,jdbcType=VARCHAR},
+            AccountType = #{record.accounttype,jdbcType=TINYINT},
+            Status = #{record.status,jdbcType=TINYINT},
+            CreateDrID = #{record.createdrid,jdbcType=INTEGER},
+            CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+            UpdateDrID = #{record.updatedrid,jdbcType=INTEGER},
+            UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.MemAccount" >
+        update omem_account
+        <set >
+            <if test="memberid != null" >
+                Memberid = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="account != null" >
+                Account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="accounttype != null" >
+                AccountType = #{accounttype,jdbcType=TINYINT},
+            </if>
+            <if test="status != null" >
+                Status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createdrid != null" >
+                CreateDrID = #{createdrid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedrid != null" >
+                UpdateDrID = #{updatedrid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LogID = #{logid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.MemAccount" >
+        update omem_account
+        set Memberid = #{memberid,jdbcType=INTEGER},
+            Account = #{account,jdbcType=VARCHAR},
+            AccountType = #{accounttype,jdbcType=TINYINT},
+            Status = #{status,jdbcType=TINYINT},
+            CreateDrID = #{createdrid,jdbcType=INTEGER},
+            CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            UpdateDrID = #{updatedrid,jdbcType=INTEGER},
+            UpdateTime = #{updatetime,jdbcType=TIMESTAMP}
+        where LogID = #{logid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from omem_account
+        where LogID = #{logid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.MemAccountExample" >
+        delete from omem_account
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- ################### -->
+    <select id="selectByMember" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT 
+    <include refid="Base_Column_List"/>
+     FROM omem_account 
+    WHERE `Status`=2 AND Memberid = #{memberid,jdbcType=INTEGER} 
+    </select>
+    
+    <insert id="insertBatch" parameterType="java.util.List">
+     insert into omem_account (Memberid, Account, 
+            AccountType, Status, CreateDrID, 
+            CreateTime, UpdateDrID, UpdateTime
+            )
+        values 
+        <foreach collection="list" item="item" separator=",">
+        (#{item.memberid,jdbcType=INTEGER}, #{item.account,jdbcType=VARCHAR}, 
+            #{item.accounttype,jdbcType=TINYINT}, #{item.status,jdbcType=TINYINT}, #{item.createdrid,jdbcType=INTEGER}, 
+            NOW(), #{item.updatedrid,jdbcType=INTEGER}, #{item.updatetime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+    <select id="selectAccountByTypeAndAccount" parameterType="com.bithealth.memberCore.member.model.MemAccount" resultType="java.lang.String">
+    SELECT a.account FROM `omem_account` a INNER JOIN `omem_account` b ON a.`Memberid`=b.`Memberid` 
+    WHERE b.account=#{account, jdbcType=VARCHAR} AND a.`AccountType`=#{accounttype, jdbcType=TINYINT}
+    </select>
+
+</mapper>

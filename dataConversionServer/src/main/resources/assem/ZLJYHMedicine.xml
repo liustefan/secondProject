@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.inspectCore.physical.model.PhHealthexamdetailmedicine">
+<!-- 会员基本资料信息,通过查询数据库获取 -->
+<Assem name="uniqueId" assembly="DGrdabh"/>   <!-- 个人档案编号 -->
+<Assem name="drugname" assembly="YYwmc"/>   <!-- 药物名称-->
+<Assem name="drugusage" assembly="YYongfa"/>  <!-- 用法-->
+<Assem name="drugdosage"  assembly="YYongl"/>  <!-- 用量-->
+<Assem name="institution" assembly="YYysj"/> <!-- 用药时间-->
+<Assem name="drugcompliance" assembly="YFyycx"/>  <!-- 服药依从性 -->
+<Assem name="updatetime" assembly="YHappentime"/>  <!-- 发生时间 -->
+</Assemes>

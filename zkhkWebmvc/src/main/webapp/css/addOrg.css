@@ -1,0 +1,44 @@
+/*
+* 编辑组织机构样式
+*/
+.content-box {
+	padding-left: 40px;
+}
+
+.content-slice {
+	height: 39px;
+	margin-bottom: 8px;
+}
+
+.content-slice input[type='text'] {
+	padding: 2px 5px;
+	width: 180px;
+	margin-right: 5px;
+}
+
+.content-slice label {
+	display: inline-block;
+	width: 115px;
+}
+
+label.error {
+	display: block;
+	/* width: initial !important; */
+	margin-left: 120px;
+}
+
+.mar-5 {
+	margin-left: 5px;
+}
+
+.mar-20 {
+	margin-top: 20px;
+}
+
+.fixed-width {
+	width: 10px !important;
+}
+
+.content-table {
+	margin-top: 25px;
+}

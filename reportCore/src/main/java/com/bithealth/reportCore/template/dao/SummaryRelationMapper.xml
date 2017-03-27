@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.reportCore.template.dao.SummaryRelationMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.reportCore.template.model.SummaryRelationKey" >
+        <id column="SumRepTempCode" property="sumRepTempCode" jdbcType="INTEGER" />
+        <id column="TempCode" property="tempCode" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        SumRepTempCode, TempCode
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.SummaryRelationExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from sms2
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.template.model.SummaryRelationExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from sms2
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.reportCore.template.model.SummaryRelationKey" >
+        insert into sms2
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="sumRepTempCode != null" >
+                SumRepTempCode,
+            </if>
+            <if test="tempCode != null" >
+                TempCode,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="sumRepTempCode != null" >
+                #{sumRepTempCode,jdbcType=INTEGER},
+            </if>
+            <if test="tempCode != null" >
+                #{tempCode,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.reportCore.template.model.SummaryRelationExample" resultType="java.lang.Integer" >
+        select count(*) from sms2
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update sms2
+            <set >
+                <if test="record.sumRepTempCode != null" >
+                    SumRepTempCode = #{record.sumRepTempCode,jdbcType=INTEGER},
+                </if>
+                <if test="record.tempCode != null" >
+                    TempCode = #{record.tempCode,jdbcType=INTEGER},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update sms2
+            set SumRepTempCode = #{record.sumRepTempCode,jdbcType=INTEGER},
+                TempCode = #{record.tempCode,jdbcType=INTEGER}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.reportCore.template.model.SummaryRelationKey" >
+        delete from sms2
+        where SumRepTempCode = #{sumRepTempCode,jdbcType=INTEGER}
+          and TempCode = #{tempCode,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.reportCore.template.model.SummaryRelationExample" >
+        <if test="_parameter != null" >
+            delete from sms2
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+	<!-- 批量删除 -->
+    <delete id="deleteSummaryRelationByList" parameterType="java.util.List" >
+         delete from sms2  where TempCode in (
+	         <foreach collection="list" item="item" index="index" separator=",">
+		     	#{item.tempCode}
+	         </foreach>
+         )
+    </delete>
+
+	<!-- 批量插入 -->
+    <insert id="insertByBatch" parameterType="java.util.List" >
+        insert into sms2(SumRepTempCode, TempCode) values
+        <foreach collection="list" item="item" index="index" separator=",">
+	        (#{item.sumRepTempCode}, #{item.tempCode})
+        </foreach>
+    </insert>
+
+
+
+</mapper>

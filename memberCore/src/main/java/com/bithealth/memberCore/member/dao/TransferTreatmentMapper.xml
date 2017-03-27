@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.TransferTreatmentMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.TransferTreatment" >
+        <id column="TTreatmentID" property="ttreatmentid" jdbcType="INTEGER" />
+        <result column="MemberID" property="memberid" jdbcType="INTEGER" />
+        <result column="OrgAndDept" property="organddept" jdbcType="VARCHAR" />
+        <result column="Reason" property="reason" jdbcType="VARCHAR" />
+        <result column="Result" property="result" jdbcType="VARCHAR" />
+        <result column="TreatTime" property="treattime" jdbcType="TIMESTAMP" />
+        <result column="TreatStatus" property="treatstatus" jdbcType="TINYINT" />
+        <result column="CreateID" property="createid" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateid" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        TTreatmentID, MemberID, OrgAndDept, Reason, Result, TreatTime, TreatStatus, CreateID, 
+        CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.TransferTreatmentExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_transfertreatment
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    
+     <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.TransferTreatment" >
+        SELECT
+        TTreatmentID, a.MemberID, OrgAndDept, Reason, Result, TreatTime, TreatStatus, a.CreateID, 
+        a.CreateTime, a.UpdateID, a.UpdateTime,b.docname AS createDrName,c.docname AS updateDrName,
+        o.Memberid AS `member.memberid`, 
+		o.MemName AS `member.memname`
+        FROM tb_transfertreatment a
+        LEFT JOIN odoc b ON a.CreateID=b.docid
+        LEFT JOIN odoc c ON a.UpdateID=c.docid  
+        LEFT JOIN omem  o ON  a.MemberID=o.MemberID
+        JOIN ompb ON a.MemberID = ompb.memberid 
+        JOIN odmt ON ompb.MemGrpid = odmt.MemGrpid 
+        <choose>
+			<when test="model.memberid != null">
+				and a.MemberID = #{model.memberid}
+			</when>
+			<otherwise>
+				and odmt.OdgpId in
+				<foreach collection="odgpIds" item="listItem" open="(" close=")" separator="," >
+	                #{listItem}
+	            </foreach>
+			</otherwise>
+		</choose>
+            <if test="model.treatstatus != null" >
+                AND a.TreatStatus = #{model.treatstatus,jdbcType=TINYINT}
+            </if>
+            <if test="model.startUpdatetime != null">
+				and a.UpdateTime <![CDATA[>=]]> #{model.startUpdatetime}
+			</if>
+			<if test="model.endUpdatetime != null">
+				and a.UpdateTime <![CDATA[<=]]> #{model.endUpdatetime}
+			</if>
+         GROUP BY a.TTreatmentID ORDER BY a.UpdateTime DESC
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.TransferTreatmentExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_transfertreatment
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_transfertreatment
+        where TTreatmentID = #{ttreatmentid,jdbcType=INTEGER}
+    </select>
+    <select id="selectTransfertreatmentById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select tb_transfertreatment.*,
+        omem.Memberid AS `member.memberid`, 
+		omem.MemName AS `member.memname` 
+        from tb_transfertreatment join omem on tb_transfertreatment.MemberID = omem.Memberid
+        where TTreatmentID = #{ttreatmentid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.TransferTreatment" >
+        insert into tb_transfertreatment (TTreatmentID, MemberID, OrgAndDept, 
+            Reason, Result, TreatTime, 
+            TreatStatus, CreateID, CreateTime, 
+            UpdateID, UpdateTime)
+        values (#{ttreatmentid,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER}, #{organddept,jdbcType=VARCHAR}, 
+            #{reason,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{treattime,jdbcType=TIMESTAMP}, 
+            #{treatstatus,jdbcType=TINYINT}, #{createid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+            #{updateid,jdbcType=INTEGER}, #{updatetime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.TransferTreatment" >
+        insert into tb_transfertreatment
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="ttreatmentid != null" >
+                TTreatmentID,
+            </if>
+            <if test="memberid != null" >
+                MemberID,
+            </if>
+            <if test="organddept != null" >
+                OrgAndDept,
+            </if>
+            <if test="reason != null" >
+                Reason,
+            </if>
+            <if test="result != null" >
+                Result,
+            </if>
+            <if test="treattime != null" >
+                TreatTime,
+            </if>
+            <if test="treatstatus != null" >
+                TreatStatus,
+            </if>
+            <if test="createid != null" >
+                CreateID,
+            </if>
+            <if test="createtime != null" >
+                CreateTime,
+            </if>
+            <if test="updateid != null" >
+                UpdateID,
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="ttreatmentid != null" >
+                #{ttreatmentid,jdbcType=INTEGER},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="organddept != null" >
+                #{organddept,jdbcType=VARCHAR},
+            </if>
+            <if test="reason != null" >
+                #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null" >
+                #{result,jdbcType=VARCHAR},
+            </if>
+            <if test="treattime != null" >
+                #{treattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="treatstatus != null" >
+                #{treatstatus,jdbcType=TINYINT},
+            </if>
+            <if test="createid != null" >
+                #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateid != null" >
+                #{updateid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.TransferTreatmentExample" resultType="java.lang.Integer" >
+        select count(*) from tb_transfertreatment
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update tb_transfertreatment
+        <set >
+            <if test="record.ttreatmentid != null" >
+                TTreatmentID = #{record.ttreatmentid,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberid != null" >
+                MemberID = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.organddept != null" >
+                OrgAndDept = #{record.organddept,jdbcType=VARCHAR},
+            </if>
+            <if test="record.reason != null" >
+                Reason = #{record.reason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.result != null" >
+                Result = #{record.result,jdbcType=VARCHAR},
+            </if>
+            <if test="record.treattime != null" >
+                TreatTime = #{record.treattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.treatstatus != null" >
+                TreatStatus = #{record.treatstatus,jdbcType=TINYINT},
+            </if>
+            <if test="record.createid != null" >
+                CreateID = #{record.createid,jdbcType=INTEGER},
+            </if>
+            <if test="record.createtime != null" >
+                CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateid != null" >
+                UpdateID = #{record.updateid,jdbcType=INTEGER},
+            </if>
+            <if test="record.updatetime != null" >
+                UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update tb_transfertreatment
+        set TTreatmentID = #{record.ttreatmentid,jdbcType=INTEGER},
+           <!--  MemberID = #{record.memberid,jdbcType=INTEGER}, -->
+            OrgAndDept = #{record.organddept,jdbcType=VARCHAR},
+            Reason = #{record.reason,jdbcType=VARCHAR},
+            Result = #{record.result,jdbcType=VARCHAR},
+            TreatTime = #{record.treattime,jdbcType=TIMESTAMP},
+            TreatStatus = #{record.treatstatus,jdbcType=TINYINT},
+            CreateID = #{record.createid,jdbcType=INTEGER},
+            CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+            UpdateID = #{record.updateid,jdbcType=INTEGER},
+            UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.TransferTreatment" >
+        update tb_transfertreatment
+        <set >
+            <if test="memberid != null" >
+                MemberID = #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="organddept != null" >
+                OrgAndDept = #{organddept,jdbcType=VARCHAR},
+            </if>
+            <if test="reason != null" >
+                Reason = #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null" >
+                Result = #{result,jdbcType=VARCHAR},
+            </if>
+            <if test="treattime != null" >
+                TreatTime = #{treattime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="treatstatus != null" >
+                TreatStatus = #{treatstatus,jdbcType=TINYINT},
+            </if>
+            <if test="createid != null" >
+                CreateID = #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createtime != null" >
+                CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateid != null" >
+                UpdateID = #{updateid,jdbcType=INTEGER},
+            </if>
+            <if test="updatetime != null" >
+                UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where TTreatmentID = #{ttreatmentid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.TransferTreatment" >
+        update tb_transfertreatment
+        set MemberID = #{memberid,jdbcType=INTEGER},
+            OrgAndDept = #{organddept,jdbcType=VARCHAR},
+            Reason = #{reason,jdbcType=VARCHAR},
+            Result = #{result,jdbcType=VARCHAR},
+            TreatTime = #{treattime,jdbcType=TIMESTAMP},
+            TreatStatus = #{treatstatus,jdbcType=TINYINT},
+            CreateID = #{createid,jdbcType=INTEGER},
+            CreateTime = #{createtime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateid,jdbcType=INTEGER},
+            UpdateTime = #{updatetime,jdbcType=TIMESTAMP}
+        where TTreatmentID = #{ttreatmentid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_transfertreatment
+        where TTreatmentID = #{ttreatmentid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.TransferTreatmentExample" >
+        delete from tb_transfertreatment
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <select id="selectTransferTreatmentAndMember" parameterType="java.util.Map" resultType="com.bithealth.memberCore.member.vo.TransferTreatAndMemVo">
+    	SELECT t.TTreatmentID,t.MemberID,a.MemName,a.Gender,t.OrgAndDept,t.Reason,
+		       t.Result, t.TreatStatus, t.CreateID, t.UpdateID, t.UpdateTime,GROUP_CONCAT(e.diseaseName) AS diseasNames
+		 FROM
+		      (
+		           SELECT t.TTreatmentID
+				   FROM tb_transfertreatment t
+				   JOIN omem a ON a.MemberID = t.MemberID AND a.UseTag = 'T'
+				   JOIN ompb b ON b.Memberid = a.Memberid
+				   JOIN odmt c ON c.MemGrpid = b.MemGrpid
+				   JOIN dgp1 d ON d.OdgpId = c.OdgpId AND d.docid = #{docId}
+				   LEFT JOIN mem3 e ON e.memberid = a.memberid
+				   <where> 
+				    <if test="diseasName != null and diseasName !=''">
+						e.DiseaseName = #{diseasName}
+					</if>
+				   </where>
+				   GROUP BY t.TTreatmentID DESC
+		      )tmp 
+		      LEFT JOIN tb_transfertreatment t ON t.TTreatmentID = tmp.TTreatmentID
+			  LEFT JOIN omem a ON a.Memberid = t.MemberID
+			  LEFT JOIN mem3 e ON e.memberid = a.memberid
+	   <where>
+	          <if test="memName != null and memName !=''">
+				and a.MemName like #{memName}
+			</if>
+			<if test="treatStatus != null and treatStatus !=''">
+				and t.TreatStatus = #{treatStatus}
+			</if>
+			<if test="updateStartTime != null and updateStartTime !='' and updateEndTime != null and updateEndTime != ''">
+				and t.UpdateTime between #{updateStartTime} and #{updateEndTime}
+			</if>
+			<if test="updateStartTime != null and updateStartTime !='' and (updateEndTime == null or updateEndTime == '')">
+				and t.UpdateTime &gt;= #{updateStartTime}
+			</if>
+			<if test="(updateStartTime == null or updateStartTime =='') and updateEndTime != null and updateEndTime != ''">
+				and t.UpdateTime &lt;= #{updateEndTime}
+			</if>
+		 </where>
+			GROUP BY t.TTreatmentID
+            ORDER BY t.UpdateTime DESC
+    </select>
+    
+    <select id="selectOmemLabel" parameterType="map" resultType="com.bithealth.memberCore.member.vo.TransferTreatAndMemVo">
+    	SELECT 
+    	  o.memberid,
+		  o.memname,
+		  o.gender,
+		  o.birthDate,
+		  o.tel,
+		  o.idCard,
+		  o.status,
+		  GROUP_CONCAT(t.ItemName SEPARATOR ';') omemLabel,
+		  tb.orgAndDept,
+		  tb.reason,
+		  tb.result,
+		  tb.treatStatus,
+		  tb.treatTime,
+		  tb.createID,
+  		  tb.updateId 
+		FROM tb_transfertreatment tb
+		    JOIN omem o ON tb.memberid=o.memberid  
+		      LEFT JOIN omem_labelitem ol ON o.memberid = ol.memberid
+		    LEFT JOIN tb_label_item t ON t.LItemID = ol.LItemID AND t.ItemStatus = 2 AND t.CreateID = #{createID}
+		     <!-- AND (t.UseRange = 1 OR (t.OrgID IN (${superOrgIds}) AND t.UseRange = 2)
+		      OR (t.UseRange = 3 AND t.CreateID = #{createID}))  -->
+		  WHERE
+		  	o.memberid = #{memberId}
+    </select>
+    
+    <select id="selectTransferTreatmentAndDise" parameterType="map" resultType="com.bithealth.memberCore.member.vo.TransferTreatAndMemVo">
+    	SELECT 
+    		o.memberid, o.memname, o.gender, o.birthDate, o.tel, o.idCard, o.status,
+       		GROUP_CONCAT(a.diseaseName) AS diseasNames, GROUP_CONCAT(t.ItemName SEPARATOR ';') AS omemLabel,
+       		tb.orgAndDept, tb.reason,  tb.result, tb.treatStatus, tb.treatTime, tb.createID, tb.updateId 
+		    FROM tb_transfertreatment tb
+		    JOIN omem o ON tb.memberid=o.memberid AND tb.TTreatmentID=#{ttreatmentid}
+		    LEFT JOIN mem3 a ON a.Memberid = o.Memberid
+		    LEFT JOIN omem_labelitem ol ON o.memberid = ol.memberid
+		    LEFT JOIN tb_label_item t ON t.LItemID = ol.LItemID AND t.ItemStatus = 2 AND t.CreateID = #{createID}
+		   <!--  (t.UseRange = 1 OR (t.OrgID IN (${superOrgIds}) AND t.UseRange = 2) OR (t.UseRange = 3 AND t.CreateID = #{createID})); -->
+
+    </select>
+    
+    <select id="selectTransferTreatmentBymemberId" parameterType="java.lang.Integer" resultType="com.bithealth.memberCore.member.model.TransferTreatment">  
+		SELECT * FROM tb_transfertreatment  WHERE MemberID=#{memberid,jdbcType=INTEGER} 
+	</select> 
+    
+    <resultMap type="com.bithealth.memberCore.member.vo.TransferTreatAndMemVo" id="memberVoResultMap">
+	    <id column="Memberid" property="memberid" jdbcType="INTEGER"/>
+	    <result column="MemName" property="memName" jdbcType="VARCHAR"/>
+	    <result column="Gender" property="gender" jdbcType="VARCHAR"/>
+	    <result column="Tel" property="tel" jdbcType="VARCHAR"/>
+	    <result column="DiseaseName_List" property="diseasNames" jdbcType="VARCHAR"/>
+	    <result column="MemGrpName_List" property="memGrpNames" jdbcType="VARCHAR"/>
+	    <result column="itemName_List" property="omemLabel" jdbcType="VARCHAR"/>
+	    <result column="MemberTypeName" property="memberTypeName" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <select id="exeProTreatmentMember" statementType="CALLABLE" resultMap="memberVoResultMap" parameterType="com.bithealth.memberCore.member.model.TransferTreatSearchCondtion">
+	    {call proc_ttreatment_getMemberByDocId(
+			    #{docid, mode=IN, jdbcType=INTEGER},
+			    #{memName, mode=IN, jdbcType=VARCHAR},
+			    #{tel, mode=IN, jdbcType=VARCHAR},
+			    #{idCard, mode=IN, jdbcType=VARCHAR},
+			    #{memGrpId, mode=IN, jdbcType=INTEGER},
+			    #{disease_id, mode=IN, jdbcType=INTEGER},
+			    #{memId, mode=IN, jdbcType=INTEGER},
+			    #{lItemID_list, mode=IN, jdbcType=VARCHAR},
+			    #{pageNo, mode=IN, jdbcType=INTEGER}-1,
+			    #{pageSize, mode=IN, jdbcType=INTEGER},
+			    #{iCount, mode=OUT, jdbcType=INTEGER}
+			    )}
+    </select>
+    
+    <select id="selectOdgpIdsByDocId" parameterType="java.lang.Integer" resultType="java.lang.Integer">  
+		SELECT DISTINCT a.OdgpId FROM dgp1 a JOIN odgp b ON b.OdgpId = a.OdgpId AND a.Docid = #{docId,jdbcType=INTEGER};  
+	</select> 
+	
+	<select id="selectMemberLabels" resultType="String" parameterType="java.lang.Integer">
+	 	SELECT a.itemName 
+	 	FROM `tb_label_item` a 
+	 	JOIN `omem_labelitem` b ON a.LItemID = b.LItemID 
+	 	WHERE b.`Memberid` = #{MemberID,jdbcType=INTEGER} AND a.ItemStatus = 2
+	</select>
+	
+</mapper>

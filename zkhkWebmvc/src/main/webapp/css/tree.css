@@ -1,0 +1,115 @@
+.left-title, .tree-wrapper {
+	margin: 5px 5px 5px 10px;
+}
+
+.left-title {
+	position: relative;
+}
+
+.ztree .level0 #treeDemo_1_ico{
+	background: url('../img/u211.png') no-repeat center;
+}
+
+.ztree li span.button.ico_docu {
+	background: url('../img/u257.png') no-repeat center;
+}
+
+.tree-wrapper {
+	background: #e3e3e3;
+	overflow: scroll;
+}
+
+#menuContent .input-search {
+	width: 140px;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #ccc;
+	padding: 1px 5px;
+	margin: 5px;
+}
+
+.menuContent {
+	background: #fff;
+}
+
+.menuContent .left-title {
+	margin: 0;
+}
+
+.menuContent .menu-title {
+	font-size: 13px;
+	padding: 5px 10px;
+}
+
+/* #height
+{
+	background: #009C45;
+} */
+
+.menu-footer {
+	margin: 15px;
+}
+
+.input-search {
+	width: 95%;
+	padding: 3px 5px;
+}
+.icon {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	position: relative;
+	top: 5px;
+	right: 15px;
+	cursor:pointer;
+}
+
+.icon-close {
+	background: #fff url('../img/u255.png') no-repeat center;
+	top: 2px;
+	right: 0;
+	left: 8px;
+}
+
+.icon-group-search {
+	background: #fff url('../img/u45.png') no-repeat center;
+	right: 25px;
+}
+
+.icon-search {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	background: url('../img/u125.png') no-repeat center;
+	position: absolute;
+	top: 0.6em;
+	right: 2em; 
+	cursor: pointer;
+}
+
+.btn-label {
+	padding: 5px 15px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	cursor: pointer;
+}
+
+.select-input {
+	padding: 5px 10px;
+}
+
+body .ztree li span.button.chk.checkbox_true_disable {
+	background-position: -14px 0;
+}
+
+.pop-ztree {
+	width: 170px;
+	height: 210px;
+	margin-top: 0;
+	background-color: #fff;
+	overflow-y: scroll;
+}
+
+#treeDemo_1 {
+	padding-top: 8px;
+}

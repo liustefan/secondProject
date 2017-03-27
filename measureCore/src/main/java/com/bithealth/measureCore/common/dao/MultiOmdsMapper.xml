@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.measureCore.common.dao.MultiOmdsMapper" >
+	<!-- <insert id="insertOmds_eventid">
+    	INSERT INTO omds_eventid values();
+    </insert> -->
+    
+    <select id="selectMaxEventid" resultType="java.lang.Long">
+    	SELECT MAX(eventid) FROM omds;
+    </select>
+    
+      
+    <insert id="insertOmds" parameterType="com.bithealth.measureCore.common.model.Omds">
+    	INSERT INTO omds(memberid,timelength,uploadtime,eventtype,wheabntag,statustag) values(#{memberid},#{timelength},#{uploadtime},#{eventtype},#{wheabntag},#{statustag});
+    </insert>
+    
+    <select id="selectOmdsByEventId" parameterType="java.util.Map" resultType="com.bithealth.measureCore.common.model.Omds">
+    	SELECT * FROM omds WHERE eventid = #{eventId}
+    </select>
+    
+    <update id="updateOmdsByEventid" parameterType="java.util.Map">
+    	update omds set StatusTag= #{statusTag} where eventid=#{eventId}
+    </update>
+    
+    <select id="findAllMeasureRecordByParam" parameterType="java.util.Map" resultType="com.bithealth.measureCore.common.model.MeasureRecord">
+    	SELECT * FROM (SELECT o.EventType AS eventType,o.WheAbnTag AS isAbnormal,o.Memberid AS memberId,a.EventId AS eventId,a.TestTime AS testTime, a.Docentry as id,
+			a.SBP AS systolic,a.DBP AS diastolic,a.PulseRate AS pulseRate, NULL AS bloodSugar,a.timePeriod AS timePeriod, a.Abnormal AS analysisResult, NULL AS averageHeart,
+			NULL AS averagePulseRate,NULL AS analysisStatus FROM osbp a LEFT JOIN omds o ON a.EventId = o.EventId WHERE a.DelTag = 0 AND a.Memberid = #{memberId}
+			UNION 
+			SELECT o.EventType AS eventType,o.WheAbnTag AS isAbnormal,o.Memberid AS memberId,b.EventId AS eventId,b.TestTime AS testTime, b.Docentry as id,NULL AS systolic, 
+			NULL AS diastolic, NULL AS pulseRate, b.BsValue AS bloodSugar,b.timePeriod,b.AnalysisResult AS analysisResult,NULL AS averageHeart, NULL AS averagePulseRate,
+			NULL AS analysisStatus FROM obsr b LEFT JOIN omds o ON  b.EventId = o.EventId WHERE b.DelTag = 0 AND b.Memberid = #{memberId} 
+			UNION 
+			SELECT o.EventType AS eventType,o.WheAbnTag AS isAbnormal,o.Memberid AS memberId,c.EventId AS eventId,c.MeasTime AS testTime, c.Docentry as id,NULL AS systolic, 
+			NULL AS diastolic, NULL AS pulseRate,NULL AS bloodSugar,NULL AS timePeriod, CAST(c.ECGResult AS CHAR) AS analysisResult,c.AverageHeart AS averageHeart,
+			d.PulseRate AS averagePulseRate,c.StatusTag AS analysisStatus FROM oecg c LEFT JOIN omds o ON  c.EventId = o.EventId LEFT JOIN oppg d ON c.EventId = d.EventId 
+			WHERE c.DelTag = 0 AND c.Memberid = #{memberId} ) aa WHERE aa.memberId = #{memberId} 
+			<if test="startTime != null and endTime != null">
+				AND  (aa.testTime BETWEEN #{startTime} AND #{endTime}) 
+			</if>
+			<if test="startTime != null and endTime == null">
+				AND  (aa.testTime &gt; #{startTime}) 
+			</if>
+			<if test="startTime == null and endTime != null">
+				AND  (aa.testTime &lt; #{endTime}) 
+			</if>
+			<if test="isAbnormal != null">
+				 AND aa.isAbnormal = #{isAbnormal} 
+			</if>
+			<if test="eventType != null">
+				AND aa.eventType = #{eventType}
+			</if>
+			ORDER BY aa.testTime DESC
+    </select>
+ 
+</mapper>

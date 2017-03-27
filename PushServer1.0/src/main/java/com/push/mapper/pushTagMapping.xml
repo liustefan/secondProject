@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.push.dao.PushTagMapper">
+
+    <resultMap id="pushTagResultMap" type="com.push.model.HkPushMemberTag">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result property="tag" column="tag" jdbcType="VARCHAR"/>
+        <result property="memberId" column="member_id" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectHkPushMemberTagByTag" resultMap="pushTagResultMap" parameterType="com.push.model.HKPushInfo">
+        select * from hk_push_member_tag where tag = #{tag}
+    </select>
+    <insert id="saveHkPushMemberTag" parameterType="java.util.List">
+        insert into hk_push_member_tag(tag,member_id) values
+        <foreach collection="list" item="item" index="index" separator="," >  
+        	(#{item.tag},#{item.memberId})  
+    	</foreach>
+    </insert>
+    <update id="updateHkPushMemberTag" parameterType="com.push.model.HKPushInfo">
+        update hk_push_member_tag set member_id = #{memberIds} where tag = #{tag}
+    </update>
+ 	<delete id="deleteHkPushMemberTag" parameterType="com.push.model.HKPushInfo"> 
+		delete from hk_push_member_tag where tag = #{tag}
+	</delete>
+	
+	<resultMap id="memberResultMap" type="com.push.model.HKPushInfo">
+        <result property="memberId" column="member_id" jdbcType="VARCHAR"/>
+        <result property="channelId" column="channel_id" jdbcType="VARCHAR"/>
+        <result property="lineStatus" column="line_status" jdbcType="INTEGER"/>
+        <result property="loginPlatform" column="login_platform" jdbcType="VARCHAR"/>
+        <result property="loginTime" column="login_time" jdbcType="DATE"/>
+    </resultMap>
+	
+	<select id="queryMemberByTag" resultMap="memberResultMap" parameterType="java.lang.String">
+      select m.member_id,
+			 m.channel_id,
+			 m.line_status,
+			 m.login_platform,
+			 m.login_time
+	   from  hk_push_member m,
+		     (select t.member_id,t.tag from hk_push_member_tag t where t.tag = #{tag} ) tag
+	  where  m.member_id = tag.member_id
+	  ORDER  BY m.login_time 
+    </select>
+    
+    <select id="queryMemberByTags" resultMap="memberResultMap" parameterType="java.util.List">
+      select m.member_id,
+			 m.channel_id,
+			 m.line_status,
+			 m.login_platform,
+			 m.login_time
+       from  hk_push_member m 
+        where EXISTS(select 1 
+		 from hk_push_member_tag t 
+		where t.member_id = m.member_id 
+		  and t.tag in(
+		  <foreach collection="list" item="tag" index="index" separator="," >  
+			#{tag}
+		  </foreach> 
+		 ))
+	  ORDER  BY m.login_time
+    </select>
+	
+	
+	
+</mapper>

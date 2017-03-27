@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.doctorCore.doctor.dao.DoctorMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.doctorCore.doctor.model.Doctor" >
+        <id column="Docid" property="docid" jdbcType="INTEGER" />
+        <result column="RoleId" property="roleid" jdbcType="SMALLINT" />
+        <result column="OrgId" property="orgid" jdbcType="INTEGER" />
+        <result column="DocName" property="docname" jdbcType="VARCHAR" />
+        <result column="Title" property="title" jdbcType="VARCHAR" />
+        <result column="Gender" property="gender" jdbcType="CHAR" />
+        <result column="BirthDate" property="birthdate" jdbcType="DATE" />
+        <result column="ContactTel" property="contacttel" jdbcType="VARCHAR" />
+        <result column="Tel" property="tel" jdbcType="VARCHAR" />
+        <result column="Email" property="email" jdbcType="VARCHAR" />
+        <result column="HomeAddress" property="homeaddress" jdbcType="VARCHAR" />
+        <result column="workAddress" property="workaddress" jdbcType="VARCHAR" />
+        <result column="UnitAddress" property="unitaddress" jdbcType="VARCHAR" />
+        <result column="ResideAddress" property="resideaddress" jdbcType="VARCHAR" />
+        <result column="CertiType" property="certitype" jdbcType="CHAR" />
+        <result column="CertiNum" property="certinum" jdbcType="VARCHAR" />
+        <result column="Weixin" property="weixin" jdbcType="VARCHAR" />
+        <result column="Desription" property="desription" jdbcType="VARCHAR" />
+        <result column="WorkDepart" property="workdepart" jdbcType="VARCHAR" />
+        <result column="HeadAddress" property="headaddress" jdbcType="VARCHAR" />
+        <result column="SignAddress" property="signaddress" jdbcType="VARCHAR" />
+        <result column="Tag" property="tag" jdbcType="CHAR" />
+        <result column="DocGUID" property="docGUID" jdbcType="VARCHAR"/>
+        <association property="doctorSession" column="Docid" select="com.bithealth.doctorCore.doctor.dao.DoctorSessionMapper.selectByPrimaryKey"></association>
+        <association property="doctorAccount" column="Docid" select="com.bithealth.doctorCore.doctor.dao.DoctorAccountMapper.selectByPrimaryKey"/>
+        <association property="doctorScore" column="Docid" select="com.bithealth.doctorCore.doctor.dao.DoctorScoreMapper.selectByPrimaryKey"/>
+        <association property="orol" column="RoleId" select="com.bithealth.doctorCore.doctor.dao.OrolMapper.selectByPrimaryKey"/>
+        <association property="orgName" column="OrgId" select="selectOrgName"></association>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Docid, RoleId, OrgId, DocName, Title, Gender, BirthDate, ContactTel, Tel, Email, 
+        HomeAddress, workAddress, UnitAddress, ResideAddress, CertiType, CertiNum, Weixin, 
+        Desription, WorkDepart, HeadAddress, SignAddress, Tag, DocGUID
+    </sql>
+    
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.doctorCore.doctor.model.DoctorExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from odoc
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.doctorCore.doctor.model.DoctorExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from odoc
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from odoc
+        where Docid = #{docid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.doctorCore.doctor.model.Doctor" useGeneratedKeys="true" keyProperty="docid">
+        insert into odoc (Docid, RoleId, OrgId, 
+            DocName, Title, Gender, 
+            BirthDate, ContactTel, Tel, 
+            Email, HomeAddress, workAddress, 
+            UnitAddress, ResideAddress, CertiType, 
+            CertiNum, Weixin, Desription, 
+            WorkDepart, HeadAddress, SignAddress, 
+            Tag, DocGUID)
+        values (#{docid,jdbcType=INTEGER}, #{roleid,jdbcType=SMALLINT}, #{orgid,jdbcType=INTEGER}, 
+            #{docname,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
+            #{birthdate,jdbcType=DATE}, #{contacttel,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+            #{email,jdbcType=VARCHAR}, #{homeaddress,jdbcType=VARCHAR}, #{workaddress,jdbcType=VARCHAR}, 
+            #{unitaddress,jdbcType=VARCHAR}, #{resideaddress,jdbcType=VARCHAR}, #{certitype,jdbcType=CHAR}, 
+            #{certinum,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{desription,jdbcType=VARCHAR}, 
+            #{workdepart,jdbcType=VARCHAR}, #{headaddress,jdbcType=VARCHAR}, #{signaddress,jdbcType=VARCHAR}, 
+            #{tag,jdbcType=CHAR},#{docGUID, jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.doctorCore.doctor.model.Doctor" useGeneratedKeys="true" keyProperty="docid">
+        insert into odoc
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="docid != null" >
+                Docid,
+            </if>
+            <if test="roleid != null" >
+                RoleId,
+            </if>
+            <if test="orgid != null" >
+                OrgId,
+            </if>
+            <if test="docname != null" >
+                DocName,
+            </if>
+            <if test="title != null" >
+                Title,
+            </if>
+            <if test="gender != null" >
+                Gender,
+            </if>
+            <if test="birthdate != null" >
+                BirthDate,
+            </if>
+            <if test="contacttel != null" >
+                ContactTel,
+            </if>
+            <if test="tel != null" >
+                Tel,
+            </if>
+            <if test="email != null" >
+                Email,
+            </if>
+            <if test="homeaddress != null" >
+                HomeAddress,
+            </if>
+            <if test="workaddress != null" >
+                workAddress,
+            </if>
+            <if test="unitaddress != null" >
+                UnitAddress,
+            </if>
+            <if test="resideaddress != null" >
+                ResideAddress,
+            </if>
+            <if test="certitype != null" >
+                CertiType,
+            </if>
+            <if test="certinum != null" >
+                CertiNum,
+            </if>
+            <if test="weixin != null" >
+                Weixin,
+            </if>
+            <if test="desription != null" >
+                Desription,
+            </if>
+            <if test="workdepart != null" >
+                WorkDepart,
+            </if>
+            <if test="headaddress != null" >
+                HeadAddress,
+            </if>
+            <if test="signaddress != null" >
+                SignAddress,
+            </if>
+            <if test="tag != null" >
+                Tag,
+            </if>
+            <if test="docGUID != null">
+                DocGUID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="docid != null" >
+                #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="roleid != null" >
+                #{roleid,jdbcType=SMALLINT},
+            </if>
+            <if test="orgid != null" >
+                #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="docname != null" >
+                #{docname,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null" >
+                #{gender,jdbcType=CHAR},
+            </if>
+            <if test="birthdate != null" >
+                #{birthdate,jdbcType=DATE},
+            </if>
+            <if test="contacttel != null" >
+                #{contacttel,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null" >
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="homeaddress != null" >
+                #{homeaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="workaddress != null" >
+                #{workaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="unitaddress != null" >
+                #{unitaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="resideaddress != null" >
+                #{resideaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="certitype != null" >
+                #{certitype,jdbcType=CHAR},
+            </if>
+            <if test="certinum != null" >
+                #{certinum,jdbcType=VARCHAR},
+            </if>
+            <if test="weixin != null" >
+                #{weixin,jdbcType=VARCHAR},
+            </if>
+            <if test="desription != null" >
+                #{desription,jdbcType=VARCHAR},
+            </if>
+            <if test="workdepart != null" >
+                #{workdepart,jdbcType=VARCHAR},
+            </if>
+            <if test="headaddress != null" >
+                #{headaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="signaddress != null" >
+                #{signaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=CHAR},
+            </if>
+            <if test="docGUID != null">
+                #{docGUID, jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.doctorCore.doctor.model.DoctorExample" resultType="java.lang.Integer" >
+        select count(*) from odoc
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update odoc
+        <set >
+            <if test="record.docid != null" >
+                Docid = #{record.docid,jdbcType=INTEGER},
+            </if>
+            <if test="record.roleid != null" >
+                RoleId = #{record.roleid,jdbcType=SMALLINT},
+            </if>
+            <if test="record.orgid != null" >
+                OrgId = #{record.orgid,jdbcType=INTEGER},
+            </if>
+            <if test="record.docname != null" >
+                DocName = #{record.docname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.title != null" >
+                Title = #{record.title,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gender != null" >
+                Gender = #{record.gender,jdbcType=CHAR},
+            </if>
+            <if test="record.birthdate != null" >
+                BirthDate = #{record.birthdate,jdbcType=DATE},
+            </if>
+            <if test="record.contacttel != null" >
+                ContactTel = #{record.contacttel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tel != null" >
+                Tel = #{record.tel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null" >
+                Email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.homeaddress != null" >
+                HomeAddress = #{record.homeaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.workaddress != null" >
+                workAddress = #{record.workaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.unitaddress != null" >
+                UnitAddress = #{record.unitaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.resideaddress != null" >
+                ResideAddress = #{record.resideaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.certitype != null" >
+                CertiType = #{record.certitype,jdbcType=CHAR},
+            </if>
+            <if test="record.certinum != null" >
+                CertiNum = #{record.certinum,jdbcType=VARCHAR},
+            </if>
+            <if test="record.weixin != null" >
+                Weixin = #{record.weixin,jdbcType=VARCHAR},
+            </if>
+            <if test="record.desription != null" >
+                Desription = #{record.desription,jdbcType=VARCHAR},
+            </if>
+            <if test="record.workdepart != null" >
+                WorkDepart = #{record.workdepart,jdbcType=VARCHAR},
+            </if>
+            <if test="record.headaddress != null" >
+                HeadAddress = #{record.headaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.signaddress != null" >
+                SignAddress = #{record.signaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="record.tag != null" >
+                Tag = #{record.tag,jdbcType=CHAR},
+            </if>
+            <if test="record.docGUID != null">
+                DocGUID = #{record.docGUID, jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update odoc
+        set Docid = #{record.docid,jdbcType=INTEGER},
+            RoleId = #{record.roleid,jdbcType=SMALLINT},
+            OrgId = #{record.orgid,jdbcType=INTEGER},
+            DocName = #{record.docname,jdbcType=VARCHAR},
+            Title = #{record.title,jdbcType=VARCHAR},
+            Gender = #{record.gender,jdbcType=CHAR},
+            BirthDate = #{record.birthdate,jdbcType=DATE},
+            ContactTel = #{record.contacttel,jdbcType=VARCHAR},
+            Tel = #{record.tel,jdbcType=VARCHAR},
+            Email = #{record.email,jdbcType=VARCHAR},
+            HomeAddress = #{record.homeaddress,jdbcType=VARCHAR},
+            workAddress = #{record.workaddress,jdbcType=VARCHAR},
+            UnitAddress = #{record.unitaddress,jdbcType=VARCHAR},
+            ResideAddress = #{record.resideaddress,jdbcType=VARCHAR},
+            CertiType = #{record.certitype,jdbcType=CHAR},
+            CertiNum = #{record.certinum,jdbcType=VARCHAR},
+            Weixin = #{record.weixin,jdbcType=VARCHAR},
+            Desription = #{record.desription,jdbcType=VARCHAR},
+            WorkDepart = #{record.workdepart,jdbcType=VARCHAR},
+            HeadAddress = #{record.headaddress,jdbcType=VARCHAR},
+            SignAddress = #{record.signaddress,jdbcType=VARCHAR},
+            Tag = #{record.tag,jdbcType=CHAR},
+            DocGUID = #{record.docGUID, jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.doctorCore.doctor.model.Doctor" >
+        update odoc
+        <set >
+            <if test="roleid != null" >
+                RoleId = #{roleid,jdbcType=SMALLINT},
+            </if>
+            <if test="orgid != null" >
+                OrgId = #{orgid,jdbcType=INTEGER},
+            </if>
+            <if test="docname != null" >
+                DocName = #{docname,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                Title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null" >
+                Gender = #{gender,jdbcType=CHAR},
+            </if>
+            <if test="birthdate != null" >
+                BirthDate = #{birthdate,jdbcType=DATE},
+            </if>
+            <if test="contacttel != null" >
+                ContactTel = #{contacttel,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null" >
+                Tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                Email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="homeaddress != null" >
+                HomeAddress = #{homeaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="workaddress != null" >
+                workAddress = #{workaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="unitaddress != null" >
+                UnitAddress = #{unitaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="resideaddress != null" >
+                ResideAddress = #{resideaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="certitype != null" >
+                CertiType = #{certitype,jdbcType=CHAR},
+            </if>
+            <if test="certinum != null" >
+                CertiNum = #{certinum,jdbcType=VARCHAR},
+            </if>
+            <if test="weixin != null" >
+                Weixin = #{weixin,jdbcType=VARCHAR},
+            </if>
+            <if test="desription != null" >
+                Desription = #{desription,jdbcType=VARCHAR},
+            </if>
+            <if test="workdepart != null" >
+                WorkDepart = #{workdepart,jdbcType=VARCHAR},
+            </if>
+            <if test="headaddress != null" >
+                HeadAddress = #{headaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="signaddress != null" >
+                SignAddress = #{signaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                Tag = #{tag,jdbcType=CHAR},
+            </if>
+            <if test="docGUID != null">
+                DocGUID = #{docGUID, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Docid = #{docid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.doctorCore.doctor.model.Doctor" >
+        update odoc
+        set RoleId = #{roleid,jdbcType=SMALLINT},
+            OrgId = #{orgid,jdbcType=INTEGER},
+            DocName = #{docname,jdbcType=VARCHAR},
+            Title = #{title,jdbcType=VARCHAR},
+            Gender = #{gender,jdbcType=CHAR},
+            BirthDate = #{birthdate,jdbcType=DATE},
+            ContactTel = #{contacttel,jdbcType=VARCHAR},
+            Tel = #{tel,jdbcType=VARCHAR},
+            Email = #{email,jdbcType=VARCHAR},
+            HomeAddress = #{homeaddress,jdbcType=VARCHAR},
+            workAddress = #{workaddress,jdbcType=VARCHAR},
+            UnitAddress = #{unitaddress,jdbcType=VARCHAR},
+            ResideAddress = #{resideaddress,jdbcType=VARCHAR},
+            CertiType = #{certitype,jdbcType=CHAR},
+            CertiNum = #{certinum,jdbcType=VARCHAR},
+            Weixin = #{weixin,jdbcType=VARCHAR},
+            Desription = #{desription,jdbcType=VARCHAR},
+            WorkDepart = #{workdepart,jdbcType=VARCHAR},
+            HeadAddress = #{headaddress,jdbcType=VARCHAR},
+            SignAddress = #{signaddress,jdbcType=VARCHAR},
+            Tag = #{tag,jdbcType=CHAR},
+            DocGUID = #{docGUID, jdbcType=VARCHAR}
+        where Docid = #{docid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from odoc
+        where Docid = #{docid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.doctorCore.doctor.model.DoctorExample" >
+        delete from odoc
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <select id="isMyMember" parameterType="map" resultType="java.lang.Boolean">
+    SELECT COUNT(*) &gt;0 FROM dgp1 a JOIN odmt b ON a.`OdgpId`=b.`OdgpId` JOIN ompb c ON b.`MemGrpid`=c.`MemGrpid` 
+    INNER JOIN odgp o ON o.`OdgpId`=a.`OdgpId`INNER JOIN omgs om ON om.`MemGrpid`=c.`MemGrpid`  
+    WHERE a.`Docid`=#{docId, jdbcType=INTEGER} AND c.`Memberid`=#{memberId, jdbcType=INTEGER} AND a.`OrgId`=#{orgId, jdbcType=INTEGER}
+    </select>
+    
+    <!-- ########################## -->
+    <select id="selectOrgName" parameterType="java.lang.Integer" resultType="java.lang.String">
+      SELECT OrgName FROM orgs WHERE OrgId=#{orgid,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByMember" resultMap="BaseResultMap" parameterType="map">
+    SELECT DISTINCT t.Docid,t.`DocName`,t.`Tel`,t.`Gender` FROM odoc t, dgp1 a, odgp b, odmt c, ompb d
+    WHERE t.Tag = 'T' AND t.Docid = a.Docid AND a.OdgpId = b.OdgpId AND b.OdgpId = c.OdgpId AND 
+    c.MemGrpid=d.`MemGrpid` AND d.`Memberid`=#{memberId, jdbcType=INTEGER} LIMIT #{offset, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER} 
+    </select>
+    
+    <select id="countByMember" resultType="java.lang.Integer" parameterType="map">
+    SELECT COUNT(DISTINCT t.Docid) FROM odoc t, dgp1 a, odgp b, odmt c, ompb d
+    WHERE t.Tag = 'T' AND t.Docid = a.Docid AND a.OdgpId = b.OdgpId AND b.OdgpId = c.OdgpId AND 
+    c.MemGrpid=d.`MemGrpid` AND d.`Memberid`=#{memberId, jdbcType=INTEGER}
+    </select>
+    
+</mapper>

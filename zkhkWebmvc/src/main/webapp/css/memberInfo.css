@@ -1,0 +1,211 @@
+/* 单一会员基本信息详情   */
+.content_title {
+	border: none !important;
+}
+
+.table-bordered tr th {
+	background: #bcdee0;
+}
+
+.nav-tabs>li {
+	border: 1px solid #94ca64;
+	border-bottom: 0 !important;
+}
+
+.memberImg {
+	width: 99px;
+	height: 120px;
+}
+
+.red {
+	color: red;
+}
+
+.info-date {
+	width: 139px;
+	height: 24px;
+	background: url("../img/u17.png") no-repeat scroll right center white;
+    background-size: 15px 15px;
+    padding-right: 2px;
+    background-origin: content-box;
+    border: 1px solid #a9a9a9;
+}
+
+.w60 {
+	width: 60px;
+}
+
+.nav-tabs {
+	border-left: 1px solid #6acd7d;
+	border-bottom: none;
+}
+
+.nav-tabs>li {
+	border-left: none;
+}
+
+.nav-tabs>li>a {
+	font-size: 16px;
+	color: #000;
+	margin-right: 0 !important;
+	border-radius: 0 !important;
+	border-bottom: 1px solid #6acd7d !important;
+}
+
+ .nav>li>a:focus, .nav>li>a:hover {
+	background: #FFF;
+	color: #000;
+	border-bottom: 1px solid #6acd7d !important;
+} 
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+	background: #6acd7d !important;
+	color: #FFF;
+	border: 1px solid #6acd7d;
+	border-bottom: none;
+	outline: none;
+}
+
+.tab-pane {
+/* 	border: 1px solid #6acd7d; */
+	padding: 6px;
+}
+
+.tab-content { 
+	border: 1px solid #6acd7d;
+}
+
+p.text-center a { 
+	text-decoration: none;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+	padding: 5px !important;
+	vertical-align: middle !important;
+}
+
+.select-normal {
+	width: 140px;
+    height: 25px;
+}
+
+.occupation {
+	height: 25px;
+}
+
+.address {
+	width: 240px !important;
+}
+
+.border-right {
+	border-right: 1px solid #fff !important;
+}
+
+.border-left {
+	border-left: 1px solid #fff !important;
+}
+
+input[type="text"] {
+	margin-right: 5px;
+	width: 139px;
+	height: 24px;
+}
+
+.other-ill {
+	margin-left: 6px;
+}
+
+input[type=checkbox] {
+	margin-top: 2px !important;
+}
+
+input[type=radio] {
+	margin-top: 3px !important;
+}
+
+.margin-10 {
+	margin: 10px 0;
+}
+
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio]
+{
+	margin-left: -15px !important;
+}
+
+#imghead {
+	display: block;
+  	margin-right: auto;
+  	margin-left: auto;
+}
+
+.table>tbody+tbody { 
+	border-top:0 !important;
+}
+
+.error { 
+	color:red;
+}
+
+.mr-5 {
+	margin-right: 5px;
+}
+
+.mr-align {
+	margin-right: 12px;
+}
+
+.height-normal {
+	height: 23px;
+	width: 135px;
+}
+
+#position {
+	border: none; 
+	width: 0; 
+	height: 0;
+	padding: 0;
+}
+
+.ico-edit {
+	padding: 5px 10px 5px 32px;
+    background: #DAF6D7 url(../img/u726.png) no-repeat 8px center;
+}
+
+.ico-edit:hover {
+	background: #64C25A url(../img/u730.png) no-repeat 8px center;
+}
+
+.phcolor { 
+	color:#888;
+}
+
+.readonly-width input {
+	width: 72%;
+}
+
+.cursor {
+	cursor: pointer;
+}
+
+.table {
+	margin-bottom: 0 !important;
+}
+
+.h27 {
+	height: 27px !important;
+	line-height: 27px;
+}
+
+.h27 input{
+	margin-top: 7px !important;
+}
+
+.editImg-btn {
+	color: #ccc;
+	cursor: default !important;
+}
+
+#allergicHisName {
+	position: relative;
+	top: 2px\9;
+}

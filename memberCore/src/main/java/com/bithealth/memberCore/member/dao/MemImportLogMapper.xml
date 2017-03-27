@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.MemImportLogMapper" >
+     <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.MemImportLog" >
+        <id column="LogID" property="logID" jdbcType="BIGINT" />
+        <result column="memberGUID" property="memberGUID" jdbcType="CHAR" />
+        <result column="ImportBatchGUID" property="importBatchGUID" jdbcType="CHAR" />
+        <result column="ImportTime" property="importTime" jdbcType="TIMESTAMP" />
+        <result column="Reason" property="reason" jdbcType="VARCHAR" />
+        <result column="UseTag" property="useTag" jdbcType="CHAR" />
+        <result column="SyncTimestamp" property="syncTimestamp" jdbcType="BIGINT" />
+        <result column="Content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="SourceType" property="sourceType" jdbcType="TINYINT" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        LogID, memberGUID, ImportBatchGUID, ImportTime, Reason, UseTag, SyncTimestamp, Content, 
+        SourceType, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemImportLogExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem_importlog
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemImportLogExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem_importlog
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from omem_importlog
+        where LogID = #{logID,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.MemImportLog" useGeneratedKeys="true" keyProperty="logID" >
+        insert into omem_importlog (memberGUID, ImportBatchGUID, ImportTime, 
+            Reason, UseTag, SyncTimestamp, 
+            Content, SourceType, UpdateTime
+            )
+        values (#{memberGUID,jdbcType=CHAR}, #{importBatchGUID,jdbcType=CHAR}, #{importTime,jdbcType=TIMESTAMP}, 
+            #{reason,jdbcType=VARCHAR}, #{useTag,jdbcType=CHAR}, #{syncTimestamp,jdbcType=BIGINT}, 
+            #{content,jdbcType=LONGVARCHAR}, #{sourceType,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.MemImportLog" useGeneratedKeys="true" keyProperty="logID" >
+        insert into omem_importlog
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberGUID != null" >
+                memberGUID,
+            </if>
+            <if test="importBatchGUID != null" >
+                ImportBatchGUID,
+            </if>
+            <if test="importTime != null" >
+                ImportTime,
+            </if>
+            <if test="reason != null" >
+                Reason,
+            </if>
+            <if test="useTag != null" >
+                UseTag,
+            </if>
+            <if test="syncTimestamp != null" >
+                SyncTimestamp,
+            </if>
+            <if test="content != null" >
+                Content,
+            </if>
+            <if test="sourceType != null" >
+                SourceType,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberGUID != null" >
+                #{memberGUID,jdbcType=CHAR},
+            </if>
+            <if test="importBatchGUID != null" >
+                #{importBatchGUID,jdbcType=CHAR},
+            </if>
+            <if test="importTime != null" >
+                #{importTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reason != null" >
+                #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="useTag != null" >
+                #{useTag,jdbcType=CHAR},
+            </if>
+            <if test="syncTimestamp != null" >
+                #{syncTimestamp,jdbcType=BIGINT},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="sourceType != null" >
+                #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.MemImportLogExample" resultType="java.lang.Integer" >
+        select count(*) from omem_importlog
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update omem_importlog
+        <set >
+            <if test="record.logID != null" >
+                LogID = #{record.logID,jdbcType=BIGINT},
+            </if>
+            <if test="record.memberGUID != null" >
+                memberGUID = #{record.memberGUID,jdbcType=CHAR},
+            </if>
+            <if test="record.importBatchGUID != null" >
+                ImportBatchGUID = #{record.importBatchGUID,jdbcType=CHAR},
+            </if>
+            <if test="record.importTime != null" >
+                ImportTime = #{record.importTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.reason != null" >
+                Reason = #{record.reason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.useTag != null" >
+                UseTag = #{record.useTag,jdbcType=CHAR},
+            </if>
+            <if test="record.syncTimestamp != null" >
+                SyncTimestamp = #{record.syncTimestamp,jdbcType=BIGINT},
+            </if>
+            <if test="record.content != null" >
+                Content = #{record.content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.sourceType != null" >
+                SourceType = #{record.sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="record.updateTime != null" >
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update omem_importlog
+        set LogID = #{record.logID,jdbcType=BIGINT},
+            memberGUID = #{record.memberGUID,jdbcType=CHAR},
+            ImportBatchGUID = #{record.importBatchGUID,jdbcType=CHAR},
+            ImportTime = #{record.importTime,jdbcType=TIMESTAMP},
+            Reason = #{record.reason,jdbcType=VARCHAR},
+            UseTag = #{record.useTag,jdbcType=CHAR},
+            SyncTimestamp = #{record.syncTimestamp,jdbcType=BIGINT},
+            Content = #{record.content,jdbcType=LONGVARCHAR},
+            SourceType = #{record.sourceType,jdbcType=TINYINT},
+            UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.MemImportLog" >
+        update omem_importlog
+        <set >
+            <if test="memberGUID != null" >
+                memberGUID = #{memberGUID,jdbcType=CHAR},
+            </if>
+            <if test="importBatchGUID != null" >
+                ImportBatchGUID = #{importBatchGUID,jdbcType=CHAR},
+            </if>
+            <if test="importTime != null" >
+                ImportTime = #{importTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reason != null" >
+                Reason = #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="useTag != null" >
+                UseTag = #{useTag,jdbcType=CHAR},
+            </if>
+            <if test="syncTimestamp != null" >
+                SyncTimestamp = #{syncTimestamp,jdbcType=BIGINT},
+            </if>
+            <if test="content != null" >
+                Content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="sourceType != null" >
+                SourceType = #{sourceType,jdbcType=TINYINT},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LogID = #{logID,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.MemImportLog" >
+        update omem_importlog
+        set memberGUID = #{memberGUID,jdbcType=CHAR},
+            ImportBatchGUID = #{importBatchGUID,jdbcType=CHAR},
+            ImportTime = #{importTime,jdbcType=TIMESTAMP},
+            Reason = #{reason,jdbcType=VARCHAR},
+            UseTag = #{useTag,jdbcType=CHAR},
+            SyncTimestamp = #{syncTimestamp,jdbcType=BIGINT},
+            Content = #{content,jdbcType=LONGVARCHAR},
+            SourceType = #{sourceType,jdbcType=TINYINT},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where LogID = #{logID,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from omem_importlog
+        where LogID = #{logID,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.MemImportLogExample" >
+        delete from omem_importlog
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insertBatch" parameterType="java.util.List">
+    insert into omem_importlog (memberGUID, ImportBatchGUID, ImportTime, 
+            Reason, UpdateTime,SyncTimestamp,UseTag,Content)
+        values 
+        <foreach collection="list" item="item" separator=",">
+         (#{item.memberGUID,jdbcType=CHAR}, #{item.importBatchGUID,jdbcType=CHAR}, #{item.importTime,jdbcType=TIMESTAMP}, 
+            #{item.reason,jdbcType=VARCHAR}, #{item.updateTime,jdbcType=TIMESTAMP},#{item.syncTimestamp,jdbcType=BIGINT},#{item.useTag,jdbcType=CHAR},#{item.content,jdbcType=LONGVARCHAR})
+        </foreach>
+    </insert>
+    <delete id="deleteErrorLog" parameterType="java.lang.Integer">
+    DELETE FROM `omem_importlog` WHERE memberGUID  IN (SELECT o.memberGUID FROM `omem` o WHERE o.`Docid`=#{docId, jdbcType=INTEGER} AND o.`UseTag`='E') AND UseTag='E'
+    </delete>
+    <select id="selectByMemberGUID" resultMap="BaseResultMap" parameterType="string">
+     select 
+        <include refid="Base_Column_List" />
+        from omem_importlog WHERE memberGUID=#{_parameter}
+    </select>
+</mapper>

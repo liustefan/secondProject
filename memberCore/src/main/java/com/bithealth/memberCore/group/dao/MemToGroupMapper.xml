@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.group.dao.MemToGroupMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.group.model.MemToGroupKey" >
+        <id column="MemGrpid" property="memgrpid" jdbcType="INTEGER" />
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        MemGrpid, Memberid
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.group.model.MemToGroupExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ompb
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.group.model.MemToGroupExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from ompb
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.group.model.MemToGroupKey" >
+        insert into ompb (MemGrpid, Memberid)
+        values (#{memgrpid,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER})
+    </insert>
+    
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.group.model.MemToGroupKey" >
+        insert into ompb
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memgrpid != null" >
+                MemGrpid,
+            </if>
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memgrpid != null" >
+                #{memgrpid,jdbcType=INTEGER},
+            </if>
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.group.model.MemToGroupExample" resultType="java.lang.Integer" >
+        select count(*) from ompb
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update ompb
+        <set >
+            <if test="record.memgrpid != null" >
+                MemGrpid = #{record.memgrpid,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update ompb
+        set MemGrpid = #{record.memgrpid,jdbcType=INTEGER},
+            Memberid = #{record.memberid,jdbcType=INTEGER}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.memberCore.group.model.MemToGroupKey" >
+        delete from ompb
+        where MemGrpid = #{memgrpid,jdbcType=INTEGER}
+          and Memberid = #{memberid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.group.model.MemToGroupExample" >
+        delete from ompb
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- ##########自定义SQL -->
+    <insert id="insertBatch" parameterType="java.util.List" >
+        insert into ompb (MemGrpid, Memberid)
+        values 
+        <foreach collection="list" item="item" separator=",">
+         (#{item.memgrpid,jdbcType=INTEGER}, #{item.memberid,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    
+</mapper>

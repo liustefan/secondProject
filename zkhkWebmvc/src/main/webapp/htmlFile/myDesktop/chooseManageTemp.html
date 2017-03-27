@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>选择管理方案</title>
+	<link rel="stylesheet" href="../../css/general.css">
+
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<div class="content">
+    <form action="" method="POST" id="">
+		<div class="search-box-wrapper">
+			<ul class="search-wrapper">
+				<li>
+					<label>方案标题：</label>
+	                <input type="text">
+				</li>
+				<li>
+					<label>疾病分类：</label>
+	                <input type="text">
+				</li>
+				<li>
+					<label>更新日期：</label> 
+					<input class="info-date" id="startDate" type="text" name="" required="required" value='' readonly="readonly" /> 
+					<span class="mar-left">至</span> 
+					<input class="info-date" id="endDate" type="text" name="" required="required" value='' readonly="readonly" />
+				</li>
+				<li>
+					<button type="button" class="btn-inquiry ico-search" onclick="">查询</button>
+				</li>
+			</ul>
+		</div>
+		<div class="table-box">
+			<table class="table-content">
+				<thead class="table-title">
+					<tr>
+						<th>方案标题</th>
+						<th>适用疾病分类</th>
+						<th>更新人</th>
+						<th>更新日期</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a href="javascript: void(0);" onclick="">选择</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="page-box">
+			<jsp:include page="/public/pageFoot.jsp"></jsp:include>
+		</div>
+	</form>
+</div>
+</body>
+</html>

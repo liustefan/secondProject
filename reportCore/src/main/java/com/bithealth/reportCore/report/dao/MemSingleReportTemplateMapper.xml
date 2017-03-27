@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.reportCore.report.dao.MemSingleReportTemplateMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.reportCore.report.model.MemSingleReportTemplate" >
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <id column="TempCode" property="tempCode" jdbcType="INTEGER" />
+        <result column="OdgpId" property="odgpId" jdbcType="INTEGER" />
+        <result column="OptId" property="optId" jdbcType="SMALLINT" />
+        <result column="FunId" property="funId" jdbcType="SMALLINT" />
+        <result column="CurrUesedNum" property="currUesedNum" jdbcType="BIGINT" />
+        <result column="EndProDate" property="endProDate" jdbcType="DATE" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="Createid" property="createid" jdbcType="INTEGER" />
+        <result column="CreateName" property="createName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Memberid, TempCode, OdgpId, OptId, FunId, CurrUesedNum, EndProDate, CreateTime, Createid, 
+        CreateName
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.report.model.MemSingleReportTemplateExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omas
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.report.model.MemSingleReportTemplateExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omas
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.reportCore.report.model.MemSingleReportTemplateKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from omas
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and TempCode = #{tempCode,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.reportCore.report.model.MemSingleReportTemplate" >
+        insert into omas
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="tempCode != null" >
+                TempCode,
+            </if>
+            <if test="odgpId != null" >
+                OdgpId,
+            </if>
+            <if test="optId != null" >
+                OptId,
+            </if>
+            <if test="funId != null" >
+                FunId,
+            </if>
+            <if test="currUesedNum != null" >
+                CurrUesedNum,
+            </if>
+            <if test="endProDate != null" >
+                EndProDate,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="createid != null" >
+                Createid,
+            </if>
+            <if test="createName != null" >
+                CreateName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="tempCode != null" >
+                #{tempCode,jdbcType=INTEGER},
+            </if>
+            <if test="odgpId != null" >
+                #{odgpId,jdbcType=INTEGER},
+            </if>
+            <if test="optId != null" >
+                #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="funId != null" >
+                #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="currUesedNum != null" >
+                #{currUesedNum,jdbcType=BIGINT},
+            </if>
+            <if test="endProDate != null" >
+                #{endProDate,jdbcType=DATE},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createid != null" >
+                #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null" >
+                #{createName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.reportCore.report.model.MemSingleReportTemplateExample" resultType="java.lang.Integer" >
+        select count(*) from omas
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null" >
+            update omas
+            <set >
+                <if test="record.memberid != null" >
+                    Memberid = #{record.memberid,jdbcType=INTEGER},
+                </if>
+                <if test="record.tempCode != null" >
+                    TempCode = #{record.tempCode,jdbcType=INTEGER},
+                </if>
+                <if test="record.odgpId != null" >
+                    OdgpId = #{record.odgpId,jdbcType=INTEGER},
+                </if>
+                <if test="record.optId != null" >
+                    OptId = #{record.optId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.funId != null" >
+                    FunId = #{record.funId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.currUesedNum != null" >
+                    CurrUesedNum = #{record.currUesedNum,jdbcType=BIGINT},
+                </if>
+                <if test="record.endProDate != null" >
+                    EndProDate = #{record.endProDate,jdbcType=DATE},
+                </if>
+                <if test="record.createTime != null" >
+                    CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.createid != null" >
+                    Createid = #{record.createid,jdbcType=INTEGER},
+                </if>
+                <if test="record.createName != null" >
+                    CreateName = #{record.createName,jdbcType=VARCHAR},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null" >
+            update omas
+            set Memberid = #{record.memberid,jdbcType=INTEGER},
+                TempCode = #{record.tempCode,jdbcType=INTEGER},
+                OdgpId = #{record.odgpId,jdbcType=INTEGER},
+                OptId = #{record.optId,jdbcType=SMALLINT},
+                FunId = #{record.funId,jdbcType=SMALLINT},
+                CurrUesedNum = #{record.currUesedNum,jdbcType=BIGINT},
+                EndProDate = #{record.endProDate,jdbcType=DATE},
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                Createid = #{record.createid,jdbcType=INTEGER},
+                CreateName = #{record.createName,jdbcType=VARCHAR}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.reportCore.report.model.MemSingleReportTemplate" >
+        update omas
+        <set >
+            <if test="odgpId != null" >
+                OdgpId = #{odgpId,jdbcType=INTEGER},
+            </if>
+            <if test="optId != null" >
+                OptId = #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="funId != null" >
+                FunId = #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="currUesedNum != null" >
+                CurrUesedNum = #{currUesedNum,jdbcType=BIGINT},
+            </if>
+            <if test="endProDate != null" >
+                EndProDate = #{endProDate,jdbcType=DATE},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createid != null" >
+                Createid = #{createid,jdbcType=INTEGER},
+            </if>
+            <if test="createName != null" >
+                CreateName = #{createName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and TempCode = #{tempCode,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.reportCore.report.model.MemSingleReportTemplate" >
+        update omas
+        set OdgpId = #{odgpId,jdbcType=INTEGER},
+            OptId = #{optId,jdbcType=SMALLINT},
+            FunId = #{funId,jdbcType=SMALLINT},
+            CurrUesedNum = #{currUesedNum,jdbcType=BIGINT},
+            EndProDate = #{endProDate,jdbcType=DATE},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            Createid = #{createid,jdbcType=INTEGER},
+            CreateName = #{createName,jdbcType=VARCHAR}
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and TempCode = #{tempCode,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.reportCore.report.model.MemSingleReportTemplateKey" >
+        delete from omas
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and TempCode = #{tempCode,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.reportCore.report.model.MemSingleReportTemplateExample" >
+        <if test="_parameter != null" >
+            delete from omas
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+	<!--调用存储过程  -->
+    <select id="exProc_pro_insOMAS" parameterType="java.util.Map" statementType="CALLABLE">  
+      {call pro_insOMAS(#{createId},#{createName},#{memberId})}
+    </select>  
+
+
+
+
+
+</mapper>

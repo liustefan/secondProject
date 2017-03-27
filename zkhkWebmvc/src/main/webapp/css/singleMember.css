@@ -1,0 +1,131 @@
+/* single-member.html样式 */
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+/*浮动*/
+.fl { float: left;}
+
+.fr { float: right;}
+
+/*清除浮动*/
+.clearfix {
+    overflow: auto;
+    word-wrap: break-word;
+    /* max-width: 100%; */
+    height: auto;
+    _height: 1%;
+}
+
+.main {
+	overflow: hidden;
+    border: 1px solid #ccc;
+    border-top: 2px solid #6dbb95;
+    margin-top: 15px;
+    width: 1280px;
+}
+
+.single-content {
+    border: 1px solid #ccc;
+    border-top: 2px solid #6dbb95;
+    margin-top: 15px;
+    width: 1280px;
+    padding: 0;
+}
+
+#left {
+    width: 210px;
+    min-height: 650px;
+    float: left;
+    background: #6dbb95;
+}
+
+/* #left ul {
+    padding: 0;
+    margin: 0;
+}
+
+#left .celiang-items li {
+    text-indent: 5em;
+}
+
+#left ul li {
+    list-style: none;
+    line-height: 30px;
+    text-indent: 30px;
+}
+
+#left ul li a {
+    display: block;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    line-height: 30px;
+    border-bottom: 1px solid #ccc;
+}
+
+#left a.a-null:hover {
+    background: none;
+    color: #fff;
+}
+
+#left ul li a:hover,
+#left ul li a.current {
+    background: #fff;
+    color: green;
+} */
+
+#right {
+    width: 1068px;
+    height: 650px;
+    float: right;
+}
+
+/*个人信息*/
+.w1280 {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.single_report_head {
+    background: #094;
+    padding: 15px 0;
+    height: 70px;
+    position: relative;
+}
+
+.single_report_head h3 {
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    line-height: 70px;
+ }
+
+.person-info {
+    position: absolute;
+    left: 15px;
+}
+
+.person-info .fr p {
+    color: #fff;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.person-img,
+.person-img div {
+    width: 64px;
+    height: 64px;
+    border-radius: 5%;
+}
+
+.person-img {
+    margin: 5px 10px;
+}

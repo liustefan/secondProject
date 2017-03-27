@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.orgainCore.dao.OrgMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.orgainCore.model.Org" >
+        <id column="OrgId" property="orgId" jdbcType="INTEGER" />
+        <result column="orgCode" property="orgCode" jdbcType="CHAR" />
+        <result column="OrgName" property="orgName" jdbcType="VARCHAR" />
+        <result column="Superior" property="superior" jdbcType="INTEGER" />
+        <result column="IsExternalService" property="isExternalService" jdbcType="CHAR"/>
+        <result column="Otype" property="otype" jdbcType="SMALLINT" />
+        <result column="Memnum" property="memnum" jdbcType="INTEGER" />
+        <result column="DocNum" property="docNum" jdbcType="INTEGER" />
+        <result column="UseTag" property="useTag" jdbcType="CHAR" />
+        <result column="order" property="order" jdbcType="INTEGER" />
+        <result column="Path" property="path" jdbcType="VARCHAR" />
+        <association property="parentOrg" column="Superior" select="selectByPrimaryKey"/>
+        <association property="hasDoctor" column="OrgId" select="selectHasDoctor"/>
+        <association property="orgConfig" column="OrgId" select="com.bithealth.orgainCore.dao.OrgConfigMapper.selectByOrg"/>
+        <collection property="children" column="OrgId" select="selectChildren"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        OrgId, orgCode, OrgName, Superior, Otype, Memnum, DocNum, UseTag, `order`, 
+        Path,IsExternalService
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.orgainCore.model.OrgExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from orgs
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.orgainCore.model.OrgExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from orgs
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from orgs
+        where OrgId = #{orgId,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.orgainCore.model.Org" useGeneratedKeys="true" keyProperty="orgId" >
+        insert into orgs (orgCode, OrgName, Superior, 
+            Otype, Memnum, 
+            DocNum, UseTag, `order`, 
+            Path,IsExternalService)
+        values (#{orgCode,jdbcType=CHAR}, #{orgName,jdbcType=VARCHAR}, #{superior,jdbcType=INTEGER}, 
+            #{otype,jdbcType=SMALLINT}, #{memnum,jdbcType=INTEGER}, 
+            #{docNum,jdbcType=INTEGER}, #{useTag,jdbcType=CHAR}, #{order,jdbcType=INTEGER}, 
+            #{path,jdbcType=VARCHAR},#{isExternalService,jdbcType=CHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.orgainCore.model.Org" useGeneratedKeys="true" keyProperty="orgId" >
+        insert into orgs
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="orgCode != null" >
+                orgCode,
+            </if>
+            <if test="orgName != null" >
+                OrgName,
+            </if>
+            <if test="superior != null" >
+                Superior,
+            </if>
+            <if test="otype != null" >
+                Otype,
+            </if>
+            <if test="memnum != null" >
+                Memnum,
+            </if>
+            <if test="docNum != null" >
+                DocNum,
+            </if>
+            <if test="useTag != null" >
+                UseTag,
+            </if>
+            <if test="order != null" >
+                `order`,
+            </if>
+            <if test="path != null" >
+                Path,
+            </if>
+            <if test="isExternalService != null">
+                IsExternalService,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="orgCode != null" >
+                #{orgCode,jdbcType=CHAR},
+            </if>
+            <if test="orgName != null" >
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="superior != null" >
+                #{superior,jdbcType=INTEGER},
+            </if>
+            <if test="otype != null" >
+                #{otype,jdbcType=SMALLINT},
+            </if>
+            <if test="memnum != null" >
+                #{memnum,jdbcType=INTEGER},
+            </if>
+            <if test="docNum != null" >
+                #{docNum,jdbcType=INTEGER},
+            </if>
+            <if test="useTag != null" >
+                #{useTag,jdbcType=CHAR},
+            </if>
+            <if test="order != null" >
+                #{order,jdbcType=INTEGER},
+            </if>
+            <if test="path != null" >
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="isExternalService != null">
+                #{isExternalService, jdbcType=CHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.orgainCore.model.OrgExample" resultType="java.lang.Integer" >
+        select count(*) from orgs
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update orgs
+        <set >
+            <if test="record.orgId != null" >
+                OrgId = #{record.orgId,jdbcType=INTEGER},
+            </if>
+            <if test="record.orgCode != null" >
+                orgCode = #{record.orgCode,jdbcType=CHAR},
+            </if>
+            <if test="record.orgName != null" >
+                OrgName = #{record.orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.superior != null" >
+                Superior = #{record.superior,jdbcType=INTEGER},
+            </if>
+            <if test="record.otype != null" >
+                Otype = #{record.otype,jdbcType=SMALLINT},
+            </if>
+            <if test="record.memnum != null" >
+                Memnum = #{record.memnum,jdbcType=INTEGER},
+            </if>
+            <if test="record.docNum != null" >
+                DocNum = #{record.docNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.useTag != null" >
+                UseTag = #{record.useTag,jdbcType=CHAR},
+            </if>
+            <if test="record.order != null" >
+                `order` = #{record.order,jdbcType=INTEGER},
+            </if>
+            <if test="record.path != null" >
+                Path = #{record.path,jdbcType=VARCHAR},
+            </if>
+            <if test="record.isExternalService != null">
+                IsExternalService = #{record.isExternalService, jdbcType=CHAR}
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update orgs
+        set OrgId = #{record.orgId,jdbcType=INTEGER},
+            orgCode = #{record.orgCode,jdbcType=CHAR},
+            OrgName = #{record.orgName,jdbcType=VARCHAR},
+            Superior = #{record.superior,jdbcType=INTEGER},
+            Otype = #{record.otype,jdbcType=SMALLINT},
+            Memnum = #{record.memnum,jdbcType=INTEGER},
+            DocNum = #{record.docNum,jdbcType=INTEGER},
+            UseTag = #{record.useTag,jdbcType=CHAR},
+            `order` = #{record.order,jdbcType=INTEGER},
+            Path = #{record.path,jdbcType=VARCHAR},
+            IsExternalService = #{record.isExternalService, jdbcType=CHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.orgainCore.model.Org" >
+        update orgs
+        <set >
+            <if test="orgCode != null" >
+                orgCode = #{orgCode,jdbcType=CHAR},
+            </if>
+            <if test="orgName != null" >
+                OrgName = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="superior != null" >
+                Superior = #{superior,jdbcType=INTEGER},
+            </if>
+            <if test="otype != null" >
+                Otype = #{otype,jdbcType=SMALLINT},
+            </if>
+            <if test="memnum != null" >
+                Memnum = #{memnum,jdbcType=INTEGER},
+            </if>
+            <if test="docNum != null" >
+                DocNum = #{docNum,jdbcType=INTEGER},
+            </if>
+            <if test="useTag != null" >
+                UseTag = #{useTag,jdbcType=CHAR},
+            </if>
+            <if test="order != null" >
+                `order` = #{order,jdbcType=INTEGER},
+            </if>
+            <if test="path != null" >
+                Path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="isExternalService != null">
+                IsExternalService = #{isExternalService, jdbcType=CHAR}
+            </if>
+        </set>
+        where OrgId = #{orgId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.orgainCore.model.Org" >
+        update orgs
+        set orgCode = #{orgCode,jdbcType=CHAR},
+            OrgName = #{orgName,jdbcType=VARCHAR},
+            Superior = #{superior,jdbcType=INTEGER},
+            Otype = #{otype,jdbcType=SMALLINT},
+            Memnum = #{memnum,jdbcType=INTEGER},
+            DocNum = #{docNum,jdbcType=INTEGER},
+            UseTag = #{useTag,jdbcType=CHAR},
+            `order` = #{order,jdbcType=INTEGER},
+            Path = #{path,jdbcType=VARCHAR},
+            IsExternalService = #{isExternalService, jdbcType=CHAR}
+        where OrgId = #{orgId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from orgs
+        where OrgId = #{orgId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.orgainCore.model.OrgExample" >
+        delete from orgs
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+<!-- ################### -->
+<select id="selectChildren" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+ select 
+        <include refid="Base_Column_List" />
+        from orgs
+        where Superior = #{orgId,jdbcType=INTEGER}
+</select>
+<select id="selectHasDoctor" parameterType="java.lang.Integer" resultType="java.lang.Boolean">
+SELECT COUNT(*) > 0 FROM odoc WHERE OrgId=#{orgId,jdbcType=INTEGER} AND Tag='T'
+</select>
+
+<select id="selectShareOrg" parameterType="string" resultType="string">
+SELECT GROUP_CONCAT(o.`OrgId` ORDER BY o.`OrgId` DESC) AS path FROM orgs o, `orgs_cfg` c WHERE
+ o.orgId IN(${_parameter}) AND o.`OrgId`=c.`OrgID` AND c.`IsSharedParentNode`=1 AND o.IsExternalService='Y'
+</select>
+
+<select id="selectPathById" parameterType="java.lang.Integer" resultType="string">
+select Path from orgs where OrgId=#{orgId,jdbcType=INTEGER}
+</select>
+</mapper>

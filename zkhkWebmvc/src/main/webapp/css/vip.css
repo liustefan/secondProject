@@ -1,0 +1,374 @@
+@CHARSET "UTF-8";
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,form,sub,dl,dd,ol,ul,li,tbody,table,thead,tr,th,td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+ol,ul,li { 
+	list-style: none;
+}
+
+body {
+	margin: 0;
+    padding: 0;
+   	font: 12px "微软雅黑",Arial,"宋体",Helvetica,Verdana,Sans-serif;
+}
+
+button {
+	font: 14px "微软雅黑",Arial,"宋体",Helvetica,Verdana,sans-serif;
+	border: none;
+	background: none;
+}
+
+table { 
+	border-collapse: collapse; 
+	border-spacing: 0;
+}
+ 
+.table-border {
+	border: 1px solid #ccc;
+	width: 100%;
+}
+	
+.table-border tr td {
+	padding: 10px;
+}
+.table-border tr td {
+	border: 1px solid #ddd;
+}
+
+#content {
+	margin-top: 20px;
+	float: right;
+	width: 100%;
+	padding: 1%;
+	padding-top: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#content_title {
+	font-size: 16px;
+	line-height: 35px;
+	text-align: left;
+	height: 48px;
+	font-weight: bold;
+}
+
+#content_footer {
+	font-size: 12px;
+	background-color: #FFF;
+}
+
+#tabel_content {
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+#tabel_content th,
+#tabel_content td { 
+	padding:10px 0;
+}
+
+#table_content_title {
+	background: #878B83;
+	height: 38px;
+}
+
+#table_content_title th {
+	font-size: 14px;
+	color: #333;
+	background-color: #bcdee0;
+	padding: 10px 0;
+}
+
+#tabel_content td {
+    padding: 10xp 0;
+	text-align: center;
+	font-size: 12px;
+}
+
+#tabel_content tr:nth-child(odd) { background-color: #fff;}
+
+#tabel_content tr:nth-child(even) { background-color: #e0f1f3;}
+ 
+#footer_butpage {
+	margin: 15px 0;
+}
+
+#add {
+	margin-top: 10px;
+}
+
+/* #add,tr#button button,
+input.btn-normal {
+  height: 26px;
+  line-height: 26px;
+  border: 0px;
+  border-radius: 3px;
+  padding:0 10px;
+  color: #FFF;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-block;
+  font-family: "Microsoft YaHei";
+  background-image: -moz-linear-gradient(center top, rgba(072, 214, 096, 0.8) , rgba(097, 185, 095, 0.8)) repeat scroll 0 0 rgba(072, 214, 096, 0.8);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(072, 214, 096, 0.8)), color-stop(1, rgba(097, 185, 095, 0.8)));
+  filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#48d660', EndColorStr='#61b95f');
+} */
+
+table.vl { 
+	border:1px solid #ddd;
+}
+
+.vl tr:nth-child(odd) {
+	background-color: #e0f1f3;
+}
+
+.vl tr:nth-child(even) {
+	background-color: #fdfefc;
+}
+
+.vl td {
+    border-top: 1px solid #ddd;
+	text-align: center;
+	padding: 10px 0;
+	font: 12px "微软雅黑",Arial,"宋体",Helvetica,Verdana,sans-serif;
+}
+
+.vl th {
+	font-size: 14px;
+	color: #333;
+	padding: 10px 0;
+	background-color: #bcdee0;
+}
+
+.vq {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.vv {
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.vv td {
+	padding: 10px;
+	font: 14px "Microsoft YaHei",Arial,"宋体",Helvetica,Verdana,sans-serif;
+}
+
+.vv select { 
+	width: 304px;
+	padding: 5px 2px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-family: "Microsoft YaHei";
+}
+
+.vi {
+	text-align: right;
+	padding: 3px 40px;
+	font-size: 12px;
+}
+
+.vs {
+	width: 300px;
+	padding: 5px 2px !important;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-family: "Microsoft YaHei";
+}
+
+.vc {
+	width: 16px;
+	margin: 0;
+}
+
+.txtarea-normal {
+	margin: 0;
+	padding: 0;
+	border: 1px solid #ddd;
+	width: 90%;
+}
+
+.go-back {
+	color: #f00;
+	cursor: pointer;
+	text-decoration: underline;
+	padding: 0;
+}
+  
+.title-report { 
+	font-size: 14px; 
+	margin: 5px 0;
+}
+
+.caption-title {
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	background: #bcdee0;
+	height: 35px;
+	text-align: left;
+	font-weight: bold;
+	color: #333;
+	font-size: 14px;
+	line-height: 35px;
+	text-indent: 1em;
+}
+
+.caption-title span {
+	font-size: 14px;
+}
+
+.caption-title select {
+	height: 25px;
+	border: 1px solid #ddd;
+	width: 180px;
+	font-family: "Microsoft YaHei", "SimSun";/*默认字体微软雅黑，宋体*/
+}
+
+.result-list-box {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.result-list { 
+	padding: 15px; 
+	font-size: 14px; 
+	border: 1px solid #ddd; 
+	background: #fff;
+}
+
+.result-list li { 
+	margin: 10px 0;
+}
+
+.result-list li .result-item {
+	font-size: 13px;
+	color: #333;
+	border-bottom: 1px dotted #dedede;
+	padding: 5px 0px 5px 10px;
+	position: relative;
+}
+
+.result-list li img { 
+	max-width: 64px; 
+	max-height: 64px; 
+	border: none; 
+	outline: none;
+}
+
+.result-list li .result-item::before {
+    border: 1px solid #6fa2a5;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 0;
+    margin-right: 5px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    vertical-align: 2px;
+    width: 2px;
+}
+
+.audit-box {
+	margin: 10px 0;
+}
+
+.audit-content { 
+	padding-bottom: 10px;
+}
+
+.audit-foot {
+	font-size: 12px; 
+	color: #999;
+}
+
+.doc-sign img {
+	max-width: 64px;
+	max-height: 64px;
+	border: none;
+	outline: none;	
+}
+
+.ques-name { 
+	font-size: 1.5em;
+	text-align: center;
+	padding-bottom: 15px;
+	font-weight: bold;
+}
+
+.ques-user-info span { 
+	display: inline-block;
+	font-size: 14px;
+	width: 33%;
+	text-align: center;
+}
+
+.ques-user-info b { 
+	display: inline-block; 
+	text-align: right;
+}
+
+.question-title {
+	font-weight: bold; 
+	font-size: 1.2em;
+	padding-top: 15px;
+}
+
+.ques-explain h2 {
+	font-weight: bold; 
+	font-size: 1.2em; 
+	margin: 15px 0;
+}
+
+.ques-explain p {
+	line-height: 24px;
+	text-indent: 2em;
+}
+
+.w100-txtarea { 
+	width: 100%;
+	border: none;
+	min-height: 50px;
+	border-bottom: 1px #ddd solid;
+}
+
+.diagnose-result {
+	padding:30px 0;
+}
+
+.diagnose-result b {
+	font-size: 1.2em;
+}
+
+.diagnose-result span { 
+	text-decoration: underline;
+}
+
+.doc-sign {
+	text-align: right;
+}
+
+.doc-advice h3 {
+	font-size: 1.2em; 
+	font-weight: bold; 
+}
+
+.doc-advice .content {
+	min-height: 100px; 
+	border: 1px solid; 
+	width: 90%; 
+	margin: 15px auto; 
+	background-color: #fff; 
+	padding: 8px 1em;
+}

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.healthCore.managescheme.dao.ManageschemeDesignMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.healthCore.managescheme.model.ManageschemeDesign" >
+        <id column="MSDesignID" property="MSDesignID" jdbcType="INTEGER" />
+        <result column="SchemeType" property="schemeType" jdbcType="TINYINT" />
+        <result column="SchemeTitle" property="schemeTitle" jdbcType="VARCHAR" />
+        <result column="MassStatus" property="massStatus" jdbcType="TINYINT" />
+        <result column="MassEffectTime" property="massEffectTime" jdbcType="TIMESTAMP" />
+        <result column="MassOffTime" property="massOffTime" jdbcType="TIMESTAMP" />
+        <result column="MassOffReason" property="massOffReason" jdbcType="VARCHAR" />
+        <result column="MassEffectProcess" property="massEffectProcess" jdbcType="TINYINT" />
+        <result column="ExecDrID" property="execDrID" jdbcType="INTEGER" />
+        <result column="CreateID" property="createID" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <resultMap id="ResultMap" type="com.bithealth.healthCore.managescheme.model.ManageschemeDesign" extends="BaseResultMap">
+        <association column="ExecDrID" property="execDrName" select="selectExecDrName"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        MSDesignID, SchemeType, SchemeTitle, MassStatus, MassEffectTime, MassOffTime, MassOffReason, MassEffectProcess, 
+        ExecDrID, CreateID, CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_design
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_design
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="ResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_managescheme_design
+        where MSDesignID = #{MSDesignID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesign" useGeneratedKeys="true" keyProperty="MSDesignID" >
+        insert into tb_managescheme_design
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="schemeType != null" >
+                SchemeType,
+            </if>
+            <if test="schemeTitle != null" >
+                SchemeTitle,
+            </if>
+            <if test="massStatus != null" >
+                MassStatus,
+            </if>
+            <if test="massEffectTime != null" >
+                MassEffectTime,
+            </if>
+            <if test="massOffTime != null" >
+                MassOffTime,
+            </if>
+            <if test="massOffReason != null" >
+                MassOffReason,
+            </if>
+            <if test="massEffectProcess != null" >
+                MassEffectProcess,
+            </if>
+            <if test="execDrID != null" >
+                ExecDrID,
+            </if>
+            <if test="createID != null" >
+                CreateID,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateID != null" >
+                UpdateID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="schemeType != null" >
+                #{schemeType,jdbcType=TINYINT},
+            </if>
+            <if test="schemeTitle != null" >
+                #{schemeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="massStatus != null" >
+                #{massStatus,jdbcType=TINYINT},
+            </if>
+            <if test="massEffectTime != null" >
+                #{massEffectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="massOffTime != null" >
+                #{massOffTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="massOffReason != null" >
+                #{massOffReason,jdbcType=VARCHAR},
+            </if>
+            <if test="massEffectProcess != null" >
+                #{massEffectProcess,jdbcType=TINYINT},
+            </if>
+            <if test="execDrID != null" >
+                #{execDrID,jdbcType=INTEGER},
+            </if>
+            <if test="createID != null" >
+                #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignExample" resultType="java.lang.Integer" >
+        select count(*) from tb_managescheme_design
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_design
+            <set >
+                <if test="record.MSDesignID != null" >
+                    MSDesignID = #{record.MSDesignID,jdbcType=INTEGER},
+                </if>
+                <if test="record.schemeType != null" >
+                    SchemeType = #{record.schemeType,jdbcType=TINYINT},
+                </if>
+                <if test="record.schemeTitle != null" >
+                    SchemeTitle = #{record.schemeTitle,jdbcType=VARCHAR},
+                </if>
+                <if test="record.massStatus != null" >
+                    MassStatus = #{record.massStatus,jdbcType=TINYINT},
+                </if>
+                <if test="record.massEffectTime != null" >
+                    MassEffectTime = #{record.massEffectTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.massOffTime != null" >
+                    MassOffTime = #{record.massOffTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.massOffReason != null" >
+                    MassOffReason = #{record.massOffReason,jdbcType=VARCHAR},
+                </if>
+                <if test="record.massEffectProcess != null" >
+                    MassEffectProcess = #{record.massEffectProcess,jdbcType=TINYINT},
+                </if>
+                <if test="record.execDrID != null" >
+                    ExecDrID = #{record.execDrID,jdbcType=INTEGER},
+                </if>
+                <if test="record.createID != null" >
+                    CreateID = #{record.createID,jdbcType=INTEGER},
+                </if>
+                <if test="record.createTime != null" >
+                    CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateID != null" >
+                    UpdateID = #{record.updateID,jdbcType=INTEGER},
+                </if>
+                <if test="record.updateTime != null" >
+                    UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_design
+            set MSDesignID = #{record.MSDesignID,jdbcType=INTEGER},
+                SchemeType = #{record.schemeType,jdbcType=TINYINT},
+                SchemeTitle = #{record.schemeTitle,jdbcType=VARCHAR},
+                MassStatus = #{record.massStatus,jdbcType=TINYINT},
+                MassEffectTime = #{record.massEffectTime,jdbcType=TIMESTAMP},
+                MassOffTime = #{record.massOffTime,jdbcType=VARCHAR},
+                MassOffReason = #{record.massOffReason,jdbcType=VARCHAR},
+                MassEffectProcess = #{record.massEffectProcess,jdbcType=TINYINT},
+                ExecDrID = #{record.execDrID,jdbcType=INTEGER},
+                CreateID = #{record.createID,jdbcType=INTEGER},
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                UpdateID = #{record.updateID,jdbcType=INTEGER},
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesign" >
+        update tb_managescheme_design
+        <set >
+            <if test="schemeType != null" >
+                SchemeType = #{schemeType,jdbcType=TINYINT},
+            </if>
+            <if test="schemeTitle != null" >
+                SchemeTitle = #{schemeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="massStatus != null" >
+                MassStatus = #{massStatus,jdbcType=TINYINT},
+            </if>
+            <if test="massEffectTime != null" >
+                MassEffectTime = #{massEffectTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="massOffTime != null" >
+                MassOffTime = #{massOffTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="massOffReason != null" >
+                MassOffReason = #{massOffReason,jdbcType=VARCHAR},
+            </if>
+            <if test="massEffectProcess != null" >
+                MassEffectProcess = #{massEffectProcess,jdbcType=TINYINT},
+            </if>
+            <if test="execDrID != null" >
+                ExecDrID = #{execDrID,jdbcType=INTEGER},
+            </if>
+            <if test="createID != null" >
+                CreateID = #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                UpdateID = #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where MSDesignID = #{MSDesignID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesign" >
+        update tb_managescheme_design
+        set SchemeType = #{schemeType,jdbcType=TINYINT},
+            SchemeTitle = #{schemeTitle,jdbcType=VARCHAR},
+            MassStatus = #{massStatus,jdbcType=TINYINT},
+            MassEffectTime = #{massEffectTime,jdbcType=TIMESTAMP},
+            MassOffTime = #{massOffTime,jdbcType=VARCHAR},
+            MassOffReason = #{massOffReason,jdbcType=VARCHAR},
+            MassEffectProcess = #{massEffectProcess,jdbcType=TINYINT},
+            ExecDrID = #{execDrID,jdbcType=INTEGER},
+            CreateID = #{createID,jdbcType=INTEGER},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where MSDesignID = #{MSDesignID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from tb_managescheme_design
+        where MSDesignID = #{MSDesignID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeDesignExample" >
+        <if test="_parameter != null and _parameter != ''" >
+            delete from tb_managescheme_design
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <select id="selectExecDrName" resultType="String" parameterType="java.lang.Integer" >
+        SELECT docname FROM odoc WHERE docid=#{execDrID,jdbcType=INTEGER}
+    </select>
+
+</mapper>

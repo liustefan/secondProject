@@ -1,0 +1,58 @@
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,form,sub,dl,dd,ol,ul,li{
+	margin: 0;
+	padding: 0;
+	border:0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body{
+   font:12px/100% "Microsoft YaHei", "SimSun";
+}
+table{border-collapse: collapse;border-spacing: 0;}
+#content{
+	margin-top: 30px;
+	float: right;
+	width: 94%;
+	margin-left: 4.2%;
+	margin-right: 3%;
+}
+#content_title{
+	font-size: 16px;
+	line-height: 35px;
+	text-align: left;
+	height: 48px;
+	font-weight: bold;
+
+}
+#footer_content{
+	font-size: 12px;
+	background-color: #FFF;
+}
+#tabel_content{
+	width: 100%;
+	border:1px #ddd solid;
+}
+#table_content_title{
+	background: #878B83;
+	height: 38px;
+}
+#table_content_title th,#table_content_title1 th,#tabel_content th{
+	font-size: 14px;
+	color:#333;
+	background-color:#bcdee0;
+	padding:10px 0;
+	border:1px #ccc solid;
+}
+
+
+#tabel_content td{
+	font-size:12px;
+	padding:10px 0px;
+	text-align: center;
+	border-top:1px #ddd solid;
+	
+}
+#tabel_content tr:nth-child(odd){background-color:#fff;}
+#tabel_content tr:nth-child(even){background-color:#e0f1f3;}

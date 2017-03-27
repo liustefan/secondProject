@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Assemes namespace="com.bithealth.inspectCore.physical.model.PhHealthexamdetailfamilybed">
+	<Assem name="hexamid" assembly="hexamid"/>
+	<Assem name="hbStrDate2" assembly="startdate"/> 
+	<Assem name="hbStoDate2" assembly="endtime"/>
+	<Assem name="hbRes2"  assembly="resson"/>
+	<Assem name="hbHospital2" assembly="institution"/>
+	<Assem name="hbIpNo2" assembly="patientid"/>
+</Assemes>

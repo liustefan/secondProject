@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.packagCore.packag.dao.MemBerPackagTemplateMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.packagCore.packag.model.MemBerPackagTemplate" >
+        <id column="Memberid" property="memberid" jdbcType="INTEGER" />
+        <id column="LineNum" property="lineNum" jdbcType="SMALLINT" />
+        <id column="PackageCode" property="packageCode" jdbcType="INTEGER" />
+        <id column="SumRepTempCode" property="sumRepTempCode" jdbcType="INTEGER" />
+        <result column="NumTimes" property="numTimes" jdbcType="SMALLINT" />
+        <result column="SubmitNum" property="submitNum" jdbcType="SMALLINT" />
+        <result column="BeginDate" property="beginDate" jdbcType="DATE" />
+        <result column="EndDate" property="endDate" jdbcType="DATE" />
+        <result column="CalcType" property="calcType" jdbcType="CHAR" />
+        <result column="Tag" property="tag" jdbcType="CHAR" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Memberid, LineNum, PackageCode, SumRepTempCode, NumTimes, SubmitNum, BeginDate, EndDate, 
+        CalcType, Tag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplateExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem51
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplateExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mem51
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplateKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from mem51
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+          and PackageCode = #{packageCode,jdbcType=INTEGER}
+          and SumRepTempCode = #{sumRepTempCode,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplate" >
+        insert into mem51 (Memberid, LineNum, PackageCode, 
+            SumRepTempCode, NumTimes, SubmitNum, 
+            BeginDate, EndDate, CalcType, 
+            Tag)
+        values (#{memberid,jdbcType=INTEGER}, #{lineNum,jdbcType=SMALLINT}, #{packageCode,jdbcType=INTEGER}, 
+            #{sumRepTempCode,jdbcType=INTEGER}, #{numTimes,jdbcType=SMALLINT}, #{submitNum,jdbcType=SMALLINT}, 
+            #{beginDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, #{calcType,jdbcType=CHAR}, 
+            #{tag,jdbcType=CHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplate" >
+        insert into mem51
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                Memberid,
+            </if>
+            <if test="lineNum != null" >
+                LineNum,
+            </if>
+            <if test="packageCode != null" >
+                PackageCode,
+            </if>
+            <if test="sumRepTempCode != null" >
+                SumRepTempCode,
+            </if>
+            <if test="numTimes != null" >
+                NumTimes,
+            </if>
+            <if test="submitNum != null" >
+                SubmitNum,
+            </if>
+            <if test="beginDate != null" >
+                BeginDate,
+            </if>
+            <if test="endDate != null" >
+                EndDate,
+            </if>
+            <if test="calcType != null" >
+                CalcType,
+            </if>
+            <if test="tag != null" >
+                Tag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberid != null" >
+                #{memberid,jdbcType=INTEGER},
+            </if>
+            <if test="lineNum != null" >
+                #{lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="packageCode != null" >
+                #{packageCode,jdbcType=INTEGER},
+            </if>
+            <if test="sumRepTempCode != null" >
+                #{sumRepTempCode,jdbcType=INTEGER},
+            </if>
+            <if test="numTimes != null" >
+                #{numTimes,jdbcType=SMALLINT},
+            </if>
+            <if test="submitNum != null" >
+                #{submitNum,jdbcType=SMALLINT},
+            </if>
+            <if test="beginDate != null" >
+                #{beginDate,jdbcType=DATE},
+            </if>
+            <if test="endDate != null" >
+                #{endDate,jdbcType=DATE},
+            </if>
+            <if test="calcType != null" >
+                #{calcType,jdbcType=CHAR},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplateExample" resultType="java.lang.Integer" >
+        select count(*) from mem51
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update mem51
+        <set >
+            <if test="record.memberid != null" >
+                Memberid = #{record.memberid,jdbcType=INTEGER},
+            </if>
+            <if test="record.lineNum != null" >
+                LineNum = #{record.lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="record.packageCode != null" >
+                PackageCode = #{record.packageCode,jdbcType=INTEGER},
+            </if>
+            <if test="record.sumRepTempCode != null" >
+                SumRepTempCode = #{record.sumRepTempCode,jdbcType=INTEGER},
+            </if>
+            <if test="record.numTimes != null" >
+                NumTimes = #{record.numTimes,jdbcType=SMALLINT},
+            </if>
+            <if test="record.submitNum != null" >
+                SubmitNum = #{record.submitNum,jdbcType=SMALLINT},
+            </if>
+            <if test="record.beginDate != null" >
+                BeginDate = #{record.beginDate,jdbcType=DATE},
+            </if>
+            <if test="record.endDate != null" >
+                EndDate = #{record.endDate,jdbcType=DATE},
+            </if>
+            <if test="record.calcType != null" >
+                CalcType = #{record.calcType,jdbcType=CHAR},
+            </if>
+            <if test="record.tag != null" >
+                Tag = #{record.tag,jdbcType=CHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update mem51
+        set Memberid = #{record.memberid,jdbcType=INTEGER},
+            LineNum = #{record.lineNum,jdbcType=SMALLINT},
+            PackageCode = #{record.packageCode,jdbcType=INTEGER},
+            SumRepTempCode = #{record.sumRepTempCode,jdbcType=INTEGER},
+            NumTimes = #{record.numTimes,jdbcType=SMALLINT},
+            SubmitNum = #{record.submitNum,jdbcType=SMALLINT},
+            BeginDate = #{record.beginDate,jdbcType=DATE},
+            EndDate = #{record.endDate,jdbcType=DATE},
+            CalcType = #{record.calcType,jdbcType=CHAR},
+            Tag = #{record.tag,jdbcType=CHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplate" >
+        update mem51
+        <set >
+            <if test="numTimes != null" >
+                NumTimes = #{numTimes,jdbcType=SMALLINT},
+            </if>
+            <if test="submitNum != null" >
+                SubmitNum = #{submitNum,jdbcType=SMALLINT},
+            </if>
+            <if test="beginDate != null" >
+                BeginDate = #{beginDate,jdbcType=DATE},
+            </if>
+            <if test="endDate != null" >
+                EndDate = #{endDate,jdbcType=DATE},
+            </if>
+            <if test="calcType != null" >
+                CalcType = #{calcType,jdbcType=CHAR},
+            </if>
+            <if test="tag != null" >
+                Tag = #{tag,jdbcType=CHAR},
+            </if>
+        </set>
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+          and PackageCode = #{packageCode,jdbcType=INTEGER}
+          and SumRepTempCode = #{sumRepTempCode,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplate" >
+        update mem51
+        set NumTimes = #{numTimes,jdbcType=SMALLINT},
+            SubmitNum = #{submitNum,jdbcType=SMALLINT},
+            BeginDate = #{beginDate,jdbcType=DATE},
+            EndDate = #{endDate,jdbcType=DATE},
+            CalcType = #{calcType,jdbcType=CHAR},
+            Tag = #{tag,jdbcType=CHAR}
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+          and PackageCode = #{packageCode,jdbcType=INTEGER}
+          and SumRepTempCode = #{sumRepTempCode,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplateKey" >
+        delete from mem51
+        where Memberid = #{memberid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+          and PackageCode = #{packageCode,jdbcType=INTEGER}
+          and SumRepTempCode = #{sumRepTempCode,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplateExample" >
+        delete from mem51
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+
+
+    <select id="selectByEndDayAndKey" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplateKey" >
+		select Memberid from mem51 
+		where  memberid=#{memberid,jdbcType=INTEGER}
+		  and PackageCode= #{packageCode,jdbcType=INTEGER}
+		  and tag='T' 
+		  and DATE_FORMAT(EndDate,'%y-%m-%d') > DATE_FORMAT(sysdate(),'%y-%m-%d')
+		  and LineNum= #{lineNum,jdbcType=SMALLINT}
+    </select>
+
+
+    <select id="selectByNumTimesAndKey" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplateKey" >
+		select Memberid from mem51 
+		where  memberid=#{memberid,jdbcType=INTEGER}
+		  and PackageCode= #{packageCode,jdbcType=INTEGER}
+		  and tag='T' 
+		  and NumTimes>SubmitNum
+		  and LineNum= #{lineNum,jdbcType=SMALLINT}
+    </select>
+    
+    <insert id="insertByBatch" parameterType="java.util.List" >
+        insert into mem51 (Memberid, LineNum, PackageCode, 
+            SumRepTempCode, NumTimes, SubmitNum, 
+            BeginDate, EndDate, CalcType, 
+            Tag)values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.memberid,jdbcType=INTEGER}, #{item.lineNum,jdbcType=SMALLINT}, #{item.packageCode,jdbcType=INTEGER}, 
+            #{item.sumRepTempCode,jdbcType=INTEGER}, #{item.numTimes,jdbcType=SMALLINT}, #{item.submitNum,jdbcType=SMALLINT}, 
+            #{item.beginDate,jdbcType=DATE}, #{item.endDate,jdbcType=DATE}, #{item.calcType,jdbcType=CHAR}, 
+            #{item.tag,jdbcType=CHAR})
+        </foreach>
+    </insert>
+    
+    <!-- 查询会员订购套餐的明细 -->
+    <select id="selectMemPackageDetailList" resultMap="BaseResultMap" parameterType="com.bithealth.packagCore.packag.model.MemBerPackagTemplate" >
+			SELECT a.*,b.`TempName` AS sumRepTempName 
+			FROM mem51 a , osms b  
+			WHERE  a.`SumRepTempCode` = b.`SumRepTempCode`
+			AND a.`Memberid` = #{memberid}
+			AND a.`PackageCode` = #{packageCode}
+			AND a.`LineNum` = #{lineNum}
+    </select>
+
+
+
+</mapper>

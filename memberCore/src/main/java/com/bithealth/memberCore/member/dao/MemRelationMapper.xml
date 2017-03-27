@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.MemRelationMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.MemRelation" >
+        <id column="unique_id" property="uniqueId" jdbcType="VARCHAR" />
+        <result column="logogram" property="logogram" jdbcType="VARCHAR" />
+        <result column="relation" property="relation" jdbcType="INTEGER" />
+        <result column="company" property="company" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="area" property="area" jdbcType="VARCHAR" />
+        <result column="village" property="village" jdbcType="VARCHAR" />
+        <result column="neighborhood_committee" property="neighborhoodCommittee" jdbcType="VARCHAR" />
+        <result column="live_status" property="liveStatus" jdbcType="INTEGER" />
+        <result column="nation" property="nation" jdbcType="VARCHAR" />
+        <result column="pay_type" property="payType" jdbcType="INTEGER" />
+        <result column="medical_account" property="medicalAccount" jdbcType="VARCHAR" />
+        <result column="agro_account" property="agroAccount" jdbcType="VARCHAR" />
+        <result column="survey_time" property="surveyTime" jdbcType="TIMESTAMP" />
+        <result column="fetation_status" property="fetationStatus" jdbcType="INTEGER" />
+        <result column="certificate_type" property="certificateType" jdbcType="INTEGER" />
+        <result column="file_type" property="fileType" jdbcType="INTEGER" />
+        <result column="file_status" property="fileStatus" jdbcType="INTEGER" />
+        <result column="prgid" property="prgid" jdbcType="VARCHAR" />
+        <result column="other_pay" property="otherPay" jdbcType="VARCHAR" />
+        <result column="family_code" property="familyCode" jdbcType="VARCHAR" />
+        <result column="belong_area" property="belongArea" jdbcType="VARCHAR" />
+        <result column="file_status_desc" property="fileStatusDesc" jdbcType="INTEGER" />
+        <result column="state" property="state" jdbcType="TINYINT" />
+        <association property="member" column="unique_id" select="com.bithealth.memberCore.member.dao.MemberMapper.selectByUniqueId"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        unique_id, logogram, relation, company, province, city, area, village, neighborhood_committee, 
+        live_status, nation, pay_type, medical_account, agro_account, survey_time, fetation_status, 
+        certificate_type, file_type, file_status, prgid, other_pay, family_code, belong_area, 
+        file_status_desc, state
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemRelationExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from d_omem_relation
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemRelationExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from d_omem_relation
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from d_omem_relation
+        where unique_id = #{uniqueId,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.MemRelation" >
+        insert into d_omem_relation (unique_id, logogram, relation, 
+            company, province, city, 
+            area, village, neighborhood_committee, 
+            live_status, nation, pay_type, 
+            medical_account, agro_account, survey_time, 
+            fetation_status, certificate_type, file_type, 
+            file_status, prgid, other_pay, 
+            family_code, belong_area, file_status_desc, 
+            state)
+        values (#{uniqueId,jdbcType=VARCHAR}, #{logogram,jdbcType=VARCHAR}, #{relation,jdbcType=INTEGER}, 
+            #{company,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+            #{area,jdbcType=VARCHAR}, #{village,jdbcType=VARCHAR}, #{neighborhoodCommittee,jdbcType=VARCHAR}, 
+            #{liveStatus,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, 
+            #{medicalAccount,jdbcType=VARCHAR}, #{agroAccount,jdbcType=VARCHAR}, #{surveyTime,jdbcType=TIMESTAMP}, 
+            #{fetationStatus,jdbcType=INTEGER}, #{certificateType,jdbcType=INTEGER}, #{fileType,jdbcType=INTEGER}, 
+            #{fileStatus,jdbcType=INTEGER}, #{prgid,jdbcType=VARCHAR}, #{otherPay,jdbcType=VARCHAR}, 
+            #{familyCode,jdbcType=VARCHAR}, #{belongArea,jdbcType=VARCHAR}, #{fileStatusDesc,jdbcType=INTEGER}, 
+            #{state,jdbcType=TINYINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.MemRelation" >
+        insert into d_omem_relation
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="uniqueId != null" >
+                unique_id,
+            </if>
+            <if test="logogram != null" >
+                logogram,
+            </if>
+            <if test="relation != null" >
+                relation,
+            </if>
+            <if test="company != null" >
+                company,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="area != null" >
+                area,
+            </if>
+            <if test="village != null" >
+                village,
+            </if>
+            <if test="neighborhoodCommittee != null" >
+                neighborhood_committee,
+            </if>
+            <if test="liveStatus != null" >
+                live_status,
+            </if>
+            <if test="nation != null" >
+                nation,
+            </if>
+            <if test="payType != null" >
+                pay_type,
+            </if>
+            <if test="medicalAccount != null" >
+                medical_account,
+            </if>
+            <if test="agroAccount != null" >
+                agro_account,
+            </if>
+            <if test="surveyTime != null" >
+                survey_time,
+            </if>
+            <if test="fetationStatus != null" >
+                fetation_status,
+            </if>
+            <if test="certificateType != null" >
+                certificate_type,
+            </if>
+            <if test="fileType != null" >
+                file_type,
+            </if>
+            <if test="fileStatus != null" >
+                file_status,
+            </if>
+            <if test="prgid != null" >
+                prgid,
+            </if>
+            <if test="otherPay != null" >
+                other_pay,
+            </if>
+            <if test="familyCode != null" >
+                family_code,
+            </if>
+            <if test="belongArea != null" >
+                belong_area,
+            </if>
+            <if test="fileStatusDesc != null" >
+                file_status_desc,
+            </if>
+            <if test="state != null" >
+                state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="uniqueId != null" >
+                #{uniqueId,jdbcType=VARCHAR},
+            </if>
+            <if test="logogram != null" >
+                #{logogram,jdbcType=VARCHAR},
+            </if>
+            <if test="relation != null" >
+                #{relation,jdbcType=INTEGER},
+            </if>
+            <if test="company != null" >
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null" >
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="village != null" >
+                #{village,jdbcType=VARCHAR},
+            </if>
+            <if test="neighborhoodCommittee != null" >
+                #{neighborhoodCommittee,jdbcType=VARCHAR},
+            </if>
+            <if test="liveStatus != null" >
+                #{liveStatus,jdbcType=INTEGER},
+            </if>
+            <if test="nation != null" >
+                #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null" >
+                #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="medicalAccount != null" >
+                #{medicalAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="agroAccount != null" >
+                #{agroAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyTime != null" >
+                #{surveyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fetationStatus != null" >
+                #{fetationStatus,jdbcType=INTEGER},
+            </if>
+            <if test="certificateType != null" >
+                #{certificateType,jdbcType=INTEGER},
+            </if>
+            <if test="fileType != null" >
+                #{fileType,jdbcType=INTEGER},
+            </if>
+            <if test="fileStatus != null" >
+                #{fileStatus,jdbcType=INTEGER},
+            </if>
+            <if test="prgid != null" >
+                #{prgid,jdbcType=VARCHAR},
+            </if>
+            <if test="otherPay != null" >
+                #{otherPay,jdbcType=VARCHAR},
+            </if>
+            <if test="familyCode != null" >
+                #{familyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="belongArea != null" >
+                #{belongArea,jdbcType=VARCHAR},
+            </if>
+            <if test="fileStatusDesc != null" >
+                #{fileStatusDesc,jdbcType=INTEGER},
+            </if>
+            <if test="state != null" >
+                #{state,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.MemRelationExample" resultType="java.lang.Integer" >
+        select count(*) from d_omem_relation
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update d_omem_relation
+        <set >
+            <if test="record.uniqueId != null" >
+                unique_id = #{record.uniqueId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.logogram != null" >
+                logogram = #{record.logogram,jdbcType=VARCHAR},
+            </if>
+            <if test="record.relation != null" >
+                relation = #{record.relation,jdbcType=INTEGER},
+            </if>
+            <if test="record.company != null" >
+                company = #{record.company,jdbcType=VARCHAR},
+            </if>
+            <if test="record.province != null" >
+                province = #{record.province,jdbcType=VARCHAR},
+            </if>
+            <if test="record.city != null" >
+                city = #{record.city,jdbcType=VARCHAR},
+            </if>
+            <if test="record.area != null" >
+                area = #{record.area,jdbcType=VARCHAR},
+            </if>
+            <if test="record.village != null" >
+                village = #{record.village,jdbcType=VARCHAR},
+            </if>
+            <if test="record.neighborhoodCommittee != null" >
+                neighborhood_committee = #{record.neighborhoodCommittee,jdbcType=VARCHAR},
+            </if>
+            <if test="record.liveStatus != null" >
+                live_status = #{record.liveStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.nation != null" >
+                nation = #{record.nation,jdbcType=VARCHAR},
+            </if>
+            <if test="record.payType != null" >
+                pay_type = #{record.payType,jdbcType=INTEGER},
+            </if>
+            <if test="record.medicalAccount != null" >
+                medical_account = #{record.medicalAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.agroAccount != null" >
+                agro_account = #{record.agroAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.surveyTime != null" >
+                survey_time = #{record.surveyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.fetationStatus != null" >
+                fetation_status = #{record.fetationStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.certificateType != null" >
+                certificate_type = #{record.certificateType,jdbcType=INTEGER},
+            </if>
+            <if test="record.fileType != null" >
+                file_type = #{record.fileType,jdbcType=INTEGER},
+            </if>
+            <if test="record.fileStatus != null" >
+                file_status = #{record.fileStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.prgid != null" >
+                prgid = #{record.prgid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.otherPay != null" >
+                other_pay = #{record.otherPay,jdbcType=VARCHAR},
+            </if>
+            <if test="record.familyCode != null" >
+                family_code = #{record.familyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.belongArea != null" >
+                belong_area = #{record.belongArea,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fileStatusDesc != null" >
+                file_status_desc = #{record.fileStatusDesc,jdbcType=INTEGER},
+            </if>
+            <if test="record.state != null" >
+                state = #{record.state,jdbcType=TINYINT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update d_omem_relation
+        set unique_id = #{record.uniqueId,jdbcType=VARCHAR},
+            logogram = #{record.logogram,jdbcType=VARCHAR},
+            relation = #{record.relation,jdbcType=INTEGER},
+            company = #{record.company,jdbcType=VARCHAR},
+            province = #{record.province,jdbcType=VARCHAR},
+            city = #{record.city,jdbcType=VARCHAR},
+            area = #{record.area,jdbcType=VARCHAR},
+            village = #{record.village,jdbcType=VARCHAR},
+            neighborhood_committee = #{record.neighborhoodCommittee,jdbcType=VARCHAR},
+            live_status = #{record.liveStatus,jdbcType=INTEGER},
+            nation = #{record.nation,jdbcType=VARCHAR},
+            pay_type = #{record.payType,jdbcType=INTEGER},
+            medical_account = #{record.medicalAccount,jdbcType=VARCHAR},
+            agro_account = #{record.agroAccount,jdbcType=VARCHAR},
+            survey_time = #{record.surveyTime,jdbcType=TIMESTAMP},
+            fetation_status = #{record.fetationStatus,jdbcType=INTEGER},
+            certificate_type = #{record.certificateType,jdbcType=INTEGER},
+            file_type = #{record.fileType,jdbcType=INTEGER},
+            file_status = #{record.fileStatus,jdbcType=INTEGER},
+            prgid = #{record.prgid,jdbcType=VARCHAR},
+            other_pay = #{record.otherPay,jdbcType=VARCHAR},
+            family_code = #{record.familyCode,jdbcType=VARCHAR},
+            belong_area = #{record.belongArea,jdbcType=VARCHAR},
+            file_status_desc = #{record.fileStatusDesc,jdbcType=INTEGER},
+            state = #{record.state,jdbcType=TINYINT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.MemRelation" >
+        update d_omem_relation
+        <set >
+            <if test="logogram != null" >
+                logogram = #{logogram,jdbcType=VARCHAR},
+            </if>
+            <if test="relation != null" >
+                relation = #{relation,jdbcType=INTEGER},
+            </if>
+            <if test="company != null" >
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null" >
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="village != null" >
+                village = #{village,jdbcType=VARCHAR},
+            </if>
+            <if test="neighborhoodCommittee != null" >
+                neighborhood_committee = #{neighborhoodCommittee,jdbcType=VARCHAR},
+            </if>
+            <if test="liveStatus != null" >
+                live_status = #{liveStatus,jdbcType=INTEGER},
+            </if>
+            <if test="nation != null" >
+                nation = #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null" >
+                pay_type = #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="medicalAccount != null" >
+                medical_account = #{medicalAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="agroAccount != null" >
+                agro_account = #{agroAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="surveyTime != null" >
+                survey_time = #{surveyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fetationStatus != null" >
+                fetation_status = #{fetationStatus,jdbcType=INTEGER},
+            </if>
+            <if test="certificateType != null" >
+                certificate_type = #{certificateType,jdbcType=INTEGER},
+            </if>
+            <if test="fileType != null" >
+                file_type = #{fileType,jdbcType=INTEGER},
+            </if>
+            <if test="fileStatus != null" >
+                file_status = #{fileStatus,jdbcType=INTEGER},
+            </if>
+            <if test="prgid != null" >
+                prgid = #{prgid,jdbcType=VARCHAR},
+            </if>
+            <if test="otherPay != null" >
+                other_pay = #{otherPay,jdbcType=VARCHAR},
+            </if>
+            <if test="familyCode != null" >
+                family_code = #{familyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="belongArea != null" >
+                belong_area = #{belongArea,jdbcType=VARCHAR},
+            </if>
+            <if test="fileStatusDesc != null" >
+                file_status_desc = #{fileStatusDesc,jdbcType=INTEGER},
+            </if>
+            <if test="state != null" >
+                state = #{state,jdbcType=TINYINT},
+            </if>
+        </set>
+        where unique_id = #{uniqueId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.MemRelation" >
+        update d_omem_relation
+        set logogram = #{logogram,jdbcType=VARCHAR},
+            relation = #{relation,jdbcType=INTEGER},
+            company = #{company,jdbcType=VARCHAR},
+            province = #{province,jdbcType=VARCHAR},
+            city = #{city,jdbcType=VARCHAR},
+            area = #{area,jdbcType=VARCHAR},
+            village = #{village,jdbcType=VARCHAR},
+            neighborhood_committee = #{neighborhoodCommittee,jdbcType=VARCHAR},
+            live_status = #{liveStatus,jdbcType=INTEGER},
+            nation = #{nation,jdbcType=VARCHAR},
+            pay_type = #{payType,jdbcType=INTEGER},
+            medical_account = #{medicalAccount,jdbcType=VARCHAR},
+            agro_account = #{agroAccount,jdbcType=VARCHAR},
+            survey_time = #{surveyTime,jdbcType=TIMESTAMP},
+            fetation_status = #{fetationStatus,jdbcType=INTEGER},
+            certificate_type = #{certificateType,jdbcType=INTEGER},
+            file_type = #{fileType,jdbcType=INTEGER},
+            file_status = #{fileStatus,jdbcType=INTEGER},
+            prgid = #{prgid,jdbcType=VARCHAR},
+            other_pay = #{otherPay,jdbcType=VARCHAR},
+            family_code = #{familyCode,jdbcType=VARCHAR},
+            belong_area = #{belongArea,jdbcType=VARCHAR},
+            file_status_desc = #{fileStatusDesc,jdbcType=INTEGER},
+            state = #{state,jdbcType=TINYINT}
+        where unique_id = #{uniqueId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from d_omem_relation
+        where unique_id = #{uniqueId,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.MemRelationExample" >
+        delete from d_omem_relation
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+</mapper>

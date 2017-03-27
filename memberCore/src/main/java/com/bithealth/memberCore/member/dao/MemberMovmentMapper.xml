@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.memberCore.member.dao.MemberMovmentMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.memberCore.member.model.MemberMovment" >
+        <id column="MMovementID" property="MMovementID" jdbcType="INTEGER" />
+        <result column="MemberID" property="memberID" jdbcType="INTEGER" />
+        <result column="OutOrgID" property="outOrgID" jdbcType="INTEGER" />
+        <result column="OutDrID" property="outDrID" jdbcType="INTEGER" />
+        <result column="InOrgID" property="inOrgID" jdbcType="INTEGER" />
+        <result column="InMemGrpidList" property="inMemGrpidList" jdbcType="VARCHAR" />
+        <result column="MoveStatus" property="moveStatus" jdbcType="TINYINT" />
+        <result column="ConfirmTime" property="confirmTime" jdbcType="TIMESTAMP" />
+        <result column="RefuseReason" property="refuseReason" jdbcType="VARCHAR" />
+        <result column="CreateID" property="createID" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+        <association property="member" column="MemberID" select="com.bithealth.memberCore.member.dao.MemberMapper.selectByPrimaryKey"/>
+        <association property="outDrName" column="OutDrID" select="selectDocById"/>
+        <association property="createDrName" column="CreateID" select="selectDocById"/>
+        <association property="groupNames" column="InMemGrpidList" select="selectByGroupNames"/>
+        <association property="outOrgName" column="outOrgID" select="selectOrgNameById"/>
+        <association property="inOrgName" column="InOrgID" select="selectOrgNameById"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        MMovementID, MemberID, OutOrgID, OutDrID, InOrgID, InMemGrpidList, MoveStatus, ConfirmTime, 
+        RefuseReason, CreateID, CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemberMovmentExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem_movement
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.memberCore.member.model.MemberMovmentExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from omem_movement
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from omem_movement
+        where MMovementID = #{MMovementID,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.bithealth.memberCore.member.model.MemberMovment" useGeneratedKeys="true" keyProperty="MMovementID" >
+        insert into omem_movement (MemberID, OutOrgID, OutDrID, 
+            InOrgID, InMemGrpidList, MoveStatus, 
+            ConfirmTime, RefuseReason, CreateID, 
+            CreateTime, UpdateID, UpdateTime
+            )
+        values (#{memberID,jdbcType=INTEGER}, #{outOrgID,jdbcType=INTEGER}, #{outDrID,jdbcType=INTEGER}, 
+            #{inOrgID,jdbcType=INTEGER}, #{inMemGrpidList,jdbcType=VARCHAR}, #{moveStatus,jdbcType=TINYINT}, 
+            #{confirmTime,jdbcType=TIMESTAMP}, #{refuseReason,jdbcType=VARCHAR}, #{createID,jdbcType=INTEGER}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{updateID,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.bithealth.memberCore.member.model.MemberMovment" useGeneratedKeys="true" keyProperty="MMovementID" >
+        insert into omem_movement
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="memberID != null" >
+                MemberID,
+            </if>
+            <if test="outOrgID != null" >
+                OutOrgID,
+            </if>
+            <if test="outDrID != null" >
+                OutDrID,
+            </if>
+            <if test="inOrgID != null" >
+                InOrgID,
+            </if>
+            <if test="inMemGrpidList != null" >
+                InMemGrpidList,
+            </if>
+            <if test="moveStatus != null" >
+                MoveStatus,
+            </if>
+            <if test="confirmTime != null" >
+                ConfirmTime,
+            </if>
+            <if test="refuseReason != null" >
+                RefuseReason,
+            </if>
+            <if test="createID != null" >
+                CreateID,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateID != null" >
+                UpdateID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="memberID != null" >
+                #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="outOrgID != null" >
+                #{outOrgID,jdbcType=INTEGER},
+            </if>
+            <if test="outDrID != null" >
+                #{outDrID,jdbcType=INTEGER},
+            </if>
+            <if test="inOrgID != null" >
+                #{inOrgID,jdbcType=INTEGER},
+            </if>
+            <if test="inMemGrpidList != null" >
+                #{inMemGrpidList,jdbcType=VARCHAR},
+            </if>
+            <if test="moveStatus != null" >
+                #{moveStatus,jdbcType=TINYINT},
+            </if>
+            <if test="confirmTime != null" >
+                #{confirmTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refuseReason != null" >
+                #{refuseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="createID != null" >
+                #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.memberCore.member.model.MemberMovmentExample" resultType="java.lang.Integer" >
+        select count(*) from omem_movement
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update omem_movement
+        <set >
+            <if test="record.MMovementID != null" >
+                MMovementID = #{record.MMovementID,jdbcType=INTEGER},
+            </if>
+            <if test="record.memberID != null" >
+                MemberID = #{record.memberID,jdbcType=INTEGER},
+            </if>
+            <if test="record.outOrgID != null" >
+                OutOrgID = #{record.outOrgID,jdbcType=INTEGER},
+            </if>
+            <if test="record.outDrID != null" >
+                OutDrID = #{record.outDrID,jdbcType=INTEGER},
+            </if>
+            <if test="record.inOrgID != null" >
+                InOrgID = #{record.inOrgID,jdbcType=INTEGER},
+            </if>
+            <if test="record.inMemGrpidList != null" >
+                InMemGrpidList = #{record.inMemGrpidList,jdbcType=VARCHAR},
+            </if>
+            <if test="record.moveStatus != null" >
+                MoveStatus = #{record.moveStatus,jdbcType=TINYINT},
+            </if>
+            <if test="record.confirmTime != null" >
+                ConfirmTime = #{record.confirmTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.refuseReason != null" >
+                RefuseReason = #{record.refuseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createID != null" >
+                CreateID = #{record.createID,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null" >
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateID != null" >
+                UpdateID = #{record.updateID,jdbcType=INTEGER},
+            </if>
+            <if test="record.updateTime != null" >
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update omem_movement
+        set MMovementID = #{record.MMovementID,jdbcType=INTEGER},
+            MemberID = #{record.memberID,jdbcType=INTEGER},
+            OutOrgID = #{record.outOrgID,jdbcType=INTEGER},
+            OutDrID = #{record.outDrID,jdbcType=INTEGER},
+            InOrgID = #{record.inOrgID,jdbcType=INTEGER},
+            InMemGrpidList = #{record.inMemGrpidList,jdbcType=VARCHAR},
+            MoveStatus = #{record.moveStatus,jdbcType=TINYINT},
+            ConfirmTime = #{record.confirmTime,jdbcType=TIMESTAMP},
+            RefuseReason = #{record.refuseReason,jdbcType=VARCHAR},
+            CreateID = #{record.createID,jdbcType=INTEGER},
+            CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+            UpdateID = #{record.updateID,jdbcType=INTEGER},
+            UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.memberCore.member.model.MemberMovment" >
+        update omem_movement
+        <set >
+            <if test="memberID != null" >
+                MemberID = #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="outOrgID != null" >
+                OutOrgID = #{outOrgID,jdbcType=INTEGER},
+            </if>
+            <if test="outDrID != null" >
+                OutDrID = #{outDrID,jdbcType=INTEGER},
+            </if>
+            <if test="inOrgID != null" >
+                InOrgID = #{inOrgID,jdbcType=INTEGER},
+            </if>
+            <if test="inMemGrpidList != null" >
+                InMemGrpidList = #{inMemGrpidList,jdbcType=VARCHAR},
+            </if>
+            <if test="moveStatus != null" >
+                MoveStatus = #{moveStatus,jdbcType=TINYINT},
+            </if>
+            <if test="confirmTime != null" >
+                ConfirmTime = #{confirmTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="refuseReason != null" >
+                RefuseReason = #{refuseReason,jdbcType=VARCHAR},
+            </if>
+            <if test="createID != null" >
+                CreateID = #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                UpdateID = #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where MMovementID = #{MMovementID,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.memberCore.member.model.MemberMovment" >
+        update omem_movement
+        set MemberID = #{memberID,jdbcType=INTEGER},
+            OutOrgID = #{outOrgID,jdbcType=INTEGER},
+            OutDrID = #{outDrID,jdbcType=INTEGER},
+            InOrgID = #{inOrgID,jdbcType=INTEGER},
+            InMemGrpidList = #{inMemGrpidList,jdbcType=VARCHAR},
+            MoveStatus = #{moveStatus,jdbcType=TINYINT},
+            ConfirmTime = #{confirmTime,jdbcType=TIMESTAMP},
+            RefuseReason = #{refuseReason,jdbcType=VARCHAR},
+            CreateID = #{createID,jdbcType=INTEGER},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where MMovementID = #{MMovementID,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from omem_movement
+        where MMovementID = #{MMovementID,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.memberCore.member.model.MemberMovmentExample" >
+        delete from omem_movement
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    
+    <!-- ############# -->
+    <select id="selectDocById" parameterType="java.lang.Integer" resultType="String">
+    SELECT DocName FROM odoc WHERE Docid=#{docId, jdbcType=INTEGER}
+    </select>
+    <sql id="dynamic_selectMoments_sql">
+	    <if test="condition.memberName != null and condition.memberName != ''">
+	    AND m.`MemName` LIKE CONCAT(TRIM(#{condition.memberName,jdbcType=VARCHAR}), '%') 
+	    </if>
+	    <if test="condition.tel != null and condition.tel != ''">
+	    AND m.`Tel` LIKE CONCAT('%',TRIM(#{condition.tel,jdbcType=VARCHAR}), '%') 
+	    </if>
+	    <if test="condition.idcard != null and condition.idcard != ''">
+	    AND m.`IdCard` LIKE CONCAT('%',TRIM(#{condition.idcard,jdbcType=VARCHAR}), '%') 
+	    </if>
+	    <if test="condition.status != null and condition.status != ''">
+	    AND o.`MoveStatus`= #{condition.status,jdbcType=INTEGER}
+	    </if>
+	    <if test="condition.applyStartDate != null and condition.applyStartDate != ''">
+	    AND o.`CreateTime` &gt;= CONCAT(#{condition.applyStartDate,jdbcType=VARCHAR}, ' 00:00:00')
+	    </if>
+	    <if test="condition.applyEndDate != null and condition.applyEndDate != ''">
+	    AND o.`CreateTime` &lt;= CONCAT(#{condition.applyEndDate,jdbcType=VARCHAR}, ' 23:59:59')
+	    </if>
+	    <if test="condition.createDrId != null and condition.createDrId != ''">
+	    AND o.CreateID = #{condition.createDrId, jdbcType=INTEGER}
+	    </if>
+	    <if test="condition.confirmDrId != null and condition.confirmDrId != ''">
+	    AND o.OutDrID = #{condition.confirmDrId, jdbcType=INTEGER}
+	    </if>
+    </sql>
+    
+    <select id="selectByPage" parameterType="map" resultMap="BaseResultMap">
+    SELECT o.* FROM omem_movement o  INNER JOIN omem m ON m.`Memberid`=o.`MemberID` AND m.`UseTag`='T' 
+    <where>
+     <include refid="dynamic_selectMoments_sql"/>
+    </where>
+    ORDER BY o.`CreateTime` DESC 
+    LIMIT #{page.offset, jdbcType=INTEGER}, #{page.pageSize, jdbcType=INTEGER} 
+    </select>
+    <select id="countMovments" parameterType="map" resultType="java.lang.Integer">
+    SELECT COUNT(o.MMovementID) FROM omem_movement o  INNER JOIN omem m ON m.`Memberid`=o.`MemberID` AND m.`UseTag`='T'
+    <where>
+     <include refid="dynamic_selectMoments_sql"/>
+    </where>
+    </select>
+    <select id="selectByGroupNames" resultType="string"  parameterType="string">
+    SELECT GROUP_CONCAT(MemGrpName) FROM `omgs` WHERE MemGrpid IN(${_parameter})
+    </select>
+    <select id="selectOrgNameById" resultType="string" parameterType="java.lang.Integer">
+    SELECT OrgName FROM orgs WHERE OrgId=#{orgId, jdbcType=INTEGER}
+    </select>
+    
+
+</mapper>

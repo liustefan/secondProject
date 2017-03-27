@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 原始对象 -->
+<Assemes namespace="com.bithealth.inspectCore.physical.model.PhHealthexamdetailnonimmune">
+<!-- 会员基本资料信息,通过查询数据库获取 -->
+<Assem name="uniqueId" assembly="DGrdabh"/>   <!-- 个人档案编号 -->
+<Assem name="vaccinatename" assembly="FJzmc"/>   <!-- 接种名称-->
+<Assem name="vaccinatedate" assembly="FJzrq"/>  <!-- 接种日期-->
+<Assem name="institution"  assembly="FJzjg"/>  <!-- 接种机构-->
+<Assem name="updatetime" assembly="FHappentime"/>  <!-- 发生时间 -->
+</Assemes>

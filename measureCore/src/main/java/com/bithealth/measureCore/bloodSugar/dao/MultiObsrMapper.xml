@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.measureCore.bloodSugar.dao.MultiObsrMapper" >
+	<sql id="maxObsrCondition">
+		<if test="memberId != null">
+			AND memberid = #{memberId}
+		</if>
+		<if test="timePeriod != null and timePeriod != ''">
+			AND timePeriod = #{timePeriod}
+		</if>
+		<if test="delTag != null and delTag != ''">
+			AND DelTag = #{delTag}
+		</if>
+		<if test="startTime != null and endTime != null">
+			AND testTime BETWEEN #{startTime} AND #{endTime}
+		</if>
+		<if test="startTime != null and endTime == null">
+			AND testTime &gt;= #{startTime}
+		</if>
+		<if test="startTime == null and endTime != null">
+			AND testTime &lt;= #{endTime}
+		</if>
+	</sql>
+	
+	<sql id="where_condition_0">
+		FROM 
+			omrr o 
+			JOIN obsr ob 
+			ON ob.Memberid = o.Memberid 
+      		AND ob.TestTime &gt;= o.MeasTime 
+      		AND ob.TestTime &lt;= o.MeasTermTime 
+      		WHERE ob.DelTag = '0' 
+      		AND o.Memberid = #{memberId} 
+      		AND o.id = #{reportNo}
+	</sql>
+	
+    <select id="selectMaxObsrList" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodSugar.model.Obsr">
+    	SELECT * FROM obsr WHERE bsvalue IN (SELECT MAX(bsValue) FROM obsr <where><include refid="maxObsrCondition" /></where>) <include refid="maxObsrCondition" />
+    </select>
+    
+    <select id="selectMinObsrList" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodSugar.model.Obsr">
+    	SELECT * FROM obsr WHERE bsvalue IN (SELECT MIN(bsValue) FROM obsr <where><include refid="maxObsrCondition" /></where>) <include refid="maxObsrCondition" />
+    </select>
+
+	<select id="selectOmdsLastOnebyObsr" parameterType="java.util.Map" resultType="com.bithealth.measureCore.common.model.Omds">
+		SELECT a.* from omds a JOIN obsr b ON a.eventid=b.EventId AND b.memberid=#{memberId} AND a.EventType=2 AND
+			b.testTime IN (SELECT MAX(testTime) FROM obsr WHERE memberid=#{memberId})
+		<if test="delTag != null and delTag != ''">
+			b.DelTag=#{delTag}
+		</if>
+	</select>
+	
+	<select id="selectOmdsListbyObsr" parameterType="java.util.Map" resultType="com.bithealth.measureCore.common.model.Omds">
+		SELECT a.* from omds a JOIN obsr b ON a.eventid=b.EventId AND b.memberid=#{memberId} AND a.EventType=2
+		<if test="delTag != null and delTag != ''">
+			AND b.DelTag=#{delTag}
+		</if>
+		order by b.TestTime desc
+	</select>
+	
+	<select id="selectObsrListAndPage"  parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrOmemVO">
+		SELECT e.Memberid,e.LogName,e.MemName,e.BirthDate,e.Tel,e.Gender,o.bsValue,o.timePeriod,o.TestTime,o.DeviceCode, 
+			o.Docentry,o.EventId FROM obsr o, ompb a, odmt b, odgp c, dgp1 d, omem e WHERE a.MemGrpid = b.MemGrpid 
+			AND c.OdgpId = b.OdgpId AND c.OdgpId = d.OdgpId AND e.Memberid = a.Memberid AND o.Memberid = a.Memberid
+			AND e.Memberid = o.Memberid AND o.DelTag = 0 AND e.UseTag = 'T' 
+			<if test="docId != null and docId != ''">
+				AND d.Docid = #{docId} 
+			</if>
+			<if test="criteria != null and criteria != ''">
+				AND (e.logName LIKE #{criteria} OR e.memName LIKE #{criteria} OR e.tel LIKE #{criteria} OR o.deviceCode LIKE #{criteria})
+			</if>
+			<if test="wheAbnTag == 1">
+				AND o.AnalysisResult &lt;&gt; 0 
+			</if>
+			GROUP BY o.TestTime DESC, o.Docentry DESC
+	</select>
+	
+	<select id="selectObsrDistriChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT DATE_FORMAT(ob.TestTime, '%H:%i') TestTimes,ob.timePeriod,ob.BsValue 
+			<include refid="where_condition_0" />
+			;
+	</select>
+	
+	<select id="selectObsrDistriChart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT DATE_FORMAT(TestTime, '%H:%i') TestTimes,timePeriod,BsValue FROM obsr
+			<where>
+				docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+		</where>
+			;
+	</select>
+	
+	<select id="selectObsrDistriBoxChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT ob.timePeriod,ob.BsValue 
+			<include refid="where_condition_0" />
+    		ORDER BY ob.timePeriod;
+	</select>
+	
+	<select id="selectObsrDistriBoxChart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT timePeriod,BsValue FROM obsr
+			<where>
+				docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+		</where>
+    		ORDER BY timePeriod;
+	</select>
+	
+	<select id="selectObsrMaxAndMinTrendChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT DATE_FORMAT(ob.TestTime, '%Y-%m-%d') days,MAX(ob.BsValue) MAX,MIN(ob.BsValue) MIN 
+			<include refid="where_condition_0" /> 
+			GROUP BY days ORDER BY days;
+	</select>
+	
+	<select id="selectObsrMaxAndMinTrendChart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT DATE_FORMAT(TestTime, '%Y-%m-%d') days,MAX(BsValue) MAX,MIN(BsValue) MIN FROM obsr
+			<where>
+				docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+		</where>
+			GROUP BY days ORDER BY days;
+	</select>
+
+	<select id="selectObsrTimeQPieChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT * FROM (SELECT timePeriod, CASE WHEN (AnalysisResult = '0') THEN 'N' WHEN (AnalysisResult = '2') THEN 'H' 
+      		WHEN (AnalysisResult = '3') THEN 'H' WHEN (AnalysisResult = '5') THEN 'H' WHEN (AnalysisResult = '1') THEN 'L' 
+      		WHEN (AnalysisResult = '4') THEN 'L' END NE, COUNT(*) num 
+      		<include refid="where_condition_0" />
+      		GROUP BY ob.timePeriod, NE ORDER BY ob.timePeriod) bsr;
+	</select>
+	
+	<select id="selectObsrTimeQPieChart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT * FROM (SELECT timePeriod, CASE WHEN (AnalysisResult = '0') THEN 'N' WHEN (AnalysisResult = '2') THEN 'H' 
+      		WHEN (AnalysisResult = '3') THEN 'H' WHEN (AnalysisResult = '5') THEN 'H' WHEN (AnalysisResult = '1') THEN 'L' 
+      		WHEN (AnalysisResult = '4') THEN 'L' END NE, COUNT(*) num FROM obsr ob
+      		<where>
+				docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+		</where>
+      		GROUP BY ob.timePeriod, NE ORDER BY ob.timePeriod) bsr;
+	</select>
+	
+	<select id="selectObsrMeasTrendsChart" parameterType="java.util.Map" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT ob.* 
+			<include refid="where_condition_0" /> 
+			ORDER BY ob.TestTime;
+	</select>
+	
+	<select id="selectObsrMeasTrendsChart1" parameterType="java.util.List" resultType="com.bithealth.measureCore.bloodSugar.model.ObsrChart">
+		SELECT ob.* FROM obsr ob
+      		<where>
+				docentry in
+				<foreach item="docentry" collection="list"
+					open="(" separator="," close=")">
+					#{docentry}
+				</foreach>
+		</where>
+			ORDER BY ob.TestTime;
+	</select>
+
+	<!-- <insert id="insertObsr_docentry">
+    	INSERT INTO obsr_docentry VALUES();
+    </insert>
+    
+    <select id="selectMaxDocentry" resultType="java.lang.Long">
+    	SELECT MAX(Docentry) FROM obsr_docentry;
+    </select> -->
+    
+    <insert id="insertObsr" parameterType="com.bithealth.measureCore.bloodSugar.model.Obsr">
+    	INSERT INTO obsr(EventId ,Memberid ,UploadTime ,TestTime ,DelTag ,BsValue ,timePeriod ,AnalysisResult ,DeviceCode ,BluetoothMacAddr) 
+    		VALUES(#{eventid},#{memberid},#{uploadtime},#{testtime},#{deltag},#{bsvalue},#{timeperiod},#{analysisresult},#{devicecode},#{bluetoothmacaddr});
+    </insert>
+
+</mapper>

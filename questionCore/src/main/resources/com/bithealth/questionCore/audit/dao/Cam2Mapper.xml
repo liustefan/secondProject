@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.audit.dao.Cam2Mapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.questionCore.audit.model.Cam2" >
+        <id column="CombAnsid" property="combAnsid" jdbcType="INTEGER" />
+        <id column="LineNum" property="lineNum" jdbcType="SMALLINT" />
+        <result column="OptId" property="optId" jdbcType="SMALLINT" />
+        <result column="FunId" property="funId" jdbcType="SMALLINT" />
+        <result column="AuditLevel" property="auditLevel" jdbcType="SMALLINT" />
+        <result column="Docid" property="docid" jdbcType="INTEGER" />
+        <result column="AuditDesc" property="auditDesc" jdbcType="LONGVARCHAR" />
+        <result column="AuditTime" property="auditTime" jdbcType="TIMESTAMP" />
+        <result column="AuditMode" property="auditMode" jdbcType="CHAR" />
+        <result column="diagnosis" property="diagnosis" jdbcType="VARCHAR" />
+        <association property="doctor" column="docid" select="com.bithealth.doctorCore.doctor.dao.DoctorMapper.selectByPrimaryKey"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        CombAnsid, LineNum, OptId, FunId, AuditLevel, Docid, AuditDesc, AuditTime, AuditMode, 
+        diagnosis
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.audit.model.Cam2Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from cam2
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.audit.model.Cam2Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from cam2
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.audit.model.Cam2Key" >
+        select 
+        <include refid="Base_Column_List" />
+        from cam2
+        where CombAnsid = #{combAnsid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.questionCore.audit.model.Cam2" >
+        insert into cam2
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="combAnsid != null" >
+                CombAnsid,
+            </if>
+            <if test="lineNum != null" >
+                LineNum,
+            </if>
+            <if test="optId != null" >
+                OptId,
+            </if>
+            <if test="funId != null" >
+                FunId,
+            </if>
+            <if test="auditLevel != null" >
+                AuditLevel,
+            </if>
+            <if test="docid != null" >
+                Docid,
+            </if>
+            <if test="auditDesc != null" >
+                AuditDesc,
+            </if>
+            <if test="auditTime != null" >
+                AuditTime,
+            </if>
+            <if test="auditMode != null" >
+                AuditMode,
+            </if>
+            <if test="diagnosis != null" >
+                diagnosis,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="combAnsid != null" >
+                #{combAnsid,jdbcType=INTEGER},
+            </if>
+            <if test="lineNum != null" >
+                #{lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="optId != null" >
+                #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="funId != null" >
+                #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="auditLevel != null" >
+                #{auditLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="docid != null" >
+                #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="auditDesc != null" >
+                #{auditDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditMode != null" >
+                #{auditMode,jdbcType=CHAR},
+            </if>
+            <if test="diagnosis != null" >
+                #{diagnosis,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.questionCore.audit.model.Cam2Example" resultType="java.lang.Integer" >
+        select count(*) from cam2
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null and _parameter != '' ">
+            update cam2
+            <set >
+                <if test="record.combAnsid != null" >
+                    CombAnsid = #{record.combAnsid,jdbcType=INTEGER},
+                </if>
+                <if test="record.lineNum != null" >
+                    LineNum = #{record.lineNum,jdbcType=SMALLINT},
+                </if>
+                <if test="record.optId != null" >
+                    OptId = #{record.optId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.funId != null" >
+                    FunId = #{record.funId,jdbcType=SMALLINT},
+                </if>
+                <if test="record.auditLevel != null" >
+                    AuditLevel = #{record.auditLevel,jdbcType=SMALLINT},
+                </if>
+                <if test="record.docid != null" >
+                    Docid = #{record.docid,jdbcType=INTEGER},
+                </if>
+                <if test="record.auditDesc != null" >
+                    AuditDesc = #{record.auditDesc,jdbcType=LONGVARCHAR},
+                </if>
+                <if test="record.auditTime != null" >
+                    AuditTime = #{record.auditTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.auditMode != null" >
+                    AuditMode = #{record.auditMode,jdbcType=CHAR},
+                </if>
+                <if test="record.diagnosis != null" >
+                    diagnosis = #{record.diagnosis,jdbcType=VARCHAR},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null and _parameter != '' ">
+            update cam2
+            set CombAnsid = #{record.combAnsid,jdbcType=INTEGER},
+                LineNum = #{record.lineNum,jdbcType=SMALLINT},
+                OptId = #{record.optId,jdbcType=SMALLINT},
+                FunId = #{record.funId,jdbcType=SMALLINT},
+                AuditLevel = #{record.auditLevel,jdbcType=SMALLINT},
+                Docid = #{record.docid,jdbcType=INTEGER},
+                AuditDesc = #{record.auditDesc,jdbcType=LONGVARCHAR},
+                AuditTime = #{record.auditTime,jdbcType=TIMESTAMP},
+                AuditMode = #{record.auditMode,jdbcType=CHAR},
+                diagnosis = #{record.diagnosis,jdbcType=VARCHAR}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.questionCore.audit.model.Cam2" >
+        update cam2
+        <set >
+            <if test="optId != null" >
+                OptId = #{optId,jdbcType=SMALLINT},
+            </if>
+            <if test="funId != null" >
+                FunId = #{funId,jdbcType=SMALLINT},
+            </if>
+            <if test="auditLevel != null" >
+                AuditLevel = #{auditLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="docid != null" >
+                Docid = #{docid,jdbcType=INTEGER},
+            </if>
+            <if test="auditDesc != null" >
+                AuditDesc = #{auditDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                AuditTime = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="auditMode != null" >
+                AuditMode = #{auditMode,jdbcType=CHAR},
+            </if>
+            <if test="diagnosis != null" >
+                diagnosis = #{diagnosis,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where CombAnsid = #{combAnsid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.questionCore.audit.model.Cam2" >
+        update cam2
+        set OptId = #{optId,jdbcType=SMALLINT},
+            FunId = #{funId,jdbcType=SMALLINT},
+            AuditLevel = #{auditLevel,jdbcType=SMALLINT},
+            Docid = #{docid,jdbcType=INTEGER},
+            AuditDesc = #{auditDesc,jdbcType=LONGVARCHAR},
+            AuditTime = #{auditTime,jdbcType=TIMESTAMP},
+            AuditMode = #{auditMode,jdbcType=CHAR},
+            diagnosis = #{diagnosis,jdbcType=VARCHAR}
+        where CombAnsid = #{combAnsid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.questionCore.audit.model.Cam2Key" >
+        delete from cam2
+        where CombAnsid = #{combAnsid,jdbcType=INTEGER}
+          and LineNum = #{lineNum,jdbcType=SMALLINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.questionCore.audit.model.Cam2Example" >
+        <if test="_parameter != null and _parameter != '' ">
+            delete from cam2
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <select id="selectLatestAudit" parameterType="java.lang.Integer" resultMap="BaseResultMap" >
+    	SELECT c.* FROM oasr a JOIN oopt b ON a.optId = b.optId JOIN cam2 c ON a.reportNo = c.combAnsId 
+    	WHERE b.funId=4 AND a.memberid=#{memberId,jdbcType=INTEGER} AND a.AuditState = 'Y' ORDER BY a.serialNumber DESC LIMIT 1
+    </select>
+</mapper>

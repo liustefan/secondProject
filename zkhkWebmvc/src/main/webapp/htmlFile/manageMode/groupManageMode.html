@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>群体管理方案</title>
+	<link rel="stylesheet" href="../../css/general.css">
+	<link rel="stylesheet" href="../../js/jquery-ui/themes/overcast/jquery-ui.min.css">
+	<link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.min.css">
+	
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jquery-ui/jquery-ui.js"></script>
+	<script type="text/javascript" src="../../js/dataPacker.js"></script>
+	<script type="text/javascript" src="../../layer/layer-v2.0/layer.js"></script>
+	<style type="text/css">
+		.layer-box {
+			margin: 20px;
+			font-size: 16px;
+		}
+		
+		.text-top {
+	        vertical-align: text-top;
+	    }
+	</style>
+	<script type="text/javascript">
+		function endMode(){
+			layer.closeAll();
+			layer.open({
+		   	    type: 1,
+		   		skin : 'skin1',
+		   	    title: '终止方案',
+		   	    shadeClose: false,
+		   	    shade: 0,
+		   	    area: ['465px', '200px'],
+		   	 	content: $("#endMode_box"), //iframe的url
+		   	}); 
+		}
+	</script>
+</head>
+<body>
+<div class="content content3">
+	<div class="content-title">群体管理方案</div>
+    <form action="" method="POST" id="">
+		<div class="search-box-wrapper">
+			<ul class="search-wrapper">
+				<li>
+					<label>管理方案：</label>
+					<input type="text">
+				</li>
+				<li>
+					<label>方案状态：</label>
+	               	<select name="">
+			          	<option value="0">请选择</option>
+			          	<option value="1">新增</option>
+			          	<option value="2">已生效</option>
+			          	<option value="3">已终止</option>
+		        	</select>
+				</li>
+				<li>
+					<label>创建日期：</label> 
+					<input class="info-date" id="startDate" type="text" name="" required="required" value='' readonly /> 
+					<span class="mar-left">至</span> 
+					<input class="info-date" id="endDate" type="text" name="" required="required" value='' readonly />
+				</li>
+				<li>
+					<label>任务生成状态：</label>
+	               	<select name="">
+			          	<option value="0">请选择</option>
+			          	<option value="1">未完成</option>
+			          	<option value="2">已完成</option>
+		        	</select>
+				</li>
+				<li>
+					<button type="button" class="btn-inquiry ico-search" onclick="">查询</button>
+					<button type="button" class="btn-inquiry" onclick="window.location.href='editGroupManageMode.html'">制定群体管理方案</button>
+				</li>
+			</ul>
+		</div>
+		<div class="table-box">
+			<table class="table-content">
+				<thead class="table-title">
+					<tr>
+						<th>管理方案</th>
+						<th>创建日期</th>
+						<th>生效日期</th>
+						<th>方案状态</th>
+						<th>任务生成状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<a href="javascript: void(0);" onclick="endMode();">终止</a>
+							<a href="javascript: void(0);" class="mar-left" onclick="">修改</a>
+							<a href="javascript: void(0);" class="mar-left" onclick="">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="page-box">
+			<jsp:include page="/public/pageFoot.jsp"></jsp:include>
+		</div>
+	</form>
+</div>
+<div id="endMode_box" style="display: none;">
+	<form action="" method="post">
+		<div class="layer-box">
+			<span>终止原因：</span>
+			<textarea rows="3" cols="45" class="text-top"></textarea>
+		</div>
+		<div class="page-box align-center">
+			<input type="submit" class="btn-inquiry" value="保存">
+			<input type="button" class="btn-cancel" onclick="layer.closeAll();" value="取消">
+		</div>
+	</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=9">
+	<title>编辑疾病分类</title>
+	<link rel="stylesheet" href="../../css/general.css">
+	<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+	<style>
+		.content-box {
+			padding: 25px 10px;
+		}
+		
+		.content-box label {
+			width: 150px;
+			font-size: 14px;
+			text-align: right;
+		}
+		
+		.content-slice {
+			margin-bottom: 15px;
+		}
+		
+		.text-top {
+	        vertical-align: text-top;
+	    } 
+	    
+	    .mar-5 {
+	    	margin-left: 5px;
+	    }
+	    
+	    .width-input {
+	    	width: 150px;
+	    }
+	    
+	    .width-number {
+	    	width: 150px;
+	    	padding: 2px;
+	    }
+	</style>
+</head>
+<body>
+	<form class="" id="" method="post" action="">
+		<div class="content-box">
+			<div class="content-slice">
+				<label>上级分类名称：</label>
+				<span class="mar-5">高血压</span>
+			</div>
+			<div class="content-slice">
+				<label><span class="red">*</span>疾病分类名称：</label> 
+				<input class="width-input" type="text" name="" value="" maxlength="10" required >
+			</div>
+			<div class="content-slice">
+				<label>排序号：</label> 
+				<input class="width-number" type="number" name="" required value="">
+			</div>
+			<div class="content-slice">
+				<label>描述：</label>
+				<textarea class="text-top" rows="6" cols="60" maxlength="100" name=""></textarea>
+			</div>
+		</div>
+		<div class="page-box align-center">
+			<button type="button" id="" class="btn-inquiry">保存</button>
+			<button type="button" id="" class="btn-cancel">取消</button>
+		</div>
+	</form>
+</body>
+</html>

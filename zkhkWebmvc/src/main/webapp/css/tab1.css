@@ -1,0 +1,31 @@
+/* tab 切换页样式 */
+
+ul,li {
+	list-style: none;
+}
+
+nav ul li{
+	width: 157px;
+	height: 35px;
+	line-height: 35px;
+	float: left;
+	text-align: center;
+	background: #E4E4E4;
+	color: #333;
+	font-size: 16px;
+	cursor: pointer;
+	margin-bottom: 2px;
+}
+
+nav ul li.active{
+	background: #67C15F;
+	color: #fff;
+}
+
+#content_title{
+	font-size: 16px;
+	line-height: 35px;
+	text-align: left;
+	height: 35px;
+	font-weight: bold;
+}

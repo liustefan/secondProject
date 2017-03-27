@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.healthCore.managescheme.dao.ManageschemeExecMapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.healthCore.managescheme.model.ManageschemeExec" >
+        <id column="MSExecID" property="MSExecID" jdbcType="BIGINT" />
+        <result column="MSDesignID" property="MSDesignID" jdbcType="INTEGER" />
+        <result column="MemberID" property="memberID" jdbcType="INTEGER" />
+        <result column="ExecStatus" property="execStatus" jdbcType="TINYINT" />
+        <result column="ExecOffTime" property="execOffTime" jdbcType="TIMESTAMP" />
+        <result column="ExecOffReason" property="execOffReason" jdbcType="VARCHAR" />
+        <result column="MEPersonProcess" property="MEPersonProcess" jdbcType="TINYINT" />
+        <result column="MEPTriggerTime" property="MEPTriggerTime" jdbcType="TIMESTAMP" />
+        <result column="CreateID" property="createID" jdbcType="INTEGER" />
+        <result column="CreateTime" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="UpdateID" property="updateID" jdbcType="INTEGER" />
+        <result column="UpdateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <resultMap id="ResultMap" type="com.bithealth.healthCore.managescheme.model.ManageschemeExec" extends="BaseResultMap">
+    	<association column="MemberID" property="memberLabels" select="selectMemberLabels"/>
+    </resultMap>
+     <resultMap id="ResultMapHasDocName" type="com.bithealth.healthCore.managescheme.model.ManageschemeExec" extends="BaseResultMap">
+    	<association column="CreateID" property="createName" select="selectDocName"/>
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        MSExecID, MSDesignID, MemberID, ExecStatus, ExecOffTime, ExecOffReason, MEPersonProcess, MEPTriggerTime, 
+        CreateID, CreateTime, UpdateID, UpdateTime
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeExecExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_exec
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeExecExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_managescheme_exec
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from tb_managescheme_exec
+        where MSExecID = #{MSExecID,jdbcType=BIGINT}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeExec" useGeneratedKeys="true" keyProperty="MSExecID" >
+        insert into tb_managescheme_exec
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="MSDesignID != null" >
+                MSDesignID,
+            </if>
+            <if test="memberID != null" >
+                MemberID,
+            </if>
+            <if test="execStatus != null" >
+                ExecStatus,
+            </if>
+            <if test="execOffReason != null" >
+                ExecOffReason,
+            </if>
+            <if test="MEPersonProcess != null" >
+                MEPersonProcess,
+            </if>
+            <if test="MEPTriggerTime != null" >
+                MEPTriggerTime,
+            </if>
+            <if test="createID != null" >
+                CreateID,
+            </if>
+            <if test="createTime != null" >
+                CreateTime,
+            </if>
+            <if test="updateID != null" >
+                UpdateID,
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="MSDesignID != null" >
+                #{MSDesignID,jdbcType=INTEGER},
+            </if>
+            <if test="memberID != null" >
+                #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="execStatus != null" >
+                #{execStatus,jdbcType=TINYINT},
+            </if>
+            <if test="execOffReason != null" >
+                #{execOffReason,jdbcType=VARCHAR},
+            </if>
+            <if test="MEPersonProcess != null" >
+                #{MEPersonProcess,jdbcType=TINYINT},
+            </if>
+            <if test="MEPTriggerTime != null" >
+                #{MEPTriggerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createID != null" >
+                #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeExecExample" resultType="java.lang.Integer" >
+        select count(*) from tb_managescheme_exec
+        <if test="_parameter != null and _parameter != ''" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_exec
+            <set >
+                <if test="record.MSExecID != null" >
+                    MSExecID = #{record.MSExecID,jdbcType=BIGINT},
+                </if>
+                <if test="record.MSDesignID != null" >
+                    MSDesignID = #{record.MSDesignID,jdbcType=INTEGER},
+                </if>
+                <if test="record.memberID != null" >
+                    MemberID = #{record.memberID,jdbcType=INTEGER},
+                </if>
+                <if test="record.execStatus != null" >
+                    ExecStatus = #{record.execStatus,jdbcType=TINYINT},
+                </if>
+                <if test="record.execOffReason != null" >
+                    ExecOffTime = #{record.execOffTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.execOffReason != null" >
+                    ExecOffReason = #{record.execOffReason,jdbcType=VARCHAR},
+                </if>
+                <if test="record.MEPersonProcess != null" >
+                    MEPersonProcess = #{record.MEPersonProcess,jdbcType=TINYINT},
+                </if>
+                <if test="record.MEPTriggerTime != null" >
+                    MEPTriggerTime = #{record.MEPTriggerTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.createID != null" >
+                    CreateID = #{record.createID,jdbcType=INTEGER},
+                </if>
+                <if test="record.createTime != null" >
+                    CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="record.updateID != null" >
+                    UpdateID = #{record.updateID,jdbcType=INTEGER},
+                </if>
+                <if test="record.updateTime != null" >
+                    UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+                </if>
+            </set>
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        <if test="_parameter != null and _parameter != ''" >
+            update tb_managescheme_exec
+            set MSExecID = #{record.MSExecID,jdbcType=BIGINT},
+                MSDesignID = #{record.MSDesignID,jdbcType=INTEGER},
+                MemberID = #{record.memberID,jdbcType=INTEGER},
+                ExecStatus = #{record.execStatus,jdbcType=TINYINT},
+                ExecOffTime = #{record.execOffTime,jdbcType=TIMESTAMP},
+                ExecOffReason = #{record.execOffReason,jdbcType=VARCHAR},
+                MEPersonProcess = #{record.MEPersonProcess,jdbcType=TINYINT},
+                MEPTriggerTime = #{record.MEPTriggerTime,jdbcType=TIMESTAMP},
+                CreateID = #{record.createID,jdbcType=INTEGER},
+                CreateTime = #{record.createTime,jdbcType=TIMESTAMP},
+                UpdateID = #{record.updateID,jdbcType=INTEGER},
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP}
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeExec" >
+        update tb_managescheme_exec
+        <set >
+            <if test="MSDesignID != null" >
+                MSDesignID = #{MSDesignID,jdbcType=INTEGER},
+            </if>
+            <if test="memberID != null" >
+                MemberID = #{memberID,jdbcType=INTEGER},
+            </if>
+            <if test="execStatus != null" >
+                ExecStatus = #{execStatus,jdbcType=TINYINT},
+            </if>
+            <if test="execOffTime != null" >
+                ExecOffTime = #{execOffTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="execOffReason != null" >
+                ExecOffReason = #{execOffReason,jdbcType=VARCHAR},
+            </if>
+            <if test="MEPersonProcess != null" >
+                MEPersonProcess = #{MEPersonProcess,jdbcType=TINYINT},
+            </if>
+            <if test="MEPTriggerTime != null" >
+                MEPTriggerTime = #{MEPTriggerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createID != null" >
+                CreateID = #{createID,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateID != null" >
+                UpdateID = #{updateID,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null" >
+                UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where MSExecID = #{MSExecID,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeExec" >
+        update tb_managescheme_exec
+        set MSDesignID = #{MSDesignID,jdbcType=INTEGER},
+            MemberID = #{memberID,jdbcType=INTEGER},
+            ExecStatus = #{execStatus,jdbcType=TINYINT},
+            ExecOffTime = #{execOffTime,jdbcType=TIMESTAMP},
+            ExecOffReason = #{execOffReason,jdbcType=VARCHAR},
+            MEPersonProcess = #{MEPersonProcess,jdbcType=TINYINT},
+            MEPTriggerTime = #{MEPTriggerTime,jdbcType=TIMESTAMP},
+            CreateID = #{createID,jdbcType=INTEGER},
+            CreateTime = #{createTime,jdbcType=TIMESTAMP},
+            UpdateID = #{updateID,jdbcType=INTEGER},
+            UpdateTime = #{updateTime,jdbcType=TIMESTAMP}
+        where MSExecID = #{MSExecID,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from tb_managescheme_exec
+        where MSExecID = #{MSExecID,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeExecExample" >
+        <if test="_parameter != null and _parameter != ''" >
+            delete from tb_managescheme_exec
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <select id="selectPersonManageschemePage" resultMap="ResultMap" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeExec" >
+        SELECT a.*, b.memName, b.gender, b.tel, c.SchemeTitle AS 'design.SchemeTitle', c.MSDesignID AS 'design.MSDesignID'
+        FROM tb_managescheme_exec a 
+        JOIN omem b ON a.MemberID = b.`Memberid`
+        JOIN `tb_managescheme_design` c ON a.MSDesignID = c.MSDesignID
+        <where>
+        		AND b.UseTag = 'T' 
+	        <if test="createID != null">
+	         	AND a.CreateID = #{createID,jdbcType=INTEGER}
+	        </if>
+	        <if test="memName != null and memName != ''">
+	        	AND b.memName LIKE CONCAT(#{memName,jdbcType=VARCHAR}, '%') 
+	        </if>
+	        <if test="tel != null and tel != ''">
+	        	AND b.tel LIKE CONCAT(#{tel,jdbcType=VARCHAR}, '%') 
+	        </if>
+	        <if test="execStatus != null">
+	        	AND a.ExecStatus = #{execStatus,jdbcType=TINYINT}
+	        </if>
+	        <if test="design != null">
+	        	<if test="design.schemeType != null">
+	        		AND c.SchemeType = #{design.schemeType,jdbcType=TINYINT}
+	        	</if>
+	        	<if test="design.schemeTitle != null and design.schemeTitle !=''">
+	        		AND c.SchemeTitle LIKE CONCAT('%', #{design.schemeTitle,jdbcType=VARCHAR}, '%')
+	        	</if>
+	        </if>
+	        <if test="createTimeS != null">
+	        	AND a.CreateTime <![CDATA[>=]]> #{createTimeS,jdbcType=TIMESTAMP}
+	        </if>
+	        <if test="createTimeE != null">
+	        	AND a.CreateTime <![CDATA[<]]> DATE_ADD(#{createTimeE,jdbcType=TIMESTAMP}, INTERVAL 1 DAY)
+	        </if>
+	        <if test="MSDesignID != null">
+	        	AND a.MSDesignID = #{MSDesignID,jdbcType=INTEGER}
+	        </if>
+	        <if test="MEPersonProcess != null">
+				AND a.MEPersonProcess = #{MEPersonProcess,jdbcType=TINYINT}
+			</if>
+        </where>
+         order by a.CreateTime desc
+    </select>
+   	<select id="selectMemberLabels" resultType="String" parameterType="java.lang.Integer">
+	 	SELECT a.itemName 
+	 	FROM `tb_label_item` a 
+	 	JOIN `omem_labelitem` b ON a.LItemID = b.LItemID 
+	 	WHERE b.`Memberid` = #{MemberID,jdbcType=INTEGER} AND a.ItemStatus = 2
+	</select>
+   	<select id="selectDocName" resultType="String" parameterType="java.lang.Integer">
+	 	SELECT docname FROM odoc 
+	 	WHERE docid = #{docid,jdbcType=INTEGER}
+	</select>
+	<select id="selectManageschemePage" resultMap="ResultMapHasDocName" parameterType="com.bithealth.healthCore.managescheme.model.ManageschemeExec" >
+        SELECT a.*, b.MSDesignID AS 'design.MSDesignID', b.SchemeTitle AS 'design.SchemeTitle', b.SchemeType AS 'design.schemeType', c.DocName AS updateName, 
+        CASE a.ExecStatus WHEN 4 THEN a.ExecOffTime ELSE a.CreateTime END tDate,  
+		CASE a.ExecStatus WHEN 1 THEN 2 WHEN 2 THEN 1 ELSE a.ExecStatus END tExecStatus
+		FROM `tb_managescheme_exec` a 
+		JOIN `tb_managescheme_design` b ON a.MSDesignID = b.MSDesignID
+		LEFT JOIN `odoc` c ON a.UpdateID = c.Docid
+		<where>
+			<if test="memberID != null">
+				AND a.MemberID = #{memberID,jdbcType=INTEGER}
+			</if>
+			<if test="design != null and design.schemeTitle != null and design.schemeTitle !=''">
+				AND b.SchemeTitle LIKE CONCAT('%', #{design.schemeTitle,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="execStatus != null">
+				AND a.ExecStatus = #{execStatus,jdbcType=TINYINT} 
+			</if>
+		</where>
+		<if test="execStatus == null">
+			ORDER BY tExecStatus, tDate DESC
+		</if>
+    </select>
+    <insert id="inserts" parameterType="java.util.List">
+        insert into tb_managescheme_exec (MSDesignID, MemberID, ExecStatus, MEPersonProcess, CreateID, CreateTime) 
+        values  
+	    <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.MSDesignID},#{item.memberID},#{item.execStatus},#{item.MEPersonProcess},#{item.createID},#{item.createTime})  
+	    </foreach>
+    </insert>
+    
+    <update id="terminatedManageschemeExec" parameterType="map" >
+    	UPDATE `tb_managescheme_exec` a, `tb_managescheme_exec_task` b 
+    	SET a.ExecStatus=4, a.ExecOffReason = #{massOffReason,jdbcType=VARCHAR}, a.ExecOffTime = now(), a.updateID = #{docId,jdbcType=INTEGER}, 
+    	b.ExecStatus=3, b.updateID = #{docId,jdbcType=INTEGER} 
+		WHERE a.MSExecID = b.MSExecID AND a.MSDesignID=#{MSDesignID,jdbcType=INTEGER} AND b.ExecStatus = 1
+    </update>
+    
+    <update id="updateSingleTerminatedManageschemeExec" parameterType="map" >
+    	UPDATE `tb_managescheme_exec` a, `tb_managescheme_exec_task` b 
+    	SET a.ExecStatus=4, a.ExecOffReason = #{massOffReason,jdbcType=VARCHAR}, a.ExecOffTime = now(), a.updateID = #{docId,jdbcType=INTEGER}, 
+    	b.ExecStatus=3, b.updateID = #{docId,jdbcType=INTEGER} 
+		WHERE a.MSExecID = b.MSExecID AND a.MSExecID=#{MSExecID,jdbcType=BIGINT} AND b.ExecStatus = 1
+    </update>
+    
+   	<select id="selectHasPersonManageschemeExec" resultMap="BaseResultMap" parameterType="Integer" >
+       SELECT a.*, c.memName AS 'memName', d.DocName AS 'createName' FROM `tb_managescheme_exec` a JOIN `tb_managescheme_design` b ON a.MSDesignID = b.MSDesignID 
+		JOIN omem c ON a.memberID = c.memberid
+		JOIN odoc d ON a.createID = d.docid
+       WHERE a.MemberID = #{memberID,jdbcType=INTEGER} AND a.ExecStatus <![CDATA[<>]]> 4 AND b.SchemeType = 1 LIMIT 1
+    </select>
+    
+</mapper>

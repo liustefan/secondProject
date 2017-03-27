@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bithealth.questionCore.question.dao.Mfq1Mapper" >
+    <resultMap id="BaseResultMap" type="com.bithealth.questionCore.question.model.Mfq1" >
+        <id column="Qustid" property="qustid" jdbcType="INTEGER" />
+        <id column="Problemid" property="problemid" jdbcType="INTEGER" />
+        <result column="QustTypeid" property="qustTypeid" jdbcType="SMALLINT" />
+        <result column="ProDesc" property="proDesc" jdbcType="VARCHAR" />
+        <result column="LineNum" property="lineNum" jdbcType="SMALLINT" />
+        <result column="AnsType" property="ansType" jdbcType="CHAR" />
+        <result column="relation" property="relation" jdbcType="CHAR" />
+        <result column="Uproblemid" property="uproblemid" jdbcType="INTEGER" />
+        <result column="Uansid" property="uansid" jdbcType="SMALLINT" />
+        <result column="CreateDate" property="createDate" jdbcType="DATE" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        Qustid, Problemid, QustTypeid, ProDesc, LineNum, AnsType, relation, Uproblemid, Uansid, 
+        CreateDate
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.Mfq1Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mfq1
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.Mfq1Example" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from mfq1
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bithealth.questionCore.question.model.Mfq1Key" >
+        select 
+        <include refid="Base_Column_List" />
+        from mfq1
+        where Qustid = #{qustid,jdbcType=INTEGER}
+          and Problemid = #{problemid,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.bithealth.questionCore.question.model.Mfq1" >
+        insert into mfq1
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="qustid != null" >
+                Qustid,
+            </if>
+            <if test="problemid != null" >
+                Problemid,
+            </if>
+            <if test="qustTypeid != null" >
+                QustTypeid,
+            </if>
+            <if test="proDesc != null" >
+                ProDesc,
+            </if>
+            <if test="lineNum != null" >
+                LineNum,
+            </if>
+            <if test="ansType != null" >
+                AnsType,
+            </if>
+            <if test="relation != null" >
+                relation,
+            </if>
+            <if test="uproblemid != null" >
+                Uproblemid,
+            </if>
+            <if test="uansid != null" >
+                Uansid,
+            </if>
+            <if test="createDate != null" >
+                CreateDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="qustid != null" >
+                #{qustid,jdbcType=INTEGER},
+            </if>
+            <if test="problemid != null" >
+                #{problemid,jdbcType=INTEGER},
+            </if>
+            <if test="qustTypeid != null" >
+                #{qustTypeid,jdbcType=SMALLINT},
+            </if>
+            <if test="proDesc != null" >
+                #{proDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="lineNum != null" >
+                #{lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="ansType != null" >
+                #{ansType,jdbcType=CHAR},
+            </if>
+            <if test="relation != null" >
+                #{relation,jdbcType=CHAR},
+            </if>
+            <if test="uproblemid != null" >
+                #{uproblemid,jdbcType=INTEGER},
+            </if>
+            <if test="uansid != null" >
+                #{uansid,jdbcType=SMALLINT},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.bithealth.questionCore.question.model.Mfq1Example" resultType="java.lang.Integer" >
+        select count(*) from mfq1
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update mfq1
+        <set >
+            <if test="record.qustid != null" >
+                Qustid = #{record.qustid,jdbcType=INTEGER},
+            </if>
+            <if test="record.problemid != null" >
+                Problemid = #{record.problemid,jdbcType=INTEGER},
+            </if>
+            <if test="record.qustTypeid != null" >
+                QustTypeid = #{record.qustTypeid,jdbcType=SMALLINT},
+            </if>
+            <if test="record.proDesc != null" >
+                ProDesc = #{record.proDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lineNum != null" >
+                LineNum = #{record.lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="record.ansType != null" >
+                AnsType = #{record.ansType,jdbcType=CHAR},
+            </if>
+            <if test="record.relation != null" >
+                relation = #{record.relation,jdbcType=CHAR},
+            </if>
+            <if test="record.uproblemid != null" >
+                Uproblemid = #{record.uproblemid,jdbcType=INTEGER},
+            </if>
+            <if test="record.uansid != null" >
+                Uansid = #{record.uansid,jdbcType=SMALLINT},
+            </if>
+            <if test="record.createDate != null" >
+                CreateDate = #{record.createDate,jdbcType=DATE},
+            </if>
+        </set>
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+    	<if test="_parameter != null and _parameter != '' ">
+        update mfq1
+        set Qustid = #{record.qustid,jdbcType=INTEGER},
+            Problemid = #{record.problemid,jdbcType=INTEGER},
+            QustTypeid = #{record.qustTypeid,jdbcType=SMALLINT},
+            ProDesc = #{record.proDesc,jdbcType=VARCHAR},
+            LineNum = #{record.lineNum,jdbcType=SMALLINT},
+            AnsType = #{record.ansType,jdbcType=CHAR},
+            relation = #{record.relation,jdbcType=CHAR},
+            Uproblemid = #{record.uproblemid,jdbcType=INTEGER},
+            Uansid = #{record.uansid,jdbcType=SMALLINT},
+            CreateDate = #{record.createDate,jdbcType=DATE}
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.bithealth.questionCore.question.model.Mfq1" >
+        update mfq1
+        <set >
+            <if test="qustTypeid != null" >
+                QustTypeid = #{qustTypeid,jdbcType=SMALLINT},
+            </if>
+            <if test="proDesc != null" >
+                ProDesc = #{proDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="lineNum != null" >
+                LineNum = #{lineNum,jdbcType=SMALLINT},
+            </if>
+            <if test="ansType != null" >
+                AnsType = #{ansType,jdbcType=CHAR},
+            </if>
+            <if test="relation != null" >
+                relation = #{relation,jdbcType=CHAR},
+            </if>
+            <if test="uproblemid != null" >
+                Uproblemid = #{uproblemid,jdbcType=INTEGER},
+            </if>
+            <if test="uansid != null" >
+                Uansid = #{uansid,jdbcType=SMALLINT},
+            </if>
+            <if test="createDate != null" >
+                CreateDate = #{createDate,jdbcType=DATE},
+            </if>
+        </set>
+        where Qustid = #{qustid,jdbcType=INTEGER}
+          and Problemid = #{problemid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.bithealth.questionCore.question.model.Mfq1" >
+        update mfq1
+        set QustTypeid = #{qustTypeid,jdbcType=SMALLINT},
+            ProDesc = #{proDesc,jdbcType=VARCHAR},
+            LineNum = #{lineNum,jdbcType=SMALLINT},
+            AnsType = #{ansType,jdbcType=CHAR},
+            relation = #{relation,jdbcType=CHAR},
+            Uproblemid = #{uproblemid,jdbcType=INTEGER},
+            Uansid = #{uansid,jdbcType=SMALLINT},
+            CreateDate = #{createDate,jdbcType=DATE}
+        where Qustid = #{qustid,jdbcType=INTEGER}
+          and Problemid = #{problemid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.bithealth.questionCore.question.model.Mfq1Key" >
+        delete from mfq1
+        where Qustid = #{qustid,jdbcType=INTEGER}
+          and Problemid = #{problemid,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.bithealth.questionCore.question.model.Mfq1Example" >
+        <if test="_parameter != null and _parameter != '' ">
+        delete from mfq1
+        <if test="_parameter != null and _parameter != '' ">
+            <include refid="Example_Where_Clause" />
+        </if>
+        </if>
+    </delete>
+
+</mapper>
